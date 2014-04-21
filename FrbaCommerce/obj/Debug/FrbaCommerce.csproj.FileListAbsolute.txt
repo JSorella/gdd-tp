@@ -1,0 +1,7 @@
+C:\Users\jsorella\Dropbox\Gestión de Datos\TP Frba Commerce 1.0 - 1C 2014\Aplicacion Desktop\FrbaCommerce\FrbaCommerce\bin\Debug\FrbaCommerce.exe
+C:\Users\jsorella\Dropbox\Gestión de Datos\TP Frba Commerce 1.0 - 1C 2014\Aplicacion Desktop\FrbaCommerce\FrbaCommerce\bin\Debug\FrbaCommerce.pdb
+C:\Users\jsorella\Dropbox\Gestión de Datos\TP Frba Commerce 1.0 - 1C 2014\Aplicacion Desktop\FrbaCommerce\FrbaCommerce\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\jsorella\Dropbox\Gestión de Datos\TP Frba Commerce 1.0 - 1C 2014\Aplicacion Desktop\FrbaCommerce\FrbaCommerce\obj\Debug\FrbaCommerce.Properties.Resources.resources
+C:\Users\jsorella\Dropbox\Gestión de Datos\TP Frba Commerce 1.0 - 1C 2014\Aplicacion Desktop\FrbaCommerce\FrbaCommerce\obj\Debug\FrbaCommerce.csproj.GenerateResource.Cache
+C:\Users\jsorella\Dropbox\Gestión de Datos\TP Frba Commerce 1.0 - 1C 2014\Aplicacion Desktop\FrbaCommerce\FrbaCommerce\obj\Debug\FrbaCommerce.exe
+C:\Users\jsorella\Dropbox\Gestión de Datos\TP Frba Commerce 1.0 - 1C 2014\Aplicacion Desktop\FrbaCommerce\FrbaCommerce\obj\Debug\FrbaCommerce.pdb
