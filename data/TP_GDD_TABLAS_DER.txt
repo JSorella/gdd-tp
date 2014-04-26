@@ -1,0 +1,135 @@
+Funcionalidades
+	fun_Id int	PK
+	fun_Nombre varchar(255)
+
+Roles (Empresa, Admin, Cliente)
+	rol_ID int	PK
+	rol_Nombre varchar(255)
+	rol_Inhabilitado bit
+
+Roles_Funcionalidades
+	rolfun_IdRol int	FK | PK
+	rolfun_IdFun int	FK | PK
+
+Usuarios
+	usu_Id int	PK
+	usu_UserName varchar(255)
+	usu_Pass varchar(255)
+	usu_Cant_Intentos int
+	usu_Inhabilitado bit
+	usu_Motivo varchar(255)
+		
+Usuarios_Roles
+	usurol_IdUser int 	FK | PK
+	usurol_IdRol int	FK | PK
+	
+TiposDoc
+	tipodoc_Id  int PK
+	tipodoc_Descripcion varchar(255)
+
+Clientes
+	cli_Nombre varchar(255) 
+	cli_Apellido varchar(255)
+	cli_IdTipoDoc int FK
+	cli_NumeroDoc numeric(18,0) PK
+	cli_Mail varchar(255)
+	cli_Tel varchar(50)
+	cli_Localidad varchar(255)
+	cli_Dom_Calle varchar(255)
+	cli_Nro_Calle numeric(18,0)
+	cli_Piso numeric(18,0)
+	cli_Dpto varchar(50)
+	cli_CP varchar(50)
+	cli_FechaNac DateTime
+	cli_IdUsuario Int FK
+	
+Empresa
+	emp_RazonSocial varchar(255)
+	emp_Cuit varchar(50) PK
+	emp_Mail varchar(50)
+	emp_Tel varchar(50)
+	emp_Localidad varchar(255)
+	emp_Calle varchar(255)
+	emp_Piso numeric(18,0)
+	emp_Dpto varchar(255)
+	emp_CP varchar(50)
+	emp_Ciudad varchar(255)
+	emp_Contacto varchar(255)
+	emp_FechaCreacion DateTime
+	emp_IdUsuario Int FK
+	
+Rubro
+	rub_Codigo numeric(18,0) PK
+	rub_Descripcion varchar(255)
+	
+Publicaciones_Visibilidad
+	pubvis_Codigo numeric(18,0) PK
+	pubvis_Descripcion varchar(255)
+	pubvis_Precio numeric(18,2)
+	pubvis_Porcentaje numeric(18,2)
+
+Publicaciones_Tipos
+	pubtip_Id int PK
+	pubtip_Nombre varchar(255)
+	
+Publicaciones_Estados
+	pubest_Id int PK
+	pubest_Descripcion varchar(255)
+
+Publicaciones
+	pub_Codigo numeric(18,0) PK
+	pub_Descripcion varchar(255)
+	pub_Stock numeric(18,0)
+	pub_FechaVto datetime
+	pub_FechaIni datetime
+	pub_Precio numeric(18,2)
+	pub_CodigoVisibilidad numeric(18,0) FK
+	pub_IdUsuario int FK
+	pub_IdEstado int FK
+	pub_IdTipo int FK
+	pub_PermitePreg bit
+
+Publicaciones_Rubros
+	pubrub_CodigoPubli numeric(18,0) FK | PK
+	pubrub_CodigoRubro numeric(18,0) FK | PK
+	
+Preguntas
+	preg_CodigoPubli numeric(18,0) FK
+	preg_IdPregunta int
+	preg_Tipo Char(1) -- P o R
+	preg_Comentario varchar(255)
+	preg_IdUsuario int FK
+
+Calificaciones
+	cal_CodigoPubli numeric(18,0) FK PK
+	cal_Cant_Estrellas numeric(18,0)
+	cal_Comentario varchar(255)
+	cal_IdUsuario int FK
+
+Oferta
+	ofer_CodigoPubli numeric(18,0) FK
+	ofer_IdUsuario int FK
+	ofer_Fecha datetime
+	ofer_Monto numeric(18,2)
+
+Compra
+	comp_CodigoPubli numeric(18,0) FK | PK
+	comp_IdUsuario int FK | PK	
+	comp_Fecha datetime
+	comp_Cantidad numeric(18,0)
+	comp_Comision numeric(18,1) -- Esto es por si tiene que rendir o no comision(Punto7-Pagina10)
+
+Facturas
+	fac_numero numeric(18,0) | PK
+	fac_IdUsuario int FK
+	fac_Fecha datetime
+	fac_Total numeric(18,2)
+	fac_Forma_Pago_Desc varchar(255)
+
+Facturas_Det
+	facdet_numero numeric(18,0) | PK
+	facdet_NroItem numeric(18,0)
+	facdet_CodigoPubli numeric(18,0) FK
+	facdet_Cantidad numeric(18,0)
+	facdet_Importe numeric(18,2)
+
