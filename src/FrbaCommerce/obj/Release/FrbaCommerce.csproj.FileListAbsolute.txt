@@ -1,0 +1,3 @@
+C:\Users\jsorella\Documents\GitHub\gdd-tp\src\FrbaCommerce\obj\Release\ResolveAssemblyReference.cache
+C:\Users\jsorella\Documents\GitHub\gdd-tp\src\FrbaCommerce\obj\Release\FrbaCommerce.Properties.Resources.resources
+C:\Users\jsorella\Documents\GitHub\gdd-tp\src\FrbaCommerce\obj\Release\FrbaCommerce.csproj.GenerateResource.Cache
