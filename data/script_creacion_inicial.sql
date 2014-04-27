@@ -86,7 +86,8 @@ CREATE TABLE J2LA.Clientes(
 	cli_fecha_nac datetime,
 	cli_usu_id int --todos los clientes van a tener usuario
 	PRIMARY KEY (cli_tipodoc_id, cli_doc),
-	FOREIGN KEY (cli_usu_id) REFERENCES J2LA.Usuarios(usu_id)
+	FOREIGN KEY (cli_usu_id) REFERENCES J2LA.Usuarios(usu_id),
+	FOREIGN KEY (cli_tipodoc_id) REFERENCES J2LA.Tipos_Doc(tipodoc_id)
 )
 GO
 
