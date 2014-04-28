@@ -253,10 +253,13 @@ INSERT INTO J2LA.Usuarios(usu_username, usu_pass)
 VALUES ('admin', 'e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7')
 GO
 
+
+/*Asignamos el rol Administrativo al usuario admin*/
 INSERT INTO J2LA.Usuarios_Roles(usurol_usu_id, usurol_rol_id)
 VALUES (1,1)
 GO
 
+/*Creamos el tipo de documento DNI*/
 INSERT INTO J2LA.Tipos_Doc(tipodoc_id, tipodoc_descripcion)
 VALUES (1, 'DNI')
 GO
