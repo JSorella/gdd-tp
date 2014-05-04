@@ -63,6 +63,7 @@
     <Compile Include="Dominio\Usuario.cs" />
     <Compile Include="Homes\HomeUsuarios.cs" />
     <Compile Include="Singleton.cs" />
+    <Compile Include="Stored_procedures.cs" />
     <Compile Include="Vistas\Abm Cliente\AbmCliente.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -75,11 +76,11 @@
     <Compile Include="Vistas\Abm Empresa\AbmEmpresa.Designer.cs">
       <DependentUpon>AbmEmpresa.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vistas\Abm Rol\AbmRol.cs">
+    <Compile Include="Vistas\Abm Rol\Abm_Rol_Alta.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vistas\Abm Rol\AbmRol.Designer.cs">
-      <DependentUpon>AbmRol.cs</DependentUpon>
+    <Compile Include="Vistas\Abm Rol\Abm_Rol_Alta.Designer.cs">
+      <DependentUpon>Abm_Rol_Alta.cs</DependentUpon>
     </Compile>
     <Compile Include="Vistas\Abm Rubro\AbmRubro.cs">
       <SubType>Form</SubType>
@@ -156,6 +157,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Vistas\Abm Empresa\AbmEmpresa.resx">
       <DependentUpon>AbmEmpresa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Abm Rol\Abm_Rol_Alta.resx">
+      <DependentUpon>Abm_Rol_Alta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Calificar Vendedor\CalificarVendedor.resx">
       <DependentUpon>CalificarVendedor.cs</DependentUpon>

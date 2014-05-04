@@ -37,5 +37,22 @@ namespace FrbaCommerce
             return pass_string.ToString();
         }
 
+        public bool existe_nombre_rol(string nombre_rol_ingresado)
+        {
+            bool existe_rol;
+            connection conexion = new connection();
+            string query = "SELECT rol_id FROM DATACENTER.Rol WHERE rol_nombre='" + nombre_rol_ingresado + "'";
+            DataTable table_rol = conexion.execute_query(query);
+            if (table_rol.Rows.Count > 0)
+            {
+                existe_rol = true;
+            }
+            else
+            {
+                existe_rol = false;
+            }
+            return existe_rol;
+        }
+
     }
 }

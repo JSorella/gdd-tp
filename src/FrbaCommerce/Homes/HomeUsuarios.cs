@@ -23,12 +23,7 @@ namespace FrbaCommerce.Homes
         {
 
             DataTable usuarioResult = Singleton.conexion.execute_query(
-                @"SELECT 
-                        *
-                    FROM 
-                        J2LA.Usuarios u  
-                    WHERE 
-                        usu_UserName = " + "'" + nombre + "'");
+                @"SELECT * FROM J2LA.Usuarios u WHERE usu_UserName = " + "'" + nombre + "'");
 
             if (usuarioResult.Rows.Count == 0)
             {
