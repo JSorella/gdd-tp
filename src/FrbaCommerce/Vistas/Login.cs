@@ -13,7 +13,7 @@ using FrbaCommerce.Dominio;
 
 namespace FrbaCommerce
 {
-    public partial class Inicio : Form
+    public partial class Login : Form
     {
         Connection connect = new Connection();
         string query;
@@ -35,7 +35,7 @@ namespace FrbaCommerce
         DateTime fechaDelSistema = Convert.ToDateTime((System.Configuration.ConfigurationSettings.AppSettings["FechaDelSistema"]).ToString());
 
         //CONSTRUCTOR
-        public Inicio()
+        public Login()
         {
             //InitializeComponent();
             /*-------------------------ACTUALIZACION DE FECHA DE ALTA DE MICRO--------------*/
@@ -138,7 +138,7 @@ namespace FrbaCommerce
             this.label4.Text = "Powered by J2LA ©";
             this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
-            // Inicio
+            // Login
             // 
             this.ClientSize = new System.Drawing.Size(855, 262);
             this.Controls.Add(this.label4);
@@ -148,14 +148,14 @@ namespace FrbaCommerce
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
-            this.Name = "Form_Inicio";
-            this.Load += new System.EventHandler(this.Inicio_Load_1);
+            this.Name = "Form_Login";
+            this.Load += new System.EventHandler(this.Login_Load_1);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
-        private void Inicio_Load(object sender, EventArgs e)
+        private void Login_Load(object sender, EventArgs e)
         {
            
 
@@ -166,7 +166,7 @@ namespace FrbaCommerce
           
         }
 
-        private void Inicio_Load_1(object sender, EventArgs e)
+        private void Login_Load_1(object sender, EventArgs e)
         {
 
         }
@@ -205,7 +205,7 @@ namespace FrbaCommerce
 
             try
             {
-                usuario = this.homeUsuarios.getUsuario(this.username_textbox.Text);
+                usuario = this.homeUsuarios.getUsuarioSinRoles(this.username_textbox.Text);
             }
             catch (Exception error)
             {
