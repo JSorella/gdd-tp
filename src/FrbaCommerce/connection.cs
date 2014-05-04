@@ -10,7 +10,7 @@ using System.Configuration;
 
 namespace FrbaCommerce
 {
-    class connection
+    public class Connection
     {
         public SqlConnection connector()
         {
@@ -72,12 +72,5 @@ namespace FrbaCommerce
             }
             conexion.Close();
         }
-
-
-
-
-
     }
-
-
 }
