@@ -45,11 +45,11 @@ namespace FrbaCommerce
             Console.WriteLine("Debug 1");
 
             //hallamos Id_Rol
-            query = "SELECT TOP 10 Publicacion_Cod, Publ_Empresa_Dom_Calle FROM gd_esquema.Maestra";
+            //query = "SELECT TOP 10 Publicacion_Cod, Publ_Empresa_Dom_Calle FROM gd_esquema.Maestra";
             
-            tablaTop10 = connect.execute_query(query);
-            Console.WriteLine("hay "+ tablaTop10.Rows.Count + " filas");
-            SBind.DataSource = tablaTop10;
+            //tablaTop10 = connect.execute_query(query);
+            //Console.WriteLine("hay "+ tablaTop10.Rows.Count + " filas");
+            //SBind.DataSource = tablaTop10;
 
             this.InitializeComponent();
 
