@@ -5,7 +5,15 @@ using System.Text;
 
 namespace FrbaCommerce.Dominio
 {
-    class Rol
+    public class Rol
     {
+        public int id;
+        public string nombre;
+        public bool inhabilitado;
+
+        public Rol(int _id)
+        {
+            this.id = _id;
+        }
     }
 }

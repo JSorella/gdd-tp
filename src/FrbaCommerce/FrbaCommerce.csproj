@@ -63,98 +63,119 @@
     <Compile Include="Dominio\Usuario.cs" />
     <Compile Include="Homes\HomeUsuarios.cs" />
     <Compile Include="Singleton.cs" />
-    <Compile Include="Vistas\AbmCliente.cs">
+    <Compile Include="Vistas\Abm Cliente\AbmCliente.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vistas\AbmCliente.Designer.cs">
+    <Compile Include="Vistas\Abm Cliente\AbmCliente.Designer.cs">
       <DependentUpon>AbmCliente.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vistas\AbmEmpresa.cs">
+    <Compile Include="Vistas\Abm Empresa\AbmEmpresa.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vistas\AbmEmpresa.Designer.cs">
+    <Compile Include="Vistas\Abm Empresa\AbmEmpresa.Designer.cs">
       <DependentUpon>AbmEmpresa.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vistas\ABMRol.cs">
+    <Compile Include="Vistas\Abm Rol\AbmRol.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vistas\ABMRol.Designer.cs">
-      <DependentUpon>ABMRol.cs</DependentUpon>
+    <Compile Include="Vistas\Abm Rol\AbmRol.Designer.cs">
+      <DependentUpon>AbmRol.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vistas\AbmRubro.cs">
+    <Compile Include="Vistas\Abm Rubro\AbmRubro.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vistas\AbmRubro.Designer.cs">
+    <Compile Include="Vistas\Abm Rubro\AbmRubro.Designer.cs">
       <DependentUpon>AbmRubro.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vistas\AbmVisibilidad.cs">
+    <Compile Include="Vistas\Abm Visibilidad\AbmVisibilidad.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vistas\AbmVisibilidad.Designer.cs">
+    <Compile Include="Vistas\Abm Visibilidad\AbmVisibilidad.Designer.cs">
       <DependentUpon>AbmVisibilidad.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vistas\CalificarVendedor.cs">
+    <Compile Include="Vistas\Calificar Vendedor\CalificarVendedor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vistas\CalificarVendedor.Designer.cs">
+    <Compile Include="Vistas\Calificar Vendedor\CalificarVendedor.Designer.cs">
       <DependentUpon>CalificarVendedor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vistas\ComprarOfertar.cs">
+    <Compile Include="Vistas\Comprar-Ofertar\ComprarOfertar.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vistas\ComprarOfertar.Designer.cs">
+    <Compile Include="Vistas\Comprar-Ofertar\ComprarOfertar.Designer.cs">
       <DependentUpon>ComprarOfertar.cs</DependentUpon>
     </Compile>
     <Compile Include="Connection.cs" />
-    <Compile Include="Vistas\EditarPublicacion.cs">
+    <Compile Include="Vistas\Editar Publicacion\EditarPublicacion.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vistas\EditarPublicacion.Designer.cs">
+    <Compile Include="Vistas\Editar Publicacion\EditarPublicacion.Designer.cs">
       <DependentUpon>EditarPublicacion.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vistas\FacturarPublicaciones.cs">
+    <Compile Include="Vistas\Facturar Publicaciones\FacturarPublicaciones.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vistas\FacturarPublicaciones.Designer.cs">
+    <Compile Include="Vistas\Facturar Publicaciones\FacturarPublicaciones.Designer.cs">
       <DependentUpon>FacturarPublicaciones.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vistas\Inicio.cs">
+    <Compile Include="Vistas\Login\EleccionRol.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Login\EleccionRol.Designer.cs">
+      <DependentUpon>EleccionRol.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Login\Login.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Funciones.cs" />
-    <Compile Include="Vistas\GenerarPublicacion.cs">
+    <Compile Include="Vistas\Generar Publicacion\GenerarPublicacion.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vistas\GenerarPublicacion.Designer.cs">
+    <Compile Include="Vistas\Generar Publicacion\GenerarPublicacion.Designer.cs">
       <DependentUpon>GenerarPublicacion.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vistas\GestionPreguntas.cs">
+    <Compile Include="Vistas\Gestion de Preguntas\GestionPreguntas.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vistas\GestionPreguntas.Designer.cs">
+    <Compile Include="Vistas\Gestion de Preguntas\GestionPreguntas.Designer.cs">
       <DependentUpon>GestionPreguntas.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vistas\Historial Cliente.cs">
+    <Compile Include="Vistas\Historial Cliente\HistorialCliente.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vistas\Historial Cliente.Designer.cs">
-      <DependentUpon>Historial Cliente.cs</DependentUpon>
+    <Compile Include="Vistas\Historial Cliente\HistorialCliente.Designer.cs">
+      <DependentUpon>HistorialCliente.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vistas\ListadoEstadistico.cs">
+    <Compile Include="Vistas\Listado Estadístico\ListadoEstadistico.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vistas\ListadoEstadistico.Designer.cs">
+    <Compile Include="Vistas\Listado Estadístico\ListadoEstadistico.Designer.cs">
       <DependentUpon>ListadoEstadistico.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Vistas\Inicio.resx">
-      <DependentUpon>Inicio.cs</DependentUpon>
+    <EmbeddedResource Include="Vistas\Abm Empresa\AbmEmpresa.resx">
+      <DependentUpon>AbmEmpresa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Calificar Vendedor\CalificarVendedor.resx">
+      <DependentUpon>CalificarVendedor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Listado Estadístico\ListadoEstadistico.resx">
+      <DependentUpon>ListadoEstadistico.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Login\EleccionRol.resx">
+      <DependentUpon>EleccionRol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Login\Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Registro de Usuario\RegistroUsuario.resx">
+      <DependentUpon>RegistroUsuario.cs</DependentUpon>
     </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -169,10 +190,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Vistas\RegistroUsuario.cs">
+    <Compile Include="Vistas\Registro de Usuario\RegistroUsuario.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vistas\RegistroUsuario.Designer.cs">
+    <Compile Include="Vistas\Registro de Usuario\RegistroUsuario.Designer.cs">
       <DependentUpon>RegistroUsuario.cs</DependentUpon>
     </Compile>
   </ItemGroup>

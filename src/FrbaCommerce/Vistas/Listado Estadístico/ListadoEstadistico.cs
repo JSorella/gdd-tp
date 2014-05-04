@@ -7,13 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace FrbaCommerce.Abm_Empresa
+namespace FrbaCommerce.Listado_Estadistico
 {
-    public partial class Form1 : Form
+    public partial class ListadoEstadistico : Form
     {
-        public Form1()
+        public ListadoEstadistico()
         {
             InitializeComponent();
+        }
+
+        private void ListadoEstadistico_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

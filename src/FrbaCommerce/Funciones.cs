@@ -10,6 +10,9 @@ using System.Windows.Forms;
 
 namespace FrbaCommerce
 {
+    /// <summary>
+    /// Funciones que no necesitan instanciarse (se usan globalmente).
+    /// </summary>
     class Funciones
     {
         Connection connect = new Connection();

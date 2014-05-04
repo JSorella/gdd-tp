@@ -7,13 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace FrbaCommerce.Listado_Estadistico
+namespace FrbaCommerce.Calificar_Vendedor
 {
-    public partial class ListadoEstadistico : Form
+    public partial class CalificarVendedor : Form
     {
-        public ListadoEstadistico()
+        public CalificarVendedor()
         {
             InitializeComponent();
+        }
+
+        private void CalificarVendedor_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

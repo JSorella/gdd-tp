@@ -7,13 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace FrbaCommerce.Registro_de_Usuario
+namespace FrbaCommerce.Vistas.Login
 {
-    public partial class RegistroUsuario : Form
+    public partial class EleccionRol : Form
     {
-        public RegistroUsuario()
+        public EleccionRol()
         {
             InitializeComponent();
+        }
+
+        private void EleccionRol_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

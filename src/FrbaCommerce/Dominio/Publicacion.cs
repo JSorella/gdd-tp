@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FrbaCommerce.Dominio
 {
-    class Publicacion
+    public class Publicacion
     {
     }
 }

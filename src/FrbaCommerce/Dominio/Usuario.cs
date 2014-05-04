@@ -13,8 +13,8 @@ namespace FrbaCommerce.Dominio
         public int cantidadIntentos;
         public bool inhabilitado;
         public string motivo;
-        List<Rol> roles;
-        List<Publicacion> publicaciones;
+        public List<Rol> roles;
+        public List<Publicacion> publicaciones;
 
         public Usuario(int _id, string _nombre, string _pass, int _cantidadIntentos, bool _inhabilitado, string _motivo)
         {

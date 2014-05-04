@@ -11,7 +11,7 @@ using FrbaCommerce.Homes;
 using FrbaCommerce.Dominio;
 
 
-namespace FrbaCommerce
+namespace FrbaCommerce.Vistas.Login
 {
     public partial class Login : Form
     {
@@ -37,11 +37,11 @@ namespace FrbaCommerce
         //CONSTRUCTOR
         public Login()
         {
-            //InitializeComponent();
+            this.InitializeComponent();
+
             /*-------------------------ACTUALIZACION DE FECHA DE ALTA DE MICRO--------------*/
             //stored_procedures stored = new stored_procedures();
             //stored.update_fecha_alta_micro(fechadelsistema.tostring("yyyy-mm-dd hh:mm"));
-            Console.WriteLine("Debug 1");
 
             //hallamos Id_Rol
             //query = "SELECT TOP 10 Publicacion_Cod, Publ_Empresa_Dom_Calle FROM gd_esquema.Maestra";
@@ -49,8 +49,6 @@ namespace FrbaCommerce
             //tablaTop10 = connect.execute_query(query);
             //Console.WriteLine("hay "+ tablaTop10.Rows.Count + " filas");
             //SBind.DataSource = tablaTop10;
-
-            this.InitializeComponent();
 
             //this.dataGridView1.DataSource = SBind;
             //this.dataGridView1.Refresh(); 
@@ -243,8 +241,9 @@ namespace FrbaCommerce
                     //limpiamos cant_intentos
                     usuario.cantidadIntentos = 0;
 
-                    //FormAdmin form_admin = new FormAdmin(id_rol);
-                    //form_admin.ShowDialog();
+                    EleccionRol rolWindow = new EleccionRol();
+                    
+                    rolWindow.ShowDialog();
                 }
                 else  //Wrong Password...
                 {

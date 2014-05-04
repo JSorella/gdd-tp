@@ -7,13 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace FrbaCommerce.Calificar_Vendedor
+namespace FrbaCommerce.Abm_Empresa
 {
-    public partial class CalificarVendedor : Form
+    public partial class Form1 : Form
     {
-        public CalificarVendedor()
+        public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
