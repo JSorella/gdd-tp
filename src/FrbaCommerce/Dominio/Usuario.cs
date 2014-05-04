@@ -29,18 +29,7 @@ namespace FrbaCommerce.Dominio
         public Usuario()
         { }
 
-        public void update_cant_intentos_fallidos(int cant_intentos)
-        {
-            string query = @"
-                UPDATE 
-                    J2LA.Usuarios
-                SET
-                    usu_Cant_Intentos = " + cant_intentos + @"
-                WHERE
-                    usu_Id=" + this.id;
-
-            Singleton.conexion.execute_query_only(query);
-        }
+        
 
     }
 }

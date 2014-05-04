@@ -17,7 +17,6 @@ namespace FrbaCommerce
     {
         Connection connect = new Connection();
         string query;
-        int cant_fallidas = 0;
         private DataGridView dataGridView1;
         DataTable tablaTop10 = new DataTable();
         BindingSource SBind = new BindingSource();
@@ -227,11 +226,8 @@ namespace FrbaCommerce
                     return;
                 }
 
-                // evaluamos la cant_intentos
-                cant_fallidas = usuario.cantidadIntentos;
-                
-                
-                if (cant_fallidas >= 3)
+                // evaluamos la cant_intentos              
+                if (usuario.cantidadIntentos >= 3)
                 {
                     MessageBox.Show("Se logueó mal 3 veces, está inhabilitado para logearse", "Acceso al Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     this.error();
@@ -245,28 +241,24 @@ namespace FrbaCommerce
                     //Login Successful!! ... abrimos el formulario de Funcionalides
 
                     //limpiamos cant_intentos
-                    cant_fallidas = 0;
-                    usuario.update_cant_intentos_fallidos(cant_fallidas);
+                    usuario.cantidadIntentos = 0;
 
                     //FormAdmin form_admin = new FormAdmin(id_rol);
                     //form_admin.ShowDialog();
                 }
                 else  //Wrong Password...
                 {
-                    cant_fallidas++;
                     //Se debe actualizar el campo usu_cant_intentos de la base de datos
-                    usuario.update_cant_intentos_fallidos(cant_fallidas);
+                    usuario.cantidadIntentos +=1;
                     
                     MessageBox.Show(@"
                         Password Incorrecto
-                        Le quedan "+ (int)(3 - cant_fallidas) + " intentos" 
+                        Le quedan " + (int)(3 - usuario.cantidadIntentos) + " intentos" 
                         , "Acceso al Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
                 }
             }
             return;
         }
-
 
         private void passw_textbox_TextChanged(object sender, EventArgs e)
         {

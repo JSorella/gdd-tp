@@ -20,9 +20,13 @@ namespace FrbaCommerce.Homes
         {
             DataTable usuarioResult = Singleton.conexion.execute_query(
                 @"SELECT 
-                        * 
+                        *
                     FROM 
-                        J2LA.Usuarios  
+                        J2LA.Usuarios u  
+                    JOIN
+                        J2LA.Usuarios_Roles r
+                    ON
+                        (u.usu_Id = r.usurol_usu_id)
                     WHERE 
                         usu_UserName = " + "'" + nombre + "'");
 
@@ -49,5 +53,20 @@ namespace FrbaCommerce.Homes
 
             return usuario;
         }
+
+        public void setCantidadIntentos(Usuario usuario)
+        {
+            string query = @"
+                UPDATE 
+                    J2LA.Usuarios
+                SET
+                    usu_Cant_Intentos = " + usuario.cantidadIntentos + @"
+                WHERE
+                    usu_Id=" + usuario.id;
+
+            Singleton.conexion.execute_query_only(query);
+        }
+
+
     }
 }
