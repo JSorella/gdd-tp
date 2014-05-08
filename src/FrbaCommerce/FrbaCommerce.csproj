@@ -82,6 +82,18 @@
     <Compile Include="Vistas\Abm Rol\Abm_Rol_Alta.Designer.cs">
       <DependentUpon>Abm_Rol_Alta.cs</DependentUpon>
     </Compile>
+    <Compile Include="Vistas\Abm Rol\Abm_Rol_Busqueda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Abm Rol\Abm_Rol_Busqueda.Designer.cs">
+      <DependentUpon>Abm_Rol_Busqueda.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Abm Rol\Abm_Rol_Modif.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Abm Rol\Abm_Rol_Modif.Designer.cs">
+      <DependentUpon>Abm_Rol_Modif.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\Abm Rubro\AbmRubro.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -160,6 +172,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Abm Rol\Abm_Rol_Alta.resx">
       <DependentUpon>Abm_Rol_Alta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Abm Rol\Abm_Rol_Busqueda.resx">
+      <DependentUpon>Abm_Rol_Busqueda.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Abm Rol\Abm_Rol_Modif.resx">
+      <DependentUpon>Abm_Rol_Modif.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Calificar Vendedor\CalificarVendedor.resx">
       <DependentUpon>CalificarVendedor.cs</DependentUpon>
