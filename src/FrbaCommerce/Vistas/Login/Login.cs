@@ -16,7 +16,6 @@ namespace FrbaCommerce.Vistas.Login
     public partial class Login : Form
     {
         Connection connect = new Connection();
-        string query;
         private DataGridView dataGridView1;
         DataTable tablaTop10 = new DataTable();
         BindingSource SBind = new BindingSource();
@@ -248,7 +247,7 @@ namespace FrbaCommerce.Vistas.Login
                 else  //Wrong Password...
                 {
                     //Se debe actualizar el campo usu_cant_intentos de la base de datos
-                    usuario.cantidadIntentos +=1;
+                    this.homeUsuarios.setCantidadIntentos(usuario);
                     
                     MessageBox.Show(@"
                         Password Incorrecto

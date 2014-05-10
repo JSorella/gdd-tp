@@ -13,7 +13,6 @@ namespace FrbaCommerce.Homes
     {
         public HomeUsuarios()
         {
-
         }
 
         /// <summary>
@@ -51,13 +50,7 @@ namespace FrbaCommerce.Homes
 
         public void setCantidadIntentos(Usuario usuario)
         {
-            string query = @"
-                UPDATE 
-                    J2LA.Usuarios
-                SET
-                    usu_Cant_Intentos = " + usuario.cantidadIntentos + @"
-                WHERE
-                    usu_Id=" + usuario.id;
+            string query = "EXECUTE J2LA.setCantidadIntentos '" + usuario.id + "'";
 
             Singleton.conexion.execute_query_only(query);
         }

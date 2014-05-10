@@ -112,23 +112,23 @@
     <Compile Include="Vistas\CalificarVendedor\CalificarVendedor.Designer.cs">
       <DependentUpon>CalificarVendedor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vistas\Comprar-Ofertar\ComprarOfertar.cs">
+    <Compile Include="Vistas\ComprarOfertar\ComprarOfertar.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vistas\Comprar-Ofertar\ComprarOfertar.Designer.cs">
+    <Compile Include="Vistas\ComprarOfertar\ComprarOfertar.Designer.cs">
       <DependentUpon>ComprarOfertar.cs</DependentUpon>
     </Compile>
     <Compile Include="Connection.cs" />
-    <Compile Include="Vistas\Editar Publicacion\EditarPublicacion.cs">
+    <Compile Include="Vistas\EditarPublicacion\EditarPublicacion.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vistas\Editar Publicacion\EditarPublicacion.Designer.cs">
+    <Compile Include="Vistas\EditarPublicacion\EditarPublicacion.Designer.cs">
       <DependentUpon>EditarPublicacion.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vistas\Facturar Publicaciones\FacturarPublicaciones.cs">
+    <Compile Include="Vistas\FacturarPublicaciones\FacturarPublicaciones.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vistas\Facturar Publicaciones\FacturarPublicaciones.Designer.cs">
+    <Compile Include="Vistas\FacturarPublicaciones\FacturarPublicaciones.Designer.cs">
       <DependentUpon>FacturarPublicaciones.cs</DependentUpon>
     </Compile>
     <Compile Include="Vistas\Login\EleccionRol.cs">
@@ -141,28 +141,28 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Funciones.cs" />
-    <Compile Include="Vistas\Generar Publicacion\GenerarPublicacion.cs">
+    <Compile Include="Vistas\GenerarPublicacion\GenerarPublicacion.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vistas\Generar Publicacion\GenerarPublicacion.Designer.cs">
+    <Compile Include="Vistas\GenerarPublicacion\GenerarPublicacion.Designer.cs">
       <DependentUpon>GenerarPublicacion.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vistas\Gestion de Preguntas\GestionPreguntas.cs">
+    <Compile Include="Vistas\GestionPreguntas\GestionPreguntas.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vistas\Gestion de Preguntas\GestionPreguntas.Designer.cs">
+    <Compile Include="Vistas\GestionPreguntas\GestionPreguntas.Designer.cs">
       <DependentUpon>GestionPreguntas.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vistas\Historial Cliente\HistorialCliente.cs">
+    <Compile Include="Vistas\HistorialCliente\HistorialCliente.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vistas\Historial Cliente\HistorialCliente.Designer.cs">
+    <Compile Include="Vistas\HistorialCliente\HistorialCliente.Designer.cs">
       <DependentUpon>HistorialCliente.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vistas\Listado Estadístico\ListadoEstadistico.cs">
+    <Compile Include="Vistas\ListadoEstadístico\ListadoEstadistico.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vistas\Listado Estadístico\ListadoEstadistico.Designer.cs">
+    <Compile Include="Vistas\ListadoEstadístico\ListadoEstadistico.Designer.cs">
       <DependentUpon>ListadoEstadistico.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -182,7 +182,7 @@
     <EmbeddedResource Include="Vistas\CalificarVendedor\CalificarVendedor.resx">
       <DependentUpon>CalificarVendedor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Vistas\Listado Estadístico\ListadoEstadistico.resx">
+    <EmbeddedResource Include="Vistas\ListadoEstadístico\ListadoEstadistico.resx">
       <DependentUpon>ListadoEstadistico.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Login\EleccionRol.resx">
@@ -196,7 +196,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Vistas\Registro de Usuario\RegistroUsuario.resx">
+    <EmbeddedResource Include="Vistas\RegistroUsuario\RegistroUsuario.resx">
       <DependentUpon>RegistroUsuario.cs</DependentUpon>
     </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
@@ -212,10 +212,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Vistas\Registro de Usuario\RegistroUsuario.cs">
+    <Compile Include="Vistas\RegistroUsuario\RegistroUsuario.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vistas\Registro de Usuario\RegistroUsuario.Designer.cs">
+    <Compile Include="Vistas\RegistroUsuario\RegistroUsuario.Designer.cs">
       <DependentUpon>RegistroUsuario.cs</DependentUpon>
     </Compile>
   </ItemGroup>
