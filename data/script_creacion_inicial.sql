@@ -16,7 +16,7 @@ GO
 -- Creamos la Tabla con las Funcionalidades del Sistema.-
 CREATE TABLE J2LA.Funcionalidades (
 	fun_Id int IDENTITY (1,1) NOT NULL,
-	fun_Nombre varchar(255) NOT NULL,
+	fun_Nombre nvarchar(255) NOT NULL,
 CONSTRAINT PK_fun_Id PRIMARY KEY (fun_Id))
 
 GO
@@ -24,7 +24,7 @@ GO
 -- Creamos la Tabla con los Roles para los usuarios (Admin, Cliente y Empresa).-
 CREATE TABLE J2LA.Roles (
 	rol_Id int IDENTITY (1,1) NOT NULL,
-	rol_Nombre varchar(255) NOT NULL,
+	rol_Nombre nvarchar(255) NOT NULL,
 	rol_Inhabilitado bit NOT NULL,
 	rol_Eliminado bit NOT NULL,
 CONSTRAINT PK_rol_Id PRIMARY KEY (rol_Id))
@@ -44,11 +44,11 @@ GO
 -- Creamos la Tabla de Usuarios.-
 CREATE TABLE J2LA.Usuarios (
 	usu_Id int IDENTITY (1,1) NOT NULL,
-	usu_UserName varchar(255) NOT NULL,
-	usu_Pass varchar(255) NOT NULL,
+	usu_UserName nvarchar(255) NOT NULL,
+	usu_Pass nvarchar(255) NOT NULL,
 	usu_Cant_Intentos int NOT NULL DEFAULT 0,
 	usu_Inhabilitado bit NOT NULL DEFAULT 0,
-	usu_Motivo varchar(255) NULL,
+	usu_Motivo nvarchar(255) NULL,
 	usu_Eliminado bit NOT NULL DEFAULT 0,
 	usu_Primer_Ingreso bit NOT NULL DEFAULT 1,
 CONSTRAINT PK_usu_Id PRIMARY KEY (usu_Id),
@@ -69,27 +69,27 @@ GO
 -- Creamos la Tabla que almacena los Tipos de Documento para Clientes.-
 CREATE TABLE J2LA.TiposDoc (
 	tipodoc_Id int IDENTITY (1,1) NOT NULL,
-	tipodoc_Descripcion varchar(255) NOT NULL,
+	tipodoc_Descripcion nvarchar(255) NOT NULL,
 CONSTRAINT PK_tipodoc_Id PRIMARY KEY (tipodoc_Id))
 
 GO
 
 -- Creamos la Tabla para los Usuarios Clientes.-
 CREATE TABLE J2LA.Clientes (
-	cli_Nombre varchar(255) NOT NULL,
-	cli_Apellido varchar(255) NOT NULL,
+	cli_Nombre nvarchar(255) NOT NULL,
+	cli_Apellido nvarchar(255) NOT NULL,
 	cli_Tipodoc_Id int NOT NULL,
 	cli_Nro_Doc numeric(18,0) NOT NULL,
-	cli_Mail varchar(255) NULL,
-	cli_Tel varchar(50) NULL,
-	cli_Dom_Calle varchar(255) NULL,
+	cli_Mail nvarchar(255) NULL,
+	cli_Tel nvarchar(50) NULL,
+	cli_Dom_Calle nvarchar(255) NULL,
 	cli_Nro_Calle numeric(18,0) NULL,
 	cli_Piso numeric(18,0) NULL,
-	cli_Dpto varchar(50) NULL,
-	cli_Localidad varchar(255) NULL,
-	cli_CP varchar(50) NULL,
+	cli_Dpto nvarchar(50) NULL,
+	cli_Localidad nvarchar(255) NULL,
+	cli_CP nvarchar(50) NULL,
 	cli_Fecha_Nac datetime NULL,
-	cli_Cuil varchar(50) NOT NULL,
+	cli_Cuil nvarchar(50) NOT NULL,
 	cli_usu_Id Int NOT NULL,
 CONSTRAINT FK_cli_usu_Id FOREIGN KEY(cli_usu_Id) REFERENCES J2LA.Usuarios (usu_Id),
 CONSTRAINT FK_cli_Tipodoc_Id FOREIGN KEY(cli_Tipodoc_Id) REFERENCES J2LA.TiposDoc (tipodoc_Id),
@@ -99,18 +99,18 @@ GO
 
 -- Creamos la Tabla para los Usuarios Empresas.-
 CREATE TABLE J2LA.Empresas (
-	emp_Razon_Social varchar(255) NOT NULL,
-	emp_Cuit varchar(50) NOT NULL,
-	emp_Mail varchar(50) NULL,
-	emp_Tel varchar(50) NULL,
-	emp_Dom_Calle varchar(255) NULL,
+	emp_Razon_Social nvarchar(255) NOT NULL,
+	emp_Cuit nvarchar(50) NOT NULL,
+	emp_Mail nvarchar(50) NULL,
+	emp_Tel nvarchar(50) NULL,
+	emp_Dom_Calle nvarchar(255) NULL,
 	emp_Nro_Calle numeric(18,0) NULL,
 	emp_Piso numeric(18,0) NULL,
-	emp_Dpto varchar(255) NULL,
-	emp_Localidad varchar(255) NULL,
-	emp_CP varchar(50) NULL,
-	emp_Ciudad varchar(255) NULL,
-	emp_Contacto varchar(255) NULL,
+	emp_Dpto nvarchar(255) NULL,
+	emp_Localidad nvarchar(255) NULL,
+	emp_CP nvarchar(50) NULL,
+	emp_Ciudad nvarchar(255) NULL,
+	emp_Contacto nvarchar(255) NULL,
 	emp_Fecha_Creacion DateTime NULL,
 	emp_usu_Id Int NOT NULL,
 CONSTRAINT FK_emp_usu_Id FOREIGN KEY(emp_usu_Id) REFERENCES J2LA.Usuarios (usu_Id),
@@ -122,7 +122,7 @@ GO
 CREATE TABLE J2LA.Rubros (
 	rub_id int IDENTITY (1,1) NOT NULL,
 	rub_Codigo numeric(18,0) NOT NULL,
-	rub_Descripcion varchar(255) NOT NULL,
+	rub_Descripcion nvarchar(255) NOT NULL,
 	rub_Eliminado bit NOT NULL,
 CONSTRAINT PK_rub_id PRIMARY KEY (rub_Id))
 
@@ -132,7 +132,7 @@ GO
 CREATE TABLE J2LA.Publicaciones_Visibilidades (
 	pubvis_id int IDENTITY (1,1) NOT NULL,
 	pubvis_Codigo numeric(18,0) NOT NULL,
-	pubvis_Descripcion varchar(255) NOT NULL,
+	pubvis_Descripcion nvarchar(255) NOT NULL,
 	pubvis_Precio numeric(18,2) NOT NULL,
 	pubvis_Porcentaje numeric(18,2) NOT NULL,
 	pubvis_Dias_Vto numeric(18,0) NOT NULL,
@@ -144,7 +144,7 @@ GO
 -- Creamos la Tabla con los Tipos de Publicaciones.-
 CREATE TABLE J2LA.Publicaciones_Tipos (
 	pubtip_Id int IDENTITY (1,1) NOT NULL,
-	pubtip_Nombre varchar(255) NOT NULL,
+	pubtip_Nombre nvarchar(255) NOT NULL,
 CONSTRAINT PK_pubtip_Id PRIMARY KEY (pubtip_Id))
 
 GO
@@ -152,7 +152,7 @@ GO
 -- Creamos la Tabla con los Estados para las Publicaciones.-
 CREATE TABLE J2LA.Publicaciones_Estados (
 	pubest_Id int IDENTITY (1,1) NOT NULL,
-	pubest_Descripcion varchar(255) NOT NULL,
+	pubest_Descripcion nvarchar(255) NOT NULL,
 CONSTRAINT PK_pubest_Id PRIMARY KEY (pubest_Id))
 
 GO
@@ -160,8 +160,8 @@ GO
 -- Creamos la Tabla para las Publicaciones.-
 CREATE TABLE J2LA.Publicaciones (
 	pub_Codigo numeric(18,0) NOT NULL,
-	pub_Tipo varchar(50) NOT NULL,
-	pub_Descripcion varchar(255) NOT NULL,
+	pub_tipo_Id int NOT NULL,
+	pub_Descripcion nvarchar(255) NOT NULL,
 	pub_Stock numeric(18,0) NOT NULL,
 	pub_Fecha_Vto datetime NOT NULL,
 	pub_Fecha_Ini datetime NOT NULL,
@@ -170,6 +170,7 @@ CREATE TABLE J2LA.Publicaciones (
 	pub_estado_Id int NOT NULL,
 	pub_Permite_Preg bit NOT NULL,
 	pub_usu_Id int NOT NULL,
+CONSTRAINT FK_pub_tipo_Id FOREIGN KEY(pub_tipo_Id) REFERENCES J2LA.Publicaciones_Tipos (pubtip_Id),	
 CONSTRAINT FK_pub_visibilidad_Id FOREIGN KEY(pub_visibilidad_Id) REFERENCES J2LA.Publicaciones_Visibilidades (pubvis_id),
 CONSTRAINT FK_pub_estado_Id FOREIGN KEY(pub_estado_Id) REFERENCES J2LA.Publicaciones_Estados (pubest_Id),
 CONSTRAINT FK_pub_usu_Id FOREIGN KEY(pub_usu_Id) REFERENCES J2LA.Usuarios (usu_Id),
@@ -192,7 +193,7 @@ CREATE TABLE J2LA.Preguntas (
 	preg_pub_Codigo numeric(18,0) NOT NULL,
 	preg_Id int NOT NULL,
 	preg_Tipo Char(1) NOT NULL,
-	preg_Comentario varchar(255) NOT NULL,
+	preg_Comentario nvarchar(255) NOT NULL,
 	preg_usu_Id int  NOT NULL,
 CONSTRAINT FK_preg_pub_Codigo FOREIGN KEY(preg_pub_Codigo) REFERENCES J2LA.Publicaciones (pub_Codigo),
 CONSTRAINT FK_preg_usu_Id FOREIGN KEY(preg_usu_Id) REFERENCES J2LA.Usuarios (usu_Id),
@@ -217,7 +218,7 @@ GO
 CREATE TABLE J2LA.Calificaciones (
 	cal_Codigo numeric(18,0) NOT NULL,
 	cal_Cant_Estrellas numeric(18,0) NOT NULL,
-	cal_Comentario varchar(255) NOT NULL,
+	cal_Comentario nvarchar(255) NOT NULL,
 CONSTRAINT PK_cal_Codigo PRIMARY KEY (cal_Codigo))
 
 GO
@@ -244,7 +245,7 @@ CREATE TABLE J2LA.Facturas (
 	fac_usu_Id int NOT NULL,
 	fac_Fecha datetime NOT NULL,
 	fac_Total numeric(18,2) NOT NULL,
-	fac_Forma_Pago_Desc varchar(255) NOT NULL,
+	fac_Forma_Pago_Desc nvarchar(255) NOT NULL,
 CONSTRAINT FK_fac_usu_Id FOREIGN KEY(fac_usu_Id) REFERENCES J2LA.Usuarios (usu_Id),
 CONSTRAINT PK_fac_numero PRIMARY KEY (fac_numero))
 
@@ -328,7 +329,7 @@ GO
 -- Agregamos 2 Columnas Temporales para Optimizar la Migración.-
 Alter Table J2LA.Usuarios Add
 	Publ_Cli_Dni numeric(18, 0),
-	Publ_Empresa_Cuit varchar(50)
+	Publ_Empresa_Cuit nvarchar(50)
 	
 GO
 
@@ -345,7 +346,7 @@ GO
 Insert Into J2LA.Usuarios(usu_UserName, usu_Pass, usu_Cant_Intentos, usu_Inhabilitado,
 		usu_Motivo, usu_Eliminado, usu_Primer_Ingreso, Publ_Cli_Dni, Publ_Empresa_Cuit)
 	Select Distinct 
-		UserName = LTRIM(RTRIM(CONVERT(Varchar, Publ_Cli_Dni))),
+		UserName = LTRIM(RTRIM(CONVERT(nvarchar, Publ_Cli_Dni))),
 		Pass = '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4',
 		CantIntentos = 2, Inhabilitado = 0, Motivo = '', Eliminado = 0, Primer_Ingreso = 1,
 		M.Publ_Cli_Dni, Cuit_Empre = Null
@@ -428,10 +429,10 @@ GO
 DECLARE @FechaTP DateTime
 SET @FechaTP = '20140618' -- Fecha Inicio Nvo Sistema = Fecha 1er Entrega TP.-
 
-Insert Into J2LA.Publicaciones (pub_Codigo,pub_Tipo,pub_Descripcion,pub_Stock,pub_Fecha_Vto,
+Insert Into J2LA.Publicaciones (pub_Codigo,pub_tipo_Id,pub_Descripcion,pub_Stock,pub_Fecha_Vto,
 		pub_Fecha_Ini,pub_Precio,pub_visibilidad_Id,pub_estado_Id,pub_Permite_Preg,pub_usu_Id)
 	Select Distinct
-		Publicacion_Cod,Publicacion_Tipo,Publicacion_Descripcion,Publicacion_Stock,
+		Publicacion_Cod,T.pubtip_Id,Publicacion_Descripcion,Publicacion_Stock,
 		Publicacion_Fecha_Venc,Publicacion_Fecha,Publicacion_Precio,PV.pubvis_id,
 		pubest_Id = (Case When (Publicacion_Fecha_Venc < @FechaTP)
 					Then 4 Else 1 
@@ -441,6 +442,7 @@ Insert Into J2LA.Publicaciones (pub_Codigo,pub_Tipo,pub_Descripcion,pub_Stock,pu
 	Inner Join J2LA.Usuarios U On ISNULL(U.Publ_Cli_Dni, 0) = ISNULL(M.Publ_Cli_Dni,0) 
 		AND ISNULL(U.Publ_Empresa_Cuit,'') = ISNULL(M.Publ_Empresa_Cuit,'')
 	Inner Join J2LA.Publicaciones_Visibilidades PV On PV.pubvis_Codigo = M.Publicacion_Visibilidad_Cod
+	Inner Join J2LA.Publicaciones_Tipos T On T.pubtip_Nombre = M.Publicacion_Tipo
 	Where M.Publicacion_Cod Is Not Null
 
 GO
