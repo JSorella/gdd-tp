@@ -19,3 +19,6 @@ C:\Users\jsorella\Documents\GitHub\gdd-tp\src\FrbaCommerce\obj\Debug\FrbaCommerc
 C:\Users\jsorella\Documents\GitHub\gdd-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.Registro_de_Usuario.RegistroUsuario.resources
 C:\Users\jsorella\Documents\GitHub\gdd-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.Vistas.Login.EleccionRol.resources
 C:\Users\jsorella\Documents\GitHub\gdd-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.Vistas.Login.Login.resources
+C:\Users\jsorella\Documents\GitHub\gdd-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.Vistas.Abm_Rol.Abm_Rol_Busqueda.resources
+C:\Users\jsorella\Documents\GitHub\gdd-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.Vistas.Abm_Rol.Abm_Rol_Modif.resources
+C:\Users\jsorella\Documents\GitHub\gdd-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.Vistas.AbmRol.Abm_Rol_Alta.resources

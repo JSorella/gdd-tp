@@ -6,7 +6,6 @@ using System.Security.Cryptography;
 using System.Data;
 using System.Data.Sql;
 using System.Data.SqlClient;
-using FrbaBus.Abm_Rol;
 using System.Windows.Forms;
 
 namespace FrbaCommerce

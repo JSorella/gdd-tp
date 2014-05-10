@@ -64,52 +64,52 @@
     <Compile Include="Homes\HomeUsuarios.cs" />
     <Compile Include="Singleton.cs" />
     <Compile Include="Stored_procedures.cs" />
-    <Compile Include="Vistas\Abm Cliente\AbmCliente.cs">
+    <Compile Include="Vistas\AbmCliente\AbmCliente.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vistas\Abm Cliente\AbmCliente.Designer.cs">
+    <Compile Include="Vistas\AbmCliente\AbmCliente.Designer.cs">
       <DependentUpon>AbmCliente.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vistas\Abm Empresa\AbmEmpresa.cs">
+    <Compile Include="Vistas\AbmEmpresa\AbmEmpresa.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vistas\Abm Empresa\AbmEmpresa.Designer.cs">
+    <Compile Include="Vistas\AbmEmpresa\AbmEmpresa.Designer.cs">
       <DependentUpon>AbmEmpresa.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vistas\Abm Rol\Abm_Rol_Alta.cs">
+    <Compile Include="Vistas\AbmRol\Abm_Rol_Alta.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vistas\Abm Rol\Abm_Rol_Alta.Designer.cs">
+    <Compile Include="Vistas\AbmRol\Abm_Rol_Alta.Designer.cs">
       <DependentUpon>Abm_Rol_Alta.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vistas\Abm Rol\Abm_Rol_Busqueda.cs">
+    <Compile Include="Vistas\AbmRol\Abm_Rol_Busqueda.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vistas\Abm Rol\Abm_Rol_Busqueda.Designer.cs">
+    <Compile Include="Vistas\AbmRol\Abm_Rol_Busqueda.Designer.cs">
       <DependentUpon>Abm_Rol_Busqueda.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vistas\Abm Rol\Abm_Rol_Modif.cs">
+    <Compile Include="Vistas\AbmRol\Abm_Rol_Modif.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vistas\Abm Rol\Abm_Rol_Modif.Designer.cs">
+    <Compile Include="Vistas\AbmRol\Abm_Rol_Modif.Designer.cs">
       <DependentUpon>Abm_Rol_Modif.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vistas\Abm Rubro\AbmRubro.cs">
+    <Compile Include="Vistas\AbmRubro\AbmRubro.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vistas\Abm Rubro\AbmRubro.Designer.cs">
+    <Compile Include="Vistas\AbmRubro\AbmRubro.Designer.cs">
       <DependentUpon>AbmRubro.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vistas\Abm Visibilidad\AbmVisibilidad.cs">
+    <Compile Include="Vistas\AbmVisibilidad\AbmVisibilidad.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vistas\Abm Visibilidad\AbmVisibilidad.Designer.cs">
+    <Compile Include="Vistas\AbmVisibilidad\AbmVisibilidad.Designer.cs">
       <DependentUpon>AbmVisibilidad.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vistas\Calificar Vendedor\CalificarVendedor.cs">
+    <Compile Include="Vistas\CalificarVendedor\CalificarVendedor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vistas\Calificar Vendedor\CalificarVendedor.Designer.cs">
+    <Compile Include="Vistas\CalificarVendedor\CalificarVendedor.Designer.cs">
       <DependentUpon>CalificarVendedor.cs</DependentUpon>
     </Compile>
     <Compile Include="Vistas\Comprar-Ofertar\ComprarOfertar.cs">
@@ -167,19 +167,19 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Vistas\Abm Empresa\AbmEmpresa.resx">
+    <EmbeddedResource Include="Vistas\AbmEmpresa\AbmEmpresa.resx">
       <DependentUpon>AbmEmpresa.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Vistas\Abm Rol\Abm_Rol_Alta.resx">
+    <EmbeddedResource Include="Vistas\AbmRol\Abm_Rol_Alta.resx">
       <DependentUpon>Abm_Rol_Alta.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Vistas\Abm Rol\Abm_Rol_Busqueda.resx">
+    <EmbeddedResource Include="Vistas\AbmRol\Abm_Rol_Busqueda.resx">
       <DependentUpon>Abm_Rol_Busqueda.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Vistas\Abm Rol\Abm_Rol_Modif.resx">
+    <EmbeddedResource Include="Vistas\AbmRol\Abm_Rol_Modif.resx">
       <DependentUpon>Abm_Rol_Modif.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Vistas\Calificar Vendedor\CalificarVendedor.resx">
+    <EmbeddedResource Include="Vistas\CalificarVendedor\CalificarVendedor.resx">
       <DependentUpon>CalificarVendedor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Listado Estadístico\ListadoEstadistico.resx">

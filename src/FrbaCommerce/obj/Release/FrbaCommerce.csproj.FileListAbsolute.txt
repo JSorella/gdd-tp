@@ -3,3 +3,4 @@ C:\Users\jsorella\Documents\GitHub\gdd-tp\src\FrbaCommerce\obj\Release\FrbaComme
 C:\Users\jsorella\Documents\GitHub\gdd-tp\src\FrbaCommerce\obj\Release\FrbaCommerce.csproj.GenerateResource.Cache
 C:\Users\Agustin\Documents\GitHub\j2la-tp\src\FrbaCommerce\bin\Release\FrbaCommerce.exe.config
 C:\Users\adaquino\Documents\GitHub\j2la-tp\src\FrbaCommerce\bin\Release\FrbaCommerce.exe.config
+C:\Users\jsorella\Documents\GitHub\gdd-tp\src\FrbaCommerce\bin\Release\FrbaCommerce.exe.config
