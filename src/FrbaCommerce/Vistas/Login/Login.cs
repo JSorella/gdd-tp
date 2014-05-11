@@ -7,7 +7,6 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Windows.Forms;
-using FrbaCommerce.Homes;
 using FrbaCommerce.Dominio;
 
 
@@ -19,6 +18,7 @@ namespace FrbaCommerce.Vistas.Login
         private DataGridView dataGridView1;
         DataTable tablaTop10 = new DataTable();
         BindingSource SBind = new BindingSource();
+  
         private FontDialog fontDialog1;
         private Label label1;
         private Button login_button;
@@ -27,7 +27,6 @@ namespace FrbaCommerce.Vistas.Login
         private Label label2;
         private Label label3;
         private Label label4;
-        private HomeUsuarios homeUsuarios = new HomeUsuarios();
 
 
         //fecha del sistema
@@ -39,8 +38,6 @@ namespace FrbaCommerce.Vistas.Login
             this.InitializeComponent();
 
             /*-------------------------ACTUALIZACION DE FECHA DE ALTA DE MICRO--------------*/
-            //stored_procedures stored = new stored_procedures();
-            //stored.update_fecha_alta_micro(fechadelsistema.tostring("yyyy-mm-dd hh:mm"));
 
             //hallamos Id_Rol
             //query = "SELECT TOP 10 Publicacion_Cod, Publ_Empresa_Dom_Calle FROM gd_esquema.Maestra";
@@ -197,12 +194,12 @@ namespace FrbaCommerce.Vistas.Login
             }
             /*------------------------------------------------*/
             //Ahora si... ingreso usuario y contraseña 
-
             Usuario usuario = new Usuario();
 
             try
             {
-                usuario = this.homeUsuarios.getUsuarioSinRoles(this.username_textbox.Text);
+                usuario = StoredProcedures.getUsuarioSinRoles(this.username_textbox.Text);
+                //NOTA: es importante que sea sin roles ya que, de no tenerlos, el user debería poder loguearse igual y ser informado de esto
             }
             catch (Exception error)
             {
@@ -210,50 +207,28 @@ namespace FrbaCommerce.Vistas.Login
                 return;
             }
 
-
-            if (usuario != null)
+            //evaluamos si esta bien la contraseña
+            if (Funciones.get_hash(passw_textbox.Text) == usuario.pass)
             {
-                //verificamos que el usuario NO este inhabilitado
-                if (usuario.inhabilitado)
-                {
-                    MessageBox.Show(
-                        @"Usuario Inhabilitado
-                        \n Motivo: " + usuario.motivo
-                        , "Acceso al Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
+                //Login Successful!! ... abrimos el formulario de Funcionalides
+                //limpiamos cant_intentos
+                usuario.cantidadIntentos = 0;
+                StoredProcedures.setCantidadIntentos(usuario);
 
-                // evaluamos la cant_intentos              
-                if (usuario.cantidadIntentos >= 3)
-                {
-                    MessageBox.Show("Se logueó mal 3 veces, está inhabilitado para logearse", "Acceso al Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    this.error();
-                    return;
-                }
-
-                //evaluamos si esta bien la contraseña
+                EleccionRol rolWindow = new EleccionRol();
                 
-                if (Funciones.get_hash(passw_textbox.Text) == usuario.pass)
-                {
-                    //Login Successful!! ... abrimos el formulario de Funcionalides
-
-                    //limpiamos cant_intentos
-                    usuario.cantidadIntentos = 0;
-
-                    EleccionRol rolWindow = new EleccionRol();
-                    
-                    rolWindow.ShowDialog();
-                }
-                else  //Wrong Password...
-                {
-                    //Se debe actualizar el campo usu_cant_intentos de la base de datos
-                    this.homeUsuarios.setCantidadIntentos(usuario);
-                    
-                    MessageBox.Show(@"
-                        Password Incorrecto
-                        Le quedan " + (int)(3 - usuario.cantidadIntentos) + " intentos" 
-                        , "Acceso al Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                rolWindow.ShowDialog();
+            }
+            else  //Wrong Password...
+            {
+                //Se debe actualizar el campo usu_cant_intentos de la base de datos
+                usuario.cantidadIntentos ++;
+                StoredProcedures.setCantidadIntentos(usuario);
+                
+                MessageBox.Show(@"
+                    Password Incorrecto
+                    Le quedan " + (int)(3 - usuario.cantidadIntentos) + " intentos" 
+                    , "Acceso al Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             return;
         }

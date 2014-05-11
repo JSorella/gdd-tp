@@ -8,25 +8,15 @@ Go
 IF OBJECT_ID('J2LA.setCantidadIntentos') IS NOT NULL
 DROP PROCEDURE J2LA.setCantidadIntentos
 GO
-CREATE PROCEDURE J2LA.setCantidadIntentos @idUsuario INT
+CREATE PROCEDURE J2LA.setCantidadIntentos @idUsuario INT, @cantIntentos INT
 AS
 BEGIN
-	DECLARE @cantIntentos NVARCHAR(255)
-
-	SELECT 
-		@cantIntentos = usu_cant_intentos
-	FROM 
-		J2LA.Usuarios
-	WHERE
-		usu_Id = @idUsuario
-		
-	SET @cantIntentos = @cantIntentos + 1
-	/*-----------------------------------*/
 	UPDATE 
 		J2LA.Usuarios
     SET
 		usu_Cant_Intentos = @cantIntentos,
-		usu_Inhabilitado = CASE WHEN @cantIntentos >= 3 THEN 1 ELSE 0 END
+		usu_Inhabilitado = CASE WHEN @cantIntentos >= 3 THEN 1 ELSE 0 END,
+		usu_Motivo = CASE WHEN @cantIntentos >= 3 THEN 'Intentos' ELSE '' END
 	WHERE
 		usu_Id = @idUsuario
 END

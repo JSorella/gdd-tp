@@ -92,33 +92,33 @@ namespace FrbaCommerce
 
         public decimal get_porcentaje(string viaj_id)
         {
-            Connection conexion = new Connection();
+            
             string query = " EXECUTE DATACENTER.get_porcentaje " + viaj_id;
-            DataTable tabl_porc = conexion.execute_query(query);
+            DataTable tabl_porc = Singleton.conexion.execute_query(query);
             return Convert.ToDecimal(tabl_porc.Rows[0].ItemArray[0].ToString());
         }
 
         public string get_costo_encomienda(string viaj_id, string paq_kg)
         {
-            Connection conexion = new Connection();
+            
             string query = " EXECUTE DATACENTER.get_costo_encomienda " + viaj_id + "," + paq_kg;
-            DataTable tabl_porc = conexion.execute_query(query);
+            DataTable tabl_porc = Singleton.conexion.execute_query(query);
             return tabl_porc.Rows[0].ItemArray[0].ToString();
         }
 
         public int get_kg_disponibles(string viaj_id)
         {
-            Connection conexion = new Connection();
+            
             string query = "EXECUTE DATACENTER.get_kg_disponibles " + viaj_id;
-            DataTable tabl_kg_disp = conexion.execute_query(query);
+            DataTable tabl_kg_disp = Singleton.conexion.execute_query(query);
             return Convert.ToInt16(tabl_kg_disp.Rows[0].ItemArray[0].ToString());
         }
 
         public char check_tipo_tarjeta(string tipo_id)
         {
-            Connection conexion = new Connection();
+            
             string query = "EXECUTE DATACENTER.check_tipo_tarjeta " + tipo_id;
-            DataTable tabl_tip_tarj = conexion.execute_query(query);
+            DataTable tabl_tip_tarj = Singleton.conexion.execute_query(query);
             return Convert.ToChar(tabl_tip_tarj.Rows[0].ItemArray[0].ToString());
         }
 
@@ -136,7 +136,7 @@ namespace FrbaCommerce
             comando.Parameters.AddWithValue("@costo_total", costo_total);
             comando.Parameters.AddWithValue("@fecha_actual", fecha_actual);
             string cod_compra = comando.ExecuteScalar().ToString();
-            conexion.Close();
+            Singleton.conexion.connector().Close();
             return cod_compra;
         }
 
@@ -154,15 +154,15 @@ namespace FrbaCommerce
             comando.Parameters.AddWithValue("@pas_precio", pas_precio);
             comando.Parameters.AddWithValue("@viaj_id", viaj_id);
             string cod_pasaje = comando.ExecuteScalar().ToString();
-            conexion.Close();
+            Singleton.conexion.connector().Close();
             return cod_pasaje;
         }
 
         public string get_micro_patente(string viaje_id)
         {
-            Connection conexion = new Connection();
+            
             string query = "EXECUTE DATACENTER.get_micro_patente " + viaje_id;
-            DataTable tabl_mic_pat = conexion.execute_query(query);
+            DataTable tabl_mic_pat = Singleton.conexion.execute_query(query);
             return tabl_mic_pat.Rows[0].ItemArray[0].ToString();
         }
 
@@ -178,14 +178,14 @@ namespace FrbaCommerce
             comando.Parameters.AddWithValue("@paq_kg", paq_kg);
             comando.Parameters.AddWithValue("@viaj_id", viaj_id);
             string cod_paquete = comando.ExecuteScalar().ToString();
-            conexion.Close();
+            Singleton.conexion.connector().Close();
             return cod_paquete;
         }
 
         /*-----------------------------CAMBIADO----------------------------*/
         public void insert_recorrido(string cod_ins, string orig_ins, string dest_ins, int serv_ins, decimal pr_pas_ins, decimal pr_enco_ins)
         {
-            Connection conexion = new Connection();
+            
 
             string precioPas = pr_pas_ins.ToString();
             string precioPasConPunto = precioPas.Replace(",", ".");
@@ -194,56 +194,57 @@ namespace FrbaCommerce
 
             //EL ESTADO_RECO LO ASIGNO DIRECTAMENTE EN LA BASE, TODOS LOS RECOS NUEVOS SE INSERTAN HABILITADOS
             query = "EXECUTE DATACENTER.insert_recorrido " + "'" + cod_ins + "'" + ", " + "'" + orig_ins + "'" + ", " + "'" + dest_ins + "'" + ", " + serv_ins + ", " + precioPasConPunto + ", " + precioEncoConPunto;
-            conexion.execute_query_only(query);
+            Singleton.conexion.execute_query_only(query);
         }
 
         /*-----------------------------CAMBIADO-----------------------------*/
         public void insert_viaje(string fecha_sal, string fecha_lleg, string cod_reco_ins, string pat_mic_ins)
         {
-            Connection conexion = new Connection();
+            
 
             query = "EXECUTE DATACENTER.insert_viaje " + "'" + fecha_sal + "'" + ", " + "'" + fecha_lleg + "'" + ", " + "'" + cod_reco_ins + "'" + ", " + "'" + pat_mic_ins + "'";
-            conexion.execute_query_only(query);
+            Singleton.conexion.execute_query_only(query);
         }
 
         /*---------------------------CAMBIADO--------------------------*/
         public void update_recorrido(string cod_act, string orig_act, string dest_act, int serv_act, decimal pr_pas_act, decimal pr_enco_act)
         {
-            Connection conexion = new Connection();
+            
 
             string precioPas = pr_pas_act.ToString();
             string precioPasConPunto = precioPas.Replace(",", ".");
             string precioEnco = pr_enco_act.ToString();
             string precioEncoConPunto = precioEnco.Replace(",", ".");
             query = "EXECUTE DATACENTER.update_recorrido " + "'" + cod_act + "'" + ", " + "'" + orig_act + "'" + ", " + "'" + dest_act + "'" + ", " + serv_act + ", " + "'" + precioPasConPunto + "'" + ", " + "'" + precioEncoConPunto + "'";
-            conexion.execute_query_only(query);
+            Singleton.conexion.execute_query_only(query);
         }
 
         public void update_estado_reco(string cod, char estado_act)
         {
-            Connection conexion = new Connection();
+            
 
             string fecha_hoy = System.Configuration.ConfigurationSettings.AppSettings["FechaDelSistema"].ToString();
             DateTime fecha_hoy2 = Convert.ToDateTime(fecha_hoy);
             string fecha = fecha_hoy2.ToString("yyyy-MM-dd HH:mm");
 
             query = "EXECUTE DATACENTER.update_estado_reco " + "'" + cod + "'" + ", " + "'" + estado_act + "'" + ", " + "'" + fecha + "'";
-            conexion.execute_query_only(query);
+            Singleton.conexion.execute_query_only(query);
         }
 
         public void habilitar_estado_reco(string cod, char estado_act)
         {
-            Connection conexion = new Connection();
+            
             query = "EXECUTE DATACENTER.habilitar_estado_reco " + "'" + cod + "'" + ", " + "'" + estado_act + "'";
-            conexion.execute_query_only(query);
+            Singleton.conexion.execute_query_only(query);
         }
 
         public void update_fecha_alta_micro(string fecha_alta)
         {
-            Connection conexion = new Connection();
+            
             string query = "EXECUTE DATACENTER.update_fecha_alta_micro '" + fecha_alta + "'";
-            conexion.execute_query(query);
+            Singleton.conexion.execute_query(query);
 
         }
+
     }
 }
