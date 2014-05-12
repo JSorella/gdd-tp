@@ -5,15 +5,15 @@ using System.Text;
 using System.Data;
 using System.Data.Sql;
 using System.Data.SqlClient;
-using FrbaCommerce.Dominio;
+using FrbaCommerce.Vistas.Login;
 
 namespace FrbaCommerce
 {
+    /// <summary>
+    /// clase que tiene metodos que hacen de interfaz con los stored procedures que estan en la BD sql server
+    /// </summary>
     public static class StoredProcedures
     {
-        /*clase que tiene metodos que hacen de interfaz con los stored procedures que estan en la BD sql server*/
-
-
         /// <summary>
         /// Trae un Usuario (sin roles)
         /// </summary>

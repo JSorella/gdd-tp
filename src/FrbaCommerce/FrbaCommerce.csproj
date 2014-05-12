@@ -49,18 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Dominio\Administrativo.cs" />
-    <Compile Include="Dominio\Cliente.cs" />
-    <Compile Include="Dominio\CompraInmediata.cs" />
-    <Compile Include="Dominio\Empresa.cs" />
-    <Compile Include="Dominio\Factura.cs" />
-    <Compile Include="Dominio\Funcionalidad.cs" />
-    <Compile Include="Dominio\Pregunta.cs" />
-    <Compile Include="Dominio\Publicacion.cs" />
-    <Compile Include="Dominio\Rol.cs" />
-    <Compile Include="Dominio\Rubro.cs" />
-    <Compile Include="Dominio\Subasta.cs" />
-    <Compile Include="Dominio\Usuario.cs" />
+    <Compile Include="Vistas\Login\Usuario.cs" />
     <Compile Include="Singleton.cs" />
     <Compile Include="StoredProcedures.cs" />
     <Compile Include="Stored_procedures.cs" />
