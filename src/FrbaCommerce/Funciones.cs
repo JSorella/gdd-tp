@@ -16,7 +16,6 @@ namespace FrbaCommerce
     class Funciones
     {
         Connection connect = new Connection();
-        private string query;
 
         static public string get_hash(string pass_ingresada)
         {

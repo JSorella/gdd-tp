@@ -16,9 +16,6 @@ namespace FrbaCommerce.Vistas.Login
     public partial class Login : Form
     {
         Connection connect = new Connection();
-        private DataGridView dataGridView1;
-        DataTable tablaTop10 = new DataTable();
-        BindingSource SBind = new BindingSource();
   
         private FontDialog fontDialog1;
         private Label label1;
@@ -248,7 +245,7 @@ namespace FrbaCommerce.Vistas.Login
 
                 if (usuarioConRoles.Rows.Count == 1)
                 {
-                    MenuFunciones menuWindow = new MenuFunciones();
+                    MenuFunciones menuWindow = new MenuFunciones((int)Singleton.usuario.Rows[0]["rol_id"]);
                     menuWindow.ShowDialog();
                 }
                 else 

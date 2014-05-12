@@ -21,17 +21,20 @@ namespace FrbaCommerce.Vistas.Login
         {
             this.comboRol.DataSource = Singleton.usuario;
             this.comboRol.DisplayMember = "rol_Nombre";
-            this.comboRol.ValueMember = "rol_Nombre";
+            this.comboRol.ValueMember = "rol_Id";
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            MenuFunciones menuWindow = new MenuFunciones((int)this.comboRol.SelectedValue);
+            menuWindow.ShowDialog();
+            this.Close();
         }
 
         private void comboRol_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+            
         }
     }
 }

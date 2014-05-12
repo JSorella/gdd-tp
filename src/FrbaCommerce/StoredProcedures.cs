@@ -25,7 +25,9 @@ namespace FrbaCommerce
                     FROM 
                         J2LA.Usuarios u  
                     WHERE 
-                        usu_username = " + "'" + nombre + "'");
+                        usu_username = " + "'" + nombre + @"' 
+                    AND
+                        usu_eliminado = 0");
 
             if (usuarioResult.Rows.Count == 0)
             {
@@ -76,7 +78,11 @@ namespace FrbaCommerce
                     AND
                         u.usu_Id = ur.usurol_usu_id 
                     AND
-                        ur.usurol_rol_id = r.rol_Id");
+                        ur.usurol_rol_id = r.rol_Id
+                    AND
+                        r.rol_eliminado = 0
+                    AND
+                        r.rol_Inhabilitado = 0");
 
             if (usuarioResult.Rows.Count == 0)
             {
