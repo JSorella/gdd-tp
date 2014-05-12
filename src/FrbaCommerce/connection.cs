@@ -72,5 +72,11 @@ namespace FrbaCommerce
             }
             conexion.Close();
         }
+
+        public void execute_query_with_parameters(SqlCommand comando)
+        {
+            comando.ExecuteScalar();
+            Singleton.conexion.connector().Close();
+        }
     }
 }

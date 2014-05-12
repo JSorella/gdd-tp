@@ -13,10 +13,23 @@ namespace FrbaCommerce.Vistas.Login
     {
         public EleccionRol()
         {
-            InitializeComponent();
+            this.InitializeComponent();
+            this.comboRol.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
         private void EleccionRol_Load(object sender, EventArgs e)
+        {
+            this.comboRol.DataSource = Singleton.usuario;
+            this.comboRol.DisplayMember = "rol_Nombre";
+            this.comboRol.ValueMember = "rol_Nombre";
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboRol_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data;
+using FrbaCommerce.Dominio;
 
 namespace FrbaCommerce
 {
@@ -13,6 +15,8 @@ namespace FrbaCommerce
     {
         private static readonly Singleton instance = new Singleton();
         public static Connection conexion = new Connection();
+        public static DataTable usuario = new DataTable();
+      
 
         //El constructor del Singleton siempre debe ser privado para evitar ser instanciado
         private Singleton() { }

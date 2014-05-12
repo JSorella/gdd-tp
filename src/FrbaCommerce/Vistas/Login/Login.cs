@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Windows.Forms;
 using FrbaCommerce.Dominio;
+using FrbaCommerce.Vistas.Registro_Usuario;
 
 
 namespace FrbaCommerce.Vistas.Login
@@ -27,6 +28,8 @@ namespace FrbaCommerce.Vistas.Login
         private Label label2;
         private Label label3;
         private Label label4;
+        private Button registrar_usuario_button;
+        private Splitter splitter1;
 
 
         //fecha del sistema
@@ -61,6 +64,8 @@ namespace FrbaCommerce.Vistas.Login
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.registrar_usuario_button = new System.Windows.Forms.Button();
+            this.splitter1 = new System.Windows.Forms.Splitter();
             this.SuspendLayout();
             // 
             // label1
@@ -76,7 +81,7 @@ namespace FrbaCommerce.Vistas.Login
             // 
             // login_button
             // 
-            this.login_button.Location = new System.Drawing.Point(406, 202);
+            this.login_button.Location = new System.Drawing.Point(209, 169);
             this.login_button.Name = "login_button";
             this.login_button.Size = new System.Drawing.Size(119, 25);
             this.login_button.TabIndex = 9;
@@ -86,7 +91,7 @@ namespace FrbaCommerce.Vistas.Login
             // 
             // passw_textbox
             // 
-            this.passw_textbox.Location = new System.Drawing.Point(406, 149);
+            this.passw_textbox.Location = new System.Drawing.Point(209, 116);
             this.passw_textbox.Name = "passw_textbox";
             this.passw_textbox.Size = new System.Drawing.Size(191, 20);
             this.passw_textbox.TabIndex = 8;
@@ -95,7 +100,7 @@ namespace FrbaCommerce.Vistas.Login
             // 
             // username_textbox
             // 
-            this.username_textbox.Location = new System.Drawing.Point(406, 101);
+            this.username_textbox.Location = new System.Drawing.Point(209, 68);
             this.username_textbox.Name = "username_textbox";
             this.username_textbox.Size = new System.Drawing.Size(191, 20);
             this.username_textbox.TabIndex = 7;
@@ -104,7 +109,7 @@ namespace FrbaCommerce.Vistas.Login
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(269, 156);
+            this.label2.Location = new System.Drawing.Point(127, 123);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(56, 13);
             this.label2.TabIndex = 6;
@@ -114,7 +119,7 @@ namespace FrbaCommerce.Vistas.Login
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(269, 108);
+            this.label3.Location = new System.Drawing.Point(127, 75);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(58, 13);
             this.label3.TabIndex = 5;
@@ -125,16 +130,37 @@ namespace FrbaCommerce.Vistas.Login
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Cambria", 11.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(723, 239);
+            this.label4.Location = new System.Drawing.Point(724, 236);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(129, 17);
             this.label4.TabIndex = 10;
             this.label4.Text = "Powered by J2LA ©";
             this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
+            // registrar_usuario_button
+            // 
+            this.registrar_usuario_button.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
+            this.registrar_usuario_button.Location = new System.Drawing.Point(551, 169);
+            this.registrar_usuario_button.Name = "registrar_usuario_button";
+            this.registrar_usuario_button.Size = new System.Drawing.Size(202, 23);
+            this.registrar_usuario_button.TabIndex = 11;
+            this.registrar_usuario_button.Text = "Registrar Nuevo Usuario";
+            this.registrar_usuario_button.UseVisualStyleBackColor = true;
+            this.registrar_usuario_button.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // splitter1
+            // 
+            this.splitter1.Location = new System.Drawing.Point(0, 0);
+            this.splitter1.Name = "splitter1";
+            this.splitter1.Size = new System.Drawing.Size(3, 262);
+            this.splitter1.TabIndex = 12;
+            this.splitter1.TabStop = false;
+            // 
             // Login
             // 
             this.ClientSize = new System.Drawing.Size(855, 262);
+            this.Controls.Add(this.splitter1);
+            this.Controls.Add(this.registrar_usuario_button);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.login_button);
             this.Controls.Add(this.passw_textbox);
@@ -142,7 +168,7 @@ namespace FrbaCommerce.Vistas.Login
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
-            this.Name = "Form_Login";
+            this.Name = "Login";
             this.Load += new System.EventHandler(this.Login_Load_1);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -170,26 +196,18 @@ namespace FrbaCommerce.Vistas.Login
 
         }
 
-        private void error()
-        {
-            //this.username_textbox.Text = "";
-            //this.passw_textbox.Text = "";
-        }
-
         private void login_button_Click(object sender, EventArgs e)
         {
             // Validación Textboxes
             if (this.username_textbox.Text == "")
             {
                 MessageBox.Show("Debe Ingresar nombre de usuario", "Acceso al Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                this.error();
                 return;
             }
 
             if (this.passw_textbox.Text == "")
             {
                 MessageBox.Show("Debe Ingresar password", "Acceso al Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                this.error();
                 return;
             }
             /*------------------------------------------------*/
@@ -215,9 +233,30 @@ namespace FrbaCommerce.Vistas.Login
                 usuario.cantidadIntentos = 0;
                 StoredProcedures.setCantidadIntentos(usuario);
 
-                EleccionRol rolWindow = new EleccionRol();
+                DataTable usuarioConRoles;
+                try
+                {
+                    usuarioConRoles = StoredProcedures.getUsuarioConRoles(usuario.nombre);
+                }
+                catch (Exception error)
+                {
+                    MessageBox.Show(error.Message, "Acceso al Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                Singleton.usuario = usuarioConRoles;
+
+                if (usuarioConRoles.Rows.Count == 1)
+                {
+                    MenuFunciones menuWindow = new MenuFunciones();
+                    menuWindow.ShowDialog();
+                }
+                else 
+                {
+                    EleccionRol rolWindow = new EleccionRol();
+                    rolWindow.ShowDialog();
+                }
                 
-                rolWindow.ShowDialog();
             }
             else  //Wrong Password...
             {
@@ -256,6 +295,12 @@ namespace FrbaCommerce.Vistas.Login
         private void label4_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            RegistroUsuario registroUsuarioWindow = new RegistroUsuario();
+            registroUsuarioWindow.ShowDialog();
         }
             
 

@@ -28,20 +28,61 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.comboRol = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
+            // 
+            // comboRol
+            // 
+            this.comboRol.FormattingEnabled = true;
+            this.comboRol.Location = new System.Drawing.Point(93, 34);
+            this.comboRol.Name = "comboRol";
+            this.comboRol.Size = new System.Drawing.Size(190, 21);
+            this.comboRol.Sorted = true;
+            this.comboRol.TabIndex = 16;
+            this.comboRol.TabStop = false;
+            this.comboRol.SelectedIndexChanged += new System.EventHandler(this.comboRol_SelectedIndexChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(10, 34);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(76, 13);
+            this.label1.TabIndex = 15;
+            this.label1.Text = "Rol Asignado: ";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(339, 34);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(105, 23);
+            this.button1.TabIndex = 17;
+            this.button1.Text = "Elegir Rol";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // EleccionRol
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.ClientSize = new System.Drawing.Size(471, 81);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.comboRol);
+            this.Controls.Add(this.label1);
             this.Name = "EleccionRol";
             this.Text = "EleccionRol";
             this.Load += new System.EventHandler(this.EleccionRol_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
+
+        private System.Windows.Forms.ComboBox comboRol;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button button1;
     }
 }

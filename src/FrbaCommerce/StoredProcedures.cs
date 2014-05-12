@@ -62,53 +62,39 @@ namespace FrbaCommerce
         /// <summary>
         /// Trae un Usuario
         /// </summary>
-        public static Usuario getUsuarioConRoles(String nombre)
+        public static DataTable getUsuarioConRoles(String nombre)
         {
             DataTable usuarioResult = Singleton.conexion.execute_query( //TODO: transformar en SP
                     @"SELECT 
                         *
                     FROM 
                         J2LA.Usuarios u  
-                    JOIN
-                        J2LA.Usuarios_Roles r
-                    ON
-                        (u.usu_Id = r.usurol_usu_id)
+                        ,J2LA.Usuarios_Roles ur
+                        ,J2LA.Roles r
                     WHERE 
-                        usu_username = " + "'" + nombre + "'");
+                        usu_username = " + "'" + nombre + @" '
+                    AND
+                        u.usu_Id = ur.usurol_usu_id 
+                    AND
+                        ur.usurol_rol_id = r.rol_Id");
 
             if (usuarioResult.Rows.Count == 0)
             {
-                throw new Exception("Usuario Inexistente!");
+                throw new Exception("Usuario sin Roles asociados!!!");
             }
-
-            Usuario usuario = new Usuario();
-
-            try
-            {
-                usuario.id = (int)usuarioResult.Rows[0]["usu_Id"];
-                usuario.nombre = (string)usuarioResult.Rows[0]["usu_UserName"];
-                usuario.pass = (string)usuarioResult.Rows[0]["usu_Pass"];
-                usuario.cantidadIntentos = (int)usuarioResult.Rows[0]["usu_Cant_Intentos"];
-                usuario.inhabilitado = (bool)(usuarioResult.Rows[0]["usu_Inhabilitado"].ToString() == "1") ? true : false;
-                usuario.motivo = (string)usuarioResult.Rows[0]["usu_Motivo"].ToString();
-
-                foreach (DataRow registro in usuarioResult.Rows)
-                {
-                    usuario.roles.Add(new Rol((int)registro["usurol_rol_id"]));
-                }
-            }
-            catch (Exception e) //otro error
-            {
-                throw new Exception("Error en HomeUsuario: " + e.Message);
-            }
-
-            return usuario;
+            return usuarioResult;
         }
 
         public static void setCantidadIntentos(Usuario usuario)
         {
-            string query = "EXECUTE J2LA.setCantidadIntentos '" + usuario.id + "', '"+ usuario.cantidadIntentos + "'";
-            Singleton.conexion.execute_query_only(query);
+            string query = "EXECUTE J2LA.setCantidadIntentos @idUsuario, @cantIntentos";
+  
+            SqlCommand comando = new SqlCommand(query, Singleton.conexion.connector());
+
+            comando.Parameters.AddWithValue("@idUsuario", usuario.id);
+            comando.Parameters.AddWithValue("@cantIntentos", usuario.cantidadIntentos);
+
+            Singleton.conexion.execute_query_with_parameters(comando);
         }
     }
 }

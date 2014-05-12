@@ -196,7 +196,10 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Vistas\RegistroUsuario\RegistroUsuario.resx">
+    <EmbeddedResource Include="Vistas\Login\MenuFunciones.resx">
+      <DependentUpon>MenuFunciones.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Registro Usuario\RegistroUsuario.resx">
       <DependentUpon>RegistroUsuario.cs</DependentUpon>
     </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
@@ -212,10 +215,16 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Vistas\RegistroUsuario\RegistroUsuario.cs">
+    <Compile Include="Vistas\Login\MenuFunciones.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vistas\RegistroUsuario\RegistroUsuario.Designer.cs">
+    <Compile Include="Vistas\Login\MenuFunciones.Designer.cs">
+      <DependentUpon>MenuFunciones.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Registro Usuario\RegistroUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Registro Usuario\RegistroUsuario.Designer.cs">
       <DependentUpon>RegistroUsuario.cs</DependentUpon>
     </Compile>
   </ItemGroup>
