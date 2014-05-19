@@ -23,7 +23,7 @@ GO
 
 CREATE PROCEDURE J2LA.getVendedoresConMayoresCalificaciones(@anio int, @trimestre int)
 AS
-	SELECT a.usu_UserName,AVG(d.cal_Cant_Estrellas) Reputacion
+	SELECT TOP 5 a.usu_UserName,AVG(d.cal_Cant_Estrellas) Reputacion
 	FROM J2LA.Usuarios a, J2LA.Compras b, J2LA.Publicaciones c, J2LA.Calificaciones d
 	WHERE b.comp_pub_Codigo = c.pub_Codigo
 	AND c.pub_usu_Id = a.usu_Id
@@ -36,7 +36,7 @@ GO
 
 CREATE PROCEDURE J2LA.getClientesConMayorCantDePublicacionesSinCalificar(@anio int, @trimestre int)
 AS
-	SELECT a.cli_Nro_Doc, COUNT(*) PublicacionesSinCalificar
+	SELECT TOP 5 a.cli_Nro_Doc, COUNT(*) PublicacionesSinCalificar
 	FROM J2LA.Clientes a, J2LA.Publicaciones b, J2LA.Compras c, J2LA.Calificaciones d
 	WHERE a.cli_usu_Id = b.pub_usu_Id
 	AND b.pub_Codigo = c.comp_pub_Codigo
