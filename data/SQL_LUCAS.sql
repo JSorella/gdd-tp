@@ -10,7 +10,7 @@ AS
 GO
 
 
-CREATE PROCEDURE J2LA.getTop5VendedoresConMayor(@anio int, @trimestre int)
+CREATE PROCEDURE J2LA.getTop5VendedoresConMayorFacturacion(@anio int, @trimestre int)
 AS
 	SELECT TOP 5 a.usu_UserName, SUM(b.fac_Total) Facturacion
 	FROM  J2LA.Usuarios a, J2LA.Facturas b
@@ -21,8 +21,9 @@ AS
 	ORDER BY Facturacion DESC
 GO
 
-CREATE PROCEDURE J2LA.getVendedoresConMayoresCalificaciones(@anio int, @trimestre int)
+CREATE PROCEDURE J2LA.getTop5VendedoresConMayoresCalificaciones(@anio int, @trimestre int)
 AS
+	/*
 	SELECT TOP 5 a.usu_UserName,AVG(d.cal_Cant_Estrellas) Reputacion
 	FROM J2LA.Usuarios a, J2LA.Compras b, J2LA.Publicaciones c, J2LA.Calificaciones d
 	WHERE b.comp_pub_Codigo = c.pub_Codigo
@@ -32,9 +33,30 @@ AS
 	AND MONTH(b.comp_Fecha)>(@trimestre-1)*3 AND MONTH(b.comp_Fecha)<= @trimestre*3
 	GROUP BY a.usu_UserName
 	ORDER BY Reputacion DESC
+	*/
+	CREATE TABLE J2LA.ListadosTemp(
+		usu_Id			varchar(255),
+		cant_Estrellas	int
+	)
+	
+	INSERT INTO J2LA.ListadosTemp SELECT a.usu_UserName,d.cal_Cant_Estrellas
+	FROM J2LA.Usuarios a, J2LA.Compras b, J2LA.Publicaciones c, J2LA.Calificaciones d
+	WHERE b.comp_pub_Codigo = c.pub_Codigo
+	AND c.pub_usu_Id = a.usu_Id
+	AND b.comp_cal_Codigo = d.cal_Codigo
+	AND YEAR(b.comp_Fecha) = @anio
+	AND MONTH(b.comp_Fecha)>(@trimestre-1)*3 AND MONTH(b.comp_Fecha)<= @trimestre*3
+
+
+	SELECT TOP 5 usu_Id, AVG(cant_Estrellas) Reputacion
+	FROM J2LA.ListadosTemp
+	GROUP BY usu_Id
+	ORDER BY Reputacion DESC
+	
+	DROP TABLE J2LA.ListadosTemp
 GO
 
-CREATE PROCEDURE J2LA.getClientesConMayorCantDePublicacionesSinCalificar(@anio int, @trimestre int)
+CREATE PROCEDURE J2LA.getTop5ClientesConMayorCantDePublicacionesSinCalificar(@anio int, @trimestre int)
 AS
 	SELECT TOP 5 a.cli_Nro_Doc, COUNT(*) PublicacionesSinCalificar
 	FROM J2LA.Clientes a, J2LA.Publicaciones b, J2LA.Compras c, J2LA.Calificaciones d
