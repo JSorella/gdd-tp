@@ -22,7 +22,9 @@ namespace FrbaCommerce.Vistas.Login
 
         private void MenuFunciones_Load(object sender, EventArgs e)
         {
-
+            this.comboBox1.DataSource = StoredProcedures.getFuncionalidadesPorRol(Singleton.sessionRol);
+            this.comboBox1.DisplayMember = "fun_Nombre";
+            this.comboBox1.ValueMember = "fun_Id";
         }
 
         private void button1_Click(object sender, EventArgs e)

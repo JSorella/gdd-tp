@@ -78,5 +78,6 @@ namespace FrbaCommerce
             comando.ExecuteScalar();
             Singleton.conexion.connector().Close();
         }
+
     }
 }

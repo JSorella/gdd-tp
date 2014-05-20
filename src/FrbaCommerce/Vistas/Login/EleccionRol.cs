@@ -26,6 +26,10 @@ namespace FrbaCommerce.Vistas.Login
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //guardo el ID de rol en el Singleton
+            DataRow selectedDataRow = ((DataRowView)comboRol.SelectedItem).Row;
+            Singleton.sessionRol = Convert.ToInt32(selectedDataRow["rol_Id"]);
+
             MenuFunciones menuWindow = new MenuFunciones((int)this.comboRol.SelectedValue);
             menuWindow.ShowDialog();
             this.Close();

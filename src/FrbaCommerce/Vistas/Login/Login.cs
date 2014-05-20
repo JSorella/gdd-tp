@@ -214,56 +214,50 @@ namespace FrbaCommerce.Vistas.Login
             {
                 usuario = StoredProcedures.getUsuarioSinRoles(this.username_textbox.Text);
                 //NOTA: es importante que sea sin roles ya que, de no tenerlos, el user debería poder loguearse igual y ser informado de esto
+
+                //evaluamos si esta bien la contraseña
+                if (Funciones.get_hash(passw_textbox.Text) == usuario.pass)
+                {
+                    //Login Successful!! ... abrimos el formulario de Funcionalides
+                    //limpiamos cant_intentos
+                    usuario.cantidadIntentos = 0;
+                    StoredProcedures.setCantidadIntentos(usuario);
+
+                    DataTable usuarioConRoles;
+
+                    usuarioConRoles = StoredProcedures.getUsuarioConRoles(usuario.nombre);
+
+                    Singleton.usuario = usuarioConRoles;
+
+                    if (usuarioConRoles.Rows.Count == 1)
+                    {
+                        Singleton.sessionRol = (int)Singleton.usuario.Rows[0]["rol_id"];
+                        MenuFunciones menuWindow = new MenuFunciones((int)Singleton.usuario.Rows[0]["rol_id"]);
+                        menuWindow.ShowDialog();
+                    }
+                    else
+                    {
+                        EleccionRol rolWindow = new EleccionRol();
+                        rolWindow.ShowDialog();
+                    }
+
+                }
+                else  //Wrong Password...
+                {
+                    //Se debe actualizar el campo usu_cant_intentos de la base de datos
+                    usuario.cantidadIntentos++;
+                    StoredProcedures.setCantidadIntentos(usuario);
+
+                    MessageBox.Show(@"
+                        Password Incorrecto
+                        Le quedan " + (int)(3 - usuario.cantidadIntentos) + " intentos"
+                        , "Acceso al Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             catch (Exception error)
             {
                 MessageBox.Show(error.Message, "Acceso al Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
-            }
-
-            //evaluamos si esta bien la contraseña
-            if (Funciones.get_hash(passw_textbox.Text) == usuario.pass)
-            {
-                //Login Successful!! ... abrimos el formulario de Funcionalides
-                //limpiamos cant_intentos
-                usuario.cantidadIntentos = 0;
-                StoredProcedures.setCantidadIntentos(usuario);
-
-                DataTable usuarioConRoles;
-                try
-                {
-                    usuarioConRoles = StoredProcedures.getUsuarioConRoles(usuario.nombre);
-                }
-                catch (Exception error)
-                {
-                    MessageBox.Show(error.Message, "Acceso al Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
-                Singleton.usuario = usuarioConRoles;
-
-                if (usuarioConRoles.Rows.Count == 1)
-                {
-                    MenuFunciones menuWindow = new MenuFunciones((int)Singleton.usuario.Rows[0]["rol_id"]);
-                    menuWindow.ShowDialog();
-                }
-                else 
-                {
-                    EleccionRol rolWindow = new EleccionRol();
-                    rolWindow.ShowDialog();
-                }
-                
-            }
-            else  //Wrong Password...
-            {
-                //Se debe actualizar el campo usu_cant_intentos de la base de datos
-                usuario.cantidadIntentos ++;
-                StoredProcedures.setCantidadIntentos(usuario);
-                
-                MessageBox.Show(@"
-                    Password Incorrecto
-                    Le quedan " + (int)(3 - usuario.cantidadIntentos) + " intentos" 
-                    , "Acceso al Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             return;
         }

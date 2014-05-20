@@ -23,3 +23,33 @@ END
 GO
 
 
+/*-------------------------STORED PROCEDURE (JAVI)--------------------------*/
+IF OBJECT_ID('J2LA.getFuncionalidadesPorRol') IS NOT NULL
+DROP FUNCTION J2LA.getFuncionalidadesPorRol
+GO
+CREATE FUNCTION J2LA.getFuncionalidadesPorRol( @idRol INT )
+RETURNS TABLE
+AS
+RETURN 
+	(SELECT
+			f.fun_Id,
+			f.fun_Nombre
+	FROM 
+		J2LA.Roles r, 
+		J2LA.Funcionalidades f, 
+		J2LA.Roles_Funcionalidades rf
+	WHERE
+		rol_Id = rolfun_rol_Id
+	AND
+		fun_Id = rolfun_fun_Id
+	AND
+		rol_Id = @idRol
+	AND
+		rol_Inhabilitado = 0
+	AND
+		rol_Eliminado = 0
+	)
+GO
+
+
+
