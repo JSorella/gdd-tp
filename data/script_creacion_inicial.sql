@@ -311,11 +311,6 @@ Insert Into J2LA.Publicaciones_Tipos
 	Values ('Compra Inmediata'),('Subasta')
 GO
 
--- Cargamos los Rubros para las Publicaciones.-
-Insert Into J2LA.Rubros(rub_Codigo, rub_Descripcion, rub_Eliminado) 
-	Values (1, 'Otros', 0)
-GO
-
 -- Cargamos el Usuario admin/w23e para la puesta en marcha del Sistema.-
 Insert Into J2LA.Usuarios(usu_username, usu_pass, usu_Cant_Intentos, 
 		usu_Inhabilitado, usu_Motivo, usu_Eliminado, usu_Primer_Ingreso)
@@ -447,12 +442,18 @@ Insert Into J2LA.Publicaciones (pub_Codigo,pub_tipo_Id,pub_Descripcion,pub_Stock
 
 GO
 
+-- Migramos los Rubros para las Publicaciones.-
+Insert Into J2LA.Rubros(rub_Codigo, rub_Descripcion, rub_Eliminado) 
+Select Distinct Codigo = 0, M.Publicacion_Rubro_Descripcion, Eliminado = 0
+From gd_esquema.Maestra M
+Order by M.Publicacion_Rubro_Descripcion
+GO
+
 -- Migramos los Rubros asignados a cada Publicacion.-
--- Como no tienen un rubro en el sistema anterior, se asigna el Rubro Otros del Nvo Sistema.-
 Insert Into J2LA.Publicaciones_Rubros(pubrub_pub_Codigo, pubrub_rub_Id)
-	Select pub_Codigo, rubro_id = 1
-	From J2LA.Publicaciones
-	
+Select Distinct M.Publicacion_Cod, R.rub_id
+From gd_esquema.Maestra M
+Inner Join J2LA.Rubros R On R.rub_Descripcion = M.Publicacion_Rubro_Descripcion
 GO
 
 -- Migramos las Ofertas realizadas a las Publicaciones.-
