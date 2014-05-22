@@ -15,3 +15,7 @@ Select Distinct M.Publicacion_Cod, R.rub_id
 From gd_esquema.Maestra M
 Inner Join J2LA.Rubros R On R.rub_Descripcion = M.Publicacion_Rubro_Descripcion
 GO
+
+Update J2LA.Rubros
+Set rub_Codigo = rub_id
+GO
