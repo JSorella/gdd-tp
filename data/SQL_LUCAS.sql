@@ -59,12 +59,11 @@ GO
 CREATE PROCEDURE J2LA.getTop5ClientesConMayorCantDePublicacionesSinCalificar(@anio int, @trimestre int)
 AS
 	SELECT TOP 5 a.cli_Nro_Doc, COUNT(*) PublicacionesSinCalificar
-	FROM J2LA.Clientes a, J2LA.Publicaciones b, J2LA.Compras c, J2LA.Calificaciones d
-	WHERE a.cli_usu_Id = b.pub_usu_Id
-	AND b.pub_Codigo = c.comp_pub_Codigo
-	AND c.comp_cal_Codigo IS NULL
-	AND YEAR(b.pub_Fecha_Ini) = @anio
-	AND MONTH(b.pub_Fecha_Ini)>(@trimestre-1)*3 AND MONTH(b.pub_Fecha_Ini)<= @trimestre*3
+	FROM J2LA.Clientes a, J2LA.Compras b
+	WHERE a.cli_usu_Id = b.comp_usu_Id
+	AND b.comp_cal_Codigo IS NULL
+	AND YEAR(b.comp_Fecha) = @anio
+	AND MONTH(b.comp_Fecha)>(@trimestre-1)*3 AND MONTH(b.comp_Fecha)<= @trimestre*3
 	GROUP BY a.cli_Nro_Doc
 	ORDER BY PublicacionesSinCalificar DESC
 GO
