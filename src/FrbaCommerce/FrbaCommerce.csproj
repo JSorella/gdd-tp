@@ -171,6 +171,9 @@
     <EmbeddedResource Include="Vistas\Calificar_Vendedor\CalificarVendedor.resx">
       <DependentUpon>CalificarVendedor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Generar_Publicacion\GenerarPublicacion.resx">
+      <DependentUpon>GenerarPublicacion.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Listado_Estadístico\ListadoEstadistico.resx">
       <DependentUpon>ListadoEstadistico.cs</DependentUpon>
     </EmbeddedResource>
