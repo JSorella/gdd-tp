@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace FrbaCommerce.Vistas.AbmRol
+namespace FrbaCommerce.ABM_Rol
 {
     public partial class Abm_Rol_Alta : Form
     {
@@ -16,7 +16,7 @@ namespace FrbaCommerce.Vistas.AbmRol
         
         public Abm_Rol_Alta()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         private void limpiar()

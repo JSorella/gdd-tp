@@ -40,3 +40,6 @@ C:\Users\jsorella\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommer
 C:\Users\jsorella\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.pdb
 C:\Users\jsorella\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.Vistas.Registro_Usuario.RegistroUsuario.resources
 C:\Users\jsorella\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.Vistas.Login.MenuFunciones.resources
+C:\Users\adaquino\Documents\GitHub\j2la-tp\src\FrbaCommerce\bin\Debug\FrbaCommerce.exe.config
+C:\Users\adaquino\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.exe
+C:\Users\adaquino\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.pdb

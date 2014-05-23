@@ -40,7 +40,7 @@ namespace FrbaCommerce
         {
             bool existe_rol;
             Connection conexion = new Connection();
-            string query = "SELECT rol_id FROM DATACENTER.Rol WHERE rol_nombre='" + nombre_rol_ingresado + "'";
+            string query = "SELECT rol_id FROM J2LA.Roles WHERE rol_nombre='" + nombre_rol_ingresado + "'";
             DataTable table_rol = conexion.execute_query(query);
             if (table_rol.Rows.Count > 0)
             {
@@ -53,18 +53,18 @@ namespace FrbaCommerce
             return existe_rol;
         }
 
-        public bool check_func_activa(string id_rol, string id_func)
+        public bool check_func_activa(int id_rol, string id_func)
         {
             bool func_activa = false;
             Connection conexion = new Connection();
-            string query = "SELECT fxrol_func_id FROM DATACENTER.FuncionalidadPorRol WHERE fxrol_rol_id = " + id_rol + " and fxrol_func_id = " + id_func;
+            string query = "SELECT rolfun_fun_id FROM J2LA.Roles_Funcionalidades WHERE rolfun_rol_id = " + id_rol + " and rolfun_fun_id = " + id_func;
             DataTable table_rol = conexion.execute_query(query);
             if (table_rol.Rows.Count > 0)
                 func_activa = true;
             return func_activa;
         }
 
-        public bool check_cambio_nomb_est_rol(string id_rol, char estado_actual_rol, string nomb_rol_ingresado, string nomb_rol_BD)
+        public bool check_cambio_nomb_est_rol(int id_rol, int estado_actual_rol, string nomb_rol_ingresado, string nomb_rol_BD)
         {
 
             if (!(this.check_estado_rol(id_rol, estado_actual_rol) & nomb_rol_BD == nomb_rol_ingresado))
@@ -75,7 +75,7 @@ namespace FrbaCommerce
         }
 
 
-        public bool check_estado_rol(string id_rol, char estado_actual_rol) //devuelve TRUE si el estado del ROL en la
+        public bool check_estado_rol(int id_rol, int estado_actual_rol) //devuelve TRUE si el estado del ROL en la
         {                                                                   //BD es igual al seleccionado
             bool estado_rol = false;
             if (this.get_estado_BD(id_rol) == estado_actual_rol)
@@ -83,12 +83,12 @@ namespace FrbaCommerce
             return estado_rol;
         }
 
-        public char get_estado_BD(string id_rol)
+        public get_estado_BD(int rol_id)
         {
             Connection conexion = new Connection();
-            string query = "SELECT rol_estado FROM DATACENTER.Rol WHERE rol_id =" + id_rol;
+            string query = "SELECT rol_inhabilitado FROM J2LA.Roles WHERE rol_id =" + rol_id;
             DataTable table_rol = conexion.execute_query(query);
-            return (Convert.ToChar(table_rol.Rows[0].ItemArray[0].ToString()));
+            return (Convert.ToBoolean(table_rol.Rows[0]["rol_Inhabilitado"]));
 
         }
     }
