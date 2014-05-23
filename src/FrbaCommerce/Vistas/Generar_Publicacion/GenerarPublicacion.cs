@@ -15,5 +15,10 @@ namespace FrbaCommerce.Generar_Publicacion
         {
             InitializeComponent();
         }
+
+        private void GenerarPublicacion_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
