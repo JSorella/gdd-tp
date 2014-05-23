@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace FrbaCommerce.ABM_Rol
+namespace FrbaCommerce.Vistas.AbmRol
 {
     public partial class Abm_Rol_Alta : Form
     {
@@ -16,7 +16,7 @@ namespace FrbaCommerce.ABM_Rol
         
         public Abm_Rol_Alta()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         private void limpiar()
@@ -35,7 +35,7 @@ namespace FrbaCommerce.ABM_Rol
         private void list_funcionalidades_Load(object sender, EventArgs e)
         {
             //consulta a ejecutar para mostrar todas las funcionalidades cargadas en el checkedlistbox
-            string query = "SELECT func_id, func_nombre FROM DATACENTER.Funcionalidad";
+            string query = "SELECT fun_id, fun_nombre FROM J2LA.Funcionalidades";
 
             //instanciamos obj de la clase connection y le enviamos la query para que la ejecute
             Connection connect = new Connection();

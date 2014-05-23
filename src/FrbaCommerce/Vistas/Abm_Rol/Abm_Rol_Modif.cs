@@ -13,13 +13,26 @@ namespace FrbaCommerce.Vistas.Abm_Rol
     {
         /*-----------ATRIBUTOS--------------------*/
         public string rol_nomb_mod;
-        public string id_rol_a_mod;
-        char estado_actual_rol;
+        public int id_rol_a_mod;
+        int estado_actual_rol;
 
         /*----------------------------------------*/        
         public Abm_Rol_Modif()
         {
             InitializeComponent();
+        }
+
+        private void select_boton_Click(object sender, EventArgs e)
+        {
+
+            Abm_Rol_Busqueda buscar_rol = new Abm_Rol_Busqueda();
+            buscar_rol.ShowDialog();
+            if ((buscar_rol.Resultado != null)) //Resultado es el DataRow.-
+            {
+                id_rol_a_mod = Convert.ToInt32(buscar_rol.Resultado["rol_id"]);
+                rol_nomb_mod = buscar_rol.Resultado["rol_nombre"].ToString();
+
+            }
         }
 
         private void list_funcionalidades_Load(object sender, EventArgs e)
@@ -31,48 +44,25 @@ namespace FrbaCommerce.Vistas.Abm_Rol
                 this.select_boton.Enabled = false;
 
                 //cargamos lista segun corresponde
-                if (this.id_rol_a_mod != "2")
+                
+                string query = "SELECT fun_id, fun_nombre FROM J2LA.Funcionalidades";
+                Connection connect = new Connection();
+                DataTable tabla_todas_func = connect.execute_query(query);
+                list_funcionalidades.DataSource = tabla_todas_func;
+                list_funcionalidades.DisplayMember = "fun_nombre";
+                list_funcionalidades.ValueMember = "fun_id";
+
+                //tildamos las funciones que ya tiene el rol
+
+                int i;
+                Funciones func = new Funciones();
+                for (i = 0; i < (this.list_funcionalidades.Items.Count); i++)
                 {
-                    string query = "SELECT func_id, func_nombre FROM DATACENTER.Funcionalidad";
-                    Connection connect = new Connection();
-                    DataTable tabla_todas_func = connect.execute_query(query);
-                    list_funcionalidades.DataSource = tabla_todas_func;
-                    list_funcionalidades.DisplayMember = "func_nombre";
-                    list_funcionalidades.ValueMember = "func_id";
-
-                    //tildamos las funciones que ya tiene el rol
-
-                    int i;
-                    Funciones func = new Funciones();
-                    for (i = 0; i < (this.list_funcionalidades.Items.Count); i++)
-                    {
-                        this.list_funcionalidades.SelectedIndex = i;
-                        if (func.check_func_activa(this.id_rol_a_mod, this.list_funcionalidades.SelectedValue.ToString()))
-                            this.list_funcionalidades.SetItemChecked(i, true);
-                    }
+                    this.list_funcionalidades.SelectedIndex = i;
+                    if (func.check_func_activa(this.id_rol_a_mod, this.list_funcionalidades.SelectedValue.ToString()))
+                        this.list_funcionalidades.SetItemChecked(i, true);
                 }
-                else
-                {
-                    //mostramos funcionalidades que se le pueden asignar a un cliente
-                    string query = "SELECT func_id, func_nombre  FROM DATACENTER.Funcionalidad where func_id= 4 or func_id=10";
-                    Connection connect = new Connection();
-                    DataTable tabla_todas_func = connect.execute_query(query);
-                    list_funcionalidades.DataSource = tabla_todas_func;
-                    list_funcionalidades.DisplayMember = "func_nombre";
-                    list_funcionalidades.ValueMember = "func_id";
-
-                    //tildamos las funciones que ya tiene el rol
-
-                    int i;
-                    Funciones func = new Funciones();
-                    for (i = 0; i < (this.list_funcionalidades.Items.Count); i++)
-                    {
-                        this.list_funcionalidades.SelectedIndex = i;
-                        if (func.check_func_activa(this.id_rol_a_mod, this.list_funcionalidades.SelectedValue.ToString()))
-                            this.list_funcionalidades.SetItemChecked(i, true);
-                    }
-                }
-
+                
             }
             else
             {
@@ -127,16 +117,6 @@ namespace FrbaCommerce.Vistas.Abm_Rol
 
         }
 
-        private void select_boton_Click(object sender, EventArgs e)
-        {
-
-            Abm_Rol_Busqueda buscar_rol = new Abm_Rol_Busqueda();
-            buscar_rol.ShowDialog();
-
-
-
-        }
-
         private void rol_select_tbox_TextChanged(object sender, EventArgs e)
         {
 
@@ -151,6 +131,18 @@ namespace FrbaCommerce.Vistas.Abm_Rol
             else
             {
                 this.estado_actual_rol = 'D';
+            }
+        }
+
+        private void inhabilitado_checkBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (inhabilitado_checkBox.Checked)
+            {
+                this.estado_actual_rol = 1;
+            }
+            else
+            {
+                this.estado_actual_rol = 0;
             }
         }
     }

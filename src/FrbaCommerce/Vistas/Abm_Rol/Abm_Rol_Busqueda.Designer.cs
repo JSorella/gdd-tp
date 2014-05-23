@@ -33,7 +33,7 @@
             this.buscar_boton = new System.Windows.Forms.Button();
             this.limpiar_boton = new System.Windows.Forms.Button();
             this.roles_dataGrid = new System.Windows.Forms.DataGridView();
-            this.Seleccionar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.selec_rol_boton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.roles_dataGrid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -80,31 +80,31 @@
             this.roles_dataGrid.AllowUserToResizeColumns = false;
             this.roles_dataGrid.AllowUserToResizeRows = false;
             this.roles_dataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.roles_dataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Seleccionar});
             this.roles_dataGrid.Location = new System.Drawing.Point(12, 116);
             this.roles_dataGrid.MultiSelect = false;
             this.roles_dataGrid.Name = "roles_dataGrid";
             this.roles_dataGrid.ReadOnly = true;
-            this.roles_dataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.roles_dataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.roles_dataGrid.Size = new System.Drawing.Size(418, 177);
             this.roles_dataGrid.TabIndex = 6;
             this.roles_dataGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.roles_dataGrid_CellContentClick);
             // 
-            // Seleccionar
+            // selec_rol_boton
             // 
-            this.Seleccionar.HeaderText = "Acción";
-            this.Seleccionar.Name = "Seleccionar";
-            this.Seleccionar.ReadOnly = true;
-            this.Seleccionar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Seleccionar.Text = "Seleccionar";
-            this.Seleccionar.UseColumnTextForButtonValue = true;
+            this.selec_rol_boton.Location = new System.Drawing.Point(27, 300);
+            this.selec_rol_boton.Name = "selec_rol_boton";
+            this.selec_rol_boton.Size = new System.Drawing.Size(106, 32);
+            this.selec_rol_boton.TabIndex = 7;
+            this.selec_rol_boton.Text = "Seleccionar Rol";
+            this.selec_rol_boton.UseVisualStyleBackColor = true;
+            this.selec_rol_boton.Click += new System.EventHandler(this.selec_rol_boton_Click);
             // 
             // Abm_Rol_Busqueda
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(442, 302);
+            this.ClientSize = new System.Drawing.Size(442, 344);
+            this.Controls.Add(this.selec_rol_boton);
             this.Controls.Add(this.roles_dataGrid);
             this.Controls.Add(this.limpiar_boton);
             this.Controls.Add(this.buscar_boton);
@@ -125,6 +125,6 @@
         private System.Windows.Forms.Button buscar_boton;
         private System.Windows.Forms.Button limpiar_boton;
         private System.Windows.Forms.DataGridView roles_dataGrid;
-        private System.Windows.Forms.DataGridViewButtonColumn Seleccionar;
+        private System.Windows.Forms.Button selec_rol_boton;
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace FrbaCommerce.ABM_Rol
+﻿namespace FrbaCommerce.Vistas.AbmRol
 {
     partial class Abm_Rol_Alta
     {
@@ -11,7 +11,7 @@
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
+        protected void dispose(bool disposing)
         {
             if (disposing && (components != null))
             {

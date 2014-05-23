@@ -36,6 +36,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.estado_comboBox = new System.Windows.Forms.ComboBox();
             this.aplicar_boton = new System.Windows.Forms.Button();
+            this.inhabilitado_checkBox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -112,13 +113,24 @@
             this.aplicar_boton.TabIndex = 14;
             this.aplicar_boton.Text = "Aplicar";
             this.aplicar_boton.UseVisualStyleBackColor = true;
-            this.rol_select_tbox.TextChanged += new System.EventHandler(this.rol_select_tbox_TextChanged);
+            // 
+            // inhabilitado_checkBox
+            // 
+            this.inhabilitado_checkBox.AutoSize = true;
+            this.inhabilitado_checkBox.Location = new System.Drawing.Point(108, 234);
+            this.inhabilitado_checkBox.Name = "inhabilitado_checkBox";
+            this.inhabilitado_checkBox.Size = new System.Drawing.Size(71, 17);
+            this.inhabilitado_checkBox.TabIndex = 15;
+            this.inhabilitado_checkBox.Text = "Inhabilitar";
+            this.inhabilitado_checkBox.UseVisualStyleBackColor = true;
+            this.inhabilitado_checkBox.CheckedChanged += new System.EventHandler(this.inhabilitado_checkBox_CheckedChanged);
             // 
             // Abm_Rol_Modif
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 308);
+            this.Controls.Add(this.inhabilitado_checkBox);
             this.Controls.Add(this.aplicar_boton);
             this.Controls.Add(this.estado_comboBox);
             this.Controls.Add(this.label3);
@@ -145,5 +157,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox estado_comboBox;
         private System.Windows.Forms.Button aplicar_boton;
+        private System.Windows.Forms.CheckBox inhabilitado_checkBox;
     }
 }
