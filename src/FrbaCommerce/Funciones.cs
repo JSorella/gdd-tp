@@ -78,12 +78,12 @@ namespace FrbaCommerce
         public bool check_estado_rol(int id_rol, int estado_actual_rol) //devuelve TRUE si el estado del ROL en la
         {                                                                   //BD es igual al seleccionado
             bool estado_rol = false;
-            if (this.get_estado_BD(id_rol) == estado_actual_rol)
+            if (this.get_estado_BD(id_rol) == (bool)(estado_actual_rol > 0) ? true : false)
                 estado_rol = true;
             return estado_rol;
         }
 
-        public get_estado_BD(int rol_id)
+        public bool get_estado_BD(int rol_id)
         {
             Connection conexion = new Connection();
             string query = "SELECT rol_inhabilitado FROM J2LA.Roles WHERE rol_id =" + rol_id;

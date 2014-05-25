@@ -27,7 +27,7 @@ GO
 IF OBJECT_ID('J2LA.getFuncionalidadesPorRol') IS NOT NULL
 DROP FUNCTION J2LA.getFuncionalidadesPorRol
 GO
-CREATE FUNCTION J2LA.getFuncionalidadesPorRol( @idRol INT )
+CREATE FUNCTION J2LA.getFuncionalidadesPorRol( @nombreRol varchar(255) )
 RETURNS TABLE
 AS
 RETURN 
@@ -43,7 +43,7 @@ RETURN
 	AND
 		fun_Id = rolfun_fun_Id
 	AND
-		rol_Id = @idRol
+		rol_Nombre = @nombreRol
 	AND
 		rol_Inhabilitado = 0
 	AND

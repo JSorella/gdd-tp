@@ -104,7 +104,7 @@ namespace FrbaCommerce.Vistas.Abm_Rol
 
             if (this.estado_comboBox.SelectedIndex == -1) //Devuelve -1 si no se ha seleccionado ninguna opcion del combo
             {
-                estado_actual_rol = func.get_estado_BD(id_rol_a_mod);
+                estado_actual_rol = func.get_estado_BD(id_rol_a_mod) == true ? 1 : 0;
             }
 
             //this.Visible = true;

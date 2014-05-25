@@ -68,7 +68,7 @@ namespace FrbaCommerce.Vistas.Login
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Cambria", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(0, -2);
+            this.label1.Location = new System.Drawing.Point(20, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(324, 37);
             this.label1.TabIndex = 1;
@@ -77,7 +77,7 @@ namespace FrbaCommerce.Vistas.Login
             // 
             // login_button
             // 
-            this.login_button.Location = new System.Drawing.Point(209, 169);
+            this.login_button.Location = new System.Drawing.Point(106, 174);
             this.login_button.Name = "login_button";
             this.login_button.Size = new System.Drawing.Size(119, 25);
             this.login_button.TabIndex = 9;
@@ -87,7 +87,7 @@ namespace FrbaCommerce.Vistas.Login
             // 
             // passw_textbox
             // 
-            this.passw_textbox.Location = new System.Drawing.Point(209, 116);
+            this.passw_textbox.Location = new System.Drawing.Point(106, 121);
             this.passw_textbox.Name = "passw_textbox";
             this.passw_textbox.Size = new System.Drawing.Size(191, 20);
             this.passw_textbox.TabIndex = 8;
@@ -96,7 +96,7 @@ namespace FrbaCommerce.Vistas.Login
             // 
             // username_textbox
             // 
-            this.username_textbox.Location = new System.Drawing.Point(209, 68);
+            this.username_textbox.Location = new System.Drawing.Point(106, 73);
             this.username_textbox.Name = "username_textbox";
             this.username_textbox.Size = new System.Drawing.Size(191, 20);
             this.username_textbox.TabIndex = 7;
@@ -105,7 +105,7 @@ namespace FrbaCommerce.Vistas.Login
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(127, 123);
+            this.label2.Location = new System.Drawing.Point(24, 128);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(56, 13);
             this.label2.TabIndex = 6;
@@ -115,7 +115,7 @@ namespace FrbaCommerce.Vistas.Login
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(127, 75);
+            this.label3.Location = new System.Drawing.Point(24, 80);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(58, 13);
             this.label3.TabIndex = 5;
@@ -126,7 +126,7 @@ namespace FrbaCommerce.Vistas.Login
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Cambria", 11.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(724, 236);
+            this.label4.Location = new System.Drawing.Point(227, 281);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(129, 17);
             this.label4.TabIndex = 10;
@@ -136,9 +136,9 @@ namespace FrbaCommerce.Vistas.Login
             // registrar_usuario_button
             // 
             this.registrar_usuario_button.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
-            this.registrar_usuario_button.Location = new System.Drawing.Point(551, 169);
+            this.registrar_usuario_button.Location = new System.Drawing.Point(106, 223);
             this.registrar_usuario_button.Name = "registrar_usuario_button";
-            this.registrar_usuario_button.Size = new System.Drawing.Size(202, 23);
+            this.registrar_usuario_button.Size = new System.Drawing.Size(191, 23);
             this.registrar_usuario_button.TabIndex = 11;
             this.registrar_usuario_button.Text = "Registrar Nuevo Usuario";
             this.registrar_usuario_button.UseVisualStyleBackColor = true;
@@ -148,13 +148,13 @@ namespace FrbaCommerce.Vistas.Login
             // 
             this.splitter1.Location = new System.Drawing.Point(0, 0);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(3, 262);
+            this.splitter1.Size = new System.Drawing.Size(3, 307);
             this.splitter1.TabIndex = 12;
             this.splitter1.TabStop = false;
             // 
             // Login
             // 
-            this.ClientSize = new System.Drawing.Size(855, 262);
+            this.ClientSize = new System.Drawing.Size(368, 307);
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.registrar_usuario_button);
             this.Controls.Add(this.label4);
@@ -231,8 +231,8 @@ namespace FrbaCommerce.Vistas.Login
 
                     if (usuarioConRoles.Rows.Count == 1)
                     {
-                        Singleton.sessionRol = (int)Singleton.usuario.Rows[0]["rol_id"];
-                        MenuFunciones menuWindow = new MenuFunciones((int)Singleton.usuario.Rows[0]["rol_id"]);
+                        Singleton.sessionRol = (string)Singleton.usuario.Rows[0]["rol_Nombre"];
+                        MenuFunciones menuWindow = new MenuFunciones((int)Singleton.usuario.Rows[0]["rol_Nombre"]);
                         menuWindow.ShowDialog();
                     }
                     else

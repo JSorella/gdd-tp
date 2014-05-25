@@ -103,11 +103,12 @@ namespace FrbaCommerce
             Singleton.conexion.execute_query_with_parameters(comando);
         }
 
-        public static DataTable getFuncionalidadesPorRol(int idRol)
+        public static DataTable getFuncionalidadesPorRol(string nombreRol)
         {
             SqlDataAdapter da;
-            da = new SqlDataAdapter("SELECT * FROM J2LA.getFuncionalidadesPorRol(@idRol)", Singleton.conexion.connector());
-            da.SelectCommand.Parameters.AddWithValue("@idRol", idRol);
+            Console.WriteLine(nombreRol);
+            da = new SqlDataAdapter("SELECT * FROM J2LA.getFuncionalidadesPorRol(@nombreRol)", Singleton.conexion.connector());
+            da.SelectCommand.Parameters.AddWithValue("@nombreRol", nombreRol);
             var dt = new DataTable();
             da.Fill(dt);
 
