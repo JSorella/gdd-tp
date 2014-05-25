@@ -49,6 +49,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Vistas\Generar_Publicacion\ControlFecha.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Generar_Publicacion\ControlFecha.Designer.cs">
+      <DependentUpon>ControlFecha.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\Login\Usuario.cs" />
     <Compile Include="Singleton.cs" />
     <Compile Include="StoredProcedures.cs" />
@@ -170,6 +176,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Calificar_Vendedor\CalificarVendedor.resx">
       <DependentUpon>CalificarVendedor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Generar_Publicacion\ControlFecha.resx">
+      <DependentUpon>ControlFecha.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Generar_Publicacion\GenerarPublicacion.resx">
       <DependentUpon>GenerarPublicacion.cs</DependentUpon>
