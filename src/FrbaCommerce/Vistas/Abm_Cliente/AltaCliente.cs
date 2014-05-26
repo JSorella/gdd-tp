@@ -32,7 +32,10 @@ namespace FrbaCommerce.Vistas.Abm_Cliente
 
         private void AltaCliente_Load(object sender, EventArgs e)
         {
-
+            this.comboDoc.DropDownStyle = ComboBoxStyle.DropDownList; //cambio style en combo
+            this.comboDoc.DataSource = StoredProcedures.getTiposDoc();
+            this.comboDoc.DisplayMember = "tipodoc_Descripcion";
+            this.comboDoc.ValueMember = "tipodoc_Id";
         }
 
         private void label3_Click(object sender, EventArgs e)
@@ -59,5 +62,86 @@ namespace FrbaCommerce.Vistas.Abm_Cliente
         {
 
         }
+
+        private void nombre_textbox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.validarCampos();
+        }
+
+        private void validarCampos()
+        {
+            if (this.nombre_textbox.Text == "")
+            {
+                Funciones.mostrarAlert("Ingrese Nombre"); return;
+            }
+            if (this.apellido_textbox.Text == "")
+            {
+                Funciones.mostrarAlert("Ingrese Apellido"); return;
+            }
+            if (this.dni_textbox.Text == "")
+            {
+                Funciones.mostrarAlert("Ingrese DNI"); return;
+            }
+            if (this.comboDoc.Text == "")
+            {
+                Funciones.mostrarAlert("Ingrese Tipo Documento"); return;
+            }
+            if (this.mail_textbox.Text == "")
+            {
+                Funciones.mostrarAlert("Ingrese Email"); return;
+            }
+            if (this.apellido_textbox.Text == "")
+            {
+                Funciones.mostrarAlert("Ingrese Apellido"); return;
+            }
+            if (this.telefono_textbox.Text == "")
+            {
+                Funciones.mostrarAlert("Ingrese Teléfono"); return;
+            }
+            if (this.calle_textbox.Text == "")
+            {
+                Funciones.mostrarAlert("Ingrese Calle"); return;
+            }
+            if (this.altura_textbox.Text == "")
+            {
+                Funciones.mostrarAlert("Ingrese Altura Calle"); return;
+            }
+            if (this.piso_textbox.Text == "")
+            {
+                Funciones.mostrarAlert("Ingrese Piso"); return;
+            }
+            if (this.depto_textbox.Text == "")
+            {
+                Funciones.mostrarAlert("Ingrese Departamento"); return;
+            }
+            if (this.localidad_textbox.Text == "")
+            {
+                Funciones.mostrarAlert("Ingrese Localidad"); return;
+            }
+            if (this.cp_textbox.Text == "")
+            {
+                Funciones.mostrarAlert("Ingrese Código Postal"); return;
+            }
+            if (this.dateTimePickerFechaAlta.Text == "")
+            {
+                Funciones.mostrarAlert("Ingrese Fecha Nacimiento"); return;
+            }
+        }
+
+        private void label14_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void altura_textbox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

@@ -91,5 +91,11 @@ namespace FrbaCommerce
             return (Convert.ToBoolean(table_rol.Rows[0]["rol_Inhabilitado"]));
 
         }
+
+        static public bool mostrarAlert(string mensaje)
+        {
+            MessageBox.Show(mensaje, "Acceso al Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return true;
+        }
     }
 }

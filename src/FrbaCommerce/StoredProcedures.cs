@@ -114,6 +114,21 @@ namespace FrbaCommerce
 
             return dt;
         }
+
+        public static DataTable getTiposDoc()
+        {
+            DataTable usuarioResult = Singleton.conexion.execute_query( //TODO: transformar en SP
+                    @"SELECT 
+                        *
+                    FROM 
+                        J2LA.TiposDoc");
+
+            if (usuarioResult.Rows.Count == 0)
+            {
+                throw new Exception("No hay registros en tabla TiposDoc!!!");
+            }
+            return usuarioResult;
+        }
     }
 }
 

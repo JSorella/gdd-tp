@@ -77,7 +77,7 @@ namespace FrbaCommerce.Vistas.Login
             // 
             // login_button
             // 
-            this.login_button.Location = new System.Drawing.Point(106, 174);
+            this.login_button.Location = new System.Drawing.Point(106, 148);
             this.login_button.Name = "login_button";
             this.login_button.Size = new System.Drawing.Size(119, 25);
             this.login_button.TabIndex = 9;
@@ -87,7 +87,7 @@ namespace FrbaCommerce.Vistas.Login
             // 
             // passw_textbox
             // 
-            this.passw_textbox.Location = new System.Drawing.Point(106, 121);
+            this.passw_textbox.Location = new System.Drawing.Point(106, 111);
             this.passw_textbox.Name = "passw_textbox";
             this.passw_textbox.Size = new System.Drawing.Size(191, 20);
             this.passw_textbox.TabIndex = 8;
@@ -105,7 +105,7 @@ namespace FrbaCommerce.Vistas.Login
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(24, 128);
+            this.label2.Location = new System.Drawing.Point(24, 118);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(56, 13);
             this.label2.TabIndex = 6;
@@ -247,16 +247,14 @@ namespace FrbaCommerce.Vistas.Login
                     //Se debe actualizar el campo usu_cant_intentos de la base de datos
                     usuario.cantidadIntentos++;
                     StoredProcedures.setCantidadIntentos(usuario);
-
-                    MessageBox.Show(@"
+                    Funciones.mostrarAlert(@"
                         Password Incorrecto
-                        Le quedan " + (int)(3 - usuario.cantidadIntentos) + " intentos"
-                        , "Acceso al Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        Le quedan " + (int)(3 - usuario.cantidadIntentos) + " intentos");
                 }
             }
             catch (Exception error)
             {
-                MessageBox.Show(error.Message, "Acceso al Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Funciones.mostrarAlert(error.Message);
                 return;
             }
             return;
