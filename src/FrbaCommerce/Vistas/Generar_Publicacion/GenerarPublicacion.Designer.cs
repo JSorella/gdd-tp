@@ -1,4 +1,4 @@
-﻿namespace FrbaCommerce.Vistas.Generar_Publicacion
+﻿namespace FrbaCommerce
 {
     partial class GenerarPublicacion
     {
@@ -253,7 +253,6 @@
             this.txtFechaIni.ReadOnly = true;
             this.txtFechaIni.Size = new System.Drawing.Size(67, 20);
             this.txtFechaIni.TabIndex = 7;
-            this.txtFechaIni.Text = "18/05/2014 12:00:00 a.m.";
             // 
             // label4
             // 

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace FrbaCommerce.Vistas.Generar_Publicacion
+namespace FrbaCommerce
 {
     public partial class GenerarPublicacion : Form
     {
@@ -18,7 +18,7 @@ namespace FrbaCommerce.Vistas.Generar_Publicacion
 
         private bool SoloNumeros(Char chrKey)
         {
-            //Para obligar a que sólo se introduzcan números
+            //Para obligar a que sólo se introduzcan números enteros
             if (Char.IsNumber(chrKey)) //e.KeyChar
             {
                 return false; // e.Handled = false;
@@ -78,13 +78,14 @@ namespace FrbaCommerce.Vistas.Generar_Publicacion
         {
             this.Enabled = false;
 
-            FrbaCommerce.Vistas.Generar_Publicacion.ControlFecha oFrm;
-            oFrm = new FrbaCommerce.Vistas.Generar_Publicacion.ControlFecha(
-                this.Location.X + pnlDatos.Location.X + this.btnSelFec.Location.X + this.btnSelFec.Size.Width + 10,
-                this.Location.Y + pnlDatos.Location.Y + this.btnSelFec.Location.Y - 50);
+            int posx = this.Location.X + pnlDatos.Location.X + this.btnSelFec.Location.X + this.btnSelFec.Size.Width + 10;
+            int posy = this.Location.Y + pnlDatos.Location.Y + this.btnSelFec.Location.Y - 50;
+
+            FrbaCommerce.ControlFecha oFrm = new FrbaCommerce.ControlFecha(posx, posy);
             oFrm.ShowDialog();
 
-            txtFechaIni.Text = oFrm.FechaSeleccionada.ToString();
+            if(!oFrm.Cancelado)
+                txtFechaIni.Text = oFrm.FechaSeleccionada.ToString();
 
             this.Enabled = true;
         }

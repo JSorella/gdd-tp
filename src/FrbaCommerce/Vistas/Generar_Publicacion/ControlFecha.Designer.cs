@@ -1,4 +1,4 @@
-﻿namespace FrbaCommerce.Vistas.Generar_Publicacion
+﻿namespace FrbaCommerce
 {
     partial class ControlFecha
     {
@@ -37,7 +37,7 @@
             this.mcSelFecha.MaxSelectionCount = 1;
             this.mcSelFecha.Name = "mcSelFecha";
             this.mcSelFecha.TabIndex = 0;
-            this.mcSelFecha.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.mcSelFecha_DateChanged);
+            this.mcSelFecha.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.mcSelFecha_DateSelected);
             // 
             // ControlFecha
             // 
@@ -47,6 +47,7 @@
             this.ControlBox = false;
             this.Controls.Add(this.mcSelFecha);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ControlFecha";
@@ -55,6 +56,7 @@
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Load += new System.EventHandler(this.ControlFecha_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ControlFecha_KeyDown);
             this.ResumeLayout(false);
 
         }
