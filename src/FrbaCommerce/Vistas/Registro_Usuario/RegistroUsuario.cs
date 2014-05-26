@@ -36,40 +36,58 @@ namespace FrbaCommerce.Vistas.Registro_Usuario
 
         private void button1_Click(object sender, EventArgs e)
         {
+            try
+            {
+                this.validarCampos();
+
+                // Cuando le doy click a "Siguiente >>" abro un Alta de Usuario o de Empresa, y a este form le mando el nombre y pass.
+
+                if (this.comboRol.Text == "Cliente")
+                {
+                    AltaCliente newWindow = new AltaCliente(this.username_textbox.Text, this.passw_textbox.Text);
+                    newWindow.ShowDialog();
+                }
+
+                if (this.comboRol.Text == "Empresa")
+                {
+                    AltaEmpresa newWindow = new AltaEmpresa(this.username_textbox.Text, this.passw_textbox.Text);
+                    newWindow.ShowDialog();
+                }
+            }
+            catch (Exception error)
+            {
+                Funciones.mostrarAlert(error.Message);
+                return;
+            }
+
+
+        }
+
+        private void validarCampos()
+        {
             // Validación Textboxes
             if (this.username_textbox.Text == "")
             {
-                MessageBox.Show("Debe Ingresar nombre de usuario", "Acceso al Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Funciones.mostrarAlert("Debe Ingresar nombre de usuario");
                 return;
             }
 
             if (this.passw_textbox.Text == "")
             {
-                MessageBox.Show("Debe Ingresar password", "Acceso al Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Funciones.mostrarAlert("Debe Ingresar password");
                 return;
             }
 
             if (this.comboRol.Text == "")
             {
-                MessageBox.Show("Debe Ingresar un Rol", "Acceso al Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Funciones.mostrarAlert("Debe Ingresar un Rol");
                 return;
             }
 
-            // Cuando le doy click a "Siguiente >>" abro un Alta de Usuario o de Empresa, y a este form le mando el nombre y pass.
+            //Validar que no exista ya el nombre de usuario!!
+            StoredProcedures.existeUsuario(this.username_textbox.Text);
 
-            if (this.comboRol.Text == "Cliente")
-            {
-                AltaCliente newWindow = new AltaCliente(this.username_textbox.Text, this.passw_textbox.Text);
-                newWindow.ShowDialog();
-            }
-
-            if (this.comboRol.Text == "Empresa")
-            {
-                AltaEmpresa newWindow = new AltaEmpresa(this.username_textbox.Text, this.passw_textbox.Text);
-                newWindow.ShowDialog();
-            }
-
-
+        
         }
 
         private void passw_textbox_TextChanged(object sender, EventArgs e)
@@ -82,6 +100,16 @@ namespace FrbaCommerce.Vistas.Registro_Usuario
             //Console.WriteLine(comboRol.Text);
 
             
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

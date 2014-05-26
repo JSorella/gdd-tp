@@ -6,6 +6,7 @@ using System.Data;
 using System.Data.Sql;
 using System.Data.SqlClient;
 using FrbaCommerce.Vistas.Login;
+using FrbaCommerce.Vistas.Abm_Cliente;
 
 namespace FrbaCommerce
 {
@@ -91,6 +92,9 @@ namespace FrbaCommerce
             return usuarioResult;
         }
 
+        /// <summary>
+        /// Guarda la cantidad de intentos de logins
+        /// </summary>
         public static void setCantidadIntentos(Usuario usuario)
         {
             string query = "EXECUTE J2LA.setCantidadIntentos @idUsuario, @cantIntentos";
@@ -103,6 +107,9 @@ namespace FrbaCommerce
             Singleton.conexion.execute_query_with_parameters(comando);
         }
 
+        /// <summary>
+        /// Trae las funcionalidades de un rol
+        /// </summary>
         public static DataTable getFuncionalidadesPorRol(string nombreRol)
         {
             SqlDataAdapter da;
@@ -115,6 +122,27 @@ namespace FrbaCommerce
             return dt;
         }
 
+        /// <summary>
+        /// Pregunto si existe un username en la tabla Usuario
+        /// </summary>
+        public static void existeUsuario(string userName)
+        {
+            SqlCommand comando = new SqlCommand("SELECT J2LA.existeUsuario(@userName)", Singleton.conexion.connector());
+            comando.Parameters.AddWithValue("@userName", userName);
+
+            if ((bool)comando.ExecuteScalar())
+            {
+                throw new Exception("Nombre de usuario ya existe!!!");
+            }
+            
+         }
+
+
+        
+
+        /// <summary>
+        /// Trae todos los tipos de documento
+        /// </summary>
         public static DataTable getTiposDoc()
         {
             DataTable usuarioResult = Singleton.conexion.execute_query( //TODO: transformar en SP
@@ -129,6 +157,54 @@ namespace FrbaCommerce
             }
             return usuarioResult;
         }
+
+        /// <summary>
+        /// Crea un nuevo Cliente
+        /// </summary>
+        public static void setNuevoCliente(Cliente cliente)
+        {
+            string query = @"EXECUTE J2LA.setNuevoCliente 
+                                @userName, 
+                                @password, 
+                                @nombre, 
+                                @apellido, 
+                                @dni, 
+                                @tipoDoc, 
+                                @mail, 
+                                @telefono, 
+                                @nomCalle, 
+                                @nroCalle, 
+                                @piso, 
+                                @depto, 
+                                @localidad, 
+                                @cp, 
+                                @fecnac,
+                                @cuil";
+
+            SqlCommand comando = new SqlCommand(query, Singleton.conexion.connector());
+
+            Console.WriteLine(cliente.userName);
+            comando.Parameters.AddWithValue("@userName", cliente.userName);
+            comando.Parameters.AddWithValue("@password", cliente.pass);
+            comando.Parameters.AddWithValue("@nombre", cliente.nombre);
+            comando.Parameters.AddWithValue("@apellido", cliente.apellido);
+            comando.Parameters.AddWithValue("@dni", cliente.dni);
+            comando.Parameters.AddWithValue("@tipoDoc", cliente.idTipoDoc);
+            comando.Parameters.AddWithValue("@mail", cliente.mail);
+            comando.Parameters.AddWithValue("@telefono", cliente.telefono);
+            comando.Parameters.AddWithValue("@nomCalle", cliente.nomCalle);
+            comando.Parameters.AddWithValue("@nroCalle", cliente.nroCalle);
+            comando.Parameters.AddWithValue("@piso", cliente.piso);
+            comando.Parameters.AddWithValue("@depto", cliente.depto);
+            comando.Parameters.AddWithValue("@localidad", cliente.localidad);
+            comando.Parameters.AddWithValue("@cp", cliente.cp);
+            comando.Parameters.AddWithValue("@fecnac", cliente.fechaNacimiento);
+            comando.Parameters.AddWithValue("@cuil", cliente.cuil);
+
+            Singleton.conexion.execute_query_with_parameters(comando);
+        }
+
+
     }
 }
 

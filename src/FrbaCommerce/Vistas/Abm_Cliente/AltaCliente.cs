@@ -71,6 +71,35 @@ namespace FrbaCommerce.Vistas.Abm_Cliente
         private void button1_Click(object sender, EventArgs e)
         {
             this.validarCampos();
+
+            try
+            {
+                Cliente cliente = new Cliente(
+                                    this.usuario, 
+                                    this.pass, 
+                                    this.nombre_textbox.Text, 
+                                    this.apellido_textbox.Text, 
+                                    Convert.ToInt64(this.dni_textbox.Text), 
+                                    Convert.ToInt32(((DataRowView)this.comboDoc.SelectedItem).Row["tipodoc_Id"]), 
+                                    this.mail_textbox.Text, 
+                                    Convert.ToInt64(this.telefono_textbox.Text), 
+                                    this.calle_textbox.Text, 
+                                    Convert.ToInt32(this.altura_textbox.Text), 
+                                    Convert.ToInt32(this.piso_textbox.Text), 
+                                    this.depto_textbox.Text, 
+                                    this.localidad_textbox.Text, 
+                                    this.cp_textbox.Text, 
+                                    (DateTime)this.fechaNacimiento.Value,
+                                    Convert.ToInt64(this.cuil_textbox.Text) 
+                                    );
+
+                StoredProcedures.setNuevoCliente(cliente);
+            }
+            catch (Exception error)
+            {
+                Funciones.mostrarAlert(error.Message);
+                return;
+            }
         }
 
         private void validarCampos()
@@ -91,6 +120,11 @@ namespace FrbaCommerce.Vistas.Abm_Cliente
             {
                 Funciones.mostrarAlert("Ingrese Tipo Documento"); return;
             }
+            if (this.cuil_textbox.Text == "")
+            {
+                Funciones.mostrarAlert("Ingrese Cuil"); return;
+            }
+
             if (this.mail_textbox.Text == "")
             {
                 Funciones.mostrarAlert("Ingrese Email"); return;
@@ -127,7 +161,7 @@ namespace FrbaCommerce.Vistas.Abm_Cliente
             {
                 Funciones.mostrarAlert("Ingrese Código Postal"); return;
             }
-            if (this.dateTimePickerFechaAlta.Text == "")
+            if (this.fechaNacimiento.Text == "")
             {
                 Funciones.mostrarAlert("Ingrese Fecha Nacimiento"); return;
             }
@@ -139,6 +173,16 @@ namespace FrbaCommerce.Vistas.Abm_Cliente
         }
 
         private void altura_textbox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dateTimePickerFechaAlta_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cuil_textbox_TextChanged(object sender, EventArgs e)
         {
 
         }

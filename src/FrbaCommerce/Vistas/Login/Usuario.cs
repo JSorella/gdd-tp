@@ -13,12 +13,10 @@ namespace FrbaCommerce.Vistas.Login
     {
         public int id;
         public string nombre;
-        public string pass;
+        public string pass; 
         public int cantidadIntentos;
         public bool inhabilitado;
         public string motivo;
-        //public List<Rol> roles;
-        //public List<Publicacion> publicaciones;
 
         public Usuario(int _id, string _nombre, string _pass, int _cantidadIntentos, bool _inhabilitado, string _motivo)
         {

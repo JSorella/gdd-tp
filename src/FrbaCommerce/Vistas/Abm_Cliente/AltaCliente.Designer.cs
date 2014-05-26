@@ -52,10 +52,12 @@
             this.label12 = new System.Windows.Forms.Label();
             this.cp_textbox = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.dateTimePickerFechaAlta = new System.Windows.Forms.DateTimePicker();
+            this.fechaNacimiento = new System.Windows.Forms.DateTimePicker();
             this.comboDoc = new System.Windows.Forms.ComboBox();
             this.label14 = new System.Windows.Forms.Label();
             this.altura_textbox = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.cuil_textbox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // button1
@@ -74,7 +76,6 @@
             this.apellido_textbox.Name = "apellido_textbox";
             this.apellido_textbox.Size = new System.Drawing.Size(191, 20);
             this.apellido_textbox.TabIndex = 19;
-            this.apellido_textbox.UseSystemPasswordChar = true;
             // 
             // nombre_textbox
             // 
@@ -109,23 +110,20 @@
             this.dni_textbox.Name = "dni_textbox";
             this.dni_textbox.Size = new System.Drawing.Size(191, 20);
             this.dni_textbox.TabIndex = 23;
-            this.dni_textbox.UseSystemPasswordChar = true;
             // 
             // mail_textbox
             // 
-            this.mail_textbox.Location = new System.Drawing.Point(94, 118);
+            this.mail_textbox.Location = new System.Drawing.Point(93, 144);
             this.mail_textbox.Name = "mail_textbox";
             this.mail_textbox.Size = new System.Drawing.Size(191, 20);
             this.mail_textbox.TabIndex = 25;
-            this.mail_textbox.UseSystemPasswordChar = true;
             // 
             // telefono_textbox
             // 
-            this.telefono_textbox.Location = new System.Drawing.Point(94, 144);
+            this.telefono_textbox.Location = new System.Drawing.Point(93, 170);
             this.telefono_textbox.Name = "telefono_textbox";
             this.telefono_textbox.Size = new System.Drawing.Size(191, 20);
             this.telefono_textbox.TabIndex = 26;
-            this.telefono_textbox.UseSystemPasswordChar = true;
             // 
             // label4
             // 
@@ -149,7 +147,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(12, 125);
+            this.label6.Location = new System.Drawing.Point(11, 151);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(26, 13);
             this.label6.TabIndex = 29;
@@ -159,7 +157,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(12, 151);
+            this.label7.Location = new System.Drawing.Point(11, 177);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(49, 13);
             this.label7.TabIndex = 30;
@@ -181,7 +179,6 @@
             this.calle_textbox.Name = "calle_textbox";
             this.calle_textbox.Size = new System.Drawing.Size(191, 20);
             this.calle_textbox.TabIndex = 31;
-            this.calle_textbox.UseSystemPasswordChar = true;
             // 
             // label8
             // 
@@ -207,7 +204,6 @@
             this.piso_textbox.Name = "piso_textbox";
             this.piso_textbox.Size = new System.Drawing.Size(36, 20);
             this.piso_textbox.TabIndex = 34;
-            this.piso_textbox.UseSystemPasswordChar = true;
             // 
             // label10
             // 
@@ -224,7 +220,6 @@
             this.depto_textbox.Name = "depto_textbox";
             this.depto_textbox.Size = new System.Drawing.Size(36, 20);
             this.depto_textbox.TabIndex = 36;
-            this.depto_textbox.UseSystemPasswordChar = true;
             // 
             // localidad_textbox
             // 
@@ -232,7 +227,6 @@
             this.localidad_textbox.Name = "localidad_textbox";
             this.localidad_textbox.Size = new System.Drawing.Size(191, 20);
             this.localidad_textbox.TabIndex = 38;
-            this.localidad_textbox.UseSystemPasswordChar = true;
             // 
             // label11
             // 
@@ -258,24 +252,26 @@
             this.cp_textbox.Name = "cp_textbox";
             this.cp_textbox.Size = new System.Drawing.Size(100, 20);
             this.cp_textbox.TabIndex = 41;
-            this.cp_textbox.UseSystemPasswordChar = true;
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(12, 177);
+            this.label13.Location = new System.Drawing.Point(11, 203);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(108, 13);
             this.label13.TabIndex = 43;
             this.label13.Text = "Fecha de Nacimiento";
             this.label13.Click += new System.EventHandler(this.label13_Click);
             // 
-            // dateTimePickerFechaAlta
+            // fechaNacimiento
             // 
-            this.dateTimePickerFechaAlta.Location = new System.Drawing.Point(94, 193);
-            this.dateTimePickerFechaAlta.Name = "dateTimePickerFechaAlta";
-            this.dateTimePickerFechaAlta.Size = new System.Drawing.Size(194, 20);
-            this.dateTimePickerFechaAlta.TabIndex = 44;
+            this.fechaNacimiento.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
+            this.fechaNacimiento.Location = new System.Drawing.Point(93, 219);
+            this.fechaNacimiento.Name = "fechaNacimiento";
+            this.fechaNacimiento.Size = new System.Drawing.Size(194, 20);
+            this.fechaNacimiento.TabIndex = 44;
+            this.fechaNacimiento.Value = new System.DateTime(2014, 5, 25, 22, 55, 23, 0);
+            this.fechaNacimiento.ValueChanged += new System.EventHandler(this.dateTimePickerFechaAlta_ValueChanged);
             // 
             // comboDoc
             // 
@@ -303,18 +299,36 @@
             this.altura_textbox.Name = "altura_textbox";
             this.altura_textbox.Size = new System.Drawing.Size(100, 20);
             this.altura_textbox.TabIndex = 46;
-            this.altura_textbox.UseSystemPasswordChar = true;
             this.altura_textbox.TextChanged += new System.EventHandler(this.altura_textbox_TextChanged);
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(12, 125);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(24, 13);
+            this.label15.TabIndex = 49;
+            this.label15.Text = "Cuil";
+            // 
+            // cuil_textbox
+            // 
+            this.cuil_textbox.Location = new System.Drawing.Point(94, 118);
+            this.cuil_textbox.Name = "cuil_textbox";
+            this.cuil_textbox.Size = new System.Drawing.Size(191, 20);
+            this.cuil_textbox.TabIndex = 48;
+            this.cuil_textbox.TextChanged += new System.EventHandler(this.cuil_textbox_TextChanged);
             // 
             // AltaCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(632, 231);
+            this.ClientSize = new System.Drawing.Size(635, 267);
+            this.Controls.Add(this.label15);
+            this.Controls.Add(this.cuil_textbox);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.altura_textbox);
             this.Controls.Add(this.comboDoc);
-            this.Controls.Add(this.dateTimePickerFechaAlta);
+            this.Controls.Add(this.fechaNacimiento);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.cp_textbox);
             this.Controls.Add(this.label12);
@@ -373,9 +387,11 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox cp_textbox;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.DateTimePicker dateTimePickerFechaAlta;
+        private System.Windows.Forms.DateTimePicker fechaNacimiento;
         private System.Windows.Forms.ComboBox comboDoc;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TextBox altura_textbox;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox cuil_textbox;
     }
 }

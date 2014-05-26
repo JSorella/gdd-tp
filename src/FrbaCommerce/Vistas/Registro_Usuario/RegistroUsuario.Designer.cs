@@ -62,6 +62,7 @@
             this.label2.Size = new System.Drawing.Size(56, 13);
             this.label2.TabIndex = 10;
             this.label2.Text = "Password:";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label3
             // 
@@ -71,6 +72,7 @@
             this.label3.Size = new System.Drawing.Size(58, 13);
             this.label3.TabIndex = 9;
             this.label3.Text = "Username:";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // label1
             // 

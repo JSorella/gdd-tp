@@ -55,6 +55,7 @@
     <Compile Include="Vistas\Abm_Cliente\AltaCliente.Designer.cs">
       <DependentUpon>AltaCliente.cs</DependentUpon>
     </Compile>
+    <Compile Include="Vistas\Abm_Cliente\Cliente.cs" />
     <Compile Include="Vistas\Abm_Empresa\AltaEmpresa.cs">
       <SubType>Form</SubType>
     </Compile>
