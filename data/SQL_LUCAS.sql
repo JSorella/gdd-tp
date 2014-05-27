@@ -1,15 +1,23 @@
-CREATE PROCEDURE J2LA.getTop5VendedoresConMayorCantDeProdNoVendidos(@anio int, @trimestre int)
+IF OBJECT_ID('J2LA.getTop5VendedoresConMayorCantDeProdNoVendidos') IS NOT NULL
+DROP PROCEDURE J2LA.getTop5VendedoresConMayorCantDeProdNoVendidos
+GO
+CREATE PROCEDURE J2LA.getTop5VendedoresConMayorCantDeProdNoVendidos(@anio int, @trimestre int, @visibilidad int, @mes int)
 AS
 	SELECT TOP 5 b.usu_UserName, a.pub_Stock, a.pub_Codigo, a.pub_Descripcion, c.pubvis_Descripcion , a.pub_Fecha_Ini
 	FROM J2LA.Publicaciones a, J2LA.Usuarios b, J2LA.Publicaciones_Visibilidades c
 	WHERE a.pub_usu_Id = b.usu_Id
 	AND a.pub_visibilidad_Id = c.pubvis_id
 	AND YEAR(a.pub_Fecha_Ini) = @anio
+	AND a.pub_visibilidad_Id = @visibilidad
+	AND MONTH(a.pub_Fecha_Ini) = @mes
 	AND MONTH(a.pub_Fecha_Ini)>(@trimestre-1)*3 AND MONTH(a.pub_Fecha_Ini)<= @trimestre*3
+	
 	ORDER BY a.pub_Stock DESC, a.pub_Fecha_Ini ASC, a.pub_visibilidad_Id ASC
 GO
 
-
+IF OBJECT_ID('J2LA.getTop5VendedoresConMayorFacturacion') IS NOT NULL
+DROP PROCEDURE J2LA.getTop5VendedoresConMayorFacturacion
+GO
 CREATE PROCEDURE J2LA.getTop5VendedoresConMayorFacturacion(@anio int, @trimestre int)
 AS
 	SELECT TOP 5 a.usu_UserName, SUM(b.fac_Total) Facturacion
@@ -21,6 +29,9 @@ AS
 	ORDER BY Facturacion DESC
 GO
 
+IF OBJECT_ID('J2LA.getTop5VendedoresConMayoresCalificaciones') IS NOT NULL
+DROP PROCEDURE J2LA.getTop5VendedoresConMayoresCalificaciones
+GO
 CREATE PROCEDURE J2LA.getTop5VendedoresConMayoresCalificaciones(@anio int, @trimestre int)
 AS
 	/*
@@ -56,6 +67,9 @@ AS
 	DROP TABLE J2LA.ListadosTemp
 GO
 
+IF OBJECT_ID('J2LA.getTop5ClientesConMayorCantDePublicacionesSinCalificar') IS NOT NULL
+DROP PROCEDURE J2LA.getTop5ClientesConMayorCantDePublicacionesSinCalificar
+GO
 CREATE PROCEDURE J2LA.getTop5ClientesConMayorCantDePublicacionesSinCalificar(@anio int, @trimestre int)
 AS
 	SELECT TOP 5 a.cli_Nro_Doc, COUNT(*) PublicacionesSinCalificar

@@ -69,7 +69,7 @@ namespace FrbaCommerce.Vistas.Listado_Estadistico
             DataTable tablaVisibilidades = connect.execute_query(query);
             cboxVisibilidad.DataSource = tablaVisibilidades;
             cboxVisibilidad.DisplayMember = "pubvis_Descripcion";
-            cboxVisibilidad.ValueMember = "pubvis_Codigo";
+            cboxVisibilidad.ValueMember = "pubvis_id";
         }
 
         public void cargarComboBoxMeses()
@@ -127,7 +127,7 @@ namespace FrbaCommerce.Vistas.Listado_Estadistico
 
         private int getVisibilidad()
         {
-            return ((KeyValuePair<string, int>)cboxVisibilidad.SelectedItem).Value;
+            return Convert.ToInt32(((DataRowView)cboxVisibilidad.SelectedItem).Row["pubvis_id"]);
         }
 
         private int getMes()
@@ -135,9 +135,9 @@ namespace FrbaCommerce.Vistas.Listado_Estadistico
             return ((KeyValuePair<string, int>)cboxMes.SelectedItem).Value;
         }
 
-        public DataTable getTop5VendedoresConMayorCantDeProdNoVendidos(int anio, int trimestre)
+        public DataTable getTop5VendedoresConMayorCantDeProdNoVendidos(int anio, int trimestre, int visibilidad, int mes)
         {
-            string query = "exec J2LA.getTop5VendedoresConMayorCantDeProdNoVendidos "+anio+", "+trimestre;
+            string query = "exec J2LA.getTop5VendedoresConMayorCantDeProdNoVendidos "+anio+", "+trimestre+", "+visibilidad+", "+mes;
             Connection connect = new Connection();
             DataTable tablaListado = connect.execute_query(query);
             return tablaListado;
@@ -181,7 +181,9 @@ namespace FrbaCommerce.Vistas.Listado_Estadistico
             switch (cboxListado.SelectedIndex)
             {
                 case 0:
-                    this.cargarGrid(getTop5VendedoresConMayorCantDeProdNoVendidos(anio, trimestre));
+                    int visibilidad = getVisibilidad();
+                    int mes = getMes();
+                    this.cargarGrid(getTop5VendedoresConMayorCantDeProdNoVendidos(anio, trimestre, visibilidad, mes));
                     break;
                 case 1:
                     this.cargarGrid(getTop5VendedoresConMayorFacturacion(anio, trimestre));
