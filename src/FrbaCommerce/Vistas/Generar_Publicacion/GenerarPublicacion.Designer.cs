@@ -201,6 +201,7 @@
             this.cmbTipoVis.Name = "cmbTipoVis";
             this.cmbTipoVis.Size = new System.Drawing.Size(181, 21);
             this.cmbTipoVis.TabIndex = 3;
+            this.cmbTipoVis.SelectedIndexChanged += new System.EventHandler(this.cmbTipoVis_SelectedIndexChanged);
             // 
             // label8
             // 

@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace FrbaCommerce
 {
@@ -103,7 +104,22 @@ namespace FrbaCommerce
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            HabilitarMod(true);
+            if (ValidaAceptar())
+            {
+                HabilitarMod(true);
+                txtDesc.Focus();
+            }
+        }
+
+        private bool ValidaAceptar()
+        {
+            if (cmbTipoPubli.SelectedIndex < 0)
+            {
+                MessageBox.Show("Debe seleccionar el Tipo de Publicación.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            return true;
         }
 
         private void btnSelFec_Click(object sender, EventArgs e)
@@ -138,31 +154,124 @@ namespace FrbaCommerce
 
         private void btnGenerar_Click(object sender, EventArgs e)
         {
-            Generar();
-            Limpiar();
-            HabilitarMod(false);
+            if (MessageBox.Show("Confirma que desea generar la Publicación?", "Nueva Publicación", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                if (ValidaGenerar())
+                {
+                    Generar();
+                    Limpiar();
+                    HabilitarMod(false);
+                }
+            }
+        }
+
+        private bool ValidaGenerar()
+        {
+            bool datosOk = true;
+            string mensaje = "";
+
+            if (txtDesc.Text == "")
+            {
+                mensaje = mensaje + "Debe indicar una Descripcion." + System.Environment.NewLine;
+                datosOk = false;
+            }
+
+            if (cmbTipoVis.SelectedIndex < 0)
+            {
+                mensaje = mensaje + "Debe indicar una Visibilidad." + System.Environment.NewLine;
+                datosOk = false;
+            }
+
+            if (cmbEstado.SelectedIndex < 0)
+            {
+                mensaje = mensaje + "Debe indicar un Estado." + System.Environment.NewLine;
+                datosOk = false;
+            }
+
+            if (nudStock.Value <= 0)
+            {
+                mensaje = mensaje + "Debe indicar el Stock." + System.Environment.NewLine;
+                datosOk = false;
+            }
+
+            if (nudPrecio.Value <= 0)
+            {
+                mensaje = mensaje + "Debe indicar un Precio." + System.Environment.NewLine;
+                datosOk = false;
+            }
+
+            if (txtFechaIni.Text == "")
+            {
+                mensaje = mensaje + "Debe indicar la Fecha de Inicio." + System.Environment.NewLine;
+                datosOk = false;
+            }
+
+            if (txtFechaVto.Text == "")
+            {
+                mensaje = mensaje + "Debe indicar la Fecha de Vencimiento." + System.Environment.NewLine;
+                datosOk = false;
+            }
+
+            if (listRubros.CheckedIndices.Count <= 0)
+            {
+                mensaje = mensaje + "Debe seleccionar al menos un Rubro." + System.Environment.NewLine;
+                datosOk = false;
+            }
+
+            if (!datosOk)
+                MessageBox.Show(mensaje, "Validaciones - Nueva Publicación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            return datosOk;
         }
 
         private void Generar()
         {
-            foreach (int x in listRubros.CheckedIndices)
+            string query = "J2LA.Publicaciones_Insert";
+            string pub_codigo = "";
+            try
             {
-                listRubros.SelectedIndex = x;
-                MessageBox.Show(listRubros.SelectedValue.ToString());
+                SqlCommand comando = new SqlCommand(query, Singleton.conexion.connector());
+                comando.CommandType = CommandType.StoredProcedure;
+
+                comando.Parameters.Add("@pub_codigo", SqlDbType.Decimal).Direction = ParameterDirection.Output;
+                comando.Parameters.AddWithValue("@pub_descripcion", txtDesc.Text);
+
+                comando.ExecuteNonQuery();
+
+                pub_codigo = comando.Parameters["@pub_codigo"].Value.ToString();
+
+                foreach (int x in listRubros.CheckedIndices)
+                {
+                    listRubros.SelectedIndex = x;
+                    MessageBox.Show(listRubros.SelectedValue.ToString());
+                }
+
+                MessageBox.Show(pub_codigo);
             }
-
-
+            catch(Exception)
+            {
+            }
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
-            Limpiar();
+            if(MessageBox.Show("Confirma que desea Limpiar los datos ingresados?", "Nueva Publicación", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                Limpiar();
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            Limpiar();
-            HabilitarMod(false);
+            if (MessageBox.Show("Confirma que desea Cancelar los datos ingresados?", "Nueva Publicación", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                Limpiar();
+                HabilitarMod(false);
+            }
+        }
+
+        private void cmbTipoVis_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(txtFechaIni.Text != "")
+                ActualizarVto();
         }
 
     }
