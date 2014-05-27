@@ -33,6 +33,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.cmbTipoPubli = new System.Windows.Forms.ComboBox();
             this.pnlDatos = new System.Windows.Forms.Panel();
+            this.nudStock = new System.Windows.Forms.NumericUpDown();
+            this.nudPrecio = new System.Windows.Forms.NumericUpDown();
             this.chkPreguntas = new System.Windows.Forms.CheckBox();
             this.cmbEstado = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -40,10 +42,8 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.listRubros = new System.Windows.Forms.CheckedListBox();
-            this.txtPrecio = new System.Windows.Forms.TextBox();
-            this.txtStock = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.txtVto = new System.Windows.Forms.TextBox();
+            this.txtFechaVto = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.btnSelFec = new System.Windows.Forms.Button();
             this.txtFechaIni = new System.Windows.Forms.TextBox();
@@ -53,9 +53,11 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btnGenerar = new System.Windows.Forms.Button();
             this.btnLimpiar = new System.Windows.Forms.Button();
-            this.btnSalir = new System.Windows.Forms.Button();
+            this.btnCancelar = new System.Windows.Forms.Button();
             this.pnlParam.SuspendLayout();
             this.pnlDatos.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudStock)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPrecio)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlParam
@@ -77,7 +79,7 @@
             this.btnAceptar.Location = new System.Drawing.Point(490, 10);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(91, 23);
-            this.btnAceptar.TabIndex = 2;
+            this.btnAceptar.TabIndex = 1;
             this.btnAceptar.Text = "Aceptar";
             this.btnAceptar.UseVisualStyleBackColor = true;
             this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
@@ -93,6 +95,7 @@
             // 
             // cmbTipoPubli
             // 
+            this.cmbTipoPubli.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTipoPubli.FormattingEnabled = true;
             this.cmbTipoPubli.Location = new System.Drawing.Point(193, 12);
             this.cmbTipoPubli.Name = "cmbTipoPubli";
@@ -105,6 +108,8 @@
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlDatos.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlDatos.Controls.Add(this.nudStock);
+            this.pnlDatos.Controls.Add(this.nudPrecio);
             this.pnlDatos.Controls.Add(this.chkPreguntas);
             this.pnlDatos.Controls.Add(this.cmbEstado);
             this.pnlDatos.Controls.Add(this.label9);
@@ -112,10 +117,8 @@
             this.pnlDatos.Controls.Add(this.label8);
             this.pnlDatos.Controls.Add(this.label7);
             this.pnlDatos.Controls.Add(this.listRubros);
-            this.pnlDatos.Controls.Add(this.txtPrecio);
-            this.pnlDatos.Controls.Add(this.txtStock);
             this.pnlDatos.Controls.Add(this.label6);
-            this.pnlDatos.Controls.Add(this.txtVto);
+            this.pnlDatos.Controls.Add(this.txtFechaVto);
             this.pnlDatos.Controls.Add(this.label5);
             this.pnlDatos.Controls.Add(this.btnSelFec);
             this.pnlDatos.Controls.Add(this.txtFechaIni);
@@ -128,13 +131,46 @@
             this.pnlDatos.Size = new System.Drawing.Size(596, 375);
             this.pnlDatos.TabIndex = 1;
             // 
+            // nudStock
+            // 
+            this.nudStock.Location = new System.Drawing.Point(90, 196);
+            this.nudStock.Maximum = new decimal(new int[] {
+            1874919423,
+            2328306,
+            0,
+            0});
+            this.nudStock.Name = "nudStock";
+            this.nudStock.Size = new System.Drawing.Size(148, 20);
+            this.nudStock.TabIndex = 5;
+            this.nudStock.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // nudPrecio
+            // 
+            this.nudPrecio.DecimalPlaces = 2;
+            this.nudPrecio.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.nudPrecio.Location = new System.Drawing.Point(90, 222);
+            this.nudPrecio.Maximum = new decimal(new int[] {
+            1874919423,
+            2328306,
+            0,
+            0});
+            this.nudPrecio.Name = "nudPrecio";
+            this.nudPrecio.Size = new System.Drawing.Size(148, 20);
+            this.nudPrecio.TabIndex = 6;
+            this.nudPrecio.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.nudPrecio.ThousandsSeparator = true;
+            // 
             // chkPreguntas
             // 
             this.chkPreguntas.AutoSize = true;
             this.chkPreguntas.Location = new System.Drawing.Point(16, 308);
             this.chkPreguntas.Name = "chkPreguntas";
             this.chkPreguntas.Size = new System.Drawing.Size(112, 17);
-            this.chkPreguntas.TabIndex = 21;
+            this.chkPreguntas.TabIndex = 10;
             this.chkPreguntas.Text = "Permite Preguntas";
             this.chkPreguntas.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.chkPreguntas.UseVisualStyleBackColor = true;
@@ -146,7 +182,7 @@
             this.cmbEstado.Location = new System.Drawing.Point(90, 168);
             this.cmbEstado.Name = "cmbEstado";
             this.cmbEstado.Size = new System.Drawing.Size(181, 21);
-            this.cmbEstado.TabIndex = 20;
+            this.cmbEstado.TabIndex = 4;
             // 
             // label9
             // 
@@ -164,7 +200,7 @@
             this.cmbTipoVis.Location = new System.Drawing.Point(90, 141);
             this.cmbTipoVis.Name = "cmbTipoVis";
             this.cmbTipoVis.Size = new System.Drawing.Size(181, 21);
-            this.cmbTipoVis.TabIndex = 18;
+            this.cmbTipoVis.TabIndex = 3;
             // 
             // label8
             // 
@@ -192,23 +228,7 @@
             this.listRubros.Location = new System.Drawing.Point(295, 160);
             this.listRubros.Name = "listRubros";
             this.listRubros.Size = new System.Drawing.Size(286, 169);
-            this.listRubros.TabIndex = 15;
-            // 
-            // txtPrecio
-            // 
-            this.txtPrecio.Location = new System.Drawing.Point(90, 221);
-            this.txtPrecio.Name = "txtPrecio";
-            this.txtPrecio.Size = new System.Drawing.Size(148, 20);
-            this.txtPrecio.TabIndex = 14;
-            this.txtPrecio.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPrecio_KeyPress);
-            // 
-            // txtStock
-            // 
-            this.txtStock.Location = new System.Drawing.Point(90, 195);
-            this.txtStock.Name = "txtStock";
-            this.txtStock.Size = new System.Drawing.Size(148, 20);
-            this.txtStock.TabIndex = 13;
-            this.txtStock.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtStock_KeyPress);
+            this.listRubros.TabIndex = 11;
             // 
             // label6
             // 
@@ -219,13 +239,13 @@
             this.label6.TabIndex = 12;
             this.label6.Text = "Precio :";
             // 
-            // txtVto
+            // txtFechaVto
             // 
-            this.txtVto.Location = new System.Drawing.Point(90, 273);
-            this.txtVto.Name = "txtVto";
-            this.txtVto.ReadOnly = true;
-            this.txtVto.Size = new System.Drawing.Size(67, 20);
-            this.txtVto.TabIndex = 11;
+            this.txtFechaVto.Location = new System.Drawing.Point(90, 273);
+            this.txtFechaVto.Name = "txtFechaVto";
+            this.txtFechaVto.ReadOnly = true;
+            this.txtFechaVto.Size = new System.Drawing.Size(67, 20);
+            this.txtFechaVto.TabIndex = 9;
             // 
             // label5
             // 
@@ -282,7 +302,7 @@
             this.txtDesc.Name = "txtDesc";
             this.txtDesc.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtDesc.Size = new System.Drawing.Size(565, 107);
-            this.txtDesc.TabIndex = 3;
+            this.txtDesc.TabIndex = 2;
             // 
             // label2
             // 
@@ -299,7 +319,7 @@
             this.btnGenerar.Location = new System.Drawing.Point(371, 447);
             this.btnGenerar.Name = "btnGenerar";
             this.btnGenerar.Size = new System.Drawing.Size(75, 23);
-            this.btnGenerar.TabIndex = 2;
+            this.btnGenerar.TabIndex = 12;
             this.btnGenerar.Text = "Generar";
             this.btnGenerar.UseVisualStyleBackColor = true;
             this.btnGenerar.Click += new System.EventHandler(this.btnGenerar_Click);
@@ -310,28 +330,28 @@
             this.btnLimpiar.Location = new System.Drawing.Point(452, 447);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(75, 23);
-            this.btnLimpiar.TabIndex = 3;
+            this.btnLimpiar.TabIndex = 13;
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.UseVisualStyleBackColor = true;
             this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
-            // btnSalir
+            // btnCancelar
             // 
-            this.btnSalir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSalir.Location = new System.Drawing.Point(533, 447);
-            this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(75, 23);
-            this.btnSalir.TabIndex = 4;
-            this.btnSalir.Text = "Salir";
-            this.btnSalir.UseVisualStyleBackColor = true;
-            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
+            this.btnCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancelar.Location = new System.Drawing.Point(533, 447);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(75, 23);
+            this.btnCancelar.TabIndex = 14;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // GenerarPublicacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(620, 482);
-            this.Controls.Add(this.btnSalir);
+            this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.btnGenerar);
             this.Controls.Add(this.pnlDatos);
@@ -344,6 +364,8 @@
             this.pnlParam.PerformLayout();
             this.pnlDatos.ResumeLayout(false);
             this.pnlDatos.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudStock)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPrecio)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -354,7 +376,7 @@
         private System.Windows.Forms.Panel pnlDatos;
         private System.Windows.Forms.Button btnGenerar;
         private System.Windows.Forms.Button btnLimpiar;
-        private System.Windows.Forms.Button btnSalir;
+        private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Button btnAceptar;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cmbTipoPubli;
@@ -362,7 +384,7 @@
         private System.Windows.Forms.TextBox txtDesc;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox txtVto;
+        private System.Windows.Forms.TextBox txtFechaVto;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnSelFec;
         private System.Windows.Forms.TextBox txtFechaIni;
@@ -374,7 +396,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.CheckedListBox listRubros;
-        private System.Windows.Forms.TextBox txtPrecio;
-        private System.Windows.Forms.TextBox txtStock;
+        private System.Windows.Forms.NumericUpDown nudPrecio;
+        private System.Windows.Forms.NumericUpDown nudStock;
     }
 }
