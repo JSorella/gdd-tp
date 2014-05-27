@@ -30,7 +30,7 @@ namespace FrbaCommerce.Vistas.Login
             DataRow selectedDataRow = ((DataRowView)comboRol.SelectedItem).Row;
             Singleton.sessionRol = Convert.ToString(selectedDataRow["rol_Nombre"]);
 
-            MenuFunciones menuWindow = new MenuFunciones((int)this.comboRol.SelectedValue);
+            MenuFunciones menuWindow = new MenuFunciones();
             menuWindow.ShowDialog();
             this.Close();
         }

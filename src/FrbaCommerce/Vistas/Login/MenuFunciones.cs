@@ -11,11 +11,8 @@ namespace FrbaCommerce.Vistas.Login
 {
     public partial class MenuFunciones : Form
     {
-        private int idRol;
-
-        public MenuFunciones(int _idRol)
+        public MenuFunciones()
         {
-            this.idRol = _idRol;
             this.InitializeComponent();
             this.comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
         }

@@ -232,7 +232,7 @@ namespace FrbaCommerce.Vistas.Login
                     if (usuarioConRoles.Rows.Count == 1)
                     {
                         Singleton.sessionRol = (string)Singleton.usuario.Rows[0]["rol_Nombre"];
-                        MenuFunciones menuWindow = new MenuFunciones((int)Singleton.usuario.Rows[0]["rol_Nombre"]);
+                        MenuFunciones menuWindow = new MenuFunciones();
                         menuWindow.ShowDialog();
                     }
                     else
@@ -240,7 +240,6 @@ namespace FrbaCommerce.Vistas.Login
                         EleccionRol rolWindow = new EleccionRol();
                         rolWindow.ShowDialog();
                     }
-
                 }
                 else  //Wrong Password...
                 {
@@ -255,7 +254,6 @@ namespace FrbaCommerce.Vistas.Login
             catch (Exception error)
             {
                 Funciones.mostrarAlert(error.Message);
-                return;
             }
             return;
         }

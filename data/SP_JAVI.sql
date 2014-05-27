@@ -69,7 +69,7 @@ GO
 IF OBJECT_ID('J2LA.setNuevoUsuario') IS NOT NULL
 DROP PROCEDURE J2LA.setNuevoUsuario
 GO
-CREATE PROCEDURE J2LA.setNuevoUsuario @userName varchar(255)
+CREATE PROCEDURE J2LA.setNuevoUsuario @userName varchar(255), @password varchar(255)
 AS
 BEGIN
 	INSERT INTO
@@ -95,6 +95,21 @@ BEGIN
 END
 GO
 
+/*-------------------------FUNCTION (JAVI)--------------------------*/
+IF OBJECT_ID('J2LA.getRolId') IS NOT NULL
+DROP FUNCTION J2LA.getRolId
+GO
+CREATE FUNCTION J2LA.getRolId(@nombre varchar(255))
+RETURNS INT
+AS
+BEGIN
+	DECLARE @rol_Id INT
+	SET @rol_Id = (SELECT rol_Id FROM J2LA.Roles WHERE  rol_Nombre = @nombre)
+	
+	RETURN @rol_Id
+END
+GO
+
 /*-------------------------STORED PROCEDURE (JAVI)--------------------------*/
 IF OBJECT_ID('J2LA.setNuevoCliente') IS NOT NULL
 DROP PROCEDURE J2LA.setNuevoCliente
@@ -108,6 +123,12 @@ BEGIN
 		J2LA.Clientes (cli_Nombre, cli_Apellido, cli_Nro_Doc, cli_Tipodoc_Id, cli_Mail, cli_Tel, cli_Dom_Calle, cli_Nro_Calle, cli_Piso, cli_Dpto, cli_Localidad, cli_CP, cli_Fecha_Nac, cli_Cuil, cli_usu_Id)
 	VALUES
 		(@nombre, @apellido, @dni, @tipoDoc, @mail, @telefono, @nomCalle, @nroCalle, @piso, @depto, @localidad, @cp, @fecnac, @cuil, J2LA.getUserId(@userName))
+
+	INSERT INTO
+		J2LA.Usuarios_Roles (usurol_usu_Id, usurol_rol_Id)
+	VALUES
+		(J2LA.getUserId(@userName), J2LA.getRolId('Cliente'))
+	
 END
 GO
 

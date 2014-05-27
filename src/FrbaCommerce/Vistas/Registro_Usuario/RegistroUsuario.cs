@@ -57,9 +57,9 @@ namespace FrbaCommerce.Vistas.Registro_Usuario
             catch (Exception error)
             {
                 Funciones.mostrarAlert(error.Message);
-                return;
             }
 
+            return;
 
         }
 
