@@ -48,7 +48,10 @@ namespace FrbaCommerce
 
         private void CargarRubros()
         {
-            listRubros.DataSource = Singleton.conexion.execute_query("Select * From J2LA.Rubros Order By rub_Descripcion");
+            listRubros.DataSource = Singleton.conexion.execute_query("Select rub_id, rub_descripcion " +
+                                                                        "From J2LA.Rubros " +
+                                                                        "Where rub_Eliminado = 0" +
+                                                                        "Order By rub_Descripcion");
             listRubros.ValueMember = "rub_id";
             listRubros.DisplayMember = "rub_Descripcion";
         }
@@ -83,7 +86,7 @@ namespace FrbaCommerce
 
         private void CargarCombos()
         {
-            oDTVis = Singleton.conexion.execute_query("Select * From J2LA.Publicaciones_Visibilidades Order By pubvis_Descripcion");
+            oDTVis = Singleton.conexion.execute_query("Select * From J2LA.Publicaciones_Visibilidades Where pubvis_Eliminado = 0 Order By pubvis_Descripcion");
 
             cmbTipoPubli.ValueMember = "pubtip_Id";
             cmbTipoPubli.DisplayMember = "pubtip_Nombre";
@@ -117,6 +120,20 @@ namespace FrbaCommerce
                 txtFechaIni.Text = oFrm.FechaSeleccionada.ToString();
 
             this.Enabled = true;
+
+            ActualizarVto();
+        }
+
+        private void ActualizarVto()
+        {
+            DataRowView vrow = (DataRowView)cmbTipoVis.SelectedItem;
+            DataRow row;
+
+            if (vrow != null)
+            { 
+                row = vrow.Row;
+                txtFechaVto.Text = Convert.ToDateTime(txtFechaIni.Text).AddDays(Convert.ToDouble(row["pubvis_Dias_Vto"])).ToString();
+            }            
         }
 
         private void btnGenerar_Click(object sender, EventArgs e)

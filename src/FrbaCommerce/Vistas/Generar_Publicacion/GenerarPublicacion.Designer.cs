@@ -224,6 +224,7 @@
             // 
             this.listRubros.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.listRubros.CheckOnClick = true;
             this.listRubros.FormattingEnabled = true;
             this.listRubros.Location = new System.Drawing.Point(295, 160);
             this.listRubros.Name = "listRubros";
