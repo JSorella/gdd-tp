@@ -46,6 +46,11 @@ namespace FrbaCommerce.Vistas.Login
                     abmRolWindow.ShowDialog();
                     break;
 
+                //case "Registro de Usuario":
+                //    RegistroUsuario registroUsuarioWindow = new RegistroUsuario();
+                //    registroUsuarioWindow.ShowDialog();
+                //    break;
+
                 case "ABM de Cliente":
                     AbmCliente abmClienteWindow = new AbmCliente();
                     abmClienteWindow.ShowDialog();
