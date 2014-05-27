@@ -101,8 +101,8 @@ namespace FrbaCommerce.Vistas.Abm_Cliente
                 return;
             }
 
-            Funciones.mostrarAlert("El Cliente ha sido dado de alta exitosamente!!");
-            return;
+            Funciones.mostrarInformacion("El Cliente ha sido dado de alta exitosamente!!");
+            this.Close();
         }
 
         private void validarCampos()

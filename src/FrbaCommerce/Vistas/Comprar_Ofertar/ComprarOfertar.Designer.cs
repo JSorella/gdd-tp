@@ -1,4 +1,4 @@
-﻿namespace FrbaCommerce.Comprar_Ofertar
+﻿namespace FrbaCommerce.Vistas.Comprar_Ofertar
 {
     partial class ComprarOfertar
     {
@@ -28,9 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // ComprarOfertar
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "Form1";
+            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.Name = "ComprarOfertar";
+            this.ShowInTaskbar = false;
+            this.Text = "Comprar / Ofertar";
+            this.Load += new System.EventHandler(this.ComprarOfertar_Load);
+            this.ResumeLayout(false);
+
         }
 
         #endregion

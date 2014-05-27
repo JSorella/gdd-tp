@@ -7,13 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace FrbaCommerce.Editar_Publicacion
+namespace FrbaCommerce.Vistas.Editar_Publicacion
 {
     public partial class EditarPublicacion : Form
     {
         public EditarPublicacion()
         {
             InitializeComponent();
+        }
+
+        private void EditarPublicacion_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

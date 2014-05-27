@@ -1,4 +1,4 @@
-﻿namespace FrbaCommerce.Editar_Publicacion
+﻿namespace FrbaCommerce.Vistas.Editar_Publicacion
 {
     partial class EditarPublicacion
     {
@@ -32,6 +32,7 @@
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnGenerar = new System.Windows.Forms.Button();
             this.pnlDatos = new System.Windows.Forms.Panel();
+            this.mcFechaIni = new System.Windows.Forms.MonthCalendar();
             this.label10 = new System.Windows.Forms.Label();
             this.chkPreguntas = new System.Windows.Forms.CheckBox();
             this.cmbTipoPubli = new System.Windows.Forms.ComboBox();
@@ -46,7 +47,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.txtVto = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.mcFechaIni = new System.Windows.Forms.MonthCalendar();
             this.btnSelFec = new System.Windows.Forms.Button();
             this.txtFechaIni = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -123,6 +123,12 @@
             this.pnlDatos.Name = "pnlDatos";
             this.pnlDatos.Size = new System.Drawing.Size(596, 375);
             this.pnlDatos.TabIndex = 6;
+            // 
+            // mcFechaIni
+            // 
+            this.mcFechaIni.Location = new System.Drawing.Point(283, 206);
+            this.mcFechaIni.Name = "mcFechaIni";
+            this.mcFechaIni.TabIndex = 9;
             // 
             // label10
             // 
@@ -245,12 +251,6 @@
             this.label5.TabIndex = 10;
             this.label5.Text = "Fecha Vto. :";
             // 
-            // mcFechaIni
-            // 
-            this.mcFechaIni.Location = new System.Drawing.Point(283, 206);
-            this.mcFechaIni.Name = "mcFechaIni";
-            this.mcFechaIni.TabIndex = 9;
-            // 
             // btnSelFec
             // 
             this.btnSelFec.Location = new System.Drawing.Point(196, 272);
@@ -369,6 +369,7 @@
             this.Name = "EditarPublicacion";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Edicion de Publicaciones";
+            this.Load += new System.EventHandler(this.EditarPublicacion_Load);
             this.pnlDatos.ResumeLayout(false);
             this.pnlDatos.PerformLayout();
             this.pnlParam.ResumeLayout(false);

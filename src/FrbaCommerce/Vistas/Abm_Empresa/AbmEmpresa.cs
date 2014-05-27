@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace FrbaCommerce.Abm_Empresa
+namespace FrbaCommerce.Vistas.Abm_Empresa
 {
-    public partial class Form1 : Form
+    public partial class AbmEmpresa : Form
     {
-        public Form1()
+        public AbmEmpresa()
         {
             InitializeComponent();
         }

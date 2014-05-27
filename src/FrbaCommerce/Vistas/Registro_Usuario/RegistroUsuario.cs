@@ -59,7 +59,7 @@ namespace FrbaCommerce.Vistas.Registro_Usuario
                 Funciones.mostrarAlert(error.Message);
             }
 
-            return;
+            this.Close();
 
         }
 

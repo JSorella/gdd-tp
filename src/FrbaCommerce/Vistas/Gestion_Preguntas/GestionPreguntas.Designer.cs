@@ -1,4 +1,4 @@
-﻿namespace FrbaCommerce.Gestion_de_Preguntas
+﻿namespace FrbaCommerce.Vistas.Gestion_de_Preguntas
 {
     partial class GestionPreguntas
     {
@@ -28,9 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // GestionPreguntas
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "Form1";
+            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.Name = "GestionPreguntas";
+            this.Text = "Gestión de Preguntas";
+            this.Load += new System.EventHandler(this.GestionPreguntas_Load);
+            this.ResumeLayout(false);
+
         }
 
         #endregion

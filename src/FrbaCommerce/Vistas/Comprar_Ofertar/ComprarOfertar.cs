@@ -7,13 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace FrbaCommerce.Comprar_Ofertar
+namespace FrbaCommerce.Vistas.Comprar_Ofertar
 {
     public partial class ComprarOfertar : Form
     {
         public ComprarOfertar()
         {
             InitializeComponent();
+        }
+
+        private void ComprarOfertar_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

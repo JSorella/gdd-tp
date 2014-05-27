@@ -7,13 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace FrbaCommerce.Historial_Cliente
+namespace FrbaCommerce.Vistas.Historial_Cliente
 {
-    public partial class Form1 : Form
+    public partial class HistorialCliente : Form
     {
-        public Form1()
+        public HistorialCliente()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

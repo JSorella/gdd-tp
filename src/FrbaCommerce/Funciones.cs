@@ -97,5 +97,11 @@ namespace FrbaCommerce
             MessageBox.Show(mensaje, "Acceso al Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return true;
         }
+
+        static public bool mostrarInformacion(string mensaje)
+        {
+            MessageBox.Show(mensaje, "Acceso al Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            return true;
+        }
     }
 }

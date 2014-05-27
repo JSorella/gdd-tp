@@ -1,6 +1,6 @@
-﻿namespace FrbaCommerce.Abm_Cliente
+﻿namespace FrbaCommerce.Vistas.Abm_Cliente
 {
-    partial class Form1
+    partial class AbmCliente
     {
         /// <summary>
         /// Required designer variable.

@@ -7,13 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace FrbaCommerce.Gestion_de_Preguntas
+namespace FrbaCommerce.Vistas.Gestion_de_Preguntas
 {
     public partial class GestionPreguntas : Form
     {
         public GestionPreguntas()
         {
             InitializeComponent();
+        }
+
+        private void GestionPreguntas_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
