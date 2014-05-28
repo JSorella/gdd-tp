@@ -12,7 +12,7 @@ namespace FrbaCommerce.Vistas.AbmRol
     public partial class Abm_Rol_Alta : Form
     {
         Funciones func = new Funciones();
-        Stored_procedures procedure = new Stored_procedures();
+        //StoredProcedures procedure = new StoredProcedures();
         
         public Abm_Rol_Alta()
         {
@@ -96,7 +96,7 @@ namespace FrbaCommerce.Vistas.AbmRol
                 return;
             }
 
-            procedure.insert_Rol(name_rol.Text);
+            StoredProcedures.insert_Rol(name_rol.Text);
 
             foreach (int indice_func in this.list_funcionalidades.CheckedIndices) //checkedIndices devuelve la coleccion de los indices activados
             {
@@ -104,8 +104,7 @@ namespace FrbaCommerce.Vistas.AbmRol
                 this.list_funcionalidades.SelectedIndex = indice_func; //establecemos que el elemento seleccionado posee el indice marcado correspondiente
                 //selectValue retorna el value_member del item seleccionado (seleccionado != tildado)
                 //insertamos las funcionalidades del nuevo rol
-                procedure.insert_funcxrol(name_rol.Text, Convert.ToInt16(this.list_funcionalidades.SelectedValue.ToString()));
-
+                StoredProcedures.insert_funcxrol(name_rol.Text, Convert.ToInt32(this.list_funcionalidades.SelectedValue.ToString()));
 
             }
             MessageBox.Show("Rol Insertado Correctamente", "Alta de Rol", MessageBoxButtons.OK, MessageBoxIcon.Information);

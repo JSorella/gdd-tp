@@ -26,7 +26,7 @@ namespace FrbaCommerce.Vistas.Abm_Rol
             buscar_rol.ShowDialog();
             if ((buscar_rol.Resultado != null)) //Resultado es el DataRow.-
             {
-                id_rol_a_mod = buscar_rol.Resultado["rol_Id"].ToString();
+                id_rol_a_mod = Convert.ToInt32(buscar_rol.Resultado["rol_id"]);
                 rol_nomb_mod = buscar_rol.Resultado["rol_nombre"].ToString();
 
             }
@@ -34,8 +34,7 @@ namespace FrbaCommerce.Vistas.Abm_Rol
 
         private void baja_boton_Click(object sender, EventArgs e)
         {
-            Stored_procedures stored_proc = new Stored_procedures();
-            stored_proc.baja_rol(this.rol_nomb_mod, this.id_rol_a_mod);
+            StoredProcedures.baja_rol(this.rol_nomb_mod, this.id_rol_a_mod);
         }
     }
 }

@@ -204,7 +204,47 @@ namespace FrbaCommerce
             Singleton.conexion.execute_query_with_parameters(comando);
         }
 
+        public static void insert_Rol(string nombre_rol)
+        {
+            string query;
+            query = "EXECUTE J2LA.insert_Rol '" + nombre_rol + "'";
 
+            Singleton.conexion.execute_query_only(query);
+        }
+
+        public static void insert_funcxrol(string nombre_rol, int func_id)
+        {
+            string query;
+            //hallamos Id_Rol
+            query = "SELECT rol_id FROM J2LA.Roles WHERE rol_nombre = '" + nombre_rol + "'";
+            DataTable table_rol = Singleton.conexion.execute_query(query);
+            string rol_id = table_rol.Rows[0].ItemArray[0].ToString();
+
+            query = "EXECUTE J2LA.insert_rolfun " + rol_id + ", " + func_id.ToString();
+            Singleton.conexion.execute_query_only(query);
+
+        }
+
+        public static void delete_funcxrol(int rol_id, string func_id)
+        {
+            string query;
+            query = "EXECUTE J2LA.delete_rolfun " + rol_id + ", " + func_id;
+            Singleton.conexion.execute_query_only(query);
+        }
+
+        public static void update_rol(int rol_id, string rol_nombre, bool rol_estado)
+        {
+            string query;
+            query = "EXECUTE J2LA.update_rol " + rol_id + ", '" + rol_nombre + "', '" + rol_estado + "'";
+            Singleton.conexion.execute_query_only(query);
+        }
+
+        public static void baja_rol(string rol_nombre, int rol_id) //PONER UN INT FUNCIONA????
+        {
+            string query;
+            query = "EXECUTE J2LA.baja_rol " + rol_id + ", '" + rol_nombre;
+            Singleton.conexion.execute_query_only(query);
+        }
     }
 }
 

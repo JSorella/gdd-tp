@@ -53,7 +53,7 @@ namespace FrbaCommerce
             return existe_rol;
         }
 
-        public bool check_func_activa(int id_rol, string id_func)
+        public bool check_func_activa(int id_rol, int id_func)
         {
             bool func_activa = false;
             Connection conexion = new Connection();
@@ -64,7 +64,7 @@ namespace FrbaCommerce
             return func_activa;
         }
 
-        public bool check_cambio_nomb_est_rol(int id_rol, int estado_actual_rol, string nomb_rol_ingresado, string nomb_rol_BD)
+        public bool check_cambio_nomb_est_rol(int id_rol, bool estado_actual_rol, string nomb_rol_ingresado, string nomb_rol_BD)
         {
 
             if (!(this.check_estado_rol(id_rol, estado_actual_rol) & nomb_rol_BD == nomb_rol_ingresado))
@@ -75,10 +75,10 @@ namespace FrbaCommerce
         }
 
 
-        public bool check_estado_rol(int id_rol, int estado_actual_rol) //devuelve TRUE si el estado del ROL en la
+        public bool check_estado_rol(int id_rol, bool estado_actual_rol) //devuelve TRUE si el estado del ROL en la
         {                                                                   //BD es igual al seleccionado
             bool estado_rol = false;
-            if (this.get_estado_BD(id_rol) == (bool)(estado_actual_rol > 0) ? true : false)
+            if (this.get_estado_BD(id_rol) == estado_actual_rol)
                 estado_rol = true;
             return estado_rol;
         }

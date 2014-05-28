@@ -98,3 +98,4 @@ C:\Users\Juan\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.P
 C:\Users\Juan\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.Vistas.Login.MenuFunciones.resources
 C:\Users\Juan\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.Vistas.Registro_Usuario.RegistroUsuario.resources
 C:\Users\Juan\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.csproj.GenerateResource.Cache
+C:\Users\Juan\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.Vistas.Abm_Rol.Abm_Rol_Baja.resources

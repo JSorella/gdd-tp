@@ -14,7 +14,6 @@ namespace FrbaCommerce.Vistas.Abm_Rol
         /*-----------ATRIBUTOS--------------------*/
         public string rol_nomb_mod;
         public int id_rol_a_mod;
-        int estado_actual_rol;
 
         /*----------------------------------------*/        
         public Abm_Rol_Modif()
@@ -31,8 +30,20 @@ namespace FrbaCommerce.Vistas.Abm_Rol
             {
                 id_rol_a_mod = Convert.ToInt32(buscar_rol.Resultado["rol_id"]);
                 rol_nomb_mod = buscar_rol.Resultado["rol_nombre"].ToString();
+                chkInhabilitado.Checked = Convert.ToBoolean(buscar_rol.Resultado["rol_inhabilitado"]);
 
+                CargarFuncionalidadesxRol(Convert.ToInt32(buscar_rol.Resultado["rol_id"]));
             }
+        }
+
+        private void CargarFuncionalidadesxRol(int rol_id)
+        {
+            //Ir a la BD y traer los id de funcionalidades que ya tiene el ROL - J2LA.Roles_Funcionalidades -
+            // filtrando por el rol_id.
+            // esto se graba en un DataTable
+            // Hasta aca hacer!!
+            // tenes que recorrer el DataTable y por cada fun_id busacarlo en el List y tildarlo.-
+            // Bancame al de Rubros.-
         }
 
         private void list_funcionalidades_Load(object sender, EventArgs e)
@@ -54,14 +65,14 @@ namespace FrbaCommerce.Vistas.Abm_Rol
 
                 //tildamos las funciones que ya tiene el rol
 
-                int i;
-                Funciones func = new Funciones();
-                for (i = 0; i < (this.list_funcionalidades.Items.Count); i++)
-                {
-                    this.list_funcionalidades.SelectedIndex = i;
-                    if (func.check_func_activa(this.id_rol_a_mod, this.list_funcionalidades.SelectedValue.ToString()))
-                        this.list_funcionalidades.SetItemChecked(i, true);
-                }
+                //int i;
+                //Funciones func = new Funciones();
+                //for (i = 0; i < (this.list_funcionalidades.Items.Count); i++)
+                //{
+                //    this.list_funcionalidades.SelectedIndex = i;
+                //    if (func.check_func_activa(this.id_rol_a_mod, Convert.ToInt16(this.list_funcionalidades.SelectedValue.ToString())))
+                //        this.list_funcionalidades.SetItemChecked(i, true);
+                //}
                 
             }
             else
@@ -74,8 +85,12 @@ namespace FrbaCommerce.Vistas.Abm_Rol
         {
             int i;
             Funciones func = new Funciones();
-            Stored_procedures stored_proc = new Stored_procedures();
-            //this.Visible = false;
+
+            //this.Visible = true;
+            //devuelve true si se realizaron cambios en el nombre o estado 
+            if (func.check_cambio_nomb_est_rol(id_rol_a_mod, this.estado_actual_rol, this.rol_select_tbox.Text, this.rol_nomb_mod))
+                StoredProcedures.update_rol(this.id_rol_a_mod, this.rol_select_tbox.Text, chkInhabilitado.Checked);
+
             for (i = 0; i < (this.list_funcionalidades.Items.Count); i++)
             {
 
@@ -84,66 +99,27 @@ namespace FrbaCommerce.Vistas.Abm_Rol
                 {
                     //consulto si la func la tnia ya el Rol
                     //si la tnia la dejo sino la agrego
-                    if (!func.check_func_activa(this.id_rol_a_mod, this.list_funcionalidades.SelectedValue.ToString()))
+                    if (!func.check_func_activa(this.id_rol_a_mod, Convert.ToInt16(this.list_funcionalidades.SelectedValue.ToString())))
                     {
-                        stored_proc.insert_funcxrol(this.rol_nomb_mod, Convert.ToInt16(this.list_funcionalidades.SelectedValue.ToString()));
+                        StoredProcedures.insert_funcxrol(this.rol_nomb_mod, Convert.ToInt16(this.list_funcionalidades.SelectedValue.ToString()));
                     }
                 }
                 else
                 {
                     //consulto si la func la tnia ya el usuario
                     //si la tnia la elimino
-                    if (func.check_func_activa(this.id_rol_a_mod, this.list_funcionalidades.SelectedValue.ToString()))
+                    if (func.check_func_activa(this.id_rol_a_mod, Convert.ToInt16(this.list_funcionalidades.SelectedValue.ToString())))
                     {
-                        stored_proc.delete_funcxrol(this.id_rol_a_mod, this.list_funcionalidades.SelectedValue.ToString());
+                        StoredProcedures.delete_funcxrol(this.id_rol_a_mod, this.list_funcionalidades.SelectedValue.ToString());
                     }
                 }
 
 
             }
 
-            if (this.estado_comboBox.SelectedIndex == -1) //Devuelve -1 si no se ha seleccionado ninguna opcion del combo
-            {
-                estado_actual_rol = func.get_estado_BD(id_rol_a_mod) == true ? 1 : 0;
-            }
-
-            //this.Visible = true;
-            //devuelve true si se realizaron cambios en el nombre o estado 
-            if (func.check_cambio_nomb_est_rol(id_rol_a_mod, this.estado_actual_rol, this.rol_select_tbox.Text, this.rol_nomb_mod))
-                stored_proc.update_rol(this.id_rol_a_mod, this.rol_select_tbox.Text, estado_actual_rol);
-
             MessageBox.Show("Actualización Exitosa", "Modificación  Rol", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.Close();
 
-        }
-
-        private void rol_select_tbox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void estado_comboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (estado_comboBox.Text == "Habilitado")
-            {
-                this.estado_actual_rol = 'H';
-            }
-            else
-            {
-                this.estado_actual_rol = 'D';
-            }
-        }
-
-        private void inhabilitado_checkBox_CheckedChanged(object sender, EventArgs e)
-        {
-            if (inhabilitado_checkBox.Checked)
-            {
-                this.estado_actual_rol = 1;
-            }
-            else
-            {
-                this.estado_actual_rol = 0;
-            }
         }
     }
 }

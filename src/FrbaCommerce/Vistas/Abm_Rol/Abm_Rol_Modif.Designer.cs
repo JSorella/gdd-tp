@@ -34,9 +34,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.list_funcionalidades = new System.Windows.Forms.CheckedListBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.estado_comboBox = new System.Windows.Forms.ComboBox();
             this.aplicar_boton = new System.Windows.Forms.Button();
-            this.inhabilitado_checkBox = new System.Windows.Forms.CheckBox();
+            this.chkInhabilitado = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -54,7 +53,6 @@
             this.rol_select_tbox.Name = "rol_select_tbox";
             this.rol_select_tbox.Size = new System.Drawing.Size(133, 20);
             this.rol_select_tbox.TabIndex = 8;
-            this.rol_select_tbox.TextChanged += new System.EventHandler(this.rol_select_tbox_TextChanged);
             // 
             // select_boton
             // 
@@ -86,24 +84,11 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 214);
+            this.label3.Location = new System.Drawing.Point(44, 211);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(43, 13);
             this.label3.TabIndex = 12;
             this.label3.Text = "Estado:";
-            // 
-            // estado_comboBox
-            // 
-            this.estado_comboBox.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
-            this.estado_comboBox.FormattingEnabled = true;
-            this.estado_comboBox.Items.AddRange(new object[] {
-            "Habilitado",
-            "Deshabilitado"});
-            this.estado_comboBox.Location = new System.Drawing.Point(108, 206);
-            this.estado_comboBox.Name = "estado_comboBox";
-            this.estado_comboBox.Size = new System.Drawing.Size(137, 21);
-            this.estado_comboBox.TabIndex = 13;
-            this.estado_comboBox.SelectedIndexChanged += new System.EventHandler(this.estado_comboBox_SelectedIndexChanged);
             // 
             // aplicar_boton
             // 
@@ -113,26 +98,25 @@
             this.aplicar_boton.TabIndex = 14;
             this.aplicar_boton.Text = "Aplicar";
             this.aplicar_boton.UseVisualStyleBackColor = true;
+            this.aplicar_boton.Click += new System.EventHandler(this.aplicar_boton_Click);
             // 
-            // inhabilitado_checkBox
+            // chkInhabilitado
             // 
-            this.inhabilitado_checkBox.AutoSize = true;
-            this.inhabilitado_checkBox.Location = new System.Drawing.Point(108, 234);
-            this.inhabilitado_checkBox.Name = "inhabilitado_checkBox";
-            this.inhabilitado_checkBox.Size = new System.Drawing.Size(71, 17);
-            this.inhabilitado_checkBox.TabIndex = 15;
-            this.inhabilitado_checkBox.Text = "Inhabilitar";
-            this.inhabilitado_checkBox.UseVisualStyleBackColor = true;
-            this.inhabilitado_checkBox.CheckedChanged += new System.EventHandler(this.inhabilitado_checkBox_CheckedChanged);
+            this.chkInhabilitado.AutoSize = true;
+            this.chkInhabilitado.Location = new System.Drawing.Point(108, 210);
+            this.chkInhabilitado.Name = "chkInhabilitado";
+            this.chkInhabilitado.Size = new System.Drawing.Size(71, 17);
+            this.chkInhabilitado.TabIndex = 15;
+            this.chkInhabilitado.Text = "Inhabilitar";
+            this.chkInhabilitado.UseVisualStyleBackColor = true;
             // 
             // Abm_Rol_Modif
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 308);
-            this.Controls.Add(this.inhabilitado_checkBox);
+            this.Controls.Add(this.chkInhabilitado);
             this.Controls.Add(this.aplicar_boton);
-            this.Controls.Add(this.estado_comboBox);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.list_funcionalidades);
             this.Controls.Add(this.label2);
@@ -155,8 +139,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckedListBox list_funcionalidades;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox estado_comboBox;
         private System.Windows.Forms.Button aplicar_boton;
-        private System.Windows.Forms.CheckBox inhabilitado_checkBox;
+        private System.Windows.Forms.CheckBox chkInhabilitado;
     }
 }

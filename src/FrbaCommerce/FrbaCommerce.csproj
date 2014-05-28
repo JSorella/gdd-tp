@@ -62,6 +62,12 @@
     <Compile Include="Vistas\Abm_Empresa\AltaEmpresa.Designer.cs">
       <DependentUpon>AltaEmpresa.cs</DependentUpon>
     </Compile>
+    <Compile Include="Vistas\Abm_Rol\Abm_Rol_Baja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Abm_Rol\Abm_Rol_Baja.Designer.cs">
+      <DependentUpon>Abm_Rol_Baja.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\Editar_Publicacion\BuscarPublicaciones.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -77,7 +83,6 @@
     <Compile Include="Vistas\Login\Usuario.cs" />
     <Compile Include="Singleton.cs" />
     <Compile Include="StoredProcedures.cs" />
-    <Compile Include="Stored_procedures.cs" />
     <Compile Include="Vistas\Abm_Cliente\AbmCliente.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -195,6 +200,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Abm_Rol\Abm_Rol_Alta.resx">
       <DependentUpon>Abm_Rol_Alta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Abm_Rol\Abm_Rol_Baja.resx">
+      <DependentUpon>Abm_Rol_Baja.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Abm_Rol\Abm_Rol_Busqueda.resx">
       <DependentUpon>Abm_Rol_Busqueda.cs</DependentUpon>
