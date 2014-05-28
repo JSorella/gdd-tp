@@ -1,4 +1,4 @@
-﻿namespace FrbaCommerce.Vistas.Facturar_Publicaciones
+﻿namespace FrbaCommerce
 {
     partial class FacturarPublicaciones
     {

@@ -1,4 +1,4 @@
-﻿namespace FrbaCommerce.Vistas.Abm_Visibilidad
+﻿namespace FrbaCommerce
 {
     partial class AbmVisibilidad
     {

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace FrbaCommerce.Vistas.Login
+namespace FrbaCommerce
 {
     public partial class EleccionRol : Form
     {

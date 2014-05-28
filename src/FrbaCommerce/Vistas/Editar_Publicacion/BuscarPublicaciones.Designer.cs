@@ -1,4 +1,4 @@
-﻿namespace FrbaCommerce.Vistas.Editar_Publicacion
+﻿namespace FrbaCommerce
 {
     partial class BuscarPublicaciones
     {

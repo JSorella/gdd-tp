@@ -1,4 +1,4 @@
-﻿namespace FrbaCommerce.Vistas.Registro_Usuario
+﻿namespace FrbaCommerce
 {
     partial class RegistroUsuario
     {

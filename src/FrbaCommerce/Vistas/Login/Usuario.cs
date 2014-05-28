@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace FrbaCommerce.Vistas.Login
+namespace FrbaCommerce
 {
     /// <summary>
     /// clase de uso LOCAL en Login para mapear un Usuario en un objeto..

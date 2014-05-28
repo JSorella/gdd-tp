@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace FrbaCommerce.Vistas.Gestion_de_Preguntas
+namespace FrbaCommerce
 {
     public partial class GestionPreguntas : Form
     {

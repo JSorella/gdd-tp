@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace FrbaCommerce.Abm_Rubro
+namespace FrbaCommerce
 {
     public partial class AbmRubro : Form
     {

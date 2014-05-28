@@ -1,4 +1,4 @@
-﻿namespace FrbaCommerce.Vistas.Gestion_de_Preguntas
+﻿namespace FrbaCommerce
 {
     partial class GestionPreguntas
     {

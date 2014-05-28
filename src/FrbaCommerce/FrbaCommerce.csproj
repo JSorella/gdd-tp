@@ -80,6 +80,9 @@
     <Compile Include="Vistas\Generar_Publicacion\ControlFecha.Designer.cs">
       <DependentUpon>ControlFecha.cs</DependentUpon>
     </Compile>
+    <Compile Include="Vistas\Login\Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\Login\Usuario.cs" />
     <Compile Include="Singleton.cs" />
     <Compile Include="StoredProcedures.cs" />

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace FrbaCommerce.Vistas.Facturar_Publicaciones
+namespace FrbaCommerce
 {
     public partial class FacturarPublicaciones : Form
     {

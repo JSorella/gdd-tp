@@ -6,10 +6,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using FrbaCommerce.Vistas.Abm_Cliente;
-using FrbaCommerce.Vistas.Abm_Empresa;
 
-namespace FrbaCommerce.Vistas.Registro_Usuario
+namespace FrbaCommerce
 {
     public partial class RegistroUsuario : Form
     {

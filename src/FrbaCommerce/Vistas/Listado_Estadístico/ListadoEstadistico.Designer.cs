@@ -1,4 +1,4 @@
-﻿namespace FrbaCommerce.Vistas.Listado_Estadistico
+﻿namespace FrbaCommerce
 {
     partial class ListadoEstadistico
     {

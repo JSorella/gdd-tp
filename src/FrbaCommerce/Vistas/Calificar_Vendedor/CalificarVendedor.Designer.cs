@@ -1,4 +1,4 @@
-﻿namespace FrbaCommerce.Calificar_Vendedor
+﻿namespace FrbaCommerce
 {
     partial class CalificarVendedor
     {

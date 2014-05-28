@@ -1,4 +1,4 @@
-﻿namespace FrbaCommerce.Vistas.Comprar_Ofertar
+﻿namespace FrbaCommerce
 {
     partial class ComprarOfertar
     {

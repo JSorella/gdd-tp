@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using FrbaCommerce.Vistas.Login;
-using FrbaCommerce.Vistas.AbmRol;
 
 namespace FrbaCommerce
 {

@@ -1,4 +1,4 @@
-﻿namespace FrbaCommerce.Vistas.Abm_Empresa
+﻿namespace FrbaCommerce
 {
     partial class AltaEmpresa
     {

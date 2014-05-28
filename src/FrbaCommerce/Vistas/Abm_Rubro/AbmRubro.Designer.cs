@@ -1,4 +1,4 @@
-﻿namespace FrbaCommerce.Abm_Rubro
+﻿namespace FrbaCommerce
 {
     partial class AbmRubro
     {

@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using FrbaCommerce;
 
-namespace FrbaCommerce.Vistas.Listado_Estadistico
+namespace FrbaCommerce
 {
     public partial class ListadoEstadistico : Form
     {

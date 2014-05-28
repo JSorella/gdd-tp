@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace FrbaCommerce.Vistas.Abm_Empresa
+namespace FrbaCommerce
 {
     public partial class AbmEmpresa : Form
     {

@@ -5,8 +5,6 @@ using System.Text;
 using System.Data;
 using System.Data.Sql;
 using System.Data.SqlClient;
-using FrbaCommerce.Vistas.Login;
-using FrbaCommerce.Vistas.Abm_Cliente;
 
 namespace FrbaCommerce
 {

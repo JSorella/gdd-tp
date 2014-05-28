@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace FrbaCommerce.Vistas.Abm_Rol
+namespace FrbaCommerce
 {
     public partial class Abm_Rol_Busqueda : Form
     {

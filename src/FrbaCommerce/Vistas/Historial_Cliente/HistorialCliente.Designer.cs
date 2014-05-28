@@ -1,4 +1,4 @@
-﻿namespace FrbaCommerce.Vistas.Historial_Cliente
+﻿namespace FrbaCommerce
 {
     partial class HistorialCliente
     {

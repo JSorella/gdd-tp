@@ -6,21 +6,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using FrbaCommerce.Vistas.Abm_Rol;
-using FrbaCommerce.Vistas.Registro_Usuario;
-using FrbaCommerce.Vistas.Abm_Cliente;
-using FrbaCommerce.Vistas.Listado_Estadistico;
-using FrbaCommerce.Vistas.Editar_Publicacion;
-using FrbaCommerce.Vistas.Comprar_Ofertar;
-using FrbaCommerce.Vistas.Historial_Cliente;
-using FrbaCommerce.Vistas.Facturar_Publicaciones;
-using FrbaCommerce.Vistas.Gestion_de_Preguntas;
-using FrbaCommerce.Vistas.Abm_Visibilidad;
-using FrbaCommerce.Vistas.Abm_Empresa;
 
-
-
-namespace FrbaCommerce.Vistas.Login
+namespace FrbaCommerce
 {
     public partial class MenuFunciones : Form
     {

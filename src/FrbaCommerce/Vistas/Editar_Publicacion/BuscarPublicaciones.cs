@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace FrbaCommerce.Vistas.Editar_Publicacion
+namespace FrbaCommerce
 {
     public partial class BuscarPublicaciones : Form
     {

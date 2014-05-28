@@ -1,4 +1,4 @@
-﻿namespace FrbaCommerce.Vistas.Abm_Cliente
+﻿namespace FrbaCommerce
 {
     partial class AltaCliente
     {

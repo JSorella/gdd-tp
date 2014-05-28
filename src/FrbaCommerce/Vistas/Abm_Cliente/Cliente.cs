@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace FrbaCommerce.Vistas.Abm_Cliente
+namespace FrbaCommerce
 {
     /// <summary>
     /// clase de uso LOCAL en Alta de Cliente para mapear un Cliente en un objeto.

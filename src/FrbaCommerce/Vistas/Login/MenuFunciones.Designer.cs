@@ -1,4 +1,4 @@
-﻿namespace FrbaCommerce.Vistas.Login
+﻿namespace FrbaCommerce
 {
     partial class MenuFunciones
     {
