@@ -88,8 +88,8 @@ namespace FrbaCommerce.Vistas.Abm_Rol
 
             //this.Visible = true;
             //devuelve true si se realizaron cambios en el nombre o estado 
-            if (func.check_cambio_nomb_est_rol(id_rol_a_mod, this.estado_actual_rol, this.rol_select_tbox.Text, this.rol_nomb_mod))
-                StoredProcedures.update_rol(this.id_rol_a_mod, this.rol_select_tbox.Text, chkInhabilitado.Checked);
+            //if (func.check_cambio_nomb_est_rol(id_rol_a_mod, this.estado_actual_rol, this.rol_select_tbox.Text, this.rol_nomb_mod))
+            StoredProcedures.update_rol(this.id_rol_a_mod, this.rol_select_tbox.Text, chkInhabilitado.Checked);
 
             for (i = 0; i < (this.list_funcionalidades.Items.Count); i++)
             {

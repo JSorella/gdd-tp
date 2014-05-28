@@ -39,7 +39,8 @@ namespace FrbaCommerce.Vistas.Login
 
         private void button1_Click(object sender, EventArgs e)
         {
-            switch (Convert.ToString(((DataRowView)comboBox1.SelectedItem).Row["fun_Nombre"]))
+            //switch (Convert.ToString(((DataRowView)comboBox1.SelectedItem).Row["fun_Nombre"]))
+            switch (comboBox1.Text)
             {
                 case "ABM de Rol":
                     Abm_Rol_Busqueda abmRolWindow = new Abm_Rol_Busqueda();

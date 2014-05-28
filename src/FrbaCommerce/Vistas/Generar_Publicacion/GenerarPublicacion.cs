@@ -19,7 +19,7 @@ namespace FrbaCommerce
             InitializeComponent();
         }
 
-        // e.Handled = SoloNumeros(e.KeyChar);
+        // Evento KeyPress del TextBox => e.Handled = SoloNumeros(e.KeyChar);
         private bool SoloNumeros(Char chrKey)
         {
             //Para obligar a que sólo se introduzcan números enteros
