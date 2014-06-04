@@ -31,16 +31,15 @@ namespace FrbaCommerce
 
         private void buscar_boton_Click(object sender, EventArgs e)
         {
-
-            string seleccion = "SELECT rol_id AS ID, rol_nombre AS Nombre, rol_inhabilitado AS Estado";
-            string desde = " FROM J2LA.Roles";
-            string condicion = " WHERE rol_Estado = 0";
-            //buscamos Patron
-            string query = seleccion + desde + condicion;
-            Connection connect = new Connection();
-            DataTable tabla_func = connect.execute_query(query);
-            //cargamos el data_grid con el resultado de la busqueda
-            this.roles_dataGrid.DataSource = tabla_func;
+            try
+            {
+                //cargamos el data_grid con el resultado de la busqueda
+                this.roles_dataGrid.DataSource = InterfazBD.BuscarRoles(rol_a_buscarTBox.Text);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void limpiar_boton_Click(object sender, EventArgs e)
@@ -70,6 +69,11 @@ namespace FrbaCommerce
                 MessageBox.Show("Seleccione un Rol.", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
             this.Close();
+        }
+
+        private void Abm_Rol_Busqueda_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

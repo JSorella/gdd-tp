@@ -12,72 +12,268 @@ namespace FrbaCommerce
 {
     public class Connection
     {
-        public SqlConnection connector()
+        /// <summary>
+        /// Funciones Genericas
+        /// </summary>
+
+        /*====================================================================================================*/
+        /*====================================================================================================*/
+
+        private SqlCommand cargarParametrosCommand(SqlCommand cmd, DataTable oTable, DataRow oRow, String sListOutParam)
         {
-            SqlConnection connect = new SqlConnection();
+            cmd.Parameters.Clear();
+
+            if (oTable != null)
+            {
+                foreach (DataColumn oCol in oTable.Columns)
+                {
+                    if (sListOutParam.ToUpper().Contains(oCol.ColumnName.ToUpper()))
+                        cmd.Parameters.AddWithValue("@" + oCol.ColumnName, oRow[oCol.ColumnName]).Direction = ParameterDirection.Output;
+                    else
+                        cmd.Parameters.AddWithValue("@" + oCol.ColumnName, oRow[oCol.ColumnName]);
+                }
+            }
+
+            return cmd;
+        }
+
+        private SqlCommand cargarParametrosCommand(SqlCommand cmd, String[,] aParam)
+        {
+            cmd.Parameters.Clear();
+
+            if (aParam != null)
+            {
+                for (int i = 0; i < aParam.GetLength(0); i++)
+                {
+                    cmd.Parameters.AddWithValue("@" + aParam[i, 0], aParam[i, 1]);
+                }
+            }
+
+            return cmd;
+        }
+
+        /*====================================================================================================*/
+        /*====================================================================================================*/
+
+        //Ejecutar un Comando armado - Es algo temporal, deberiamos no utilizarlo.
+        public void executeCommandConn(SqlCommand cmd)
+        {
+            SqlConnection conn = new SqlConnection(Singleton.ConnectionString);
+            cmd.Connection = conn;
+
             try
             {
-                connect.ConnectionString = get_string_connection();
-                connect.Open(); //abrimos conexion
+                conn.Open();
 
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                finally
+                {
+                    conn.Close();
+                }
             }
-            catch (SqlException ex) //Capturamos algun error que pudo darse al querer conectarse
+            catch (Exception ex)
             {
-                MessageBox.Show("Error al conectar con la base datos--" + ex.Message);
-
+                throw new Exception("Se detecto un error en executeCommand con el Texto: " + cmd.CommandText + System.Environment.NewLine + "Mensaje de Error: " + ex.Message);
             }
-            return connect;
-
         }
 
-        public string get_string_connection()
+        //Query Obtener DataTable BD      
+        public DataTable executeQueryTable(String query, DataTable oDtParam, String[,] aParam)
         {
-            //string string_connect = @"Data Source=localhost\SQLSERVER2008;Initial Catalog=GD1C2013;User ID=gd; PASSWORD=gd2013"; //va el @ porque sino tira un warning escape sequences con @se ignora
-            //obtenemos la cadena de conexion del XML
-            string connection_string = ConfigurationManager.ConnectionStrings["FrbaCommerceConnectionString"].ToString();
-            return connection_string; ;
-        }
+            DataTable dt = new DataTable();
 
-        public DataTable execute_query(string query)
-        {
-            //creamos Data_Adapter que es un adaptador/interfaz que nos permite interactuar entre 
-            //nuestra base_local dataset/datatable y la la base de datos del sql server
-            //el data_adapter se encargara de llevar a cabo las consultas a la DB sql_Server
+            SqlConnection conn = new SqlConnection(Singleton.ConnectionString);
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.CommandType = CommandType.Text;
 
-            SqlDataAdapter data_adapter = new SqlDataAdapter(query, this.get_string_connection());
-
-            //volcamos la informacion resultado de ejecutar la consulta en un data table
-            DataTable tabla = new DataTable();
-            //tabla.Locale = System.Globalization.CultureInfo.InvariantCulture;
             try
             {
-                data_adapter.Fill(tabla);
+                if(oDtParam != null)
+                    cmd = cargarParametrosCommand(cmd, oDtParam, oDtParam.Rows[0], "");
+
+                if(aParam != null)
+                    cmd = cargarParametrosCommand(cmd, aParam);
+
+                conn.Open();
+
+                dt.Load(cmd.ExecuteReader(CommandBehavior.CloseConnection));
             }
-            catch (SqlException ex)
+            catch (Exception ex)
             {
-                MessageBox.Show("Error al llenar el DataTable ..." + ex.Message);
-            }
-            return tabla;
+                if (conn.State == ConnectionState.Open)
+                    conn.Close();
 
+                throw new Exception("Se detecto un error en executeQueryTable con la Query: " + query + System.Environment.NewLine + "Mensaje de Error: " + ex.Message);
+            }
+
+            return dt;
         }
 
-        public void execute_query_only(string query)
+        //Query Funciones Escalares - Parametros Tabla (Estructura) / Parametros Matriz (Pocos)
+        public object executeQueryFuncEscalar(String funNameParam, DataTable oDtParam, String[,] aParam)
         {
-            SqlConnection conexion = this.connector();
-            SqlCommand comando = new SqlCommand(query, conexion); //sqlcommand almacena una instruccion sql que luego ejecutar executenonquery
-            int cant_filas_afectadas = comando.ExecuteNonQuery(); //ejecuta la query y devuelve filas afectadas 
-            if (cant_filas_afectadas == 0)
+            String query = "Select " + funNameParam;;
+            object result;
+
+            SqlConnection conn = new SqlConnection(Singleton.ConnectionString);
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.CommandType = CommandType.Text;
+
+            try
             {
-                MessageBox.Show("Fallo operacion al tratar de modificar la BD");
+                if (oDtParam != null)
+                    cmd = cargarParametrosCommand(cmd, oDtParam, oDtParam.Rows[0], "");
+
+                if (aParam != null)
+                    cmd = cargarParametrosCommand(cmd, aParam);
+
+                conn.Open();
+
+                try
+                {
+                    result = cmd.ExecuteScalar();
+                }
+                finally
+                {
+                    conn.Close();
+                }
             }
-            conexion.Close();
+            catch (Exception ex)
+            {
+                result = null;
+                throw new Exception("Se detecto un error en executeQueryFuncEscalar con la Funcion: " + funNameParam + System.Environment.NewLine + "Mensaje de Error: " + ex.Message);
+            }
+
+            return result;
         }
 
-        public void execute_query_with_parameters(SqlCommand comando)
+        //Query SP Con Parametros Out
+        public String executeQuerySPOutPut(String spName, DataTable oDtParam, String[,] aParam, String sListOutParam)
         {
-            comando.ExecuteScalar();
-            Singleton.conexion.connector().Close();
+            String result = "";
+            String[] aListOutParam = sListOutParam.Split('|');
+
+            SqlConnection conn = new SqlConnection(Singleton.ConnectionString);
+            SqlCommand cmd = new SqlCommand(spName, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            if (oDtParam != null)
+                cmd = cargarParametrosCommand(cmd, oDtParam, oDtParam.Rows[0], "");
+
+            if (aParam != null)
+                cmd = cargarParametrosCommand(cmd, aParam);
+
+            try
+            {
+                conn.Open();
+
+                try
+                {
+                    cmd.ExecuteNonQuery();
+
+                    for (int i = 0; i < aListOutParam.Length; i++)
+                    {
+                        result = result + cmd.Parameters["@" + aListOutParam[i]].Value.ToString() + "|";
+                    }
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Se detecto un error en executeQuerySPOutPut con el SP: " + spName + System.Environment.NewLine + "Mensaje de Error: " + ex.Message);
+            }
+
+            return result;
         }
 
+        //Query Stored Procedure con Parametros Tabla (Estructura) / Parametros Matriz (Poco)
+        public void executeQuerySP(String spName, DataTable oDtParam, String[,] aParam)
+        {
+            SqlConnection conn = new SqlConnection(Singleton.ConnectionString);
+            SqlCommand cmd = new SqlCommand(spName, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            try
+            {
+                conn.Open();
+
+                executeCommandMasivo(ref cmd, spName, oDtParam, aParam, "");
+
+                //if (oDtParam != null)
+                //{
+                //    executeCommandMasivo(ref cmd, spName, oDtParam, null, "");
+                //}
+                //else
+                //{
+                //    if (aParam != null)
+                //        cmd = cargarParametrosCommand(cmd, aParam);
+
+                //    try
+                //    {
+                //        cmd.ExecuteNonQuery();
+                //    }
+                //    catch (Exception)
+                //    {
+                //        throw;
+                //    }
+                //}
+
+                conn.Close();
+            }
+            catch (Exception ex)
+            {
+                if (conn.State == ConnectionState.Open)
+                    conn.Close();
+
+                throw new Exception("Se detecto un error en executeQuerySPMasivo con el SP: " + spName + System.Environment.NewLine + "Mensaje de Error: " + ex.Message);
+            }
+        }
+
+        //Ejecuta un SqlCommand que ya posee una SqlConnection (Y posible SqlTransaction)
+        public void executeCommandMasivo(ref SqlCommand cmd, String cmdTxt, DataTable oDatos, String[,] aParam, String sListOutParam)
+        {
+            cmd.CommandText = cmdTxt;
+
+            if (oDatos != null)
+            {
+                foreach (DataRow oRow in oDatos.Rows)
+                {
+                    if (oDatos != null)
+                        cmd = cargarParametrosCommand(cmd, oDatos, oRow, sListOutParam);
+
+                    try
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch (Exception)
+                    {
+                        throw;
+                    }
+                }
+            }
+            else
+            {
+                if (aParam != null)
+                    cmd = cargarParametrosCommand(cmd, aParam);
+
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+        }
+
+        /*====================================================================================================*/
+        /*====================================================================================================*/
     }
 }

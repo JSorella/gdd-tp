@@ -29,34 +29,35 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.rol_select_tbox = new System.Windows.Forms.TextBox();
+            this.txtRolName = new System.Windows.Forms.TextBox();
             this.select_boton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.list_funcionalidades = new System.Windows.Forms.CheckedListBox();
             this.label3 = new System.Windows.Forms.Label();
             this.aplicar_boton = new System.Windows.Forms.Button();
             this.chkInhabilitado = new System.Windows.Forms.CheckBox();
+            this.btnLimpiar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 25);
+            this.label1.Location = new System.Drawing.Point(12, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(86, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "Nombre del Rol: ";
             // 
-            // rol_select_tbox
+            // txtRolName
             // 
-            this.rol_select_tbox.Location = new System.Drawing.Point(104, 22);
-            this.rol_select_tbox.Name = "rol_select_tbox";
-            this.rol_select_tbox.Size = new System.Drawing.Size(133, 20);
-            this.rol_select_tbox.TabIndex = 8;
+            this.txtRolName.Location = new System.Drawing.Point(104, 12);
+            this.txtRolName.Name = "txtRolName";
+            this.txtRolName.Size = new System.Drawing.Size(133, 20);
+            this.txtRolName.TabIndex = 8;
             // 
             // select_boton
             // 
-            this.select_boton.Location = new System.Drawing.Point(136, 48);
+            this.select_boton.Location = new System.Drawing.Point(243, 8);
             this.select_boton.Name = "select_boton";
             this.select_boton.Size = new System.Drawing.Size(101, 27);
             this.select_boton.TabIndex = 9;
@@ -67,7 +68,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 92);
+            this.label2.Location = new System.Drawing.Point(12, 79);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(90, 13);
             this.label2.TabIndex = 10;
@@ -76,15 +77,15 @@
             // list_funcionalidades
             // 
             this.list_funcionalidades.FormattingEnabled = true;
-            this.list_funcionalidades.Location = new System.Drawing.Point(108, 92);
+            this.list_funcionalidades.Location = new System.Drawing.Point(12, 95);
             this.list_funcionalidades.Name = "list_funcionalidades";
-            this.list_funcionalidades.Size = new System.Drawing.Size(141, 94);
+            this.list_funcionalidades.Size = new System.Drawing.Size(332, 169);
             this.list_funcionalidades.TabIndex = 11;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(44, 211);
+            this.label3.Location = new System.Drawing.Point(12, 45);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(43, 13);
             this.label3.TabIndex = 12;
@@ -92,7 +93,7 @@
             // 
             // aplicar_boton
             // 
-            this.aplicar_boton.Location = new System.Drawing.Point(137, 258);
+            this.aplicar_boton.Location = new System.Drawing.Point(232, 270);
             this.aplicar_boton.Name = "aplicar_boton";
             this.aplicar_boton.Size = new System.Drawing.Size(112, 26);
             this.aplicar_boton.TabIndex = 14;
@@ -103,27 +104,39 @@
             // chkInhabilitado
             // 
             this.chkInhabilitado.AutoSize = true;
-            this.chkInhabilitado.Location = new System.Drawing.Point(108, 210);
+            this.chkInhabilitado.Location = new System.Drawing.Point(104, 44);
             this.chkInhabilitado.Name = "chkInhabilitado";
-            this.chkInhabilitado.Size = new System.Drawing.Size(71, 17);
+            this.chkInhabilitado.Size = new System.Drawing.Size(80, 17);
             this.chkInhabilitado.TabIndex = 15;
-            this.chkInhabilitado.Text = "Inhabilitar";
+            this.chkInhabilitado.Text = "Inhabilitado";
             this.chkInhabilitado.UseVisualStyleBackColor = true;
+            // 
+            // btnLimpiar
+            // 
+            this.btnLimpiar.Location = new System.Drawing.Point(12, 270);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(112, 26);
+            this.btnLimpiar.TabIndex = 16;
+            this.btnLimpiar.Text = "Limpiar";
+            this.btnLimpiar.UseVisualStyleBackColor = true;
             // 
             // Abm_Rol_Modif
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 308);
+            this.ClientSize = new System.Drawing.Size(355, 308);
+            this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.chkInhabilitado);
             this.Controls.Add(this.aplicar_boton);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.list_funcionalidades);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.select_boton);
-            this.Controls.Add(this.rol_select_tbox);
+            this.Controls.Add(this.txtRolName);
             this.Controls.Add(this.label1);
+            this.MaximizeBox = false;
             this.Name = "Abm_Rol_Modif";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Modificación Rol";
             this.Load += new System.EventHandler(this.list_funcionalidades_Load);
             this.ResumeLayout(false);
@@ -134,12 +147,13 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox rol_select_tbox;
+        private System.Windows.Forms.TextBox txtRolName;
         private System.Windows.Forms.Button select_boton;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckedListBox list_funcionalidades;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button aplicar_boton;
         private System.Windows.Forms.CheckBox chkInhabilitado;
+        private System.Windows.Forms.Button btnLimpiar;
     }
 }

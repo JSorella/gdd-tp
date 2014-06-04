@@ -229,7 +229,7 @@
             this.listRubros.FormattingEnabled = true;
             this.listRubros.Location = new System.Drawing.Point(295, 160);
             this.listRubros.Name = "listRubros";
-            this.listRubros.Size = new System.Drawing.Size(286, 169);
+            this.listRubros.Size = new System.Drawing.Size(286, 199);
             this.listRubros.TabIndex = 11;
             // 
             // label6
@@ -359,7 +359,7 @@
             this.Controls.Add(this.pnlDatos);
             this.Controls.Add(this.pnlParam);
             this.Name = "GenerarPublicacion";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Generar Publicaciones";
             this.Load += new System.EventHandler(this.GenerarPublicacion_Load);
             this.pnlParam.ResumeLayout(false);

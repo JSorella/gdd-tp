@@ -12,6 +12,8 @@
     <AssemblyName>FrbaCommerce</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <StartupObject>
+    </StartupObject>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -49,19 +51,91 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Vistas\Abm_Cliente\AltaCliente.cs">
+    <Compile Include="Vistas\Abm_Cliente\Abm_Cliente_Baja.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vistas\Abm_Cliente\AltaCliente.Designer.cs">
-      <DependentUpon>AltaCliente.cs</DependentUpon>
+    <Compile Include="Vistas\Abm_Cliente\Abm_Cliente_Baja.Designer.cs">
+      <DependentUpon>Abm_Cliente_Baja.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Abm_Cliente\Abm_Cliente_Modif.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Abm_Cliente\Abm_Cliente_Modif.Designer.cs">
+      <DependentUpon>Abm_Cliente_Modif.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Abm_Empresa\Abm_Empresa_Alta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Abm_Empresa\Abm_Empresa_Alta.Designer.cs">
+      <DependentUpon>Abm_Empresa_Alta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Abm_Empresa\Abm_Empresa_Baja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Abm_Empresa\Abm_Empresa_Baja.Designer.cs">
+      <DependentUpon>Abm_Empresa_Baja.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Abm_Empresa\Abm_Empresa_Modif.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Abm_Empresa\Abm_Empresa_Modif.Designer.cs">
+      <DependentUpon>Abm_Empresa_Modif.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Abm_Rubro\Abm_Rubro_Alta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Abm_Rubro\Abm_Rubro_Alta.Designer.cs">
+      <DependentUpon>Abm_Rubro_Alta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Abm_Rubro\Abm_Rubro_Baja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Abm_Rubro\Abm_Rubro_Baja.Designer.cs">
+      <DependentUpon>Abm_Rubro_Baja.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Abm_Rubro\Abm_Rubro_Modif.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Abm_Rubro\Abm_Rubro_Modif.Designer.cs">
+      <DependentUpon>Abm_Rubro_Modif.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Abm_Visibilidad\Abm_Visib_Alta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Abm_Visibilidad\Abm_Visib_Alta.Designer.cs">
+      <DependentUpon>Abm_Visib_Alta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Abm_Visibilidad\Abm_Visib_Baja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Abm_Visibilidad\Abm_Visib_Baja.Designer.cs">
+      <DependentUpon>Abm_Visib_Baja.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Abm_Visibilidad\Abm_Visib_Modif.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Abm_Visibilidad\Abm_Visib_Modif.Designer.cs">
+      <DependentUpon>Abm_Visib_Modif.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Seguridad\CambiarPass.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Seguridad\CambiarPass.Designer.cs">
+      <DependentUpon>CambiarPass.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmMain.Designer.cs">
+      <DependentUpon>FrmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Abm_Cliente\Abm_Cliente_Alta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Abm_Cliente\Abm_Cliente_Alta.Designer.cs">
+      <DependentUpon>Abm_Cliente_Alta.cs</DependentUpon>
     </Compile>
     <Compile Include="Vistas\Abm_Cliente\Cliente.cs" />
-    <Compile Include="Vistas\Abm_Empresa\AltaEmpresa.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Vistas\Abm_Empresa\AltaEmpresa.Designer.cs">
-      <DependentUpon>AltaEmpresa.cs</DependentUpon>
-    </Compile>
     <Compile Include="Vistas\Abm_Rol\Abm_Rol_Baja.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -74,10 +148,16 @@
     <Compile Include="Vistas\Editar_Publicacion\BuscarPublicaciones.Designer.cs">
       <DependentUpon>BuscarPublicaciones.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vistas\Generar_Publicacion\ControlFecha.cs">
+    <Compile Include="Vistas\Utilidades\ComboCheck.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Vistas\Utilidades\ComboCheck.Designer.cs">
+      <DependentUpon>ComboCheck.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Utilidades\ControlFecha.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vistas\Generar_Publicacion\ControlFecha.Designer.cs">
+    <Compile Include="Vistas\Utilidades\ControlFecha.Designer.cs">
       <DependentUpon>ControlFecha.cs</DependentUpon>
     </Compile>
     <Compile Include="Vistas\Login\Login.Designer.cs">
@@ -85,19 +165,7 @@
     </Compile>
     <Compile Include="Vistas\Login\Usuario.cs" />
     <Compile Include="Singleton.cs" />
-    <Compile Include="StoredProcedures.cs" />
-    <Compile Include="Vistas\Abm_Cliente\AbmCliente.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Vistas\Abm_Cliente\AbmCliente.Designer.cs">
-      <DependentUpon>AbmCliente.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Vistas\Abm_Empresa\AbmEmpresa.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Vistas\Abm_Empresa\AbmEmpresa.Designer.cs">
-      <DependentUpon>AbmEmpresa.cs</DependentUpon>
-    </Compile>
+    <Compile Include="InterfazBD.cs" />
     <Compile Include="Vistas\Abm_Rol\Abm_Rol_Alta.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -115,18 +183,6 @@
     </Compile>
     <Compile Include="Vistas\Abm_Rol\Abm_Rol_Modif.Designer.cs">
       <DependentUpon>Abm_Rol_Modif.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Vistas\Abm_Rubro\AbmRubro.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Vistas\Abm_Rubro\AbmRubro.Designer.cs">
-      <DependentUpon>AbmRubro.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Vistas\Abm_Visibilidad\AbmVisibilidad.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Vistas\Abm_Visibilidad\AbmVisibilidad.Designer.cs">
-      <DependentUpon>AbmVisibilidad.cs</DependentUpon>
     </Compile>
     <Compile Include="Vistas\Calificar_Vendedor\CalificarVendedor.cs">
       <SubType>Form</SubType>
@@ -189,17 +245,26 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Vistas\Abm_Cliente\AbmCliente.resx">
-      <DependentUpon>AbmCliente.cs</DependentUpon>
+    <EmbeddedResource Include="FrmMain.resx">
+      <DependentUpon>FrmMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Vistas\Abm_Cliente\AltaCliente.resx">
-      <DependentUpon>AltaCliente.cs</DependentUpon>
+    <EmbeddedResource Include="Vistas\Abm_Cliente\Abm_Cliente_Alta.resx">
+      <DependentUpon>Abm_Cliente_Alta.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Vistas\Abm_Empresa\AbmEmpresa.resx">
-      <DependentUpon>AbmEmpresa.cs</DependentUpon>
+    <EmbeddedResource Include="Vistas\Abm_Cliente\Abm_Cliente_Baja.resx">
+      <DependentUpon>Abm_Cliente_Baja.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Vistas\Abm_Empresa\AltaEmpresa.resx">
-      <DependentUpon>AltaEmpresa.cs</DependentUpon>
+    <EmbeddedResource Include="Vistas\Abm_Cliente\Abm_Cliente_Modif.resx">
+      <DependentUpon>Abm_Cliente_Modif.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Abm_Empresa\Abm_Empresa_Alta.resx">
+      <DependentUpon>Abm_Empresa_Alta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Abm_Empresa\Abm_Empresa_Baja.resx">
+      <DependentUpon>Abm_Empresa_Baja.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Abm_Empresa\Abm_Empresa_Modif.resx">
+      <DependentUpon>Abm_Empresa_Modif.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Abm_Rol\Abm_Rol_Alta.resx">
       <DependentUpon>Abm_Rol_Alta.cs</DependentUpon>
@@ -212,9 +277,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Abm_Rol\Abm_Rol_Modif.resx">
       <DependentUpon>Abm_Rol_Modif.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Vistas\Abm_Visibilidad\AbmVisibilidad.resx">
-      <DependentUpon>AbmVisibilidad.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Calificar_Vendedor\CalificarVendedor.resx">
       <DependentUpon>CalificarVendedor.cs</DependentUpon>
@@ -231,7 +293,10 @@
     <EmbeddedResource Include="Vistas\Facturar_Publicaciones\FacturarPublicaciones.resx">
       <DependentUpon>FacturarPublicaciones.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Vistas\Generar_Publicacion\ControlFecha.resx">
+    <EmbeddedResource Include="Vistas\Utilidades\ComboCheck.resx">
+      <DependentUpon>ComboCheck.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Utilidades\ControlFecha.resx">
       <DependentUpon>ControlFecha.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Generar_Publicacion\GenerarPublicacion.resx">
@@ -257,15 +322,13 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Vistas\Login\MenuFunciones.resx">
-      <DependentUpon>MenuFunciones.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Registro_Usuario\RegistroUsuario.resx">
       <DependentUpon>RegistroUsuario.cs</DependentUpon>
     </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -276,21 +339,33 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Vistas\Login\MenuFunciones.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Vistas\Login\MenuFunciones.Designer.cs">
-      <DependentUpon>MenuFunciones.cs</DependentUpon>
-    </Compile>
     <Compile Include="Vistas\Registro_Usuario\RegistroUsuario.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Vistas\Registro_Usuario\RegistroUsuario.Designer.cs">
       <DependentUpon>RegistroUsuario.cs</DependentUpon>
     </Compile>
+    <Compile Include="Vistas\Seguridad\Usuarios_Baja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Seguridad\Usuarios_Baja.Designer.cs">
+      <DependentUpon>Usuarios_Baja.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\group.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Salir_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FecSist.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

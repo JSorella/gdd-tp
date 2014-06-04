@@ -28,31 +28,29 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.passw_textbox = new System.Windows.Forms.TextBox();
-            this.username_textbox = new System.Windows.Forms.TextBox();
+            this.txtPass = new System.Windows.Forms.TextBox();
+            this.txtUserName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.comboRol = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.cmbRoles = new System.Windows.Forms.ComboBox();
+            this.btnSiguiente = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // passw_textbox
+            // txtPass
             // 
-            this.passw_textbox.Location = new System.Drawing.Point(88, 60);
-            this.passw_textbox.Name = "passw_textbox";
-            this.passw_textbox.Size = new System.Drawing.Size(191, 20);
-            this.passw_textbox.TabIndex = 12;
-            this.passw_textbox.UseSystemPasswordChar = true;
-            this.passw_textbox.TextChanged += new System.EventHandler(this.passw_textbox_TextChanged);
+            this.txtPass.Location = new System.Drawing.Point(88, 60);
+            this.txtPass.Name = "txtPass";
+            this.txtPass.Size = new System.Drawing.Size(191, 20);
+            this.txtPass.TabIndex = 2;
+            this.txtPass.UseSystemPasswordChar = true;
             // 
-            // username_textbox
+            // txtUserName
             // 
-            this.username_textbox.Location = new System.Drawing.Point(88, 12);
-            this.username_textbox.Name = "username_textbox";
-            this.username_textbox.Size = new System.Drawing.Size(191, 20);
-            this.username_textbox.TabIndex = 11;
-            this.username_textbox.TextChanged += new System.EventHandler(this.username_textbox_TextChanged);
+            this.txtUserName.Location = new System.Drawing.Point(88, 12);
+            this.txtUserName.Name = "txtUserName";
+            this.txtUserName.Size = new System.Drawing.Size(191, 20);
+            this.txtUserName.TabIndex = 1;
             // 
             // label2
             // 
@@ -62,7 +60,6 @@
             this.label2.Size = new System.Drawing.Size(56, 13);
             this.label2.TabIndex = 10;
             this.label2.Text = "Password:";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label3
             // 
@@ -72,7 +69,6 @@
             this.label3.Size = new System.Drawing.Size(58, 13);
             this.label3.TabIndex = 9;
             this.label3.Text = "Username:";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // label1
             // 
@@ -82,45 +78,48 @@
             this.label1.Size = new System.Drawing.Size(76, 13);
             this.label1.TabIndex = 13;
             this.label1.Text = "Rol Asignado: ";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
-            // comboRol
+            // cmbRoles
             // 
-            this.comboRol.FormattingEnabled = true;
-            this.comboRol.Items.AddRange(new object[] {
+            this.cmbRoles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbRoles.FormattingEnabled = true;
+            this.cmbRoles.Items.AddRange(new object[] {
             "Cliente",
             "Empresa"});
-            this.comboRol.Location = new System.Drawing.Point(89, 111);
-            this.comboRol.Name = "comboRol";
-            this.comboRol.Size = new System.Drawing.Size(190, 21);
-            this.comboRol.Sorted = true;
-            this.comboRol.TabIndex = 14;
-            this.comboRol.TabStop = false;
-            this.comboRol.SelectedIndexChanged += new System.EventHandler(this.comboRol_SelectedIndexChanged);
+            this.cmbRoles.Location = new System.Drawing.Point(89, 111);
+            this.cmbRoles.Name = "cmbRoles";
+            this.cmbRoles.Size = new System.Drawing.Size(190, 21);
+            this.cmbRoles.Sorted = true;
+            this.cmbRoles.TabIndex = 3;
             // 
-            // button1
+            // btnSiguiente
             // 
-            this.button1.Location = new System.Drawing.Point(204, 158);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 15;
-            this.button1.Text = "Siguiente >>";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnSiguiente.Location = new System.Drawing.Point(192, 156);
+            this.btnSiguiente.Name = "btnSiguiente";
+            this.btnSiguiente.Size = new System.Drawing.Size(87, 25);
+            this.btnSiguiente.TabIndex = 4;
+            this.btnSiguiente.Text = "Siguiente >>";
+            this.btnSiguiente.UseVisualStyleBackColor = true;
+            this.btnSiguiente.Click += new System.EventHandler(this.button1_Click);
             // 
             // RegistroUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(295, 191);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.comboRol);
+            this.Controls.Add(this.btnSiguiente);
+            this.Controls.Add(this.cmbRoles);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.passw_textbox);
-            this.Controls.Add(this.username_textbox);
+            this.Controls.Add(this.txtPass);
+            this.Controls.Add(this.txtUserName);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label3);
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(311, 229);
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(311, 229);
             this.Name = "RegistroUsuario";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Registrar Nuevo Usuario";
             this.Load += new System.EventHandler(this.RegistroUsuario_Load);
             this.ResumeLayout(false);
@@ -130,12 +129,12 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox passw_textbox;
-        private System.Windows.Forms.TextBox username_textbox;
+        private System.Windows.Forms.TextBox txtPass;
+        private System.Windows.Forms.TextBox txtUserName;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboRol;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ComboBox cmbRoles;
+        private System.Windows.Forms.Button btnSiguiente;
     }
 }

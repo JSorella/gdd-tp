@@ -14,20 +14,9 @@ namespace FrbaCommerce
         public RegistroUsuario()
         {
             this.InitializeComponent();
-            this.comboRol.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
         private void RegistroUsuario_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void username_textbox_TextChanged(object sender, EventArgs e)
         {
 
         }
@@ -36,78 +25,69 @@ namespace FrbaCommerce
         {
             try
             {
-                this.validarCampos();
+                if (!validarCampos())
+                    return;
 
                 // Cuando le doy click a "Siguiente >>" abro un Alta de Usuario o de Empresa, y a este form le mando el nombre y pass.
-
-                if (this.comboRol.Text == "Cliente")
+                if (this.cmbRoles.Text == "Cliente")
                 {
-                    AltaCliente newWindow = new AltaCliente(this.username_textbox.Text, this.passw_textbox.Text);
+                    Abm_Cliente_Alta newWindow = new Abm_Cliente_Alta(this.txtUserName.Text, this.txtPass.Text);
                     newWindow.ShowDialog();
                 }
 
-                if (this.comboRol.Text == "Empresa")
+                if (this.cmbRoles.Text == "Empresa")
                 {
-                    AltaEmpresa newWindow = new AltaEmpresa(this.username_textbox.Text, this.passw_textbox.Text);
+                    Abm_Empresa_Alta newWindow = new Abm_Empresa_Alta(this.txtUserName.Text, this.txtPass.Text);
                     newWindow.ShowDialog();
                 }
             }
             catch (Exception error)
             {
-                Funciones.mostrarAlert(error.Message);
+                Funciones.mostrarAlert(error.Message, this.Text);
             }
 
             this.Close();
-
         }
 
-        private void validarCampos()
+        private bool validarCampos()
         {
-            // Validación Textboxes
-            if (this.username_textbox.Text == "")
-            {
-                Funciones.mostrarAlert("Debe Ingresar nombre de usuario");
-                return;
+            try
+            {            
+                // Validación Textboxes
+                if (this.txtUserName.Text == "")
+                {
+                    Funciones.mostrarAlert("Debe Ingresar nombre de usuario", this.Text);
+                    return false;
+                }
+
+                if (this.txtPass.Text == "")
+                {
+                    Funciones.mostrarAlert("Debe Ingresar password", this.Text);
+                    return false;
+                }
+
+                if (this.cmbRoles.Text == "")
+                {
+                    Funciones.mostrarAlert("Debe Ingresar un Rol", this.Text);
+                    return false;
+                }
+
+                //Validamos que el nombre de usuario no existe actualmente...
+                bool existe = InterfazBD.existeUsuario(this.txtUserName.Text);
+
+                if (existe)
+                {
+                    Funciones.mostrarAlert("Ya existe un usuario con este nombre. Por Favor, ingrese uno distinto.", this.Text);
+                    return false;
+                }
+
+                return true;
             }
-
-            if (this.passw_textbox.Text == "")
+            catch (Exception ex)
             {
-                Funciones.mostrarAlert("Debe Ingresar password");
-                return;
+                MessageBox.Show(ex.Message, "Error del Sistema - Informe al Administrador", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
-
-            if (this.comboRol.Text == "")
-            {
-                Funciones.mostrarAlert("Debe Ingresar un Rol");
-                return;
-            }
-
-            //Validar que no exista ya el nombre de usuario!!
-            StoredProcedures.existeUsuario(this.username_textbox.Text);
-
-        
-        }
-
-        private void passw_textbox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void comboRol_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //Console.WriteLine(comboRol.Text);
-
-            
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

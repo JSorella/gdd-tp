@@ -13,9 +13,15 @@ namespace FrbaCommerce
     public sealed class Singleton
     {
         private static readonly Singleton instance = new Singleton();
+
         public static Connection conexion = new Connection();
-        public static DataTable usuario = new DataTable();
-        public static string sessionRol;
+
+        public static String ConnectionString;
+        public static DateTime FechaDelSistema;
+
+        public static DataRow usuario; //= new DataTable();
+        public static String sessionRol_Nombre = "";
+        public static int sessionRol_Id = 0;
 
         //El constructor del Singleton siempre debe ser privado para evitar ser instanciado
         private Singleton() { }

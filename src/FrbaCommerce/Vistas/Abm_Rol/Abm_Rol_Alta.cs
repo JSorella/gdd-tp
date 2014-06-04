@@ -12,7 +12,6 @@ namespace FrbaCommerce
     public partial class Abm_Rol_Alta : Form
     {
         Funciones func = new Funciones();
-        //StoredProcedures procedure = new StoredProcedures();
         
         public Abm_Rol_Alta()
         {
@@ -34,22 +33,14 @@ namespace FrbaCommerce
 
         private void list_funcionalidades_Load(object sender, EventArgs e)
         {
-            //consulta a ejecutar para mostrar todas las funcionalidades cargadas en el checkedlistbox
-            string query = "SELECT fun_id, fun_nombre FROM J2LA.Funcionalidades";
-
-            //instanciamos obj de la clase connection y le enviamos la query para que la ejecute
-            Connection connect = new Connection();
-            DataTable tabla_func = connect.execute_query(query);
-
-            //el resultado de la query lo cargamos en un data table
             //DataSource es el origen de los datos en nuestro caso la tabla que alberga el resultado de la query
-            list_funcionalidades.DataSource = tabla_func;
+            list_funcionalidades.DataSource = InterfazBD.getFuncionalidades();
 
             //Displaymember es la columna de la tabla que se va a mostrar en nuestro caso hay una sola
-            list_funcionalidades.DisplayMember = "func_nombre";
+            list_funcionalidades.DisplayMember = "fun_nombre";
 
             //ValueMembermember es el valor que tiene el campo seleccionado en nuestro caso ponemos la PK
-            list_funcionalidades.ValueMember = "func_id";
+            list_funcionalidades.ValueMember = "fun_id";
         }
 
         private void Abm_Rol_Alta_Load(object sender, EventArgs e)
@@ -60,11 +51,6 @@ namespace FrbaCommerce
         private void butt_Cleaning_Click(object sender, EventArgs e)
         {
             this.limpiar();
-        }
-
-        private void list_funcionalidades_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void butt_add_Click(object sender, EventArgs e)
@@ -79,12 +65,12 @@ namespace FrbaCommerce
 
             if (this.list_funcionalidades.CheckedIndices.Count == 0)
             {
-                MessageBox.Show("Debe seleccionar una funcionalidad", "Alta de Rol", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Debe seleccionar al menos una funcionalidad", "Alta de Rol", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 error = true;
             }
 
             //controlamos que el nombre de rol ingresado NO este en la base de datos
-            if (func.existe_nombre_rol(name_rol.Text) == true)
+            if (InterfazBD.existe_nombre_rol(name_rol.Text) == true)
             {
                 MessageBox.Show("Nombre de Rol existente en la Base de Datos", "Alta de Rol", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 error = true;
@@ -96,16 +82,16 @@ namespace FrbaCommerce
                 return;
             }
 
-            StoredProcedures.insert_Rol(name_rol.Text);
+            InterfazBD.insert_Rol(name_rol.Text);
+
+            //Lo mejor seria armar un DT y pasarlo para usar Singleton.conexion.executeQuerySPMasivo
 
             foreach (int indice_func in this.list_funcionalidades.CheckedIndices) //checkedIndices devuelve la coleccion de los indices activados
             {
-
                 this.list_funcionalidades.SelectedIndex = indice_func; //establecemos que el elemento seleccionado posee el indice marcado correspondiente
                 //selectValue retorna el value_member del item seleccionado (seleccionado != tildado)
                 //insertamos las funcionalidades del nuevo rol
-                StoredProcedures.insert_funcxrol(name_rol.Text, Convert.ToInt32(this.list_funcionalidades.SelectedValue.ToString()));
-
+                InterfazBD.insert_funcxrol(name_rol.Text, Convert.ToInt32(this.list_funcionalidades.SelectedValue));
             }
             MessageBox.Show("Rol Insertado Correctamente", "Alta de Rol", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.limpiar();

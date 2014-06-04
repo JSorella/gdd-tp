@@ -64,10 +64,7 @@ namespace FrbaCommerce
 
         public void cargarComboBoxVisibilidades()
         {
-            string query = "select * from J2LA.Publicaciones_Visibilidades";
-            Connection connect = new Connection();
-            DataTable tablaVisibilidades = connect.execute_query(query);
-            cboxVisibilidad.DataSource = tablaVisibilidades;
+            cboxVisibilidad.DataSource = InterfazBD.getVisibilidadesPubli();
             cboxVisibilidad.DisplayMember = "pubvis_Descripcion";
             cboxVisibilidad.ValueMember = "pubvis_id";
         }
@@ -137,34 +134,62 @@ namespace FrbaCommerce
 
         public DataTable getTop5VendedoresConMayorCantDeProdNoVendidos(int anio, int trimestre, int visibilidad, int mes)
         {
-            string query = "exec J2LA.getTop5VendedoresConMayorCantDeProdNoVendidos "+anio+", "+trimestre+", "+visibilidad+", "+mes;
-            Connection connect = new Connection();
-            DataTable tablaListado = connect.execute_query(query);
-            return tablaListado;
+            //ESTO DEBE IR A LA CLASE DE INTERFAZ CON BD.-
+            try
+            {
+                string query = "exec J2LA.getTop5VendedoresConMayorCantDeProdNoVendidos " + anio + ", " + trimestre + ", " + visibilidad + ", " + mes;
+                return Singleton.conexion.executeQueryTable(query, null, null);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return new DataTable();
+            }
         }
 
         public DataTable getTop5VendedoresConMayorFacturacion(int anio, int trimestre)
         {
-            string query = "exec J2LA.getTop5VendedoresConMayorFacturacion " + anio + ", " + trimestre;
-            Connection connect = new Connection();
-            DataTable tablaListado = connect.execute_query(query);
-            return tablaListado;
+            //ESTO DEBE IR A LA CLASE DE INTERFAZ CON BD.-
+            try
+            {
+                string query = "exec J2LA.getTop5VendedoresConMayorFacturacion " + anio + ", " + trimestre;
+                return Singleton.conexion.executeQueryTable(query, null, null);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return new DataTable();
+            }
         }
 
         public DataTable getTop5VendedoresConMayoresCalificaciones(int anio, int trimestre)
         {
-            string query = "exec J2LA.getTop5VendedoresConMayoresCalificaciones " + anio + ", " + trimestre;
-            Connection connect = new Connection();
-            DataTable tablaListado = connect.execute_query(query);
-            return tablaListado;
+            //ESTO DEBE IR A LA CLASE DE INTERFAZ CON BD.-
+            try
+            {
+                string query = "exec J2LA.getTop5VendedoresConMayoresCalificaciones " + anio + ", " + trimestre;
+                return Singleton.conexion.executeQueryTable(query, null, null);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return new DataTable();
+            }
         }
 
         public DataTable getTop5ClientesConMayorCantDePublicacionesSinCalificar(int anio, int trimestre)
         {
-            string query = "exec J2LA.getTop5ClientesConMayorCantDePublicacionesSinCalificar " + anio + ", " + trimestre;
-            Connection connect = new Connection();
-            DataTable tablaListado = connect.execute_query(query);
-            return tablaListado;
+            //ESTO DEBE IR A LA CLASE DE INTERFAZ CON BD.-
+            try
+            {
+                string query = "exec J2LA.getTop5ClientesConMayorCantDePublicacionesSinCalificar " + anio + ", " + trimestre;
+                return Singleton.conexion.executeQueryTable(query, null, null);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return new DataTable();
+            }
         }
 
 
@@ -197,11 +222,6 @@ namespace FrbaCommerce
                 default:
                     break;
             }
-        }
-
-        private void cBoxVisibilidad_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void cboxListado_SelectedIndexChanged(object sender, EventArgs e)

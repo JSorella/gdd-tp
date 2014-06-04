@@ -35,10 +35,10 @@
             this.cmbTipoVis = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.listRubros = new System.Windows.Forms.CheckedListBox();
             this.grpFiltros = new System.Windows.Forms.GroupBox();
-            this.btnBuscar = new System.Windows.Forms.Button();
             this.btnLimpiar = new System.Windows.Forms.Button();
+            this.btnBuscar = new System.Windows.Forms.Button();
+            this.cmbRubros = new FrbaCommerce.ComboCheck();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.btnSeleccionar = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
@@ -107,16 +107,6 @@
             this.label7.TabIndex = 26;
             this.label7.Text = "Rubros :";
             // 
-            // listRubros
-            // 
-            this.listRubros.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.listRubros.FormattingEnabled = true;
-            this.listRubros.Location = new System.Drawing.Point(10, 93);
-            this.listRubros.Name = "listRubros";
-            this.listRubros.Size = new System.Drawing.Size(522, 169);
-            this.listRubros.TabIndex = 25;
-            // 
             // grpFiltros
             // 
             this.grpFiltros.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
@@ -124,7 +114,6 @@
             this.grpFiltros.Controls.Add(this.btnLimpiar);
             this.grpFiltros.Controls.Add(this.btnBuscar);
             this.grpFiltros.Controls.Add(this.label7);
-            this.grpFiltros.Controls.Add(this.listRubros);
             this.grpFiltros.Controls.Add(this.label1);
             this.grpFiltros.Controls.Add(this.cmbEstado);
             this.grpFiltros.Controls.Add(this.txtDescripcion);
@@ -133,42 +122,50 @@
             this.grpFiltros.Controls.Add(this.cmbTipoVis);
             this.grpFiltros.Location = new System.Drawing.Point(12, 12);
             this.grpFiltros.Name = "grpFiltros";
-            this.grpFiltros.Size = new System.Drawing.Size(541, 298);
+            this.grpFiltros.Size = new System.Drawing.Size(541, 141);
             this.grpFiltros.TabIndex = 1;
             this.grpFiltros.TabStop = false;
             this.grpFiltros.Text = "Filtros de Búsqueda";
             // 
-            // btnBuscar
-            // 
-            this.btnBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnBuscar.Location = new System.Drawing.Point(457, 268);
-            this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(75, 23);
-            this.btnBuscar.TabIndex = 27;
-            this.btnBuscar.Text = "Buscar";
-            this.btnBuscar.UseVisualStyleBackColor = true;
-            // 
             // btnLimpiar
             // 
-            this.btnLimpiar.Location = new System.Drawing.Point(10, 268);
+            this.btnLimpiar.Location = new System.Drawing.Point(6, 112);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(75, 23);
             this.btnLimpiar.TabIndex = 28;
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.UseVisualStyleBackColor = true;
             // 
+            // btnBuscar
+            // 
+            this.btnBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnBuscar.Location = new System.Drawing.Point(457, 112);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(75, 23);
+            this.btnBuscar.TabIndex = 27;
+            this.btnBuscar.Text = "Buscar";
+            this.btnBuscar.UseVisualStyleBackColor = true;
+            // 
+            // cmbRubros
+            // 
+            this.cmbRubros.BackColor = System.Drawing.Color.White;
+            this.cmbRubros.Location = new System.Drawing.Point(95, 86);
+            this.cmbRubros.Name = "cmbRubros";
+            this.cmbRubros.Size = new System.Drawing.Size(449, 20);
+            this.cmbRubros.TabIndex = 29;
+            // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 316);
+            this.dataGridView1.Location = new System.Drawing.Point(12, 159);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(541, 328);
+            this.dataGridView1.Size = new System.Drawing.Size(541, 290);
             this.dataGridView1.TabIndex = 2;
             // 
             // btnSeleccionar
             // 
             this.btnSeleccionar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSeleccionar.Location = new System.Drawing.Point(339, 650);
+            this.btnSeleccionar.Location = new System.Drawing.Point(339, 455);
             this.btnSeleccionar.Name = "btnSeleccionar";
             this.btnSeleccionar.Size = new System.Drawing.Size(104, 23);
             this.btnSeleccionar.TabIndex = 28;
@@ -178,7 +175,7 @@
             // btnSalir
             // 
             this.btnSalir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSalir.Location = new System.Drawing.Point(449, 650);
+            this.btnSalir.Location = new System.Drawing.Point(449, 455);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(104, 23);
             this.btnSalir.TabIndex = 29;
@@ -189,7 +186,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(561, 679);
+            this.ClientSize = new System.Drawing.Size(561, 483);
+            this.Controls.Add(this.cmbRubros);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.btnSeleccionar);
             this.Controls.Add(this.dataGridView1);
@@ -197,6 +195,7 @@
             this.Name = "BuscarPublicaciones";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Buscar Publicaciones";
+            this.Load += new System.EventHandler(this.BuscarPublicaciones_Load);
             this.grpFiltros.ResumeLayout(false);
             this.grpFiltros.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -213,12 +212,12 @@
         private System.Windows.Forms.ComboBox cmbTipoVis;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.CheckedListBox listRubros;
         private System.Windows.Forms.GroupBox grpFiltros;
         private System.Windows.Forms.Button btnLimpiar;
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button btnSeleccionar;
         private System.Windows.Forms.Button btnSalir;
+        private FrbaCommerce.ComboCheck cmbRubros;
     }
 }

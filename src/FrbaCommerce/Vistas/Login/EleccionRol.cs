@@ -11,34 +11,32 @@ namespace FrbaCommerce
 {
     public partial class EleccionRol : Form
     {
+        DataTable oDTRoles;
+
+        public DataTable RolesTable
+        {
+            get { return oDTRoles; }
+            set { oDTRoles = value; }
+        }
+
         public EleccionRol()
         {
             this.InitializeComponent();
-            this.comboRol.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
         private void EleccionRol_Load(object sender, EventArgs e)
         {
-            this.comboRol.DataSource = Singleton.usuario;
-            this.comboRol.DisplayMember = "rol_Nombre";
-            this.comboRol.ValueMember = "rol_Id";
+            this.cmbRoles.DataSource = oDTRoles;
+            this.cmbRoles.ValueMember = "rol_Id";
+            this.cmbRoles.DisplayMember = "rol_Nombre";
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnAceptar_Click(object sender, EventArgs e)
         {
-            //guardo el ID de rol en el Singleton
-            DataRow selectedDataRow = ((DataRowView)comboRol.SelectedItem).Row;
-            Singleton.sessionRol = Convert.ToString(selectedDataRow["rol_Nombre"]);
+            Singleton.sessionRol_Id = Convert.ToInt32(cmbRoles.SelectedValue);
+            Singleton.sessionRol_Nombre = cmbRoles.Text;
 
-            MenuFunciones menuWindow = new MenuFunciones();
-            menuWindow.ShowDialog();
             this.Close();
-        }
-
-        private void comboRol_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-            
         }
     }
 }

@@ -36,71 +36,55 @@ namespace FrbaCommerce
             return pass_string.ToString();
         }
 
-        public bool existe_nombre_rol(string nombre_rol_ingresado)
+        // Para llamar a esta Funcion:
+        // Crear el Evento KeyPress del TextBox y poner el siguiente codigo => e.Handled = Funciones.SoloNumeros(e.KeyChar);
+        static public bool SoloNumeros(Char chrKey)
         {
-            bool existe_rol;
-            Connection conexion = new Connection();
-            string query = "SELECT rol_id FROM J2LA.Roles WHERE rol_nombre='" + nombre_rol_ingresado + "'";
-            DataTable table_rol = conexion.execute_query(query);
-            if (table_rol.Rows.Count > 0)
+            //Para obligar a que sólo se introduzcan números enteros
+            if (Char.IsNumber(chrKey)) //seria el e.KeyChar en el Form
             {
-                existe_rol = true;
+                return false; //seria el e.Handled = false; en el Form
             }
             else
-            {
-                existe_rol = false;
-            }
-            return existe_rol;
+                if (Char.IsControl(chrKey)) //permitir teclas de control como retroceso
+                {
+                    return false; //seria el e.Handled = false; en el Form
+                }
+                else
+                {
+                    //el resto de teclas pulsadas se desactivan
+                    return true; //seria el e.Handled = true; en el Form
+                }
         }
 
+
+        // Esta funcion no se va a usar, esta solo por compatibilidad.Despues sacarla.
+        // Esta funcion no se va a usar, esta solo por compatibilidad.Despues sacarla.
+        // Esta funcion no se va a usar, esta solo por compatibilidad.Despues sacarla.
+        // Esta funcion no se va a usar, esta solo por compatibilidad.Despues sacarla.
         public bool check_func_activa(int id_rol, int id_func)
         {
             bool func_activa = false;
-            Connection conexion = new Connection();
+
             string query = "SELECT rolfun_fun_id FROM J2LA.Roles_Funcionalidades WHERE rolfun_rol_id = " + id_rol + " and rolfun_fun_id = " + id_func;
-            DataTable table_rol = conexion.execute_query(query);
+
+            DataTable table_rol = Singleton.conexion.executeQueryTable(query, null, null);
+
             if (table_rol.Rows.Count > 0)
                 func_activa = true;
+
             return func_activa;
         }
 
-        public bool check_cambio_nomb_est_rol(int id_rol, bool estado_actual_rol, string nomb_rol_ingresado, string nomb_rol_BD)
+        public static bool mostrarAlert(string mensaje, string caption)
         {
-
-            if (!(this.check_estado_rol(id_rol, estado_actual_rol) & nomb_rol_BD == nomb_rol_ingresado))
-            {
-                return true; //devuelve true si existen cambios
-            }
-            return false;
-        }
-
-
-        public bool check_estado_rol(int id_rol, bool estado_actual_rol) //devuelve TRUE si el estado del ROL en la
-        {                                                                   //BD es igual al seleccionado
-            bool estado_rol = false;
-            if (this.get_estado_BD(id_rol) == estado_actual_rol)
-                estado_rol = true;
-            return estado_rol;
-        }
-
-        public bool get_estado_BD(int rol_id)
-        {
-            Connection conexion = new Connection();
-            string query = "SELECT rol_inhabilitado FROM J2LA.Roles WHERE rol_id =" + rol_id;
-            DataTable table_rol = conexion.execute_query(query);
-            return (Convert.ToBoolean(table_rol.Rows[0]["rol_Inhabilitado"]));
-
-        }
-
-        static public bool mostrarAlert(string mensaje)
-        {
-            MessageBox.Show(mensaje, "Acceso al Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(mensaje, caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
             return true;
         }
 
-        static public bool mostrarInformacion(string mensaje)
+        public static bool mostrarInformacion(string mensaje, string caption)
         {
-            MessageBox.Show(mensaje, "Acceso al Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(mensaje, caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
             return true;
         }
     }

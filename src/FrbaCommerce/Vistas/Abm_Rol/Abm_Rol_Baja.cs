@@ -24,17 +24,23 @@ namespace FrbaCommerce
 
             Abm_Rol_Busqueda buscar_rol = new Abm_Rol_Busqueda();
             buscar_rol.ShowDialog();
+
             if ((buscar_rol.Resultado != null)) //Resultado es el DataRow.-
             {
                 id_rol_a_mod = Convert.ToInt32(buscar_rol.Resultado["rol_id"]);
                 rol_nomb_mod = buscar_rol.Resultado["rol_nombre"].ToString();
-
+                txtRol.Text = rol_nomb_mod;
             }
         }
 
         private void baja_boton_Click(object sender, EventArgs e)
         {
-            StoredProcedures.baja_rol(this.rol_nomb_mod, this.id_rol_a_mod);
+            InterfazBD.baja_rol(this.rol_nomb_mod, this.id_rol_a_mod);
+        }
+
+        private void Abm_Rol_Baja_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

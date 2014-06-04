@@ -39,7 +39,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(22, 26);
+            this.label1.Location = new System.Drawing.Point(12, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(83, 13);
             this.label1.TabIndex = 1;
@@ -47,7 +47,7 @@
             // 
             // name_rol
             // 
-            this.name_rol.Location = new System.Drawing.Point(111, 23);
+            this.name_rol.Location = new System.Drawing.Point(106, 12);
             this.name_rol.Name = "name_rol";
             this.name_rol.Size = new System.Drawing.Size(146, 20);
             this.name_rol.TabIndex = 2;
@@ -55,7 +55,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(22, 68);
+            this.label2.Location = new System.Drawing.Point(12, 44);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(90, 13);
             this.label2.TabIndex = 3;
@@ -64,15 +64,14 @@
             // list_funcionalidades
             // 
             this.list_funcionalidades.FormattingEnabled = true;
-            this.list_funcionalidades.Location = new System.Drawing.Point(106, 68);
+            this.list_funcionalidades.Location = new System.Drawing.Point(15, 60);
             this.list_funcionalidades.Name = "list_funcionalidades";
-            this.list_funcionalidades.Size = new System.Drawing.Size(151, 109);
+            this.list_funcionalidades.Size = new System.Drawing.Size(237, 184);
             this.list_funcionalidades.TabIndex = 4;
-            this.list_funcionalidades.SelectedIndexChanged += new System.EventHandler(this.list_funcionalidades_SelectedIndexChanged);
             // 
             // butt_Cleaning
             // 
-            this.butt_Cleaning.Location = new System.Drawing.Point(25, 210);
+            this.butt_Cleaning.Location = new System.Drawing.Point(15, 256);
             this.butt_Cleaning.Name = "butt_Cleaning";
             this.butt_Cleaning.Size = new System.Drawing.Size(103, 27);
             this.butt_Cleaning.TabIndex = 5;
@@ -82,7 +81,7 @@
             // 
             // butt_add
             // 
-            this.butt_add.Location = new System.Drawing.Point(154, 210);
+            this.butt_add.Location = new System.Drawing.Point(149, 256);
             this.butt_add.Name = "butt_add";
             this.butt_add.Size = new System.Drawing.Size(103, 27);
             this.butt_add.TabIndex = 6;
@@ -94,14 +93,16 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.ClientSize = new System.Drawing.Size(262, 295);
             this.Controls.Add(this.butt_add);
             this.Controls.Add(this.butt_Cleaning);
             this.Controls.Add(this.list_funcionalidades);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.name_rol);
             this.Controls.Add(this.label1);
+            this.MaximizeBox = false;
             this.Name = "Abm_Rol_Alta";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Alta Rol";
             this.Load += new System.EventHandler(this.list_funcionalidades_Load);
             this.ResumeLayout(false);

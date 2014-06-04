@@ -13,48 +13,53 @@ namespace FrbaCommerce
     public partial class GenerarPublicacion : Form
     {
         DataTable oDTVis;
+        DataTable oDTPubli;
+        DataTable oDTRubros;
+
+        DateTime dteFecIni;
+        DateTime dteFecVto;
 
         public GenerarPublicacion()
         {
             InitializeComponent();
         }
 
-        // Evento KeyPress del TextBox => e.Handled = SoloNumeros(e.KeyChar);
-        private bool SoloNumeros(Char chrKey)
-        {
-            //Para obligar a que sólo se introduzcan números enteros
-            if (Char.IsNumber(chrKey)) //e.KeyChar
-            {
-                return false; // e.Handled = false;
-            }
-            else
-                if (Char.IsControl(chrKey)) //permitir teclas de control como retroceso
-                {
-                    return false; // e.Handled = false;
-                }
-                else
-                {
-                    //el resto de teclas pulsadas se desactivan
-                    return true; // e.Handled = true;
-                }
-        }
-
         private void GenerarPublicacion_Load(object sender, EventArgs e)
         {
+            ArmarDataTables();
             CargarCombos();
             CargarRubros();
             Limpiar();
             HabilitarMod(false);
         }
 
+        private void ArmarDataTables()
+        {
+            try
+            {
+                oDTPubli = InterfazBD.getDTPubli();
+                oDTRubros = InterfazBD.getDTRubros();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error en ArmarDataTables: " + System.Environment.NewLine + ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
+            }
+        }
+
         private void CargarRubros()
         {
-            listRubros.DataSource = Singleton.conexion.execute_query("Select rub_id, rub_descripcion " +
-                                                                        "From J2LA.Rubros " +
-                                                                        "Where rub_Eliminado = 0" +
-                                                                        "Order By rub_Descripcion");
-            listRubros.ValueMember = "rub_id";
-            listRubros.DisplayMember = "rub_Descripcion";
+            try
+            {
+                listRubros.DataSource = InterfazBD.getRubros();
+                listRubros.ValueMember = "rub_id";
+                listRubros.DisplayMember = "rub_Descripcion";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error en CargarRubros: " + System.Environment.NewLine + ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
+            }
         }
 
         private void Limpiar()
@@ -68,9 +73,11 @@ namespace FrbaCommerce
             txtFechaVto.Text = string.Empty;
             chkPreguntas.Checked = false;
 
+            oDTPubli.Rows.Clear();
+            oDTRubros.Rows.Clear();
+
             //destildamos los rubros
-            int i;
-            for (i = 0; i < (this.listRubros.Items.Count); i++)
+            for (int i = 0; i < (this.listRubros.Items.Count); i++)
             {
                 this.listRubros.SetItemChecked(i, false);
             }
@@ -87,19 +94,27 @@ namespace FrbaCommerce
 
         private void CargarCombos()
         {
-            oDTVis = Singleton.conexion.execute_query("Select * From J2LA.Publicaciones_Visibilidades Where pubvis_Eliminado = 0 Order By pubvis_Descripcion");
+            try
+            {
+                oDTVis = InterfazBD.getVisibilidadesPubli();
 
-            cmbTipoPubli.ValueMember = "pubtip_Id";
-            cmbTipoPubli.DisplayMember = "pubtip_Nombre";
-            cmbTipoPubli.DataSource = Singleton.conexion.execute_query("Select * From J2LA.Publicaciones_Tipos Order By pubtip_Nombre");
+                cmbTipoVis.ValueMember = "pubvis_Id";
+                cmbTipoVis.DisplayMember = "pubvis_Descripcion";
+                cmbTipoVis.DataSource = oDTVis;
 
-            cmbEstado.ValueMember = "pubest_Id";
-            cmbEstado.DisplayMember = "pubest_Descripcion";
-            cmbEstado.DataSource = Singleton.conexion.execute_query("Select * From J2LA.Publicaciones_Estados Order By pubest_Descripcion");
+                cmbTipoPubli.ValueMember = "pubtip_Id";
+                cmbTipoPubli.DisplayMember = "pubtip_Nombre";
+                cmbTipoPubli.DataSource = InterfazBD.getTiposPubli();
 
-            cmbTipoVis.ValueMember = "pubvis_Id";
-            cmbTipoVis.DisplayMember = "pubvis_Descripcion";
-            cmbTipoVis.DataSource = oDTVis;
+                cmbEstado.ValueMember = "pubest_Id";
+                cmbEstado.DisplayMember = "pubest_Descripcion";
+                cmbEstado.DataSource = InterfazBD.getEstadosPubli();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error en CargarCombos: " + System.Environment.NewLine + ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
+            }
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)
@@ -124,18 +139,15 @@ namespace FrbaCommerce
 
         private void btnSelFec_Click(object sender, EventArgs e)
         {
-            this.Enabled = false;
+            Point ppos = this.btnSelFec.PointToScreen(new Point());
+            ppos.X = ppos.X + this.btnSelFec.Width;
 
-            int posx = this.Location.X + pnlDatos.Location.X + this.btnSelFec.Location.X + this.btnSelFec.Size.Width + 10;
-            int posy = this.Location.Y + pnlDatos.Location.Y + this.btnSelFec.Location.Y - 50;
-
-            FrbaCommerce.ControlFecha oFrm = new FrbaCommerce.ControlFecha(posx, posy);
+            FrbaCommerce.ControlFecha oFrm = new FrbaCommerce.ControlFecha(ppos.X, ppos.Y);
             oFrm.ShowDialog();
 
-            if(!oFrm.Cancelado)
-                txtFechaIni.Text = oFrm.FechaSeleccionada.ToString();
-
-            this.Enabled = true;
+            if (!oFrm.Cancelado)
+                dteFecIni = oFrm.FechaSeleccionada;
+                txtFechaIni.Text = oFrm.FechaSeleccionada.ToShortDateString();
 
             ActualizarVto();
         }
@@ -148,7 +160,8 @@ namespace FrbaCommerce
             if (vrow != null)
             { 
                 row = vrow.Row;
-                txtFechaVto.Text = Convert.ToDateTime(txtFechaIni.Text).AddDays(Convert.ToDouble(row["pubvis_Dias_Vto"])).ToString();
+                dteFecVto = dteFecIni.AddDays(Convert.ToDouble(row["pubvis_Dias_Vto"]));
+                txtFechaVto.Text = dteFecVto.ToShortDateString();
             }            
         }
 
@@ -158,9 +171,11 @@ namespace FrbaCommerce
             {
                 if (ValidaGenerar())
                 {
-                    Generar();
-                    Limpiar();
-                    HabilitarMod(false);
+                    if (Generar())
+                    {
+                        Limpiar();
+                        HabilitarMod(false);
+                    }
                 }
             }
         }
@@ -224,33 +239,70 @@ namespace FrbaCommerce
             return datosOk;
         }
 
-        private void Generar()
+        private bool Generar()
         {
-            string query = "J2LA.Publicaciones_Insert";
-            string pub_codigo = "";
+            String[] result;
+
             try
             {
-                SqlCommand comando = new SqlCommand(query, Singleton.conexion.connector());
-                comando.CommandType = CommandType.StoredProcedure;
+                CargarDTPubli();
+                CargarDtRubros(0);
 
-                comando.Parameters.Add("@pub_codigo", SqlDbType.Decimal).Direction = ParameterDirection.Output;
-                comando.Parameters.AddWithValue("@pub_descripcion", txtDesc.Text);
+                result = InterfazBD.NuevaPublicacion(oDTPubli, oDTRubros).Split('|');
 
-                comando.ExecuteNonQuery();
+                MessageBox.Show("Su Publicación fue grabada con exito." + System.Environment.NewLine + "Codigo de Publicación: " + result[1].ToString(), this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                pub_codigo = comando.Parameters["@pub_codigo"].Value.ToString();
-
-                foreach (int x in listRubros.CheckedIndices)
-                {
-                    listRubros.SelectedIndex = x;
-                    MessageBox.Show(listRubros.SelectedValue.ToString());
-                }
-
-                MessageBox.Show(pub_codigo);
+                return Convert.ToBoolean(result[0]);
             }
-            catch(Exception)
+            catch(Exception ex)
             {
+                MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
+        }
+
+        private void CargarDtRubros(int pub_codigo)
+        {
+            oDTRubros.Rows.Clear();
+            DataRow oDr;
+
+            foreach (int x in listRubros.CheckedIndices)
+            {
+                oDr = oDTRubros.NewRow();
+
+                listRubros.SelectedIndex = x;
+
+                oDr["pubrub_pub_codigo"] = pub_codigo;
+                oDr["pubrub_rub_id"] = listRubros.SelectedValue;
+
+                oDTRubros.Rows.Add(oDr);
+            }
+        }
+
+        private void CargarDTPubli()
+        {
+            DataRowView vrow = (DataRowView)cmbTipoVis.SelectedItem;
+            DataRow rowVis = vrow.Row;
+
+            oDTPubli.Rows.Clear();
+
+            DataRow oDr = oDTPubli.NewRow();
+
+            oDr["pub_codigo"] = 0;
+            oDr["pub_tipo_Id"] = cmbTipoPubli.SelectedValue;
+            oDr["pub_Descripcion"] = txtDesc.Text;
+            oDr["pub_Stock"] = nudStock.Value;
+            oDr["pub_Fecha_Vto"] = dteFecIni;
+            oDr["pub_Fecha_Ini"] = dteFecVto;
+            oDr["pub_Precio"] = nudPrecio.Value;
+            oDr["pub_visibilidad_Id"] = cmbTipoVis.SelectedValue;
+            oDr["pub_estado_Id"] = cmbEstado.SelectedValue;
+            oDr["pub_Permite_Preg"] = chkPreguntas.Checked;
+            oDr["pub_usu_id"] = Singleton.usuario["usu_id"];
+            oDr["pub_vis_Precio"] = rowVis["pubvis_Precio"];
+            oDr["pub_vis_Porcentaje"] = rowVis["pubvis_Porcentaje"];
+
+            oDTPubli.Rows.Add(oDr);
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)

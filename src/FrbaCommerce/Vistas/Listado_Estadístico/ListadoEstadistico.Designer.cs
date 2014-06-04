@@ -83,6 +83,7 @@
             // 
             // cboxListado
             // 
+            this.cboxListado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboxListado.FormattingEnabled = true;
             this.cboxListado.Location = new System.Drawing.Point(114, 137);
             this.cboxListado.Name = "cboxListado";
@@ -92,6 +93,7 @@
             // 
             // cboxAnio
             // 
+            this.cboxAnio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboxAnio.FormattingEnabled = true;
             this.cboxAnio.Location = new System.Drawing.Point(114, 39);
             this.cboxAnio.Name = "cboxAnio";
@@ -100,6 +102,7 @@
             // 
             // cboxTrimestre
             // 
+            this.cboxTrimestre.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboxTrimestre.FormattingEnabled = true;
             this.cboxTrimestre.Location = new System.Drawing.Point(114, 86);
             this.cboxTrimestre.Name = "cboxTrimestre";
@@ -119,15 +122,16 @@
             // 
             // cboxVisibilidad
             // 
+            this.cboxVisibilidad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboxVisibilidad.FormattingEnabled = true;
             this.cboxVisibilidad.Location = new System.Drawing.Point(114, 184);
             this.cboxVisibilidad.Name = "cboxVisibilidad";
             this.cboxVisibilidad.Size = new System.Drawing.Size(207, 21);
             this.cboxVisibilidad.TabIndex = 12;
-            this.cboxVisibilidad.SelectedIndexChanged += new System.EventHandler(this.cBoxVisibilidad_SelectedIndexChanged);
             // 
             // cboxMes
             // 
+            this.cboxMes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboxMes.FormattingEnabled = true;
             this.cboxMes.Location = new System.Drawing.Point(114, 236);
             this.cboxMes.Name = "cboxMes";

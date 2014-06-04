@@ -40,7 +40,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(24, 30);
+            this.label1.Location = new System.Drawing.Point(9, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(65, 13);
             this.label1.TabIndex = 2;
@@ -48,14 +48,14 @@
             // 
             // rol_a_buscarTBox
             // 
-            this.rol_a_buscarTBox.Location = new System.Drawing.Point(95, 23);
+            this.rol_a_buscarTBox.Location = new System.Drawing.Point(80, 12);
             this.rol_a_buscarTBox.Name = "rol_a_buscarTBox";
             this.rol_a_buscarTBox.Size = new System.Drawing.Size(141, 20);
             this.rol_a_buscarTBox.TabIndex = 3;
             // 
             // buscar_boton
             // 
-            this.buscar_boton.Location = new System.Drawing.Point(270, 20);
+            this.buscar_boton.Location = new System.Drawing.Point(324, 5);
             this.buscar_boton.Name = "buscar_boton";
             this.buscar_boton.Size = new System.Drawing.Size(106, 33);
             this.buscar_boton.TabIndex = 4;
@@ -65,7 +65,7 @@
             // 
             // limpiar_boton
             // 
-            this.limpiar_boton.Location = new System.Drawing.Point(270, 68);
+            this.limpiar_boton.Location = new System.Drawing.Point(324, 44);
             this.limpiar_boton.Name = "limpiar_boton";
             this.limpiar_boton.Size = new System.Drawing.Size(106, 32);
             this.limpiar_boton.TabIndex = 5;
@@ -80,17 +80,18 @@
             this.roles_dataGrid.AllowUserToResizeColumns = false;
             this.roles_dataGrid.AllowUserToResizeRows = false;
             this.roles_dataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.roles_dataGrid.Location = new System.Drawing.Point(12, 116);
+            this.roles_dataGrid.Location = new System.Drawing.Point(12, 82);
             this.roles_dataGrid.MultiSelect = false;
             this.roles_dataGrid.Name = "roles_dataGrid";
             this.roles_dataGrid.ReadOnly = true;
             this.roles_dataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.roles_dataGrid.Size = new System.Drawing.Size(418, 177);
+            this.roles_dataGrid.Size = new System.Drawing.Size(418, 211);
             this.roles_dataGrid.TabIndex = 6;
+            this.roles_dataGrid.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.roles_dataGrid_CellDoubleClick);
             // 
             // selec_rol_boton
             // 
-            this.selec_rol_boton.Location = new System.Drawing.Point(27, 300);
+            this.selec_rol_boton.Location = new System.Drawing.Point(324, 300);
             this.selec_rol_boton.Name = "selec_rol_boton";
             this.selec_rol_boton.Size = new System.Drawing.Size(106, 32);
             this.selec_rol_boton.TabIndex = 7;
@@ -109,8 +110,11 @@
             this.Controls.Add(this.buscar_boton);
             this.Controls.Add(this.rol_a_buscarTBox);
             this.Controls.Add(this.label1);
+            this.MaximizeBox = false;
             this.Name = "Abm_Rol_Busqueda";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Buscar Rol";
+            this.Load += new System.EventHandler(this.Abm_Rol_Busqueda_Load);
             ((System.ComponentModel.ISupportInitialize)(this.roles_dataGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
