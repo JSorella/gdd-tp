@@ -37,7 +37,7 @@ namespace FrbaCommerce
             return cmd;
         }
 
-        private SqlCommand cargarParametrosCommand(SqlCommand cmd, String[,] aParam)
+        private SqlCommand cargarParametrosCommand(SqlCommand cmd, String[,] aParam, String sListOutParam)
         {
             cmd.Parameters.Clear();
 
@@ -45,7 +45,10 @@ namespace FrbaCommerce
             {
                 for (int i = 0; i < aParam.GetLength(0); i++)
                 {
-                    cmd.Parameters.AddWithValue("@" + aParam[i, 0], aParam[i, 1]);
+                    if (sListOutParam.ToUpper().Contains(aParam[i, 0].ToUpper()))
+                        cmd.Parameters.AddWithValue("@" + aParam[i, 0], aParam[i, 1]).Direction = ParameterDirection.Output;
+                    else
+                        cmd.Parameters.AddWithValue("@" + aParam[i, 0], aParam[i, 1]);
                 }
             }
 
@@ -95,7 +98,7 @@ namespace FrbaCommerce
                     cmd = cargarParametrosCommand(cmd, oDtParam, oDtParam.Rows[0], "");
 
                 if(aParam != null)
-                    cmd = cargarParametrosCommand(cmd, aParam);
+                    cmd = cargarParametrosCommand(cmd, aParam, "");
 
                 conn.Open();
 
@@ -128,7 +131,7 @@ namespace FrbaCommerce
                     cmd = cargarParametrosCommand(cmd, oDtParam, oDtParam.Rows[0], "");
 
                 if (aParam != null)
-                    cmd = cargarParametrosCommand(cmd, aParam);
+                    cmd = cargarParametrosCommand(cmd, aParam, "");
 
                 conn.Open();
 
@@ -164,7 +167,7 @@ namespace FrbaCommerce
             {
                 conn.Open();
 
-                executeCommandMasivo(ref cmd, spName, oDtParam, aParam, "");
+                executeCommandMasivo(ref cmd, spName, oDtParam, aParam, sListOutParam);
 
                 for (int i = 0; i < aListOutParam.Length; i++)
                     result = result + cmd.Parameters["@" + aListOutParam[i]].Value.ToString() + "|";
@@ -231,7 +234,7 @@ namespace FrbaCommerce
             else
             {
                 if (aParam != null)
-                    cmd = cargarParametrosCommand(cmd, aParam);
+                    cmd = cargarParametrosCommand(cmd, aParam, sListOutParam);
 
                 try
                 {
