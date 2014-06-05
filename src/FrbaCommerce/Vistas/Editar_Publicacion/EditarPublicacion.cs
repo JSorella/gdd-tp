@@ -122,19 +122,19 @@ namespace FrbaCommerce
             BuscarPublicaciones oFrm = new BuscarPublicaciones();
             oFrm.ShowDialog();
 
-            //if ((oFrm.Resultado != null)) //Resultado es el DataRow.-
-            //{
-            //    DataRow oDr = oDTPubli.NewRow();
-            //    oDr.ItemArray = oFrm.Resultado.ItemArray;
-            //    oDTPubli.Rows.Add(oDr);
+            if ((oFrm.Resultado != null)) //Resultado es el DataRow.-
+            {
+                DataRow oDr = oDTPubli.NewRow();
+                oDr.ItemArray = oFrm.Resultado.ItemArray;
+                oDTPubli.Rows.Add(oDr);
 
-            //    txtCodPubli.Text = oDr["pub_Codigo"].ToString();
-            //    oDTRubros = InterfazBD.getPublicaciones_Rubros((int)oDr["pub_Codigo"]);
+                txtCodPubli.Text = oDr["pub_Codigo"].ToString();
+                oDTRubros = InterfazBD.getPublicaciones_Rubros((int)oDr["pub_Codigo"]);
 
-            //    CargarDatosPubli();
-            //    HabilitarMod(true);
-            //    txtDesc.Focus();
-            //}
+                CargarDatosPubli();
+                HabilitarMod(true);
+                txtDesc.Focus();
+            }
         }
 
         private void CargarDatosPubli()

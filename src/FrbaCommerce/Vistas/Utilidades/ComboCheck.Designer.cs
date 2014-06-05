@@ -73,7 +73,8 @@
             this.btnTodos.Location = new System.Drawing.Point(131, 156);
             this.btnTodos.Name = "btnTodos";
             this.btnTodos.Size = new System.Drawing.Size(25, 25);
-            this.btnTodos.TabIndex = 3;
+            this.btnTodos.TabIndex = 2;
+            this.btnTodos.TabStop = false;
             this.toolTip1.SetToolTip(this.btnTodos, "Marcar Todos");
             this.btnTodos.UseVisualStyleBackColor = true;
             this.btnTodos.Click += new System.EventHandler(this.btnTodos_Click);
@@ -86,7 +87,8 @@
             this.btnInvertir.Location = new System.Drawing.Point(162, 156);
             this.btnInvertir.Name = "btnInvertir";
             this.btnInvertir.Size = new System.Drawing.Size(25, 25);
-            this.btnInvertir.TabIndex = 2;
+            this.btnInvertir.TabIndex = 3;
+            this.btnInvertir.TabStop = false;
             this.toolTip1.SetToolTip(this.btnInvertir, "Invertir Selección");
             this.btnInvertir.UseVisualStyleBackColor = true;
             this.btnInvertir.Click += new System.EventHandler(this.btnInvertir_Click);
@@ -100,6 +102,7 @@
             this.btnOcultarPanel.Name = "btnOcultarPanel";
             this.btnOcultarPanel.Size = new System.Drawing.Size(25, 25);
             this.btnOcultarPanel.TabIndex = 1;
+            this.btnOcultarPanel.TabStop = false;
             this.toolTip1.SetToolTip(this.btnOcultarPanel, "Confirmar");
             this.btnOcultarPanel.UseVisualStyleBackColor = true;
             this.btnOcultarPanel.Click += new System.EventHandler(this.btnOcultarPanel_Click);
@@ -116,6 +119,7 @@
             this.clbLista.Name = "clbLista";
             this.clbLista.Size = new System.Drawing.Size(190, 154);
             this.clbLista.TabIndex = 0;
+            this.clbLista.TabStop = false;
             this.clbLista.MouseClick += new System.Windows.Forms.MouseEventHandler(this.clbLista_MouseClick);
             this.clbLista.SelectedIndexChanged += new System.EventHandler(this.clbLista_SelectedIndexChanged);
             this.clbLista.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.clbLista_ItemCheck);

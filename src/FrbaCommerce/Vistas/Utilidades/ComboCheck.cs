@@ -19,7 +19,7 @@ namespace FrbaCommerce
         public ComboCheck()
         {
             InitializeComponent();
-            
+
             OcultarPanel();
         }
 

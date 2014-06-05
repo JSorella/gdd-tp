@@ -110,3 +110,25 @@ BEGIN
 		
 END
 GO
+
+/*============================== STORED PROCEDURE JUAN ==============================*/
+IF OBJECT_ID('J2LA.ObtenerRubrosPubli') IS NOT NULL
+DROP FUNCTION J2LA.ObtenerRubrosPubli
+GO
+CREATE FUNCTION J2LA.ObtenerRubrosPubli(@pub_Codigo numeric(18,0))
+	RETURNS VARCHAR(7000)
+AS
+BEGIN
+
+DECLARE @Rubros Varchar(7000)
+SET @Rubros = ''
+
+	SELECT @Rubros = (CASE WHEN @Rubros = '' THEN @Rubros + R.rub_Descripcion
+					   ELSE @Rubros + ' - ' + R.rub_Descripcion END)
+	FROM J2LA.Publicaciones_Rubros PR
+	INNER JOIN J2LA.Rubros R On R.rub_id = PR.pubrub_rub_Id
+	WHERE PR.pubrub_pub_Codigo = @pub_Codigo
+
+	RETURN @Rubros
+
+END

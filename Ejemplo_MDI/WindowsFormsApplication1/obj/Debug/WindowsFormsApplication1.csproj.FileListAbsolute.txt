@@ -7,3 +7,12 @@ c:\users\juan\documents\visual studio 2012\Projects\WindowsFormsApplication1\Win
 c:\users\juan\documents\visual studio 2012\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.csproj.GenerateResource.Cache
 c:\users\juan\documents\visual studio 2012\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
 c:\users\juan\documents\visual studio 2012\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb
+C:\Users\Juan\Documents\GitHub\j2la-tp\Ejemplo_MDI\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
+C:\Users\Juan\Documents\GitHub\j2la-tp\Ejemplo_MDI\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb
+C:\Users\Juan\Documents\GitHub\j2la-tp\Ejemplo_MDI\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe
+C:\Users\Juan\Documents\GitHub\j2la-tp\Ejemplo_MDI\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.pdb
+C:\Users\Juan\Documents\GitHub\j2la-tp\Ejemplo_MDI\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.csprojResolveAssemblyReference.cache
+C:\Users\Juan\Documents\GitHub\j2la-tp\Ejemplo_MDI\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Form1.resources
+C:\Users\Juan\Documents\GitHub\j2la-tp\Ejemplo_MDI\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Form2.resources
+C:\Users\Juan\Documents\GitHub\j2la-tp\Ejemplo_MDI\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
+C:\Users\Juan\Documents\GitHub\j2la-tp\Ejemplo_MDI\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.csproj.GenerateResource.Cache

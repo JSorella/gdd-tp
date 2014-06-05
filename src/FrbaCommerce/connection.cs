@@ -160,32 +160,22 @@ namespace FrbaCommerce
             SqlCommand cmd = new SqlCommand(spName, conn);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            if (oDtParam != null)
-                cmd = cargarParametrosCommand(cmd, oDtParam, oDtParam.Rows[0], "");
-
-            if (aParam != null)
-                cmd = cargarParametrosCommand(cmd, aParam);
-
             try
             {
                 conn.Open();
 
-                try
-                {
-                    cmd.ExecuteNonQuery();
+                executeCommandMasivo(ref cmd, spName, oDtParam, aParam, "");
 
-                    for (int i = 0; i < aListOutParam.Length; i++)
-                    {
-                        result = result + cmd.Parameters["@" + aListOutParam[i]].Value.ToString() + "|";
-                    }
-                }
-                finally
-                {
-                    conn.Close();
-                }
+                for (int i = 0; i < aListOutParam.Length; i++)
+                    result = result + cmd.Parameters["@" + aListOutParam[i]].Value.ToString() + "|";
+
+                conn.Close();
             }
             catch (Exception ex)
             {
+                if (conn.State == ConnectionState.Open)
+                    conn.Close();
+
                 throw new Exception("Se detecto un error en executeQuerySPOutPut con el SP: " + spName + System.Environment.NewLine + "Mensaje de Error: " + ex.Message);
             }
 
@@ -204,25 +194,6 @@ namespace FrbaCommerce
                 conn.Open();
 
                 executeCommandMasivo(ref cmd, spName, oDtParam, aParam, "");
-
-                //if (oDtParam != null)
-                //{
-                //    executeCommandMasivo(ref cmd, spName, oDtParam, null, "");
-                //}
-                //else
-                //{
-                //    if (aParam != null)
-                //        cmd = cargarParametrosCommand(cmd, aParam);
-
-                //    try
-                //    {
-                //        cmd.ExecuteNonQuery();
-                //    }
-                //    catch (Exception)
-                //    {
-                //        throw;
-                //    }
-                //}
 
                 conn.Close();
             }
