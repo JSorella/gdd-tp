@@ -124,12 +124,10 @@ namespace FrbaCommerce
 
             if ((oFrm.Resultado != null)) //Resultado es el DataRow.-
             {
-                DataRow oDr = oDTPubli.NewRow();
-                oDr.ItemArray = oFrm.Resultado.ItemArray;
-                oDTPubli.Rows.Add(oDr);
+                oDTPubli = InterfazBD.getPublicacion(Convert.ToInt32(oFrm.Resultado["Codigo"]));
 
-                txtCodPubli.Text = oDr["pub_Codigo"].ToString();
-                oDTRubros = InterfazBD.getPublicaciones_Rubros((int)oDr["pub_Codigo"]);
+                txtCodPubli.Text = oFrm.Resultado["Codigo"].ToString();
+                oDTRubros = InterfazBD.getPublicaciones_Rubros(Convert.ToInt32(oFrm.Resultado["Codigo"]));
 
                 CargarDatosPubli();
                 HabilitarMod(true);
