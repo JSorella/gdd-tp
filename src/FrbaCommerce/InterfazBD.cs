@@ -558,6 +558,16 @@ namespace FrbaCommerce
             SqlCommand cmd = new SqlCommand("", conn);
             cmd.CommandType = CommandType.StoredProcedure;
 
+            //Valido Publicaciones Activas Gratis Antes de Grabar si es Activa y Gratuita.-
+            if ((Convert.ToInt32(oDtPubli.Rows[0]["pub_estado_Id"]) == 1) 
+                    && (Convert.ToDecimal(oDtPubli.Rows[0]["pub_vis_Precio"]) == Convert.ToDecimal(0)))
+            {
+                if (getCantPubliGratis(0) >= 3)
+                {
+                    throw new Exception("No puede tener mas de 3 Publicaciones Gratuitas Activas.");
+                }
+            }
+
             try
             {
                 conn.Open();
@@ -600,6 +610,16 @@ namespace FrbaCommerce
             SqlConnection conn = new SqlConnection(Singleton.ConnectionString);
             SqlCommand cmd = new SqlCommand("", conn);
             cmd.CommandType = CommandType.StoredProcedure;
+
+            //Valido Publicaciones Activas Gratis Antes de Grabar si es Activa y Gratuita.-
+            if ((Convert.ToInt32(oDtPubli.Rows[0]["pub_estado_Id"]) == 1)
+                    && (Convert.ToDecimal(oDtPubli.Rows[0]["pub_vis_Precio"]) == Convert.ToDecimal(0)))
+            {
+                if (getCantPubliGratis(Convert.ToInt32(oDtPubli.Rows[0]["pub_Codigo"])) >= 3)
+                {
+                    throw new Exception("No puede tener mas de 3 Publicaciones Gratuitas Activas.");
+                }
+            }
 
             try
             {
@@ -705,6 +725,20 @@ namespace FrbaCommerce
                 MessageBox.Show(ex.Message);
                 return new DataTable();
             }
+        }
+
+        public static int getCantPubliGratis(int pub_codigo)
+        {
+            try
+            {
+                return (int)Singleton.conexion.executeQueryFuncEscalar("J2LA.CantPubliGratis(@usu_id, @pub_codigo)", null,
+                                        new String[2, 2] { { "usu_id", Singleton.usuario["usu_id"].ToString() }, 
+                                                            { "pub_codigo", pub_codigo.ToString() } });
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }  
         }
     }
 }

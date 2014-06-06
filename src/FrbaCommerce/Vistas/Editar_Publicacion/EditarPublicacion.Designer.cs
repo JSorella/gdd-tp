@@ -30,18 +30,7 @@
         {
             this.btnGenerar = new System.Windows.Forms.Button();
             this.pnlDatos = new System.Windows.Forms.Panel();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.listRubros = new System.Windows.Forms.CheckedListBox();
-            this.txtDesc = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.pnlParam = new System.Windows.Forms.Panel();
-            this.btnSelPubli = new System.Windows.Forms.Button();
-            this.txtCodPubli = new System.Windows.Forms.TextBox();
-            this.btnAceptar = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.btnCancelar = new System.Windows.Forms.Button();
-            this.btnLimpiar = new System.Windows.Forms.Button();
+            this.cmbTipoPubli = new System.Windows.Forms.ComboBox();
             this.nudStock = new System.Windows.Forms.NumericUpDown();
             this.nudPrecio = new System.Windows.Forms.NumericUpDown();
             this.chkPreguntas = new System.Windows.Forms.CheckBox();
@@ -56,11 +45,22 @@
             this.txtFechaIni = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.cmbTipoPubli = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.listRubros = new System.Windows.Forms.CheckedListBox();
+            this.txtDesc = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.pnlParam = new System.Windows.Forms.Panel();
+            this.btnSelPubli = new System.Windows.Forms.Button();
+            this.txtCodPubli = new System.Windows.Forms.TextBox();
+            this.btnAceptar = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnCancelar = new System.Windows.Forms.Button();
+            this.btnLimpiar = new System.Windows.Forms.Button();
             this.pnlDatos.SuspendLayout();
-            this.pnlParam.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudStock)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPrecio)).BeginInit();
+            this.pnlParam.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnGenerar
@@ -105,129 +105,15 @@
             this.pnlDatos.Size = new System.Drawing.Size(596, 375);
             this.pnlDatos.TabIndex = 6;
             // 
-            // label10
+            // cmbTipoPubli
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(13, 144);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(34, 13);
-            this.label10.TabIndex = 22;
-            this.label10.Text = "Tipo :";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(292, 144);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(112, 13);
-            this.label7.TabIndex = 16;
-            this.label7.Text = "Selección de Rubros :";
-            // 
-            // listRubros
-            // 
-            this.listRubros.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.listRubros.FormattingEnabled = true;
-            this.listRubros.Location = new System.Drawing.Point(295, 160);
-            this.listRubros.Name = "listRubros";
-            this.listRubros.Size = new System.Drawing.Size(286, 184);
-            this.listRubros.TabIndex = 14;
-            // 
-            // txtDesc
-            // 
-            this.txtDesc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtDesc.Location = new System.Drawing.Point(16, 28);
-            this.txtDesc.MaxLength = 255;
-            this.txtDesc.Multiline = true;
-            this.txtDesc.Name = "txtDesc";
-            this.txtDesc.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtDesc.Size = new System.Drawing.Size(565, 107);
-            this.txtDesc.TabIndex = 4;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(13, 12);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(69, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Descripción :";
-            // 
-            // pnlParam
-            // 
-            this.pnlParam.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlParam.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlParam.Controls.Add(this.btnSelPubli);
-            this.pnlParam.Controls.Add(this.txtCodPubli);
-            this.pnlParam.Controls.Add(this.btnAceptar);
-            this.pnlParam.Controls.Add(this.label1);
-            this.pnlParam.Location = new System.Drawing.Point(12, 12);
-            this.pnlParam.Name = "pnlParam";
-            this.pnlParam.Size = new System.Drawing.Size(596, 48);
-            this.pnlParam.TabIndex = 5;
-            // 
-            // btnSelPubli
-            // 
-            this.btnSelPubli.Location = new System.Drawing.Point(341, 11);
-            this.btnSelPubli.Name = "btnSelPubli";
-            this.btnSelPubli.Size = new System.Drawing.Size(91, 23);
-            this.btnSelPubli.TabIndex = 2;
-            this.btnSelPubli.Text = "Seleccionar";
-            this.btnSelPubli.UseVisualStyleBackColor = true;
-            this.btnSelPubli.Click += new System.EventHandler(this.btnSelPubli_Click);
-            // 
-            // txtCodPubli
-            // 
-            this.txtCodPubli.Location = new System.Drawing.Point(187, 13);
-            this.txtCodPubli.MaxLength = 18;
-            this.txtCodPubli.Name = "txtCodPubli";
-            this.txtCodPubli.Size = new System.Drawing.Size(148, 20);
-            this.txtCodPubli.TabIndex = 1;
-            this.txtCodPubli.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCodPubli_KeyPress);
-            // 
-            // btnAceptar
-            // 
-            this.btnAceptar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAceptar.Location = new System.Drawing.Point(490, 11);
-            this.btnAceptar.Name = "btnAceptar";
-            this.btnAceptar.Size = new System.Drawing.Size(91, 23);
-            this.btnAceptar.TabIndex = 3;
-            this.btnAceptar.Text = "Aceptar";
-            this.btnAceptar.UseVisualStyleBackColor = true;
-            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 16);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(168, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Indique el Codigo de Publicación: ";
-            // 
-            // btnCancelar
-            // 
-            this.btnCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancelar.Location = new System.Drawing.Point(533, 447);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(75, 23);
-            this.btnCancelar.TabIndex = 17;
-            this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.UseVisualStyleBackColor = true;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
-            // 
-            // btnLimpiar
-            // 
-            this.btnLimpiar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLimpiar.Location = new System.Drawing.Point(452, 447);
-            this.btnLimpiar.Name = "btnLimpiar";
-            this.btnLimpiar.Size = new System.Drawing.Size(75, 23);
-            this.btnLimpiar.TabIndex = 16;
-            this.btnLimpiar.Text = "Limpiar";
-            this.btnLimpiar.UseVisualStyleBackColor = true;
-            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
+            this.cmbTipoPubli.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbTipoPubli.Enabled = false;
+            this.cmbTipoPubli.FormattingEnabled = true;
+            this.cmbTipoPubli.Location = new System.Drawing.Point(90, 141);
+            this.cmbTipoPubli.Name = "cmbTipoPubli";
+            this.cmbTipoPubli.Size = new System.Drawing.Size(181, 21);
+            this.cmbTipoPubli.TabIndex = 5;
             // 
             // nudStock
             // 
@@ -372,15 +258,129 @@
             this.label3.TabIndex = 26;
             this.label3.Text = "Stock :";
             // 
-            // cmbTipoPubli
+            // label10
             // 
-            this.cmbTipoPubli.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbTipoPubli.Enabled = false;
-            this.cmbTipoPubli.FormattingEnabled = true;
-            this.cmbTipoPubli.Location = new System.Drawing.Point(90, 141);
-            this.cmbTipoPubli.Name = "cmbTipoPubli";
-            this.cmbTipoPubli.Size = new System.Drawing.Size(181, 21);
-            this.cmbTipoPubli.TabIndex = 5;
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(13, 144);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(34, 13);
+            this.label10.TabIndex = 22;
+            this.label10.Text = "Tipo :";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(292, 144);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(112, 13);
+            this.label7.TabIndex = 16;
+            this.label7.Text = "Selección de Rubros :";
+            // 
+            // listRubros
+            // 
+            this.listRubros.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.listRubros.FormattingEnabled = true;
+            this.listRubros.Location = new System.Drawing.Point(295, 160);
+            this.listRubros.Name = "listRubros";
+            this.listRubros.Size = new System.Drawing.Size(286, 184);
+            this.listRubros.TabIndex = 14;
+            // 
+            // txtDesc
+            // 
+            this.txtDesc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtDesc.Location = new System.Drawing.Point(16, 28);
+            this.txtDesc.MaxLength = 255;
+            this.txtDesc.Multiline = true;
+            this.txtDesc.Name = "txtDesc";
+            this.txtDesc.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtDesc.Size = new System.Drawing.Size(565, 107);
+            this.txtDesc.TabIndex = 4;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(13, 12);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(69, 13);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Descripción :";
+            // 
+            // pnlParam
+            // 
+            this.pnlParam.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlParam.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlParam.Controls.Add(this.btnSelPubli);
+            this.pnlParam.Controls.Add(this.txtCodPubli);
+            this.pnlParam.Controls.Add(this.btnAceptar);
+            this.pnlParam.Controls.Add(this.label1);
+            this.pnlParam.Location = new System.Drawing.Point(12, 12);
+            this.pnlParam.Name = "pnlParam";
+            this.pnlParam.Size = new System.Drawing.Size(596, 48);
+            this.pnlParam.TabIndex = 5;
+            // 
+            // btnSelPubli
+            // 
+            this.btnSelPubli.Location = new System.Drawing.Point(341, 11);
+            this.btnSelPubli.Name = "btnSelPubli";
+            this.btnSelPubli.Size = new System.Drawing.Size(91, 23);
+            this.btnSelPubli.TabIndex = 2;
+            this.btnSelPubli.Text = "Seleccionar";
+            this.btnSelPubli.UseVisualStyleBackColor = true;
+            this.btnSelPubli.Click += new System.EventHandler(this.btnSelPubli_Click);
+            // 
+            // txtCodPubli
+            // 
+            this.txtCodPubli.Location = new System.Drawing.Point(187, 13);
+            this.txtCodPubli.MaxLength = 18;
+            this.txtCodPubli.Name = "txtCodPubli";
+            this.txtCodPubli.Size = new System.Drawing.Size(148, 20);
+            this.txtCodPubli.TabIndex = 1;
+            this.txtCodPubli.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCodPubli_KeyPress);
+            // 
+            // btnAceptar
+            // 
+            this.btnAceptar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAceptar.Location = new System.Drawing.Point(490, 11);
+            this.btnAceptar.Name = "btnAceptar";
+            this.btnAceptar.Size = new System.Drawing.Size(91, 23);
+            this.btnAceptar.TabIndex = 3;
+            this.btnAceptar.Text = "Aceptar";
+            this.btnAceptar.UseVisualStyleBackColor = true;
+            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(13, 16);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(168, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Indique el Codigo de Publicación: ";
+            // 
+            // btnCancelar
+            // 
+            this.btnCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancelar.Location = new System.Drawing.Point(533, 447);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(75, 23);
+            this.btnCancelar.TabIndex = 17;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            // 
+            // btnLimpiar
+            // 
+            this.btnLimpiar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLimpiar.Location = new System.Drawing.Point(452, 447);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(75, 23);
+            this.btnLimpiar.TabIndex = 16;
+            this.btnLimpiar.Text = "Limpiar";
+            this.btnLimpiar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
             // EditarPublicacion
             // 
@@ -396,12 +396,13 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Editar Publicaciones";
             this.Load += new System.EventHandler(this.EditarPublicacion_Load);
+            this.VisibleChanged += new System.EventHandler(this.EditarPublicacion_VisibleChanged);
             this.pnlDatos.ResumeLayout(false);
             this.pnlDatos.PerformLayout();
-            this.pnlParam.ResumeLayout(false);
-            this.pnlParam.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudStock)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPrecio)).EndInit();
+            this.pnlParam.ResumeLayout(false);
+            this.pnlParam.PerformLayout();
             this.ResumeLayout(false);
 
         }

@@ -362,6 +362,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Generar Publicaciones";
             this.Load += new System.EventHandler(this.GenerarPublicacion_Load);
+            this.VisibleChanged += new System.EventHandler(this.GenerarPublicacion_VisibleChanged);
             this.pnlParam.ResumeLayout(false);
             this.pnlParam.PerformLayout();
             this.pnlDatos.ResumeLayout(false);

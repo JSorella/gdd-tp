@@ -18,6 +18,8 @@ namespace FrbaCommerce
         DateTime dteFecIni;
         DateTime dteFecVto;
 
+        bool cerrarForm = false;
+
         public EditarPublicacion()
         {
             InitializeComponent();
@@ -34,6 +36,8 @@ namespace FrbaCommerce
 
         private void ArmarDataTables()
         {
+            if (cerrarForm) return;
+
             try
             {
                 oDTPubli = InterfazBD.getDTPubli();
@@ -41,12 +45,14 @@ namespace FrbaCommerce
             catch (Exception ex)
             {
                 MessageBox.Show("Error en ArmarDataTables: " + System.Environment.NewLine + ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                this.Close();
+                cerrarForm = true;
             }
         }
 
         private void CargarRubros()
         {
+            if (cerrarForm) return;
+
             try
             {
                 listRubros.DataSource = InterfazBD.getRubros();
@@ -56,12 +62,14 @@ namespace FrbaCommerce
             catch (Exception ex)
             {
                 MessageBox.Show("Error en CargarRubros: " + System.Environment.NewLine + ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                this.Close();
+                cerrarForm = true;
             }
         }
 
         private void Limpiar()
         {
+            if (cerrarForm) return;
+
             txtCodPubli.Text = string.Empty;
             txtDesc.Text = string.Empty;
             cmbTipoPubli.SelectedIndex = -1;
@@ -85,6 +93,8 @@ namespace FrbaCommerce
 
         private void HabilitarMod(bool habilitado)
         {
+            if (cerrarForm) return;
+
             pnlParam.Enabled = !habilitado;
             pnlDatos.Enabled = habilitado;
             btnGenerar.Enabled = habilitado;
@@ -94,6 +104,8 @@ namespace FrbaCommerce
 
         private void CargarCombos()
         {
+            if (cerrarForm) return;
+
             try
             {
                 oDTVis = InterfazBD.getVisibilidadesPubli();
@@ -113,7 +125,7 @@ namespace FrbaCommerce
             catch (Exception ex)
             {
                 MessageBox.Show("Error en CargarCombos: " + System.Environment.NewLine + ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                this.Close();
+                cerrarForm = true;
             }
         }
 
@@ -280,15 +292,15 @@ namespace FrbaCommerce
                 datosOk = false;
             }
 
-            if (nudStock.Value <= 0)
+            if (nudStock.Value < 1)
             {
-                mensaje = mensaje + "Debe indicar el Stock." + System.Environment.NewLine;
+                mensaje = mensaje + "Debe indicar un Stock Mayor o Igual a 1." + System.Environment.NewLine;
                 datosOk = false;
             }
 
-            if (nudPrecio.Value <= 0)
+            if (nudPrecio.Value < 1)
             {
-                mensaje = mensaje + "Debe indicar un Precio." + System.Environment.NewLine;
+                mensaje = mensaje + "Debe indicar un Precio Mayor o Igual a $1,00." + System.Environment.NewLine;
                 datosOk = false;
             }
 
@@ -417,6 +429,11 @@ namespace FrbaCommerce
         {
             if (txtFechaIni.Text != "")
                 ActualizarVto();
+        }
+
+        private void EditarPublicacion_VisibleChanged(object sender, EventArgs e)
+        {
+            if (cerrarForm) this.Close();
         }
     }
 }

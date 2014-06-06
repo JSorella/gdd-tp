@@ -138,7 +138,7 @@ GO
 IF OBJECT_ID('J2LA.CantPubliGratis') IS NOT NULL
 DROP FUNCTION J2LA.CantPubliGratis
 GO
-CREATE FUNCTION J2LA.CantPubliGratis(@usu_id int)
+CREATE FUNCTION J2LA.CantPubliGratis(@usu_id int, @pub_codigo int)
 RETURNS INT
 AS
 BEGIN
@@ -151,7 +151,8 @@ DECLARE @CantPubli INT
 			On	V.pubvis_id = P.pub_visibilidad_Id 
 				And V.pubvis_Precio = 0 --Gratis
 		WHERE P.pub_usu_Id = @usu_id
-		AND P.pub_estado_Id = 1 --Activas 
+		AND P.pub_estado_Id = 1 --Activas
+		And P.pub_codigo <> @pub_codigo --Que no sea la que estoy grabando (En editar.-)
 		
 RETURN @CantPubli
 

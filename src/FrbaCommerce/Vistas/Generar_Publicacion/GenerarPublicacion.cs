@@ -19,6 +19,9 @@ namespace FrbaCommerce
         DateTime dteFecIni;
         DateTime dteFecVto;
 
+        int CantGratis = 0;
+        bool cerrarForm = false;
+
         public GenerarPublicacion()
         {
             InitializeComponent();
@@ -39,16 +42,19 @@ namespace FrbaCommerce
             {
                 oDTPubli = InterfazBD.getDTPubli();
                 oDTRubros = InterfazBD.getDTRubros();
+                CantGratis = InterfazBD.getCantPubliGratis(0);
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error en ArmarDataTables: " + System.Environment.NewLine + ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                this.Close();
+                cerrarForm = true;
             }
         }
 
         private void CargarRubros()
         {
+            if (cerrarForm) return;
+
             try
             {
                 listRubros.DataSource = InterfazBD.getRubros();
@@ -58,12 +64,14 @@ namespace FrbaCommerce
             catch (Exception ex)
             {
                 MessageBox.Show("Error en CargarRubros: " + System.Environment.NewLine + ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                this.Close();
+                cerrarForm = true;
             }
         }
 
         private void Limpiar()
         {
+            if (cerrarForm) return;
+
             txtDesc.Text = string.Empty;
             cmbEstado.SelectedIndex = -1;
             cmbTipoVis.SelectedIndex = -1;
@@ -73,8 +81,11 @@ namespace FrbaCommerce
             txtFechaVto.Text = string.Empty;
             chkPreguntas.Checked = false;
 
-            oDTPubli.Rows.Clear();
-            oDTRubros.Rows.Clear();
+            if (!cerrarForm)
+            {
+                oDTPubli.Rows.Clear();
+                oDTRubros.Rows.Clear();
+            }
 
             //destildamos los rubros
             for (int i = 0; i < (this.listRubros.Items.Count); i++)
@@ -85,6 +96,8 @@ namespace FrbaCommerce
 
         private void HabilitarMod(bool habilitado)
         {
+            if (cerrarForm) return;
+
             pnlParam.Enabled = !habilitado;
             pnlDatos.Enabled = habilitado;
             btnGenerar.Enabled = habilitado;
@@ -94,6 +107,8 @@ namespace FrbaCommerce
 
         private void CargarCombos()
         {
+            if (cerrarForm) return;
+
             try
             {
                 oDTVis = InterfazBD.getVisibilidadesPubli();
@@ -113,7 +128,7 @@ namespace FrbaCommerce
             catch (Exception ex)
             {
                 MessageBox.Show("Error en CargarCombos: " + System.Environment.NewLine + ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                this.Close();
+                cerrarForm = true;
             }
         }
 
@@ -203,15 +218,15 @@ namespace FrbaCommerce
                 datosOk = false;
             }
 
-            if (nudStock.Value <= 0)
+            if (nudStock.Value < 1)
             {
-                mensaje = mensaje + "Debe indicar el Stock." + System.Environment.NewLine;
+                mensaje = mensaje + "Debe indicar un Stock Mayor o Igual a 1." + System.Environment.NewLine;
                 datosOk = false;
             }
 
-            if (nudPrecio.Value <= 0)
+            if (nudPrecio.Value < 1)
             {
-                mensaje = mensaje + "Debe indicar un Precio." + System.Environment.NewLine;
+                mensaje = mensaje + "Debe indicar un Precio Mayor o Igual a $1,00." + System.Environment.NewLine;
                 datosOk = false;
             }
 
@@ -326,20 +341,28 @@ namespace FrbaCommerce
                 ActualizarVto();
 
             DataRowView vrow = (DataRowView)cmbTipoVis.SelectedItem;
-            DataRow row;
 
             if (vrow != null)
             {
-                row = vrow.Row;
-                if (Convert.ToDecimal(row["pubvis_precio"]) == Convert.ToDecimal(0)) // Gratis
-                    ValidarPubliGratuita();
+                if ((Convert.ToInt32(cmbEstado.SelectedValue) == 1) //Activa
+                        && (Convert.ToDecimal(vrow.Row["pubvis_precio"]) == Convert.ToDecimal(0))) // Gratis
+                    ValidarPubliGratuitas();
             }
         }
 
-        private void ValidarPubliGratuita()
+        private void ValidarPubliGratuitas()
         {
-            
+            if (CantGratis >= 3)
+            {
+                MessageBox.Show("No puede tener mas de 3 Publicaciones Gratuitas Activas.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                cmbTipoVis.SelectedIndex = -1;
+            }
         }
 
+        private void GenerarPublicacion_VisibleChanged(object sender, EventArgs e)
+        {
+            if (cerrarForm)
+                this.Close();
+        }
     }
 }
