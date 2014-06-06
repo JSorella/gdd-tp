@@ -42,5 +42,7 @@ Drop Table J2LA.Funcionalidades
 GO
 Drop Table J2LA.Roles
 GO
+Drop Table J2LA.Usuarios_Calificaciones
+GO
 Drop Schema J2LA
 GO
