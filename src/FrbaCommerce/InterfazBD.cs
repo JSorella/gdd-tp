@@ -668,7 +668,22 @@ namespace FrbaCommerce
         {
             try
             {
-                string query = "exec J2LA.getTop5VendedoresConMayoresCalificaciones " + anio + ", " + trimestre;
+                string string_trimestre = null;
+                switch (trimestre) {
+                    case 1: string_trimestre = "Primero";
+                            break;
+                    case 2: string_trimestre = "Segundo";
+                            break;
+                    case 3: string_trimestre = "Tercero";
+                            break;
+                    case 4: string_trimestre = "Cuarto";
+                            break;
+                    default: break;
+                }
+
+                string query = "SELECT UserName,Reputacion_Trimestre_"+string_trimestre+
+                                " FROM J2LA.ViewVendedoresConMayoresCalificaciones WHERE Anio="+anio+
+                                "ORDER BY Reputacion_Trimestre_"+string_trimestre+" DESC";
                 return Singleton.conexion.executeQueryTable(query, null, null);
             }
             catch (Exception ex)

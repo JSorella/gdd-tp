@@ -29,42 +29,25 @@ AS
 	ORDER BY Facturacion DESC
 GO
 
-IF OBJECT_ID('J2LA.getTop5VendedoresConMayoresCalificaciones') IS NOT NULL
-DROP PROCEDURE J2LA.getTop5VendedoresConMayoresCalificaciones
+IF OBJECT_ID('J2LA.ViewVendedoresConMayoresCalificaciones') IS NOT NULL
+DROP VIEW J2LA.ViewVendedoresConMayoresCalificaciones
 GO
-CREATE PROCEDURE J2LA.getTop5VendedoresConMayoresCalificaciones(@anio int, @trimestre int)
+CREATE VIEW J2LA.ViewVendedoresConMayoresCalificaciones(
+	Username,
+	Anio,
+	Reputacion_Trimestre_Primero,
+	Reputacion_Trimestre_Segundo,
+	Reputacion_Trimestre_Tercero,
+	Reputacion_Trimestre_Cuarto)
 AS
-	/*
-	SELECT TOP 5 a.usu_UserName,AVG(d.cal_Cant_Estrellas) Reputacion
-	FROM J2LA.Usuarios a, J2LA.Compras b, J2LA.Publicaciones c, J2LA.Calificaciones d
-	WHERE b.comp_pub_Codigo = c.pub_Codigo
-	AND c.pub_usu_Id = a.usu_Id
-	AND b.comp_cal_Codigo = d.cal_Codigo
-	AND YEAR(b.comp_Fecha) = @anio
-	AND MONTH(b.comp_Fecha)>(@trimestre-1)*3 AND MONTH(b.comp_Fecha)<= @trimestre*3
-	GROUP BY a.usu_UserName
-	ORDER BY Reputacion DESC
-	*/
-	CREATE TABLE J2LA.ListadosTemp(
-		usu_Id			varchar(255),
-		cant_Estrellas	int
-	)
-	
-	INSERT INTO J2LA.ListadosTemp SELECT a.usu_UserName,d.cal_Cant_Estrellas
-	FROM J2LA.Usuarios a, J2LA.Compras b, J2LA.Publicaciones c, J2LA.Calificaciones d
-	WHERE b.comp_pub_Codigo = c.pub_Codigo
-	AND c.pub_usu_Id = a.usu_Id
-	AND b.comp_cal_Codigo = d.cal_Codigo
-	AND YEAR(b.comp_Fecha) = @anio
-	AND MONTH(b.comp_Fecha)>(@trimestre-1)*3 AND MONTH(b.comp_Fecha)<= @trimestre*3
-
-
-	SELECT TOP 5 usu_Id, Cast(AVG(CAST(cant_Estrellas AS FLOAT)) AS NUMERIC(10,2)) Reputacion
-	FROM J2LA.ListadosTemp
-	GROUP BY usu_Id
-	ORDER BY Reputacion DESC
-	
-	DROP TABLE J2LA.ListadosTemp
+	SELECT U.usu_UserName,
+		   UC.usucal_Anio,
+		   (CASE WHEN usucal_Cant_Ventas_Primero=0 THEN NULL ELSE CAST((usucal_Puntos_Primero*1.00/usucal_Cant_Ventas_Primero*1.00) AS NUMERIC(18,2)) END),
+		   (CASE WHEN usucal_Cant_Ventas_Segundo=0 THEN NULL ELSE CAST((usucal_Puntos_Segundo*1.00/usucal_Cant_Ventas_Segundo*1.00) AS NUMERIC(18,2)) END),
+		   (CASE WHEN usucal_Cant_Ventas_Tercero=0 THEN NULL ELSE CAST((usucal_Puntos_Tercero*1.00/usucal_Cant_Ventas_Tercero*1.00) AS NUMERIC(18,2)) END),
+		   (CASE WHEN usucal_Cant_Ventas_Cuarto=0 THEN NULL ELSE CAST((usucal_Puntos_Cuarto*1.00/usucal_Cant_Ventas_Cuarto*1.00) AS NUMERIC(18,2)) END)
+	FROM J2LA.Usuarios_Calificaciones UC, J2LA.Usuarios U
+	WHERE UC.usucal_usu_Id = U.usu_Id
 GO
 
 IF OBJECT_ID('J2LA.getTop5ClientesConMayorCantDePublicacionesSinCalificar') IS NOT NULL
