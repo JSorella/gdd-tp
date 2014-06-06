@@ -127,7 +127,7 @@
             this.cboxVisibilidad.FormattingEnabled = true;
             this.cboxVisibilidad.Location = new System.Drawing.Point(136, 137);
             this.cboxVisibilidad.Name = "cboxVisibilidad";
-            this.cboxVisibilidad.Size = new System.Drawing.Size(207, 21);
+            this.cboxVisibilidad.Size = new System.Drawing.Size(81, 21);
             this.cboxVisibilidad.TabIndex = 12;
             // 
             // cboxMes

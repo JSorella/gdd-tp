@@ -3,16 +3,25 @@ DROP PROCEDURE J2LA.getTop5VendedoresConMayorCantDeProdNoVendidos
 GO
 CREATE PROCEDURE J2LA.getTop5VendedoresConMayorCantDeProdNoVendidos(@anio int, @trimestre int, @visibilidad int, @mes int)
 AS
-	SELECT TOP 5 b.usu_UserName Usuario,c.pubvis_Descripcion Visibilidad,MONTH(a.pub_Fecha_Ini) Mes, SUM(a.pub_Stock) Productos_No_Vendidos
+	SELECT b.usu_UserName Usuario,c.pubvis_Descripcion Visibilidad,MONTH(a.pub_Fecha_Ini) Mes, SUM(a.pub_Stock) Productos_No_Vendidos
 	FROM J2LA.Publicaciones a, J2LA.Usuarios b, J2LA.Publicaciones_Visibilidades c
 	WHERE a.pub_usu_Id = b.usu_Id
 	AND a.pub_visibilidad_Id = c.pubvis_id
 	AND YEAR(a.pub_Fecha_Ini) = @anio
-	AND a.pub_visibilidad_Id = @visibilidad
-	AND MONTH(a.pub_Fecha_Ini) = @mes
+	AND (a.pub_visibilidad_Id = @visibilidad OR @visibilidad=0)
+	AND (MONTH(a.pub_Fecha_Ini) = @mes OR @mes=0)
 	AND MONTH(a.pub_Fecha_Ini)>(@trimestre-1)*3 AND MONTH(a.pub_Fecha_Ini)<= @trimestre*3
+	AND b.usu_UserName IN (
+		SELECT TOP 5 b.usu_UserName Usuario
+		FROM J2LA.Publicaciones a, J2LA.Usuarios b, J2LA.Publicaciones_Visibilidades c
+		WHERE a.pub_usu_Id = b.usu_Id
+		AND a.pub_visibilidad_Id = c.pubvis_id
+		AND YEAR(a.pub_Fecha_Ini) = @anio
+		AND MONTH(a.pub_Fecha_Ini)>(@trimestre-1)*3 AND MONTH(a.pub_Fecha_Ini)<= @trimestre*3
+		GROUP BY b.usu_UserName
+		ORDER BY SUM(a.pub_Stock)DESC)
 	GROUP BY b.usu_UserName,c.pubvis_Descripcion,MONTH(a.pub_Fecha_Ini)
-	ORDER BY Productos_No_Vendidos DESC
+	ORDER BY MONTH(a.pub_Fecha_Ini),c.pubvis_Descripcion,SUM(a.pub_Stock) DESC
 GO
 
 IF OBJECT_ID('J2LA.getTop5VendedoresConMayorFacturacion') IS NOT NULL

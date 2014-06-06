@@ -60,14 +60,25 @@ namespace FrbaCommerce
 
         public void cargarComboBoxVisibilidades()
         {
-            cboxVisibilidad.DataSource = InterfazBD.getVisibilidadesPubli();
+            String query = "Select pubvis_id,pubvis_Descripcion From J2LA.Publicaciones_Visibilidades " +
+                "Where pubvis_Eliminado = 0 " +
+                "Order By pubvis_Descripcion";
+
+            DataTable dt = Singleton.conexion.executeQueryTable(query, null, null);
+            DataRow dr = dt.NewRow();
+            dr["pubvis_id"] = 0;
+            dr["pubvis_Descripcion"] = "Sin Filtro";
+            dt.Rows.InsertAt(dr, 0);
+            cboxVisibilidad.DataSource = dt;
             cboxVisibilidad.DisplayMember = "pubvis_Descripcion";
             cboxVisibilidad.ValueMember = "pubvis_id";
         }
 
+
         public void cargarComboBoxMeses()
         {
             List<KeyValuePair<string, int>> mes = new List<KeyValuePair<string, int>>();
+            mes.Add(generarKeyValueInt("Sin Filtro", 0));
             if (cboxTrimestre.SelectedIndex == 0)
             {
                 mes.Add(generarKeyValueInt("Enero", 1));
