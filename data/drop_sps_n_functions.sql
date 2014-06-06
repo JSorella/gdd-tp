@@ -13,14 +13,14 @@ GO
 /*-----------LUCAS-------------*/
 
 IF OBJECT_ID('J2LA.getTop5VendedoresConMayorCantDeProdNoVendidos') IS NOT NULL
-DROP FUNCTION J2LA.getTop5VendedoresConMayorCantDeProdNoVendidos
+DROP PROCEDURE J2LA.getTop5VendedoresConMayorCantDeProdNoVendidos
 GO
 IF OBJECT_ID('J2LA.getTop5VendedoresConMayorFacturacion') IS NOT NULL
-DROP FUNCTION J2LA.getTop5VendedoresConMayorFacturacion
+DROP PROCEDURE J2LA.getTop5VendedoresConMayorFacturacion
 GO
-IF OBJECT_ID('J2LA.getTop5VendedoresConMayoresCalificaciones') IS NOT NULL
-DROP FUNCTION J2LA.getTop5VendedoresConMayoresCalificaciones
+IF OBJECT_ID('J2LA.ViewVendedoresConMayoresCalificaciones') IS NOT NULL
+DROP VIEW J2LA.ViewVendedoresConMayoresCalificaciones
 GO
 IF OBJECT_ID('J2LA.getTop5ClientesConMayorCantDePublicacionesSinCalificar') IS NOT NULL
-DROP FUNCTION J2LA.getTop5ClientesConMayorCantDePublicacionesSinCalificar
+DROP PROCEDURE J2LA.getTop5ClientesConMayorCantDePublicacionesSinCalificar
 GO

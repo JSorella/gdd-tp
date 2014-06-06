@@ -681,7 +681,7 @@ namespace FrbaCommerce
                     default: break;
                 }
 
-                string query = "SELECT UserName,Reputacion_Trimestre_"+string_trimestre+
+                string query = "SELECT TOP 5 UserName,Reputacion_Trimestre_"+string_trimestre+
                                 " FROM J2LA.ViewVendedoresConMayoresCalificaciones WHERE Anio="+anio+
                                 "ORDER BY Reputacion_Trimestre_"+string_trimestre+" DESC";
                 return Singleton.conexion.executeQueryTable(query, null, null);
