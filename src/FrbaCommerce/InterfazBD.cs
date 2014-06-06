@@ -5,6 +5,7 @@ using System.Text;
 using System.Data;
 using System.Data.Sql;
 using System.Data.SqlClient;
+using System.Windows.Forms;
 
 namespace FrbaCommerce
 {
@@ -426,6 +427,20 @@ namespace FrbaCommerce
             }
         }
 
+        public static DataTable getAnios()
+        {
+            try
+            {
+                String query = "Select distinct(YEAR(comp_Fecha)) Anio From J2LA.Compras";
+
+                return Singleton.conexion.executeQueryTable(query, null, null);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public static DataTable getEstadosPubli()
         {
             try
@@ -618,6 +633,62 @@ namespace FrbaCommerce
                     conn.Close();
 
                 conn.Dispose();
+            }
+        }
+
+        public static DataTable getTop5VendedoresConMayorCantDeProdNoVendidos(int anio, int trimestre, int visibilidad, int mes)
+        {
+            try
+            {
+                string query = "exec J2LA.getTop5VendedoresConMayorCantDeProdNoVendidos " + anio + ", " + trimestre + ", " + visibilidad + ", " + mes;
+                return Singleton.conexion.executeQueryTable(query, null, null);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return new DataTable();
+            }
+        }
+
+        public static DataTable getTop5VendedoresConMayorFacturacion(int anio, int trimestre)
+        {
+            try
+            {
+                string query = "exec J2LA.getTop5VendedoresConMayorFacturacion " + anio + ", " + trimestre;
+                return Singleton.conexion.executeQueryTable(query, null, null);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return new DataTable();
+            }
+        }
+
+        public static DataTable getTop5VendedoresConMayoresCalificaciones(int anio, int trimestre)
+        {
+            try
+            {
+                string query = "exec J2LA.getTop5VendedoresConMayoresCalificaciones " + anio + ", " + trimestre;
+                return Singleton.conexion.executeQueryTable(query, null, null);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return new DataTable();
+            }
+        }
+
+        public static DataTable getTop5ClientesConMayorCantDePublicacionesSinCalificar(int anio, int trimestre)
+        {
+            try
+            {
+                string query = "exec J2LA.getTop5ClientesConMayorCantDePublicacionesSinCalificar " + anio + ", " + trimestre;
+                return Singleton.conexion.executeQueryTable(query, null, null);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return new DataTable();
             }
         }
     }

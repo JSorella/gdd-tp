@@ -46,16 +46,17 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(57, 42);
+            this.label1.Location = new System.Drawing.Point(98, 20);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(26, 13);
             this.label1.TabIndex = 3;
             this.label1.Text = "Año";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(33, 94);
+            this.label2.Location = new System.Drawing.Point(74, 59);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(50, 13);
             this.label2.TabIndex = 4;
@@ -64,7 +65,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(13, 137);
+            this.label3.Location = new System.Drawing.Point(31, 99);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(93, 13);
             this.label3.TabIndex = 5;
@@ -75,19 +76,19 @@
             this.gridListado.AllowUserToAddRows = false;
             this.gridListado.AllowUserToDeleteRows = false;
             this.gridListado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gridListado.Location = new System.Drawing.Point(16, 319);
+            this.gridListado.Location = new System.Drawing.Point(12, 219);
             this.gridListado.Name = "gridListado";
             this.gridListado.ReadOnly = true;
-            this.gridListado.Size = new System.Drawing.Size(626, 232);
+            this.gridListado.Size = new System.Drawing.Size(560, 188);
             this.gridListado.TabIndex = 6;
             // 
             // cboxListado
             // 
             this.cboxListado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboxListado.FormattingEnabled = true;
-            this.cboxListado.Location = new System.Drawing.Point(114, 137);
+            this.cboxListado.Location = new System.Drawing.Point(136, 96);
             this.cboxListado.Name = "cboxListado";
-            this.cboxListado.Size = new System.Drawing.Size(432, 21);
+            this.cboxListado.Size = new System.Drawing.Size(355, 21);
             this.cboxListado.TabIndex = 7;
             this.cboxListado.SelectedIndexChanged += new System.EventHandler(this.cboxListado_SelectedIndexChanged);
             // 
@@ -95,7 +96,7 @@
             // 
             this.cboxAnio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboxAnio.FormattingEnabled = true;
-            this.cboxAnio.Location = new System.Drawing.Point(114, 39);
+            this.cboxAnio.Location = new System.Drawing.Point(136, 17);
             this.cboxAnio.Name = "cboxAnio";
             this.cboxAnio.Size = new System.Drawing.Size(81, 21);
             this.cboxAnio.TabIndex = 9;
@@ -104,7 +105,7 @@
             // 
             this.cboxTrimestre.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboxTrimestre.FormattingEnabled = true;
-            this.cboxTrimestre.Location = new System.Drawing.Point(114, 86);
+            this.cboxTrimestre.Location = new System.Drawing.Point(136, 56);
             this.cboxTrimestre.Name = "cboxTrimestre";
             this.cboxTrimestre.Size = new System.Drawing.Size(81, 21);
             this.cboxTrimestre.TabIndex = 10;
@@ -112,7 +113,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(564, 133);
+            this.button1.Location = new System.Drawing.Point(508, 92);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(64, 26);
             this.button1.TabIndex = 11;
@@ -124,7 +125,7 @@
             // 
             this.cboxVisibilidad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboxVisibilidad.FormattingEnabled = true;
-            this.cboxVisibilidad.Location = new System.Drawing.Point(114, 184);
+            this.cboxVisibilidad.Location = new System.Drawing.Point(136, 137);
             this.cboxVisibilidad.Name = "cboxVisibilidad";
             this.cboxVisibilidad.Size = new System.Drawing.Size(207, 21);
             this.cboxVisibilidad.TabIndex = 12;
@@ -133,7 +134,7 @@
             // 
             this.cboxMes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboxMes.FormattingEnabled = true;
-            this.cboxMes.Location = new System.Drawing.Point(114, 236);
+            this.cboxMes.Location = new System.Drawing.Point(136, 174);
             this.cboxMes.Name = "cboxMes";
             this.cboxMes.Size = new System.Drawing.Size(81, 21);
             this.cboxMes.TabIndex = 13;
@@ -141,7 +142,7 @@
             // labelVisibilidad
             // 
             this.labelVisibilidad.AutoSize = true;
-            this.labelVisibilidad.Location = new System.Drawing.Point(44, 187);
+            this.labelVisibilidad.Location = new System.Drawing.Point(71, 140);
             this.labelVisibilidad.Name = "labelVisibilidad";
             this.labelVisibilidad.Size = new System.Drawing.Size(53, 13);
             this.labelVisibilidad.TabIndex = 14;
@@ -150,7 +151,7 @@
             // labelMes
             // 
             this.labelMes.AutoSize = true;
-            this.labelMes.Location = new System.Drawing.Point(70, 239);
+            this.labelMes.Location = new System.Drawing.Point(97, 177);
             this.labelMes.Name = "labelMes";
             this.labelMes.Size = new System.Drawing.Size(27, 13);
             this.labelMes.TabIndex = 15;
@@ -160,7 +161,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(653, 566);
+            this.ClientSize = new System.Drawing.Size(584, 417);
             this.Controls.Add(this.labelMes);
             this.Controls.Add(this.labelVisibilidad);
             this.Controls.Add(this.cboxMes);
@@ -174,7 +175,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "ListadoEstadistico";
-            this.Text = "Form1";
+            this.Text = "Listados Estadisticos";
             this.Load += new System.EventHandler(this.ListadoEstadistico_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gridListado)).EndInit();
             this.ResumeLayout(false);

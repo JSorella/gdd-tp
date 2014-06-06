@@ -20,22 +20,18 @@ namespace FrbaCommerce
         private void ListadoEstadistico_Load(object sender, EventArgs e)
         {
             gridListado.Visible = false;
-            cargarComboBoxAños();
+            cargarComboBoxAnios();
             cargarComboBoxTrimestres();
             cargarComboBoxListados();
             cargarComboBoxVisibilidades();
         }
 
 
-        public void cargarComboBoxAños()
+        public void cargarComboBoxAnios()
         {
-            List<KeyValuePair<string, int>> anio = new List<KeyValuePair<string, int>>();
-            //esto se podria flexibilizar trayendo los anios de las fechas de la base de datos, pero como la bdd no crece y estamos en el 2014.
-            anio.Add(generarKeyValueInt("2013", 2013));
-            anio.Add(generarKeyValueInt("2014", 2014));
-            cboxAnio.DisplayMember = "Key";
-            cboxAnio.ValueMember = "Value";
-            cboxAnio.DataSource = anio;
+            cboxAnio.DataSource = InterfazBD.getAnios();
+            cboxAnio.DisplayMember = "Anio";
+            cboxAnio.ValueMember = "Anio";
         }
 
         public void cargarComboBoxTrimestres()
@@ -53,10 +49,10 @@ namespace FrbaCommerce
         public void cargarComboBoxListados()
         {
             List<KeyValuePair<string, int>> listado = new List<KeyValuePair<string, int>>();
-            listado.Add(generarKeyValueInt("getTop5VendedoresConMayorCantDeProdNoVendidos", 1));
-            listado.Add(generarKeyValueInt("getTop5VendedoresConMayorFacturacion", 2));
-            listado.Add(generarKeyValueInt("getTop5VendedoresConMayoresCalificaciones", 3));
-            listado.Add(generarKeyValueInt("getTop5ClientesConMayorCantDePublicacionesSinCalificar", 4));
+            listado.Add(generarKeyValueInt("Vendedores con mayor cantidad de productos no vendidos", 1));
+            listado.Add(generarKeyValueInt("Vendedores con mayor facturacion", 2));
+            listado.Add(generarKeyValueInt("Vendedores con mayores calificaciones", 3));
+            listado.Add(generarKeyValueInt("Clientes con mayor cantidad de publicaciones sin calificar", 4));
             cboxListado.DisplayMember = "Key";
             cboxListado.ValueMember = "Value";
             cboxListado.DataSource = listado;
@@ -114,7 +110,7 @@ namespace FrbaCommerce
 
         private int getAnio()
         {
-            return ((KeyValuePair<string, int>)cboxAnio.SelectedItem).Value;
+            return Convert.ToInt32(cboxAnio.SelectedValue);
         }
 
         private int getTrimestre()
@@ -132,67 +128,6 @@ namespace FrbaCommerce
             return ((KeyValuePair<string, int>)cboxMes.SelectedItem).Value;
         }
 
-        public DataTable getTop5VendedoresConMayorCantDeProdNoVendidos(int anio, int trimestre, int visibilidad, int mes)
-        {
-            //ESTO DEBE IR A LA CLASE DE INTERFAZ CON BD.-
-            try
-            {
-                string query = "exec J2LA.getTop5VendedoresConMayorCantDeProdNoVendidos " + anio + ", " + trimestre + ", " + visibilidad + ", " + mes;
-                return Singleton.conexion.executeQueryTable(query, null, null);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return new DataTable();
-            }
-        }
-
-        public DataTable getTop5VendedoresConMayorFacturacion(int anio, int trimestre)
-        {
-            //ESTO DEBE IR A LA CLASE DE INTERFAZ CON BD.-
-            try
-            {
-                string query = "exec J2LA.getTop5VendedoresConMayorFacturacion " + anio + ", " + trimestre;
-                return Singleton.conexion.executeQueryTable(query, null, null);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return new DataTable();
-            }
-        }
-
-        public DataTable getTop5VendedoresConMayoresCalificaciones(int anio, int trimestre)
-        {
-            //ESTO DEBE IR A LA CLASE DE INTERFAZ CON BD.-
-            try
-            {
-                string query = "exec J2LA.getTop5VendedoresConMayoresCalificaciones " + anio + ", " + trimestre;
-                return Singleton.conexion.executeQueryTable(query, null, null);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return new DataTable();
-            }
-        }
-
-        public DataTable getTop5ClientesConMayorCantDePublicacionesSinCalificar(int anio, int trimestre)
-        {
-            //ESTO DEBE IR A LA CLASE DE INTERFAZ CON BD.-
-            try
-            {
-                string query = "exec J2LA.getTop5ClientesConMayorCantDePublicacionesSinCalificar " + anio + ", " + trimestre;
-                return Singleton.conexion.executeQueryTable(query, null, null);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return new DataTable();
-            }
-        }
-
-
         private void cargarGrid(DataTable dt)
         {
             gridListado.Visible = true;
@@ -208,16 +143,16 @@ namespace FrbaCommerce
                 case 0:
                     int visibilidad = getVisibilidad();
                     int mes = getMes();
-                    this.cargarGrid(getTop5VendedoresConMayorCantDeProdNoVendidos(anio, trimestre, visibilidad, mes));
+                    this.cargarGrid(InterfazBD.getTop5VendedoresConMayorCantDeProdNoVendidos(anio, trimestre, visibilidad, mes));
                     break;
                 case 1:
-                    this.cargarGrid(getTop5VendedoresConMayorFacturacion(anio, trimestre));
+                    this.cargarGrid(InterfazBD.getTop5VendedoresConMayorFacturacion(anio, trimestre));
                     break;
                 case 2:
-                    this.cargarGrid(getTop5VendedoresConMayoresCalificaciones(anio, trimestre));
+                    this.cargarGrid(InterfazBD.getTop5VendedoresConMayoresCalificaciones(anio, trimestre));
                     break;
                 case 3:
-                    this.cargarGrid(getTop5ClientesConMayorCantDePublicacionesSinCalificar(anio, trimestre));
+                    this.cargarGrid(InterfazBD.getTop5ClientesConMayorCantDePublicacionesSinCalificar(anio, trimestre));
                     break;
                 default:
                     break;
@@ -245,6 +180,11 @@ namespace FrbaCommerce
         private void cboxTrimestre_SelectedIndexChanged(object sender, EventArgs e)
         {
             cargarComboBoxMeses();
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
 
     }
