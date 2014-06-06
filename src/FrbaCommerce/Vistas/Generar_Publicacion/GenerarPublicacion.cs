@@ -324,6 +324,21 @@ namespace FrbaCommerce
         {
             if(txtFechaIni.Text != "")
                 ActualizarVto();
+
+            DataRowView vrow = (DataRowView)cmbTipoVis.SelectedItem;
+            DataRow row;
+
+            if (vrow != null)
+            {
+                row = vrow.Row;
+                if (Convert.ToDecimal(row["pubvis_precio"]) == Convert.ToDecimal(0)) // Gratis
+                    ValidarPubliGratuita();
+            }
+        }
+
+        private void ValidarPubliGratuita()
+        {
+            
         }
 
     }

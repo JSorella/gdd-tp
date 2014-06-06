@@ -132,3 +132,28 @@ SET @Rubros = ''
 	RETURN @Rubros
 
 END
+GO
+
+/*============================== STORED PROCEDURE JUAN ==============================*/
+IF OBJECT_ID('J2LA.CantPubliGratis') IS NOT NULL
+DROP FUNCTION J2LA.CantPubliGratis
+GO
+CREATE FUNCTION J2LA.CantPubliGratis(@usu_id int)
+RETURNS INT
+AS
+BEGIN
+
+DECLARE @CantPubli INT
+
+		SELECT @CantPubli = COUNT(*)
+		FROM J2LA.Publicaciones P
+		INNER JOIN J2LA.Publicaciones_Visibilidades V 
+			On	V.pubvis_id = P.pub_visibilidad_Id 
+				And V.pubvis_Precio = 0 --Gratis
+		WHERE P.pub_usu_Id = @usu_id
+		AND P.pub_estado_Id = 1 --Activas 
+		
+RETURN @CantPubli
+
+END
+GO
