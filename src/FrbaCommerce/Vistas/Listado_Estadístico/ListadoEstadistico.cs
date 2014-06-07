@@ -67,7 +67,7 @@ namespace FrbaCommerce
             DataTable dt = Singleton.conexion.executeQueryTable(query, null, null);
             DataRow dr = dt.NewRow();
             dr["pubvis_id"] = 0;
-            dr["pubvis_Descripcion"] = "Sin Filtro";
+            dr["pubvis_Descripcion"] = "(Todos)";
             dt.Rows.InsertAt(dr, 0);
             cboxVisibilidad.DataSource = dt;
             cboxVisibilidad.DisplayMember = "pubvis_Descripcion";
@@ -78,7 +78,7 @@ namespace FrbaCommerce
         public void cargarComboBoxMeses()
         {
             List<KeyValuePair<string, int>> mes = new List<KeyValuePair<string, int>>();
-            mes.Add(generarKeyValueInt("Sin Filtro", 0));
+            mes.Add(generarKeyValueInt("(Todos)", 0));
             if (cboxTrimestre.SelectedIndex == 0)
             {
                 mes.Add(generarKeyValueInt("Enero", 1));
