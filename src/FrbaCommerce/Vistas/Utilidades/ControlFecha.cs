@@ -39,13 +39,13 @@ namespace FrbaCommerce
             isLoad = true;
 
             // Asignamos la menor fecha posible
-            if (dteFecha < Singleton.FechaDelSistema)
-                this.mcSelFecha.MinDate = dteFecha;
-            else
-                this.mcSelFecha.MinDate = Singleton.FechaDelSistema;
+            this.mcSelFecha.MinDate = Singleton.FechaDelSistema;
 
             // Seleccionamos una fecha.
-            this.mcSelFecha.SelectionStart = dteFecha;
+            if (dteFecha < Singleton.FechaDelSistema)
+                this.mcSelFecha.SelectionStart = Singleton.FechaDelSistema;
+            else
+                this.mcSelFecha.SelectionStart = dteFecha;
 
             isLoad = false;
         }

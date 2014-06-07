@@ -549,6 +549,46 @@ namespace FrbaCommerce
             }
         }
 
+        public static void ValidarPublicacion(DataTable oDT)
+        {
+            try
+            {
+                UsuarioInHabilitado(Convert.ToInt32(Singleton.usuario["usu_id"]), Singleton.usuario["usu_username"].ToString());
+
+                //Valido Publicaciones Activas Gratis Antes de Grabar si es Activa y Gratuita.-
+                if ((Convert.ToInt32(oDT.Rows[0]["pub_estado_Id"]) == 1)
+                        && (Convert.ToDecimal(oDT.Rows[0]["pub_vis_Precio"]) == Convert.ToDecimal(0)))
+                {
+                    if (getCantPubliGratis(Convert.ToInt32(oDT.Rows[0]["pub_codigo"])) >= 3)
+                    {
+                        throw new Exception("No puede tener mas de 3 Publicaciones Gratuitas Activas.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        private static bool UsuarioInHabilitado(int usu_id, String usu_username)
+        {
+            try
+            {
+                bool result = (bool)Singleton.conexion.executeQueryFuncEscalar("J2LA.UsuarioInHabilitado(@usu_id)", null,
+                                        new String[1, 2] { { "usu_id", usu_id.ToString() } });
+
+                if (result)
+                    throw new Exception("El usuario '" + usu_username + "' esta Inhabilitado para realizar esta operación.");
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }   
+        }
+
         public static String NuevaPublicacion(DataTable oDtPubli, DataTable oDTRubros)
         {
             int pub_Codigo;
@@ -558,14 +598,14 @@ namespace FrbaCommerce
             SqlCommand cmd = new SqlCommand("", conn);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            //Valido Publicaciones Activas Gratis Antes de Grabar si es Activa y Gratuita.-
-            if ((Convert.ToInt32(oDtPubli.Rows[0]["pub_estado_Id"]) == 1) 
-                    && (Convert.ToDecimal(oDtPubli.Rows[0]["pub_vis_Precio"]) == Convert.ToDecimal(0)))
+            try
             {
-                if (getCantPubliGratis(0) >= 3)
-                {
-                    throw new Exception("No puede tener mas de 3 Publicaciones Gratuitas Activas.");
-                }
+                ValidarPublicacion(oDtPubli);
+            }
+            catch (Exception ex)
+            {
+                
+                throw new Exception(ex.Message);
             }
 
             try
@@ -611,14 +651,14 @@ namespace FrbaCommerce
             SqlCommand cmd = new SqlCommand("", conn);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            //Valido Publicaciones Activas Gratis Antes de Grabar si es Activa y Gratuita.-
-            if ((Convert.ToInt32(oDtPubli.Rows[0]["pub_estado_Id"]) == 1)
-                    && (Convert.ToDecimal(oDtPubli.Rows[0]["pub_vis_Precio"]) == Convert.ToDecimal(0)))
+            try
             {
-                if (getCantPubliGratis(Convert.ToInt32(oDtPubli.Rows[0]["pub_Codigo"])) >= 3)
-                {
-                    throw new Exception("No puede tener mas de 3 Publicaciones Gratuitas Activas.");
-                }
+                ValidarPublicacion(oDtPubli);
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
             }
 
             try

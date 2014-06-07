@@ -103,6 +103,13 @@ namespace FrbaCommerce
             btnGenerar.Enabled = habilitado;
             btnLimpiar.Enabled = habilitado;
             btnCancelar.Enabled = habilitado;
+
+            if (Convert.ToInt32(cmbTipoPubli.SelectedValue) == 2) //Subasta
+            {
+                nudStock.Value = 1;
+                nudStock.Enabled = false;
+            }
+
         }
 
         private void CargarCombos()

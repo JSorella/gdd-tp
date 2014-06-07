@@ -158,3 +158,23 @@ RETURN @CantPubli
 
 END
 GO
+
+/*============================== STORED PROCEDURE JUAN ==============================*/
+IF OBJECT_ID('J2LA.UsuarioInHabilitado') IS NOT NULL
+DROP FUNCTION J2LA.UsuarioInHabilitado
+GO
+CREATE FUNCTION J2LA.UsuarioInHabilitado(@usu_id int)
+RETURNS BIT
+AS
+BEGIN
+
+DECLARE @Result BIT
+
+	SELECT @Result = U.usu_Inhabilitado
+	FROM J2LA.Usuarios U
+	Where U.usu_Id = @usu_id
+		
+RETURN @Result
+
+END
+GO

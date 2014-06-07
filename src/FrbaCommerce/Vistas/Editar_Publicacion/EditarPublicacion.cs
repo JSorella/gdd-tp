@@ -100,6 +100,11 @@ namespace FrbaCommerce
             btnGenerar.Enabled = habilitado;
             btnLimpiar.Enabled = habilitado;
             btnCancelar.Enabled = habilitado;
+
+            if (Convert.ToInt32(cmbTipoPubli.SelectedValue) == 2) //Subasta
+            {
+                nudStock.Enabled = false;
+            }
         }
 
         private void CargarCombos()
@@ -231,6 +236,7 @@ namespace FrbaCommerce
             ppos.X = ppos.X + this.btnSelFec.Width;
 
             FrbaCommerce.ControlFecha oFrm = new FrbaCommerce.ControlFecha(ppos.X, ppos.Y);
+            oFrm.FechaSeleccionada = dteFecIni;
             oFrm.ShowDialog();
 
             if (!oFrm.Cancelado)
