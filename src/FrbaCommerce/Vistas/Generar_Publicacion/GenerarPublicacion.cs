@@ -119,6 +119,10 @@ namespace FrbaCommerce
             try
             {
                 oDTVis = InterfazBD.getVisibilidadesPubli();
+                DataTable oDtEstado = InterfazBD.getEstadosPubli();
+
+                DataRow[] foundRows = oDtEstado.Select("pubest_id not in (3,4)");
+                oDtEstado = foundRows.CopyToDataTable();
 
                 cmbTipoVis.ValueMember = "pubvis_Id";
                 cmbTipoVis.DisplayMember = "pubvis_Descripcion";
@@ -130,7 +134,7 @@ namespace FrbaCommerce
 
                 cmbEstado.ValueMember = "pubest_Id";
                 cmbEstado.DisplayMember = "pubest_Descripcion";
-                cmbEstado.DataSource = InterfazBD.getEstadosPubli();
+                cmbEstado.DataSource = oDtEstado;
             }
             catch (Exception ex)
             {

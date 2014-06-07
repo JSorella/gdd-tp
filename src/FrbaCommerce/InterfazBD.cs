@@ -186,7 +186,7 @@ namespace FrbaCommerce
             //SI ESTA FUNCION RECIBIERA UN DATATABLE DE CLIENTE CON LOS CAMPOS DEL SP SE PODRIA USAR LA FUNCION Singleton.conexion.executeQuerySP("J2LA.setNuevoCliente", oDataTableCli);
             //SI ESTA FUNCION RECIBIERA UN DATATABLE DE CLIENTE CON LOS CAMPOS DEL SP SE PODRIA USAR LA FUNCION Singleton.conexion.executeQuerySP("J2LA.setNuevoCliente", oDataTableCli);
 
-            string query = @"EXECUTE J2LA.setNuevoCliente";
+            string query = @"J2LA.setNuevoCliente";
 //                                @userName, 
 //                                @password, 
 //                                @nombre, 
@@ -207,6 +207,7 @@ namespace FrbaCommerce
             //SqlCommand comando = new SqlCommand(query, Singleton.conexion.connector());
 
             SqlCommand comando = new SqlCommand(query);
+            comando.CommandType = CommandType.StoredProcedure;
 
             //Console.WriteLine(cliente.userName);
             comando.Parameters.AddWithValue("@userName", cliente.userName);

@@ -30,7 +30,7 @@ namespace FrbaCommerce
             ArmarDataTables();
             CargarCombos();
             CargarRubros();
-            Limpiar();
+            Limpiar(true);
             HabilitarMod(false);
         }
 
@@ -66,13 +66,13 @@ namespace FrbaCommerce
             }
         }
 
-        private void Limpiar()
+        private void Limpiar(bool cancel)
         {
             if (cerrarForm) return;
 
             txtCodPubli.Text = string.Empty;
             txtDesc.Text = string.Empty;
-            cmbTipoPubli.SelectedIndex = -1;
+            if(cancel) cmbTipoPubli.SelectedIndex = -1;
             cmbEstado.SelectedIndex = -1;
             cmbTipoVis.SelectedIndex = -1;
             nudPrecio.Value = 0;
@@ -95,16 +95,23 @@ namespace FrbaCommerce
         {
             if (cerrarForm) return;
 
+            txtDesc.ReadOnly = false;
+            txtDesc.Enabled = true;
+            cmbEstado.Enabled = true;
+            cmbTipoVis.Enabled = true;
+            nudPrecio.ReadOnly = false;
+            nudPrecio.Enabled = true;
+            nudStock.ReadOnly = false;
+            nudStock.Enabled = true;
+            btnSelFec.Enabled = true;
+            chkPreguntas.Enabled = true;
+            listRubros.Enabled = true;
+
             pnlParam.Enabled = !habilitado;
             pnlDatos.Enabled = habilitado;
             btnGenerar.Enabled = habilitado;
             btnLimpiar.Enabled = habilitado;
             btnCancelar.Enabled = habilitado;
-
-            if (Convert.ToInt32(cmbTipoPubli.SelectedValue) == 2) //Subasta
-            {
-                nudStock.Enabled = false;
-            }
         }
 
         private void CargarCombos()
@@ -191,8 +198,63 @@ namespace FrbaCommerce
             {
                 CargarDatosPubli();
                 HabilitarMod(true);
+                HabilitarSegunEstadoTipo();
                 txtDesc.Focus();
             }
+        }
+
+        private void HabilitarSegunEstadoTipo()
+        {
+            if (Convert.ToInt32(cmbTipoPubli.SelectedValue) == 2) //Subasta
+            {
+                nudStock.Enabled = false;
+            }
+
+            switch (Convert.ToInt32(cmbEstado.SelectedValue))
+            {
+                case 1:
+                    ActivarVistaBorrador();
+                    break;
+                case 2:
+                    ActivarVistaActiva();
+                    break;
+                case 3:
+                    ActivarVistaPausada();
+                    break;
+                case 4:
+                    ActivarVistaFinalizada();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void ActivarVistaFinalizada()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ActivarVistaPausada()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ActivarVistaActiva()
+        {
+            nudStock.ReadOnly = false;
+            nudStock.Enabled = true;
+            txtDesc.ReadOnly = false;
+            txtDesc.Enabled = true;
+
+            for (int i = 0; i <= cmbEstado.Items.Count; i++)
+            {
+                
+            }
+        }
+
+        private void ActivarVistaBorrador()
+        {
+            cmbTipoPubli.Enabled = false;
         }
 
         private bool ValidaAceptar()
@@ -267,7 +329,7 @@ namespace FrbaCommerce
                 {
                     if (Generar())
                     {
-                        Limpiar();
+                        Limpiar(true);
                         HabilitarMod(false);
                     }
                 }
@@ -387,15 +449,10 @@ namespace FrbaCommerce
             DataRowView vrow = (DataRowView)cmbTipoVis.SelectedItem;
             DataRow rowVis = vrow.Row;
 
-            //oDTPubli.Rows.Clear();
-            //DataRow oDr = oDTPubli.NewRow();
-
             DataRow oDr = oDTPubli.Rows[0];
 
             oDr.BeginEdit();
 
-            //oDr["pub_codigo"] = 0;
-            //oDr["pub_tipo_Id"] = cmbTipoPubli.SelectedValue;
             oDr["pub_Descripcion"] = txtDesc.Text;
             oDr["pub_Stock"] = nudStock.Value;
             oDr["pub_Fecha_Vto"] = dteFecIni;
@@ -404,7 +461,6 @@ namespace FrbaCommerce
             oDr["pub_visibilidad_Id"] = cmbTipoVis.SelectedValue;
             oDr["pub_estado_Id"] = cmbEstado.SelectedValue;
             oDr["pub_Permite_Preg"] = chkPreguntas.Checked;
-            //oDr["pub_usu_id"] = Singleton.usuario["usu_id"];
             oDr["pub_vis_Precio"] = rowVis["pubvis_Precio"];
             oDr["pub_vis_Porcentaje"] = rowVis["pubvis_Porcentaje"];
 
@@ -414,14 +470,14 @@ namespace FrbaCommerce
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Confirma que desea Limpiar los datos ingresados?", "Nueva Publicación", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                Limpiar();
+                Limpiar(false);
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Confirma que desea Cancelar los datos ingresados?", "Nueva Publicación", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                Limpiar();
+                Limpiar(true);
                 HabilitarMod(false);
             }
         }
