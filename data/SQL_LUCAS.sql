@@ -157,22 +157,25 @@ AS
 	END
 GO
 
---IF OBJECT_ID('J2LA.triggerInhabilitarUsuarioPorNoCalificar') IS NOT NULL
---DROP PROCEDURE J2LA.triggerInhabilitarUsuarioPorNoCalificar
---GO
---CREATE TRIGGER J2LA.triggerInhabilitarUsuarioPorNoCalificar
---ON J2LA.Compras
---FOR INSERT, UPDATE
---AS
---	BEGIN
---		DECLARE @cant_Compras_No_Calificadas INT
+IF OBJECT_ID('J2LA.triggerInhabilitarUsuarioPorNoCalificar') IS NOT NULL
+DROP TRIGGER J2LA.triggerInhabilitarUsuarioPorNoCalificar
+GO
+CREATE TRIGGER J2LA.triggerInhabilitarUsuarioPorNoCalificar
+ON J2LA.Compras
+FOR INSERT, UPDATE
+AS
+	BEGIN
+		DECLARE @cant_Compras_No_Calificadas INT
+		DECLARE @comp_usu_Id INT
 		
---		SET @cant_Compras_No_Calificadas = (SELECT COUNT(*) FROM J2LA.Compras A WHERE comp_cal_Codigo IS NULL AND A.comp_usu_Id = comp_usu_Id)
+		SET @comp_usu_Id = (SELECT comp_usu_Id FROM inserted)
 		
---		IF (@cant_Compras_No_Calificadas > 5)
---			BEGIN
---				UPDATE J2LA.Usuarios
---				SET usu_Inhabilitado_Compras = 1
---				WHERE usu_Id = comp_usu_Id
---			END
---	END
+		SET @cant_Compras_No_Calificadas = (SELECT COUNT(*) FROM J2LA.Compras WHERE comp_cal_Codigo IS NULL AND comp_usu_Id = @comp_usu_Id)
+		
+		IF (@cant_Compras_No_Calificadas > 5)
+			BEGIN
+				UPDATE J2LA.Usuarios
+				SET usu_Inhabilitado_Comprar = 1
+				WHERE usu_Id = @comp_usu_Id
+			END
+	END

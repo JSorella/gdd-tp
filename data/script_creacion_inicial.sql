@@ -48,6 +48,7 @@ CREATE TABLE J2LA.Usuarios (
 	usu_Pass nvarchar(255) NOT NULL,
 	usu_Cant_Intentos int NOT NULL DEFAULT 0,
 	usu_Inhabilitado bit NOT NULL DEFAULT 0,
+	usu_Inhabilitado_Comprar bit NOT NULL DEFAULT 0,
 	usu_Motivo nvarchar(255) NULL,
 	usu_Eliminado bit NOT NULL DEFAULT 0,
 	usu_Primer_Ingreso bit NOT NULL DEFAULT 1,

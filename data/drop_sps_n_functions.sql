@@ -25,7 +25,7 @@ IF OBJECT_ID('J2LA.getTop5ClientesConMayorCantDePublicacionesSinCalificar') IS N
 DROP PROCEDURE J2LA.getTop5ClientesConMayorCantDePublicacionesSinCalificar
 GO
 IF OBJECT_ID('J2LA.getCalificacionesPendientes') IS NOT NULL
-DROP PROCEDURE J2LA.getCalificacionesPendientes
+DROP FUNCTION J2LA.getCalificacionesPendientes
 GO
 IF OBJECT_ID('J2LA.ActulizarReputacion') IS NOT NULL
 DROP PROCEDURE J2LA.ActualizarReputacion
@@ -34,5 +34,5 @@ IF OBJECT_ID('J2LA.CargarCalificacion') IS NOT NULL
 DROP PROCEDURE J2LA.CargarCalificacion
 GO
 IF OBJECT_ID('J2LA.triggerInhabilitarUsuarioPorNoCalificar') IS NOT NULL
-DROP PROCEDURE J2LA.triggerInhabilitarUsuarioPorNoCalificar
+DROP TRIGGER J2LA.triggerInhabilitarUsuarioPorNoCalificar
 GO
