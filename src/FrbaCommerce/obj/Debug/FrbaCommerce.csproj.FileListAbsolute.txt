@@ -174,3 +174,4 @@ C:\Users\Lucas\Documents\GitHub\j2la-tp\src\FrbaCommerce\bin\Debug\FrbaCommerce.
 C:\Users\Lucas\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.pdb
 C:\Users\Lucas\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.CalificarBusqueda.resources
 C:\Users\jsorella\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.CalificarBusqueda.resources
+C:\Users\jsorella\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.AltaPregunta.resources

@@ -47,10 +47,10 @@
             this.txtDesc = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.groupPreguntas = new System.Windows.Forms.GroupBox();
-            this.dgvPreg = new System.Windows.Forms.DataGridView();
+            this.dgPreguntas = new System.Windows.Forms.DataGridView();
             this.pnlDatos.SuspendLayout();
             this.groupPreguntas.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPreg)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgPreguntas)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlDatos
@@ -108,6 +108,7 @@
             this.btnPregunta.TabIndex = 46;
             this.btnPregunta.Text = "Hacer una Pregunta";
             this.btnPregunta.UseVisualStyleBackColor = true;
+            this.btnPregunta.Click += new System.EventHandler(this.btnPregunta_Click);
             // 
             // txtVendedor
             // 
@@ -233,7 +234,7 @@
             // 
             // groupPreguntas
             // 
-            this.groupPreguntas.Controls.Add(this.dgvPreg);
+            this.groupPreguntas.Controls.Add(this.dgPreguntas);
             this.groupPreguntas.Location = new System.Drawing.Point(12, 322);
             this.groupPreguntas.Name = "groupPreguntas";
             this.groupPreguntas.Size = new System.Drawing.Size(603, 174);
@@ -241,24 +242,24 @@
             this.groupPreguntas.TabStop = false;
             this.groupPreguntas.Text = "Preguntas";
             // 
-            // dgvPreg
+            // dgPreguntas
             // 
-            this.dgvPreg.AllowDrop = true;
-            this.dgvPreg.AllowUserToAddRows = false;
-            this.dgvPreg.AllowUserToDeleteRows = false;
-            this.dgvPreg.AllowUserToOrderColumns = true;
-            this.dgvPreg.AllowUserToResizeRows = false;
-            this.dgvPreg.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            this.dgPreguntas.AllowDrop = true;
+            this.dgPreguntas.AllowUserToAddRows = false;
+            this.dgPreguntas.AllowUserToDeleteRows = false;
+            this.dgPreguntas.AllowUserToOrderColumns = true;
+            this.dgPreguntas.AllowUserToResizeRows = false;
+            this.dgPreguntas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvPreg.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPreg.Location = new System.Drawing.Point(6, 19);
-            this.dgvPreg.MultiSelect = false;
-            this.dgvPreg.Name = "dgvPreg";
-            this.dgvPreg.ReadOnly = true;
-            this.dgvPreg.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPreg.Size = new System.Drawing.Size(591, 145);
-            this.dgvPreg.TabIndex = 18;
+            this.dgPreguntas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgPreguntas.Location = new System.Drawing.Point(6, 19);
+            this.dgPreguntas.MultiSelect = false;
+            this.dgPreguntas.Name = "dgPreguntas";
+            this.dgPreguntas.ReadOnly = true;
+            this.dgPreguntas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgPreguntas.Size = new System.Drawing.Size(591, 145);
+            this.dgPreguntas.TabIndex = 18;
             // 
             // DetallesPublicacion
             // 
@@ -273,7 +274,7 @@
             this.pnlDatos.ResumeLayout(false);
             this.pnlDatos.PerformLayout();
             this.groupPreguntas.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPreg)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgPreguntas)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -299,6 +300,6 @@
         private System.Windows.Forms.Button btnComprar;
         private System.Windows.Forms.Button btnPregunta;
         private System.Windows.Forms.GroupBox groupPreguntas;
-        private System.Windows.Forms.DataGridView dgvPreg;
+        private System.Windows.Forms.DataGridView dgPreguntas;
     }
 }

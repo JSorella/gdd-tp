@@ -522,6 +522,7 @@ namespace FrbaCommerce
             }
         }
 
+
         /// <summary>
         /// Trae una Publicación con su tipo, su estado y su usuario asociado
         /// </summary>
@@ -887,6 +888,56 @@ namespace FrbaCommerce
             {
                 throw new Exception(ex.Message);
             }  
+        }
+
+        /// <summary>
+        /// Trae DataTable Pregunta
+        /// </summary>
+        public static DataTable getDTPregunta()
+        {
+            try
+            {
+                return Singleton.conexion.executeQueryTable("Select * From J2LA.Preguntas Where 1 = 0", null, null);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Inserta una nueva Pregunta
+        /// </summary>
+        public static void setPregunta(DataTable pregunta)
+        {
+            try
+            {
+                Singleton.conexion.executeQuerySP("J2LA.setPregunta", pregunta, null);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+           
+        }
+
+        /// <summary>
+        /// Trae preguntas asociadas a una publicación
+        /// </summary>
+        public static DataTable getPreguntas_Publicacion(int preg_pub_codigo)
+        {
+            try
+            {
+                return Singleton.conexion.executeQueryTable(
+                    @"Select  [Pregunta]= P.preg_Comentario
+                    From J2LA.Preguntas P
+                    Where preg_pub_codigo = " + preg_pub_codigo, null, null);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

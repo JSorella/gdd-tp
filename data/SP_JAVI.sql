@@ -132,6 +132,23 @@ BEGIN
 END
 GO
 
+/*-------------------------STORED PROCEDURE (JAVI)--------------------------*/
+IF OBJECT_ID('J2LA.setPregunta') IS NOT NULL
+DROP PROCEDURE J2LA.setPregunta
+GO
+CREATE PROCEDURE J2LA.setPregunta @preg_pub_codigo numeric(18,0), @preg_Id int, @preg_Tipo char(1), @preg_Comentario varchar(255), @preg_usu_Id int
+AS
+BEGIN
+	DECLARE @maxId INT
+	SET @maxId = (SELECT MAX(preg_Id)FROM J2LA.Preguntas)
+	SET @preg_Id = CASE WHEN @maxId IS NULL THEN 1 ELSE (@maxId + 1) END
+
+	INSERT INTO
+		J2LA.Preguntas (preg_Id, preg_pub_codigo, preg_Tipo, preg_Comentario, preg_usu_Id)
+	VALUES
+		(@preg_Id, @preg_pub_codigo, @preg_Tipo, @preg_Comentario, @preg_usu_Id)
+END
+GO
 
 
 

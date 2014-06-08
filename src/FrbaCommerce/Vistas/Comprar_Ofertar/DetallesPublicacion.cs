@@ -52,6 +52,13 @@ namespace FrbaCommerce
             txtFechaVto.Text = dteFecVto.ToShortDateString();
             txtVendedor.Text = oDr["usu_UserName"].ToString();
 
+            //Cargar preguntas
+            DataTable preguntas = new DataTable();
+            preguntas = InterfazBD.getPreguntas_Publicacion(Convert.ToInt32(this.codigoPublicacion));
+            
+            dgPreguntas.Visible = true;
+            dgPreguntas.DataSource = preguntas;
+
         }
 
         private void AmoldarFuncionalidades()
@@ -76,6 +83,14 @@ namespace FrbaCommerce
                 btnOfertar.Visible = false;
                 btnPregunta.Visible = false;
             }
+
+            //Si soy el mismo usuario, no se muestran funcionalidades
+            if (oDr["usu_UserName"].Equals(Singleton.usuario["usu_UserName"]))
+            {
+                btnComprar.Visible = false;
+                btnOfertar.Visible = false;
+                btnPregunta.Visible = false;
+            }
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -86,6 +101,12 @@ namespace FrbaCommerce
         private void pnlDatos_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void btnPregunta_Click(object sender, EventArgs e)
+        {
+            AltaPregunta oFrm = new AltaPregunta(this.codigoPublicacion);
+            oFrm.ShowDialog();
         }
 
 
