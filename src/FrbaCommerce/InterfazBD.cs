@@ -522,6 +522,44 @@ namespace FrbaCommerce
             }
         }
 
+        /// <summary>
+        /// Trae una Publicación con su tipo, su estado y su usuario asociado
+        /// </summary>
+        public static DataTable getPublicacion_Tipo_Estado_Usuario(int pub_codigo)
+        {
+            try
+            {
+                String query =
+                    @"SELECT 
+                        P.pub_Codigo,
+                        P.pub_Descripcion,
+                        P.pub_Stock,
+                        P.pub_Fecha_Vto,
+                        P.pub_Fecha_Ini,
+                        P.pub_Precio,
+                        P.pub_Permite_Preg,
+                        E.pubest_Descripcion,
+                        T.pubtip_Nombre,
+                        U.usu_UserName                      
+                    FROM
+                        J2LA.Publicaciones P,
+                        J2LA.Publicaciones_Tipos T,
+                        J2LA.Publicaciones_Estados E,
+                        J2LA.Usuarios U
+                    WHERE 
+                        pub_Codigo = " + pub_codigo + @"
+                        AND P.pub_usu_Id =  U.usu_id
+                        AND P.pub_estado_Id = E.pubest_Id
+                        AND P.pub_tipo_Id = T.pubtip_Id";
+
+                return Singleton.conexion.executeQueryTable(query, null, null);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public static DataTable BuscarPublicaciones(String filtros)
         {
             try
@@ -562,7 +600,7 @@ namespace FrbaCommerce
                                 "[Estado] = E.pubest_Descripcion, " +
                                 "[Permite Preguntas] = (Case When P.pub_Permite_Preg = 1 Then 'Si' Else 'No' End), " +
                                 "Rubros = J2LA.ObtenerRubrosPubli(P.pub_Codigo), " +
-                                "V.pubvis_Precio " +
+                                "[Publicación Precio] = V.pubvis_Precio " +
                                 "From J2LA.Publicaciones P " +
                                 "Inner Join J2LA.Publicaciones_Rubros PR On PR.pubrub_pub_Codigo = P.pub_Codigo " +
                                 "Inner Join J2LA.Publicaciones_Tipos   T On T.pubtip_Id = P.pub_tipo_Id " +

@@ -78,7 +78,7 @@ namespace FrbaCommerce
         {
             String rubros = cmbRubros.ObtenerstrChequeados("rub_id");
 
-            String filtros = "Where E.pubest_Descripcion = 'Activa' ";
+            String filtros = "Where E.pubest_Descripcion = 'Activa' OR E.pubest_Descripcion = 'Pausada'  ";
 
             if (txtDescripcion.Text != "")
                 filtros = filtros + " And P.pub_Descripcion like '%" + txtDescripcion.Text + "%' ";

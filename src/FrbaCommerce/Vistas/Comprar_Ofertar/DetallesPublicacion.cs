@@ -14,7 +14,6 @@ namespace FrbaCommerce
         DataTable oDTPubli = new DataTable();
         private Int32 codigoPublicacion;
 
-        DateTime dteFecIni;
         DateTime dteFecVto;
 
         public DetallesPublicacion(Int32 _codigoPublicacion)
@@ -25,27 +24,74 @@ namespace FrbaCommerce
 
         private void DetallesPublicacion_Load(object sender, EventArgs e)
         {
-            oDTPubli = InterfazBD.getPublicacion(Convert.ToInt32( this.codigoPublicacion));
-            this.CargarDatosPubli();
+            try
+            {
+                oDTPubli = InterfazBD.getPublicacion_Tipo_Estado_Usuario(Convert.ToInt32(this.codigoPublicacion));
+                this.CargarDatosPubli();
+                this.AmoldarFuncionalidades();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error en Detalles Publicacion: " + System.Environment.NewLine + ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
+            }
         }
 
         private void CargarDatosPubli()
         {
             DataRow oDr = oDTPubli.Rows[0];
 
-            cmbTipoPubli.SelectedValue = oDr["pub_tipo_Id"];
+            txtTipoPubli.Text = oDr["pubtip_Nombre"].ToString();
             txtDesc.Text = oDr["pub_Descripcion"].ToString();
-            nudStock.Value = Convert.ToDecimal(oDr["pub_Stock"]);
-            dteFecIni = Convert.ToDateTime(oDr["pub_Fecha_Ini"]);
+            txtStock.Text = oDr["pub_Stock"].ToString();
             dteFecVto = Convert.ToDateTime(oDr["pub_Fecha_Vto"]);
-            nudPrecio.Value = Convert.ToDecimal(oDr["pub_Precio"]);
-            cmbTipoVis.SelectedValue = oDr["pub_visibilidad_Id"];
-            cmbEstado.SelectedValue = oDr["pub_estado_Id"];
-            chkPreguntas.Checked = Convert.ToBoolean(oDr["pub_Permite_Preg"]);
+            txtPrecio.Text = oDr["pub_Precio"].ToString();
+            txtEstado.Text = oDr["pubest_Descripcion"].ToString();
+            btnPregunta.Visible = Convert.ToBoolean(oDr["pub_Permite_Preg"]);
 
-            txtFechaIni.Text = dteFecIni.ToShortDateString();
             txtFechaVto.Text = dteFecVto.ToShortDateString();
+            txtVendedor.Text = oDr["usu_UserName"].ToString();
 
         }
+
+        private void AmoldarFuncionalidades()
+        {
+            DataRow oDr = oDTPubli.Rows[0];
+            //Ocultamos los campos/Funcionalidades que no correspondan al tipo de publicación
+            if (oDr["pubtip_Nombre"].ToString() == "Subasta")
+            {
+                txtStock.Visible = false;
+                lblStock.Visible = false;
+                btnComprar.Visible = false;
+            }
+            else if (oDr["pubtip_Nombre"].ToString() == "Compra Inmediata")
+            {
+                btnOfertar.Visible = false;
+            }
+
+            //Si el Estado es "Pausada", no se muestran funcionalidades
+            if (oDr["pubest_Descripcion"].ToString() == "Pausada")
+            {
+                btnComprar.Visible = false;
+                btnOfertar.Visible = false;
+                btnPregunta.Visible = false;
+            }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pnlDatos_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+
+ 
+
+
+
     }
 }
