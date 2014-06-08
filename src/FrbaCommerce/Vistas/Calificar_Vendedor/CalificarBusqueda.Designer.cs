@@ -45,6 +45,7 @@
             // 
             // gridCalificacionesPendientes
             // 
+            this.gridCalificacionesPendientes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
             this.gridCalificacionesPendientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridCalificacionesPendientes.Location = new System.Drawing.Point(18, 59);
             this.gridCalificacionesPendientes.Name = "gridCalificacionesPendientes";
