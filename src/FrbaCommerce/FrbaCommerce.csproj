@@ -117,6 +117,12 @@
     <Compile Include="Vistas\Abm_Visibilidad\Abm_Visib_Modif.Designer.cs">
       <DependentUpon>Abm_Visib_Modif.cs</DependentUpon>
     </Compile>
+    <Compile Include="Vistas\Comprar_Ofertar\DetallesPublicacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Comprar_Ofertar\DetallesPublicacion.Designer.cs">
+      <DependentUpon>DetallesPublicacion.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\Seguridad\CambiarPass.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -283,6 +289,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Comprar_Ofertar\ComprarOfertar.resx">
       <DependentUpon>ComprarOfertar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Comprar_Ofertar\DetallesPublicacion.resx">
+      <DependentUpon>DetallesPublicacion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Editar_Publicacion\BuscarPublicaciones.resx">
       <DependentUpon>BuscarPublicaciones.cs</DependentUpon>

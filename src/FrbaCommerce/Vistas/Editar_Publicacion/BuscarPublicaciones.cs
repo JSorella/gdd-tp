@@ -100,6 +100,7 @@ namespace FrbaCommerce
             return filtros;
         }
 
+
         private void btnSeleccionar_Click(object sender, EventArgs e)
         {
             Seleccionar();
