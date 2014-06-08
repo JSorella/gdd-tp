@@ -29,7 +29,7 @@ DROP PROCEDURE J2LA.getTop5VendedoresConMayorFacturacion
 GO
 CREATE PROCEDURE J2LA.getTop5VendedoresConMayorFacturacion(@anio int, @trimestre int)
 AS
-	SELECT TOP 5 a.usu_UserName, SUM(b.fac_Total) Facturacion
+	SELECT TOP 5 a.usu_UserName Usuario, SUM(b.fac_Total) Facturacion
 	FROM  J2LA.Usuarios a, J2LA.Facturas b
 	WHERE a.usu_Id = b.fac_usu_Id
 	AND YEAR(b.fac_Fecha) = @anio
@@ -64,12 +64,115 @@ DROP PROCEDURE J2LA.getTop5ClientesConMayorCantDePublicacionesSinCalificar
 GO
 CREATE PROCEDURE J2LA.getTop5ClientesConMayorCantDePublicacionesSinCalificar(@anio int, @trimestre int)
 AS
-	SELECT TOP 5 a.cli_Nro_Doc, COUNT(*) PublicacionesSinCalificar
+	SELECT TOP 5 a.cli_Nro_Doc Cliente, COUNT(*) Publicaciones_Sin_Calificar
 	FROM J2LA.Clientes a, J2LA.Compras b
 	WHERE a.cli_usu_Id = b.comp_usu_Id
 	AND b.comp_cal_Codigo IS NULL
 	AND YEAR(b.comp_Fecha) = @anio
 	AND MONTH(b.comp_Fecha)>(@trimestre-1)*3 AND MONTH(b.comp_Fecha)<= @trimestre*3
 	GROUP BY a.cli_Nro_Doc
-	ORDER BY PublicacionesSinCalificar DESC
+	ORDER BY Publicaciones_Sin_Calificar DESC
 GO
+
+IF OBJECT_ID('J2LA.getCalificacionesPendientes') IS NOT NULL
+DROP FUNCTION J2LA.getCalificacionesPendientes
+GO
+CREATE FUNCTION J2LA.getCalificacionesPendientes(@usu_Id int)
+RETURNS TABLE
+AS
+	RETURN
+		SELECT U.usu_userName Vendedor, C.comp_Id Codigo_de_Compra, P.pub_Descripcion Descripcion, C.comp_Fecha Fecha
+		FROM J2LA.Compras C, J2LA.Publicaciones P, J2LA.Usuarios U
+		WHERE C.comp_pub_Codigo = P.pub_Codigo
+		AND P.pub_usu_Id = U.usu_Id
+		AND C.comp_usu_Id = @usu_Id
+		AND C.comp_cal_Codigo IS NULL
+GO
+
+IF OBJECT_ID('J2LA.ActualizarReputacion') IS NOT NULL
+DROP PROCEDURE J2LA.ActualizarReputacion
+GO
+CREATE PROCEDURE J2LA.ActualizarReputacion(@usu_UserName nvarchar(255), @comp_Id int, @cal_Cant_Estrellas int)
+As
+	BEGIN
+		DECLARE @comp_Fecha DATETIME
+		DECLARE @usu_Id int
+		SET @usu_Id = (SELECT usu_Id FROM J2LA.Usuarios WHERE usu_UserName = @usu_UserName)
+		SET @comp_Fecha = (SELECT comp_Fecha FROM J2LA.Compras WHERE comp_Id = @comp_Id)
+		IF (NOT EXISTS (SELECT * FROM J2LA.Usuarios_Calificaciones WHERE usucal_usu_Id = @usu_Id AND usucal_Anio = YEAR(@comp_Fecha)))
+			BEGIN
+				INSERT INTO J2LA.Usuarios_Calificaciones(usucal_usu_Id,usucal_Anio)
+				VALUES (@usu_Id,YEAR(@comp_Fecha))
+			END
+
+		IF (MONTH(@comp_Fecha) IN (1,2,3))
+			BEGIN
+				UPDATE J2LA.Usuarios_Calificaciones
+				SET usucal_Puntos_Primero = usucal_Puntos_Primero + @cal_Cant_Estrellas,
+				    usucal_Cant_Ventas_Primero = usucal_Cant_Ventas_Primero + 1
+				WHERE usucal_usu_Id = @usu_Id
+				AND usucal_Anio = YEAR(@comp_Fecha)
+			END
+			ELSE IF (MONTH(@comp_Fecha) IN (4,5,6))
+				BEGIN
+					UPDATE J2LA.Usuarios_Calificaciones
+					SET usucal_Puntos_Segundo = usucal_Puntos_Segundo + @cal_Cant_Estrellas,
+					    usucal_Cant_Ventas_Segundo = usucal_Cant_Ventas_Segundo + 1
+					WHERE usucal_usu_Id = @usu_Id
+					AND usucal_Anio = YEAR(@comp_Fecha)
+				END
+				ELSE IF (MONTH(@comp_Fecha) IN (7,8,9))
+					BEGIN
+						UPDATE J2LA.Usuarios_Calificaciones
+						SET usucal_Puntos_Tercero = usucal_Puntos_Tercero + @cal_Cant_Estrellas,
+							usucal_Cant_Ventas_Tercero = usucal_Cant_Ventas_Tercero + 1
+						WHERE usucal_usu_Id = @usu_Id
+						AND usucal_Anio = YEAR(@comp_Fecha)
+					END
+				ELSE
+					BEGIN
+						UPDATE J2LA.Usuarios_Calificaciones
+						SET usucal_Puntos_Cuarto = usucal_Puntos_Cuarto + @cal_Cant_Estrellas,
+				    		    usucal_Cant_Ventas_Cuarto = usucal_Cant_Ventas_Cuarto + 1
+						WHERE usucal_usu_Id = @usu_Id
+						AND usucal_Anio = YEAR(@comp_Fecha)
+					END
+	END
+GO
+
+IF OBJECT_ID('J2LA.CargarCalificacion') IS NOT NULL
+DROP PROCEDURE J2LA.CargarCalificacion
+GO
+CREATE PROCEDURE J2LA.CargarCalificacion(@comp_Id int, @cal_Cant_Estrellas int, @cal_Comentario nvarchar(255))
+AS
+	BEGIN
+		DECLARE @cal_Codigo INT
+		SET @cal_Codigo = (SELECT MAX(cal_Codigo)+1 FROM J2LA.Calificaciones)
+		INSERT INTO J2LA.Calificaciones(cal_Codigo,cal_Cant_Estrellas,cal_Comentario)
+		VALUES (@cal_Codigo,@cal_Cant_Estrellas,@cal_Comentario)
+
+		UPDATE J2LA.Compras
+		SET comp_cal_Codigo = @cal_Codigo
+		WHERE comp_Id = @comp_Id
+	END
+GO
+
+--IF OBJECT_ID('J2LA.triggerInhabilitarUsuarioPorNoCalificar') IS NOT NULL
+--DROP PROCEDURE J2LA.triggerInhabilitarUsuarioPorNoCalificar
+--GO
+--CREATE TRIGGER J2LA.triggerInhabilitarUsuarioPorNoCalificar
+--ON J2LA.Compras
+--FOR INSERT, UPDATE
+--AS
+--	BEGIN
+--		DECLARE @cant_Compras_No_Calificadas INT
+		
+--		SET @cant_Compras_No_Calificadas = (SELECT COUNT(*) FROM J2LA.Compras A WHERE comp_cal_Codigo IS NULL AND A.comp_usu_Id = comp_usu_Id)
+		
+--		IF (@cant_Compras_No_Calificadas > 5)
+--			BEGIN
+--				UPDATE J2LA.Usuarios
+--				SET usu_Inhabilitado_Compras = 1
+--				WHERE usu_Id = comp_usu_Id
+--			END
+--	END

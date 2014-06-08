@@ -11,9 +11,12 @@ namespace FrbaCommerce
 {
     public partial class EditarPublicacion : Form
     {
-        DataTable oDTVis;
-        DataTable oDTPubli = new DataTable();
-        DataTable oDTRubros = new DataTable();
+        DataTable oDTVis; //Tabla de Visibilidades
+        DataTable oDTEstados; //Tabla de Estados
+        DataTable oDTRubros; //Tabla de Rubros
+
+        DataTable oDTPubli = new DataTable(); //Tabla de la Publicacion
+        DataTable oDtPubRubros = new DataTable(); //Tabla de los Rubros de la Publicacion
 
         DateTime dteFecIni;
         DateTime dteFecVto;
@@ -55,7 +58,9 @@ namespace FrbaCommerce
 
             try
             {
-                listRubros.DataSource = InterfazBD.getRubros();
+                oDTRubros = InterfazBD.getRubros();
+
+                listRubros.DataSource = oDTRubros.Copy();
                 listRubros.ValueMember = "rub_id";
                 listRubros.DisplayMember = "rub_Descripcion";
             }
@@ -82,7 +87,17 @@ namespace FrbaCommerce
             chkPreguntas.Checked = false;
 
             oDTPubli.Rows.Clear();
-            oDTRubros.Rows.Clear();
+            oDtPubRubros.Rows.Clear();
+
+            if (cancel)
+            {
+                cmbEstado.DataSource = oDTEstados.Copy();
+                cmbEstado.SelectedIndex = -1;
+
+                listRubros.DataSource = oDTRubros.Copy();
+                listRubros.ValueMember = "rub_id";
+                listRubros.DisplayMember = "rub_Descripcion";
+            }
 
             //destildamos los rubros
             for (int i = 0; i < (this.listRubros.Items.Count); i++)
@@ -107,6 +122,8 @@ namespace FrbaCommerce
             chkPreguntas.Enabled = true;
             listRubros.Enabled = true;
 
+            btnSelFec.Visible = true;
+
             pnlParam.Enabled = !habilitado;
             pnlDatos.Enabled = habilitado;
             btnGenerar.Enabled = habilitado;
@@ -121,6 +138,7 @@ namespace FrbaCommerce
             try
             {
                 oDTVis = InterfazBD.getVisibilidadesPubli();
+                oDTEstados = InterfazBD.getEstadosPubli();
 
                 cmbTipoVis.ValueMember = "pubvis_Id";
                 cmbTipoVis.DisplayMember = "pubvis_Descripcion";
@@ -132,7 +150,7 @@ namespace FrbaCommerce
 
                 cmbEstado.ValueMember = "pubest_Id";
                 cmbEstado.DisplayMember = "pubest_Descripcion";
-                cmbEstado.DataSource = InterfazBD.getEstadosPubli();
+                cmbEstado.DataSource = oDTEstados.Copy();
             }
             catch (Exception ex)
             {
@@ -151,11 +169,9 @@ namespace FrbaCommerce
                 oDTPubli = InterfazBD.getPublicacion(Convert.ToInt32(oFrm.Resultado["Codigo"]));
 
                 txtCodPubli.Text = oFrm.Resultado["Codigo"].ToString();
-                oDTRubros = InterfazBD.getPublicaciones_Rubros(Convert.ToInt32(oFrm.Resultado["Codigo"]));
+                oDtPubRubros = InterfazBD.getPublicaciones_Rubros(Convert.ToInt32(oFrm.Resultado["Codigo"]));
 
-                CargarDatosPubli();
-                HabilitarMod(true);
-                txtDesc.Focus();
+                Aplicar();
             }
         }
 
@@ -181,11 +197,11 @@ namespace FrbaCommerce
 
         private void MarcarRubros()
         {
-            oDTRubros = InterfazBD.getPublicaciones_Rubros(Convert.ToInt32(txtCodPubli.Text));
+            oDtPubRubros = InterfazBD.getPublicaciones_Rubros(Convert.ToInt32(txtCodPubli.Text));
 
             int index = 0;
 
-            foreach (DataRow oDr in oDTRubros.Rows)
+            foreach (DataRow oDr in oDtPubRubros.Rows)
             {
                 index = listRubros.FindStringExact(oDr["rub_Descripcion"].ToString());
                 listRubros.SetItemChecked(index, true);
@@ -196,65 +212,132 @@ namespace FrbaCommerce
         {
             if (ValidaAceptar())
             {
-                CargarDatosPubli();
-                HabilitarMod(true);
-                HabilitarSegunEstadoTipo();
-                txtDesc.Focus();
+                Aplicar();
             }
+        }
+
+        private void Aplicar()
+        {
+            CargarDatosPubli();
+            HabilitarMod(true);
+            HabilitarSegunEstadoTipo();
+            txtDesc.Focus();
         }
 
         private void HabilitarSegunEstadoTipo()
         {
-            if (Convert.ToInt32(cmbTipoPubli.SelectedValue) == 2) //Subasta
+            if ((Convert.ToInt32(cmbEstado.SelectedValue) != 4) //Si no esta Finalizada 
+                    && (dteFecVto < Singleton.FechaDelSistema)) //Y esta vencida.
             {
-                nudStock.Enabled = false;
+                MessageBox.Show("Esta Publicacion esta venció el dia: " + dteFecVto.ToShortDateString() + " - No podrá realizar cambios en ella.-",
+                    this.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ActivarVistaFinalizada(); //Sin Modificaciones en la Publicacion
+                return;
             }
 
-            switch (Convert.ToInt32(cmbEstado.SelectedValue))
+            if (Convert.ToInt32(cmbTipoPubli.SelectedValue) == 2) //Subasta
             {
-                case 1:
-                    ActivarVistaBorrador();
-                    break;
-                case 2:
-                    ActivarVistaActiva();
-                    break;
-                case 3:
-                    ActivarVistaPausada();
-                    break;
-                case 4:
-                    ActivarVistaFinalizada();
-                    break;
-                default:
-                    break;
+                nudStock.Enabled = false; //Si es Borrador el Stock no cambia es 1.-
+
+                if (Convert.ToInt32(cmbEstado.SelectedValue) == 1) //Activa
+                {
+                    ActivarVistaFinalizada(); //Sin Modificaciones en la Publicacion
+                }
+            }
+            else
+            {
+                switch (Convert.ToInt32(cmbEstado.SelectedValue))
+                {
+                    case 1:
+                        ActivarVistaActiva();
+                        break;
+                    case 2:
+                        ActivarVistaBorrador();
+                        break;
+                    case 3:
+                        ActivarVistaPausada();
+                        break;
+                    case 4:
+                        ActivarVistaFinalizada();
+                        break;
+                    default:
+                        break;
+                }
             }
         }
 
         private void ActivarVistaFinalizada()
         {
-            throw new NotImplementedException();
+            txtDesc.ReadOnly = true;
+            txtDesc.Enabled = false;
+            cmbEstado.Enabled = false;
+            cmbTipoVis.Enabled = false;
+            nudPrecio.ReadOnly = true;
+            nudPrecio.Enabled = false;
+            nudStock.ReadOnly = true;
+            nudStock.Enabled = false;
+            btnSelFec.Enabled = false;
+            chkPreguntas.Enabled = false;
+            listRubros.Enabled = false;
+            listRubros.DataSource = oDtPubRubros.Copy();
+            listRubros.ValueMember = "pubrub_rub_Id";
+            //Tildamos los rubros
+            for (int i = 0; i < (this.listRubros.Items.Count); i++)
+            {
+                this.listRubros.SetItemChecked(i, true);
+            }
+
+            btnGenerar.Enabled = false;
+            btnLimpiar.Enabled = false;
         }
 
         private void ActivarVistaPausada()
         {
-            throw new NotImplementedException();
+            ActivarVistaFinalizada(); //Sin Modificaciones en la Publicacion
+
+            if (dteFecVto > Singleton.FechaDelSistema) //Si no esta vencida puede cambiar a Activa.
+            {
+                //Solo puede volver a Activa.
+                cmbEstado.DataSource = oDTEstados.Select("pubest_id in (1)").CopyToDataTable();
+                cmbEstado.SelectedValue = oDTPubli.Rows[0]["pub_estado_Id"];
+                cmbEstado.Enabled = true;
+            }
         }
 
         private void ActivarVistaActiva()
         {
-            nudStock.ReadOnly = false;
             nudStock.Enabled = true;
+            nudStock.ReadOnly = false;
             txtDesc.ReadOnly = false;
             txtDesc.Enabled = true;
 
-            for (int i = 0; i <= cmbEstado.Items.Count; i++)
+            //No puede volver a Borrador.
+            cmbEstado.DataSource = oDTEstados.Select("pubest_id not in (2)").CopyToDataTable();
+            cmbEstado.SelectedValue = oDTPubli.Rows[0]["pub_estado_Id"];
+            cmbEstado.Enabled = true;
+
+            cmbTipoVis.Enabled = false;
+            nudPrecio.ReadOnly = true;
+            nudPrecio.Enabled = false;
+            btnSelFec.Enabled = false;
+            chkPreguntas.Enabled = false;
+
+            listRubros.Enabled = false;
+            listRubros.DataSource = oDtPubRubros.Copy();
+            listRubros.ValueMember = "pubrub_rub_Id";
+            //Tildamos los rubros
+            for (int i = 0; i < (this.listRubros.Items.Count); i++)
             {
-                
+                this.listRubros.SetItemChecked(i, true);
             }
         }
 
         private void ActivarVistaBorrador()
         {
             cmbTipoPubli.Enabled = false;
+            //Solo Borrador  o Activa
+            cmbEstado.DataSource = oDTEstados.Select("pubest_id not in (3,4)").CopyToDataTable();
+            cmbEstado.SelectedValue = oDTPubli.Rows[0]["pub_estado_Id"];
         }
 
         private bool ValidaAceptar()
@@ -405,7 +488,7 @@ namespace FrbaCommerce
                 CargarDTPubli();
                 CargarDtRubros(Convert.ToInt32(txtCodPubli.Text));
 
-                result = InterfazBD.EditarPublicacion(oDTPubli, oDTRubros);
+                result = InterfazBD.EditarPublicacion(oDTPubli, oDtPubRubros);
 
                 MessageBox.Show("Su Publicación fue grabada con exito.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -424,18 +507,18 @@ namespace FrbaCommerce
 
             try
             {
-                oDTRubros = InterfazBD.getDTRubros();
+                oDtPubRubros = InterfazBD.getDTRubros();
 
                 foreach (int x in listRubros.CheckedIndices)
                 {
-                    oDr = oDTRubros.NewRow();
+                    oDr = oDtPubRubros.NewRow();
 
                     listRubros.SelectedIndex = x;
 
                     oDr["pubrub_pub_codigo"] = pub_codigo;
                     oDr["pubrub_rub_id"] = listRubros.SelectedValue;
 
-                    oDTRubros.Rows.Add(oDr);
+                    oDtPubRubros.Rows.Add(oDr);
                 }
             }
             catch (Exception ex)

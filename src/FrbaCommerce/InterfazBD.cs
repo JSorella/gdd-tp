@@ -768,6 +768,46 @@ namespace FrbaCommerce
             }
         }
 
+        public static DataTable getCalificacionesPendientes()
+        {
+            try
+            {
+                string query = "SELECT * FROM J2LA.getCalificacionesPendientes(" + Singleton.usuario["usu_id"] + ")";
+                return Singleton.conexion.executeQueryTable(query, null, null);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return new DataTable();
+            }
+        }
+
+        public static void ActualizarReputacion(string usu_UserName, int comp_Id, int cal_Cant_Estrellas)
+        {
+             try
+            {
+                string query = "exec J2LA.ActualizarReputacion "+usu_UserName+", "+comp_Id+", "+cal_Cant_Estrellas;
+                Singleton.conexion.executeQueryTable(query, null, null);
+            }            
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        public static void CargarCalificacion(int comp_Id, int cal_Cant_Estrellas, string cal_Comentario)
+        {
+            try
+            {
+                string query = "exec J2LA.CargarCalificacion "+comp_Id+", "+cal_Cant_Estrellas+", '"+cal_Comentario+"'";
+                Singleton.conexion.executeQueryTable(query, null, null);
+            }            
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
         public static int getCantPubliGratis(int pub_codigo)
         {
             try
