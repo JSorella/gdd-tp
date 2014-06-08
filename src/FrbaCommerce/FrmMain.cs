@@ -271,7 +271,7 @@ namespace FrbaCommerce
 
         private void tsmiPublicacionCalif_Click(object sender, EventArgs e)
         {
-            ejecutarForm(new CalificarVendedor());
+            ejecutarForm(new CalificarBusqueda());
         }
 
         private void tsmiFacturacion_Click(object sender, EventArgs e)
