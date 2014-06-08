@@ -167,15 +167,24 @@ AS
 	BEGIN
 		DECLARE @cant_Compras_No_Calificadas INT
 		DECLARE @comp_usu_Id INT
+		DECLARE @usu_Inhabilitado_Comprar INT
 		
-		SET @comp_usu_Id = (SELECT comp_usu_Id FROM inserted)
-		
+		SET @comp_usu_Id = (SELECT comp_usu_Id FROM inserted)		
 		SET @cant_Compras_No_Calificadas = (SELECT COUNT(*) FROM J2LA.Compras WHERE comp_cal_Codigo IS NULL AND comp_usu_Id = @comp_usu_Id)
+		SET @usu_Inhabilitado_Comprar = (SELECT usu_Inhabilitado_Comprar FROM J2LA.Usuarios WHERE usu_Id = @comp_usu_Id)
 		
 		IF (@cant_Compras_No_Calificadas > 5)
 			BEGIN
 				UPDATE J2LA.Usuarios
 				SET usu_Inhabilitado_Comprar = 1
+				WHERE usu_Id = @comp_usu_Id
+			END
+		
+		
+		IF (@usu_Inhabilitado_Comprar = 1 AND @cant_Compras_No_Calificadas <= 5)
+			BEGIN
+				UPDATE J2LA.Usuarios
+				SET usu_Inhabilitado_Comprar = 0
 				WHERE usu_Id = @comp_usu_Id
 			END
 	END
