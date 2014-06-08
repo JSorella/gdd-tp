@@ -51,6 +51,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Vistas\Calificar_Vendedor\CalificarBusqueda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Calificar_Vendedor\CalificarBusqueda.Designer.cs">
+      <DependentUpon>CalificarBusqueda.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\Abm_Cliente\Abm_Cliente_Baja.cs">
       <SubType>Form</SubType>
     </Compile>
