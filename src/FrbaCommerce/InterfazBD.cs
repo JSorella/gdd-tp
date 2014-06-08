@@ -550,6 +550,35 @@ namespace FrbaCommerce
             }
         }
 
+        public static DataTable BuscarPublicacionesOrdenadasPorPeso(String filtros)
+        {
+            try
+            {
+                String query = "Select Distinct [Codigo] = P.pub_Codigo, [Tipo] = T.pubtip_Nombre, " +
+                                "[Descripcion] = P.pub_Descripcion, [Stock] = P.pub_Stock, " +
+                                "[Fecha Inicial] = Convert(varchar, P.pub_Fecha_Ini, 103), " +
+                                "[Fecha Vto.] = Convert(varchar,P.pub_Fecha_Vto, 103), " +
+                                "[Precio] = P.pub_Precio, [Visibilidad] = V.pubvis_Descripcion, " +
+                                "[Estado] = E.pubest_Descripcion, " +
+                                "[Permite Preguntas] = (Case When P.pub_Permite_Preg = 1 Then 'Si' Else 'No' End), " +
+                                "Rubros = J2LA.ObtenerRubrosPubli(P.pub_Codigo), " +
+                                "V.pubvis_Precio " +
+                                "From J2LA.Publicaciones P " +
+                                "Inner Join J2LA.Publicaciones_Rubros PR On PR.pubrub_pub_Codigo = P.pub_Codigo " +
+                                "Inner Join J2LA.Publicaciones_Tipos   T On T.pubtip_Id = P.pub_tipo_Id " +
+                                "Inner Join J2LA.Publicaciones_Estados E On E.pubest_Id = P.pub_estado_Id " +
+                                "Inner Join J2LA.Publicaciones_Visibilidades V On V.pubvis_id = P.pub_visibilidad_Id " +
+                                filtros +
+                                " Order By V.pubvis_Precio desc";
+
+                return Singleton.conexion.executeQueryTable(query, null, null);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public static void ValidarPublicacion(DataTable oDT)
         {
             try
