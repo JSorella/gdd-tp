@@ -73,6 +73,8 @@ namespace FrbaCommerce
             cerrarTodoToolStripMenuItem.Visible = true;
             toolStripSeparator1.Visible = true;
 
+            ejemploToolStripMenuItem.Visible = true;
+
             DataTable oDt = InterfazBD.getFuncionalidadesPorRol(Singleton.sessionRol_Nombre);
 
             foreach (DataRow oDr in oDt.Rows)
@@ -315,6 +317,11 @@ namespace FrbaCommerce
         private void toolStripStatusLabel1_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void ejemploToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ejecutarForm(new EjemploGrilla());
         }
     }
 }

@@ -58,6 +58,35 @@ namespace FrbaCommerce
         /*====================================================================================================*/
         /*====================================================================================================*/
 
+        //Genera un DataAdapter segun un query dado - Para grilla paginada.
+        public SqlDataAdapter executeQueryAdapter(String query, ref DataSet oDs, ref DataTable oDt, 
+                                String dataMember, int inicio, int tope)
+        {
+            SqlConnection conn = new SqlConnection(Singleton.ConnectionString);
+            SqlDataAdapter oAdapter = new SqlDataAdapter(query, conn);
+
+            try
+            {
+                conn.Open();
+
+                try
+                {
+                    oAdapter.Fill(oDs, inicio, tope, dataMember);
+                    oAdapter.Fill(oDt);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+
+                return oAdapter;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Se detecto un error en executeQueryAdapter con el Query: " + query + System.Environment.NewLine + "Mensaje de Error: " + ex.Message);
+            }
+        }
+
         //Ejecutar un Comando armado - Es algo temporal, deberiamos no utilizarlo.
         public void executeCommandConn(SqlCommand cmd)
         {

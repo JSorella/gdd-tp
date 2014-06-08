@@ -352,6 +352,9 @@
     <EmbeddedResource Include="Vistas\Registro_Usuario\RegistroUsuario.resx">
       <DependentUpon>RegistroUsuario.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Utilidades\EjemploGrilla.resx">
+      <DependentUpon>EjemploGrilla.cs</DependentUpon>
+    </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
@@ -378,6 +381,13 @@
     <Compile Include="Vistas\Seguridad\Usuarios_Baja.Designer.cs">
       <DependentUpon>Usuarios_Baja.cs</DependentUpon>
     </Compile>
+    <Compile Include="Vistas\Utilidades\EjemploGrilla.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Utilidades\EjemploGrilla.Designer.cs">
+      <DependentUpon>EjemploGrilla.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Utilidades\PaginarGrilla.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

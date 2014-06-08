@@ -939,6 +939,34 @@ namespace FrbaCommerce
                 throw new Exception(ex.Message);
             }
         }
+
+        public static PaginarGrilla BuscarPublicacionesOrdenadas(String filtros)
+        {
+            DataSet oDs = new DataSet();
+            DataTable oDt = new DataTable();
+
+            String query = "Select Distinct Top 10000 [Codigo] = P.pub_Codigo, [Tipo] = T.pubtip_Nombre, " +
+                                "[Descripcion] = P.pub_Descripcion, [Stock] = P.pub_Stock, " +
+                                "[Fecha Inicial] = Convert(varchar, P.pub_Fecha_Ini, 103), " +
+                                "[Fecha Vto.] = Convert(varchar,P.pub_Fecha_Vto, 103), " +
+                                "[Precio] = P.pub_Precio, [Visibilidad] = V.pubvis_Descripcion, " +
+                                "[Estado] = E.pubest_Descripcion, " +
+                                "[Permite Preguntas] = (Case When P.pub_Permite_Preg = 1 Then 'Si' Else 'No' End), " +
+                                //"Rubros = J2LA.ObtenerRubrosPubli(P.pub_Codigo), " +
+                                //Con esta funcion tarda mas, y me parece que si no la usas, no pasa nada
+                                "[Publicación Precio] = V.pubvis_Precio " +
+                                "From J2LA.Publicaciones P " +
+                                "Inner Join J2LA.Publicaciones_Rubros PR On PR.pubrub_pub_Codigo = P.pub_Codigo " +
+                                "Inner Join J2LA.Publicaciones_Tipos   T On T.pubtip_Id = P.pub_tipo_Id " +
+                                "Inner Join J2LA.Publicaciones_Estados E On E.pubest_Id = P.pub_estado_Id " +
+                                "Inner Join J2LA.Publicaciones_Visibilidades V On V.pubvis_id = P.pub_visibilidad_Id " +
+                                filtros +
+                                " Order By V.pubvis_Precio desc";
+
+            SqlDataAdapter o_adpter = Singleton.conexion.executeQueryAdapter(query, ref oDs, ref oDt, "Publicaciones", 0, 50);
+
+            return new PaginarGrilla(o_adpter, oDs, oDt, "Publicaciones", 50);
+        }
     }
 }
 
