@@ -290,6 +290,9 @@
     <EmbeddedResource Include="Vistas\Abm_Rol\Abm_Rol_Modif.resx">
       <DependentUpon>Abm_Rol_Modif.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Calificar_Vendedor\CalificarBusqueda.resx">
+      <DependentUpon>CalificarBusqueda.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Calificar_Vendedor\CalificarVendedor.resx">
       <DependentUpon>CalificarVendedor.cs</DependentUpon>
     </EmbeddedResource>
