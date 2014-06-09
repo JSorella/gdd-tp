@@ -11,36 +11,105 @@ namespace FrbaCommerce
 {
     public partial class Abm_Rol_Baja : Form
     {
-        public string rol_nomb_mod;
-        public int id_rol_a_mod;
+        int rol_id = 0;
 
         public Abm_Rol_Baja()
         {
             InitializeComponent();
         }
 
-        private void select_boton_Click(object sender, EventArgs e)
+        private void Abm_Rol_Baja_Load(object sender, EventArgs e)
         {
+            rol_id = 0;
+        }
 
-            Abm_Rol_Busqueda buscar_rol = new Abm_Rol_Busqueda();
-            buscar_rol.ShowDialog();
+        private void btnSeleccionar_Click(object sender, EventArgs e)
+        {
+            Abm_Rol_Busqueda oFrm = new Abm_Rol_Busqueda();
+            oFrm.ShowDialog();
 
-            if ((buscar_rol.Resultado != null)) //Resultado es el DataRow.-
+            if ((oFrm.Resultado != null)) //Resultado es el DataRow.-
             {
-                id_rol_a_mod = Convert.ToInt32(buscar_rol.Resultado["rol_id"]);
-                rol_nomb_mod = buscar_rol.Resultado["rol_nombre"].ToString();
-                txtRol.Text = rol_nomb_mod;
+                rol_id = Convert.ToInt32(oFrm.Resultado["Id"]);
+                txtRol.Text = oFrm.Resultado["Nombre"].ToString();
             }
         }
 
-        private void baja_boton_Click(object sender, EventArgs e)
+        private void btnBaja_Click(object sender, EventArgs e)
         {
-            InterfazBD.baja_rol(this.rol_nomb_mod, this.id_rol_a_mod);
+            if (MessageBox.Show("Confirma que desea dar de Baja este Rol?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                if (ValidarBaja())
+                {
+                    if (RealizarBaja())
+                    {
+                        rol_id = 0;
+                        txtRol.Text = "";
+                    }
+                }
+            }
         }
 
-        private void Abm_Rol_Baja_Load(object sender, EventArgs e)
+        private bool ValidarBaja()
         {
+            if (txtRol.Text == "")
+            {
+                MessageBox.Show("Debe indicar el Nombre del Rol.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
 
+            try
+            {
+                DataTable oDtRol = InterfazBD.getRol(txtRol.Text);
+
+                if (oDtRol != null)
+                {
+                    if (oDtRol.Rows.Count <= 0)
+                    {
+                        MessageBox.Show("Rol Inexistente.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return false;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Rol Inexistente.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+
+                rol_id = Convert.ToInt32(oDtRol.Rows[0]["rol_id"]);
+
+                if (rol_id < 4)
+                {
+                    MessageBox.Show("No tiene Permisos para dar de Baja este Rol, ya que es un Rol propio del Sistema. Gracias", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool RealizarBaja()
+        {
+            bool result;
+
+            try
+            {
+                result = InterfazBD.RealizarBajaRol(rol_id);
+
+                MessageBox.Show("Su Rol fue dado de Baja con exito.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
         }
     }
 }

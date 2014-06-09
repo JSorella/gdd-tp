@@ -51,6 +51,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Vistas\Abm_Visibilidad\Abm_Visibilidad_Buscar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Abm_Visibilidad\Abm_Visibilidad_Buscar.Designer.cs">
+      <DependentUpon>Abm_Visibilidad_Buscar.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\Calificar_Vendedor\CalificarBusqueda.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -295,6 +301,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Abm_Rol\Abm_Rol_Modif.resx">
       <DependentUpon>Abm_Rol_Modif.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Abm_Visibilidad\Abm_Visibilidad_Buscar.resx">
+      <DependentUpon>Abm_Visibilidad_Buscar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Abm_Visibilidad\Abm_Visib_Alta.resx">
+      <DependentUpon>Abm_Visib_Alta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Abm_Visibilidad\Abm_Visib_Baja.resx">
+      <DependentUpon>Abm_Visib_Baja.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Abm_Visibilidad\Abm_Visib_Modif.resx">
+      <DependentUpon>Abm_Visib_Modif.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Calificar_Vendedor\CalificarBusqueda.resx">
       <DependentUpon>CalificarBusqueda.cs</DependentUpon>

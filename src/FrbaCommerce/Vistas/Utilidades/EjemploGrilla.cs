@@ -26,6 +26,8 @@ namespace FrbaCommerce
 
             Actualizar();
 
+            dvgPublis.Columns["Publicación Precio"].Visible = false;
+
             this.WindowState = FormWindowState.Maximized;
         }
 

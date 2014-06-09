@@ -126,7 +126,6 @@
             // 
             // dgvPubli
             // 
-            this.dgvPubli.AllowDrop = true;
             this.dgvPubli.AllowUserToAddRows = false;
             this.dgvPubli.AllowUserToDeleteRows = false;
             this.dgvPubli.AllowUserToOrderColumns = true;

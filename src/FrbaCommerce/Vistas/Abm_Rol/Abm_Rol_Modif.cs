@@ -11,129 +11,290 @@ namespace FrbaCommerce
 {
     public partial class Abm_Rol_Modif : Form
     {
-        /*-----------ATRIBUTOS--------------------*/
-        public string rol_nomb_mod;
-        public int id_rol_a_mod;
+        DataTable oDtRol; //Datos del Rol
+        DataTable oDtRolFun;//Relacion - Roles_Funcionalidades
 
-        /*----------------------------------------*/        
+        bool cerrarForm = false;
+
         public Abm_Rol_Modif()
         {
             InitializeComponent();
         }
 
-        private void select_boton_Click(object sender, EventArgs e)
+        private void Abm_Rol_Modif_Load(object sender, EventArgs e)
         {
+            ArmarDataTables();
+            CargarFuncionalidades();
+            Limpiar(true);
+            HabilitarMod(false);
+        }
 
-            Abm_Rol_Busqueda buscar_rol = new Abm_Rol_Busqueda();
-            buscar_rol.ShowDialog();
+        private void ArmarDataTables()
+        {
+            if (cerrarForm) return;
 
-            if ((buscar_rol.Resultado != null)) //Resultado es el DataRow.-
+            try
             {
-                id_rol_a_mod = Convert.ToInt32(buscar_rol.Resultado["rol_id"]);
-                rol_nomb_mod = buscar_rol.Resultado["rol_nombre"].ToString();
-
-                txtRolName.Text = rol_nomb_mod;
-                chkInhabilitado.Checked = Convert.ToBoolean(buscar_rol.Resultado["rol_inhabilitado"]);
-
-                CargarFuncionalidadesxRol(Convert.ToInt32(buscar_rol.Resultado["rol_id"]));
+                oDtRol = InterfazBD.getDTRol();
+                oDtRolFun = InterfazBD.getDTRol_Fun();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error en ArmarDataTables: " + System.Environment.NewLine + ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                cerrarForm = true;
             }
         }
 
-        private void CargarFuncionalidadesxRol(int rol_id)
+        private void CargarFuncionalidades()
         {
-            // Deberia estar filtrando por el rol_id.
-            DataTable oDt = InterfazBD.getFuncionalidadesPorRol(rol_nomb_mod);
+            try
+            {
+                //DataSource es el origen de los datos en nuestro caso la tabla que alberga las funcionalidades
+                listfunc.DataSource = InterfazBD.getFuncionalidades();
+
+                //Displaymember es la columna de la tabla que se va a mostrar en nuestro caso hay una sola
+                listfunc.DisplayMember = "fun_nombre";
+
+                //ValueMembermember es el valor que tiene el campo seleccionado en nuestro caso ponemos la PK
+                listfunc.ValueMember = "fun_id";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error en CargarFuncionalidades: " + System.Environment.NewLine + ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                cerrarForm = true;
+            }
+        }
+
+        private void Limpiar(bool cancel)
+        {
+            if (cerrarForm) return;
+
+            if (cancel) txtRolName.Text = string.Empty;
+            txtNombre.Text = string.Empty;
+
+            //destildamos todas las opciones
+            for (int i = 0; i < (listfunc.Items.Count); i++)
+                listfunc.SetItemChecked(i, false);
+
+            oDtRol.Rows.Clear();
+            oDtRolFun.Rows.Clear();
+        }
+
+        private void HabilitarMod(bool habilitado)
+        {
+            if (cerrarForm) return;
+
+            pnlParam.Enabled = !habilitado;
+            pnlDatos.Enabled = habilitado;
+            btnGenerar.Enabled = habilitado;
+            btnLimpiar.Enabled = habilitado;
+            btnCancelar.Enabled = habilitado;
+        }
+
+        private void btnSeleccionar_Click(object sender, EventArgs e)
+        {
+            Abm_Rol_Busqueda oFrm = new Abm_Rol_Busqueda();
+            oFrm.ShowDialog();
+
+            if ((oFrm.Resultado != null)) //Resultado es el DataRow.-
+            {
+                oDtRol = InterfazBD.getRol(oFrm.Resultado["Nombre"].ToString());
+
+                txtRolName.Text = oFrm.Resultado["Nombre"].ToString();
+
+                Aplicar();
+            }
+        }
+
+        private void Aplicar()
+        {
+            CargarDatosRol();
+            HabilitarMod(true);
+            chkInhabilitado.Focus();
+        }
+
+        private void CargarDatosRol()
+        {
+            DataRow oDr = oDtRol.Rows[0];
+
+            txtNombre.Text = oDr["rol_Nombre"].ToString();
+            chkInhabilitado.Checked = Convert.ToBoolean(oDr["rol_Inhabilitado"]);
+
+            MarcarFuncionalidades();
+        }
+
+        private void MarcarFuncionalidades()
+        {
+            oDtRolFun = InterfazBD.getRoles_Funcionalidades(Convert.ToInt32(oDtRol.Rows[0]["rol_Id"]));
+
             int index = 0;
 
-            foreach (DataRow oDr in oDt.Rows)
+            foreach (DataRow oDr in oDtRolFun.Rows)
             {
-                index = list_funcionalidades.FindStringExact(oDr["fun_nombre"].ToString());
-                list_funcionalidades.SetItemChecked(index, true);
+                index = listfunc.FindStringExact(oDr["fun_Nombre"].ToString());
+                listfunc.SetItemChecked(index, true);
             }
         }
 
-        private void list_funcionalidades_Load(object sender, EventArgs e)
+        private void btnAceptar_Click(object sender, EventArgs e)
         {
-            // Esto quedo asi del TP anterior, adaptar!!
-            // Esto quedo asi del TP anterior, adaptar!!
-            // Esto quedo asi del TP anterior, adaptar!!
-
-            if (this.rol_nomb_mod != null) //evaluamos si esta seteada la var rol_nombre
-            {                               //esta seteada si ya se selecciono un rol a modificar
-                this.txtRolName.Text = this.rol_nomb_mod;
-                //this.rol_select_tbox.ReadOnly = true;
-                this.select_boton.Enabled = false;
-
-                //cargamos lista segun corresponde                
-                list_funcionalidades.DataSource = InterfazBD.getFuncionalidades();
-                list_funcionalidades.DisplayMember = "fun_nombre";
-                list_funcionalidades.ValueMember = "fun_id";                
-            }
-            else
+            if (ValidaAceptar())
             {
-                this.txtRolName.Enabled = false;
-
-                //cargamos lista segun corresponde                
-                list_funcionalidades.DataSource = InterfazBD.getFuncionalidades();
-                list_funcionalidades.DisplayMember = "fun_nombre";
-                list_funcionalidades.ValueMember = "fun_id";                
+                Aplicar();
             }
-
-            // Esto quedo asi del TP anterior, adaptar!!
-            // Esto quedo asi del TP anterior, adaptar!!
-            // Esto quedo asi del TP anterior, adaptar!!
         }
 
-        private void aplicar_boton_Click(object sender, EventArgs e)
+        private bool ValidaAceptar()
         {
-
-            // Esto quedo asi del TP anterior, adaptar!!
-            // Esto quedo asi del TP anterior, adaptar!!
-            // Esto quedo asi del TP anterior, adaptar!!
-            // Esto quedo asi del TP anterior, adaptar!!
-            // Esto quedo asi del TP anterior, adaptar!!
-            // Esto quedo asi del TP anterior, adaptar!!
-
-            // Aca directamente haces, update de rol, delete de rol_fun y despues insert.-
-            // Usa la clase de interfaz con la BD, fijate como hace con los rubros en Generacion de Publicaciones.
-
-            int i;
-            Funciones func = new Funciones();
-
-            //this.Visible = true;
-            //devuelve true si se realizaron cambios en el nombre o estado 
-            //if (func.check_cambio_nomb_est_rol(id_rol_a_mod, this.estado_actual_rol, this.rol_select_tbox.Text, this.rol_nomb_mod))
-            InterfazBD.update_rol(this.id_rol_a_mod, this.txtRolName.Text, chkInhabilitado.Checked);
-
-            for (i = 0; i < (this.list_funcionalidades.Items.Count); i++)
+            if (txtRolName.Text == "")
             {
+                MessageBox.Show("Debe indicar el Nombre del Rol.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
 
-                this.list_funcionalidades.SelectedIndex = i;
-                if (this.list_funcionalidades.GetItemChecked(i))
+            try
+            {
+                oDtRol = InterfazBD.getRol(txtRolName.Text);
+
+                if (oDtRol != null)
                 {
-                    //consulto si la func la tnia ya el Rol
-                    //si la tnia la dejo sino la agrego
-                    if (!func.check_func_activa(this.id_rol_a_mod, Convert.ToInt16(this.list_funcionalidades.SelectedValue.ToString())))
+                    if (oDtRol.Rows.Count <= 0)
                     {
-                        InterfazBD.insert_funcxrol(this.rol_nomb_mod, Convert.ToInt16(this.list_funcionalidades.SelectedValue.ToString()));
+                        MessageBox.Show("Rol Inexistente.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return false;
                     }
                 }
                 else
                 {
-                    //consulto si la func la tnia ya el usuario
-                    //si la tnia la elimino
-                    if (func.check_func_activa(this.id_rol_a_mod, Convert.ToInt16(this.list_funcionalidades.SelectedValue.ToString())))
-                    {
-                        InterfazBD.delete_funcxrol(this.id_rol_a_mod, this.list_funcionalidades.SelectedValue.ToString());
-                    }
+                    MessageBox.Show("Rol Inexistente.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
                 }
-
-
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
 
-            MessageBox.Show("Actualización Exitosa", "Modificación  Rol", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            this.Close();
+            return true;
+        }
 
+        private void btnGenerar_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Confirma que desea Guardar los cambios en el Rol?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                if (ValidaGenerar())
+                {
+                    if (Generar())
+                    {
+                        Limpiar(true);
+                        HabilitarMod(false);
+                    }
+                }
+            }
+        }
+
+        private bool ValidaGenerar()
+        {
+            bool datosOk = true;
+            string mensaje = "";
+
+            if (txtNombre.Text == "")
+            {
+                mensaje = mensaje + "Debe indicar un Nombre." + System.Environment.NewLine;
+                datosOk = false;
+            }
+
+            if (listfunc.CheckedIndices.Count <= 0)
+            {
+                mensaje = mensaje + "Debe seleccionar al menos una Funcionalidad." + System.Environment.NewLine;
+                datosOk = false;
+            }
+
+            if (!datosOk)
+                MessageBox.Show(mensaje, "Validaciones - Modificar Rol", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            return datosOk;
+        }
+
+        private bool Generar()
+        {
+            bool result;
+
+            try
+            {
+                CargarDTRol();
+                CargarDtFuncs();
+
+                result = InterfazBD.ModificarRol(oDtRol, oDtRolFun);
+
+                MessageBox.Show("Su Rol fue grabado con exito.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+
+        private void CargarDtFuncs()
+        {
+            DataRow oDr;
+
+            try
+            {
+                oDtRolFun = InterfazBD.getDTRol_Fun();
+
+                foreach (int x in listfunc.CheckedIndices)
+                {
+                    oDr = oDtRolFun.NewRow();
+
+                    listfunc.SelectedIndex = x;
+
+                    oDr["rolfun_rol_Id"] = oDtRol.Rows[0]["rol_Id"];
+                    oDr["rolfun_fun_Id"] = listfunc.SelectedValue;
+
+                    oDtRolFun.Rows.Add(oDr);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        private void CargarDTRol()
+        {
+            DataRow oDr = oDtRol.Rows[0];
+
+            oDr.BeginEdit();
+
+            oDr["rol_Nombre"] = txtNombre.Text;
+            oDr["rol_Inhabilitado"] = chkInhabilitado.Checked;
+
+            oDr.EndEdit();
+        }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Confirma que desea Limpiar los datos ingresados?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                Limpiar(false);
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Confirma que desea Cancelar los datos ingresados?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                Limpiar(true);
+                HabilitarMod(false);
+            }
+        }
+
+        private void Abm_Rol_Modif_VisibleChanged(object sender, EventArgs e)
+        {
+            if (cerrarForm) this.Close();
         }
     }
 }

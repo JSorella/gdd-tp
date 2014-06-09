@@ -178,3 +178,200 @@ RETURN @Result
 
 END
 GO
+
+/*============================== STORED PROCEDURE JUAN ==============================*/
+
+IF OBJECT_ID('J2LA.Roles_Insert') IS NOT NULL
+DROP PROCEDURE J2LA.Roles_Insert
+GO
+CREATE PROCEDURE J2LA.Roles_Insert
+	@rol_Id INT OUTPUT,
+	@rol_Nombre NVARCHAR(255)
+AS
+BEGIN
+
+	INSERT INTO J2LA.Roles ([rol_Nombre], [rol_Inhabilitado],[rol_Eliminado])
+	VALUES(@rol_Nombre, 0, 0)
+	
+	SELECT @rol_Id = @@IDENTITY		
+END
+GO
+
+/*============================== STORED PROCEDURE JUAN ==============================*/
+
+IF OBJECT_ID('J2LA.Roles_Insert_Funcionalidades') IS NOT NULL
+DROP PROCEDURE J2LA.Roles_Insert_Funcionalidades
+GO
+CREATE PROCEDURE J2LA.Roles_Insert_Funcionalidades
+	@rolfun_rol_Id int,
+	@rolfun_fun_Id int
+AS
+BEGIN
+
+	INSERT INTO J2LA.Roles_Funcionalidades
+		(rolfun_rol_Id,rolfun_fun_Id)
+	VALUES(
+		@rolfun_rol_Id,@rolfun_fun_Id)
+		
+END
+GO
+
+/*============================== STORED PROCEDURE JUAN ==============================*/
+
+IF OBJECT_ID('J2LA.getFuncionalidadesPorRol') IS NOT NULL
+DROP FUNCTION J2LA.getFuncionalidadesPorRol
+GO
+IF OBJECT_ID('J2LA.getRoles_Funcionalidades') IS NOT NULL
+DROP FUNCTION J2LA.getRoles_Funcionalidades
+GO
+CREATE FUNCTION J2LA.getRoles_Funcionalidades( @rol_Id int )
+RETURNS TABLE
+AS
+RETURN 
+	(SELECT RF.rolfun_rol_Id, RF.rolfun_fun_Id, f.fun_Nombre
+		FROM J2LA.Roles_Funcionalidades RF
+		INNER JOIN J2LA.Funcionalidades F On F.fun_Id = RF.rolfun_fun_Id
+		WHERE RF.rolfun_rol_Id = @rol_Id
+	)
+GO
+
+/*============================== STORED PROCEDURE JUAN ==============================*/
+
+IF OBJECT_ID('J2LA.Roles_Update') IS NOT NULL
+DROP PROCEDURE J2LA.Roles_Update
+GO
+CREATE PROCEDURE J2LA.Roles_Update
+	@rol_Id INT,
+	@rol_Nombre NVARCHAR(255),
+	@rol_Inhabilitado BIT
+AS
+BEGIN
+
+	UPDATE J2LA.Roles
+	SET rol_Nombre = @rol_Nombre,
+		rol_Inhabilitado = @rol_Inhabilitado
+	WHERE rol_Id = @rol_Id
+	
+	-- Si se Inhabilita se quitan las asignaciones de Usuarios
+	IF(@rol_Inhabilitado = 1)
+	BEGIN
+		DELETE FROM J2LA.Usuarios_Roles
+		WHERE usurol_rol_Id = @rol_Id
+	END
+	
+END
+GO
+
+/*============================== STORED PROCEDURE JUAN ==============================*/
+
+IF OBJECT_ID('J2LA.Roles_Delete_Funcionalidades') IS NOT NULL
+DROP PROCEDURE J2LA.Roles_Delete_Funcionalidades
+GO
+CREATE PROCEDURE J2LA.Roles_Delete_Funcionalidades
+	@rol_Id int
+AS
+BEGIN
+
+	DELETE FROM J2LA.Roles_Funcionalidades
+	WHERE rolfun_rol_Id = @rol_Id
+	
+END
+GO
+
+/*============================== STORED PROCEDURE JUAN ==============================*/
+
+IF OBJECT_ID('J2LA.Roles_BajaLogica') IS NOT NULL
+DROP PROCEDURE J2LA.Roles_BajaLogica
+GO
+CREATE PROCEDURE J2LA.Roles_BajaLogica
+	@rol_Id int
+AS
+BEGIN
+
+	-- Baja Logica del Rol
+	UPDATE J2LA.Roles
+	SET rol_Eliminado = 1
+	WHERE rol_Id = @rol_Id
+	
+	-- Elimino las Funcionalidades del Rol
+	DELETE FROM J2LA.Roles_Funcionalidades
+	WHERE rolfun_rol_Id = @rol_Id
+	
+	-- Elimino las asignaciones de Usuarios
+	DELETE FROM J2LA.Usuarios_Roles
+	WHERE usurol_rol_Id = @rol_Id
+	
+END
+GO
+
+/*============================== STORED PROCEDURE JUAN ==============================*/
+
+IF OBJECT_ID('J2LA.Publicaciones_Visibilidades_Insert') IS NOT NULL
+DROP PROCEDURE J2LA.Publicaciones_Visibilidades_Insert
+GO
+CREATE PROCEDURE J2LA.Publicaciones_Visibilidades_Insert
+	@pubvis_id Int,
+	@pubvis_Codigo numeric(18,0),
+	@pubvis_Descripcion NVARCHAR(255),
+	@pubvis_Precio numeric(18,2),
+	@pubvis_Porcentaje numeric(18,2),
+	@pubvis_Dias_Vto numeric(18,0),
+	@pubvis_Eliminado bit
+AS
+BEGIN
+
+	INSERT INTO J2LA.Publicaciones_Visibilidades 
+		([pubvis_Codigo], [pubvis_Descripcion],[pubvis_Precio], 
+		[pubvis_Porcentaje], [pubvis_Dias_Vto], [pubvis_Eliminado])
+	VALUES(@pubvis_Codigo, @pubvis_Descripcion, @pubvis_Precio,
+		@pubvis_Porcentaje, @pubvis_Dias_Vto, @pubvis_Eliminado)
+
+END
+GO
+
+/*============================== STORED PROCEDURE JUAN ==============================*/
+
+IF OBJECT_ID('J2LA.Publicaciones_Visibilidades_Update') IS NOT NULL
+DROP PROCEDURE J2LA.Publicaciones_Visibilidades_Update
+GO
+CREATE PROCEDURE J2LA.Publicaciones_Visibilidades_Update
+	@pubvis_id Int,
+	@pubvis_Codigo numeric(18,0),
+	@pubvis_Descripcion NVARCHAR(255),
+	@pubvis_Precio numeric(18,2),
+	@pubvis_Porcentaje numeric(18,2),
+	@pubvis_Dias_Vto numeric(18,0),
+	@pubvis_Eliminado bit
+AS
+BEGIN
+
+	UPDATE J2LA.Publicaciones_Visibilidades 
+	SET	[pubvis_Codigo] = @pubvis_Codigo, 
+		[pubvis_Descripcion] = @pubvis_Descripcion,
+		[pubvis_Precio] = @pubvis_Precio, 
+		[pubvis_Porcentaje] = @pubvis_Porcentaje, 
+		[pubvis_Dias_Vto] = @pubvis_Dias_Vto, 
+		[pubvis_Eliminado] = @pubvis_Eliminado
+	WHERE pubvis_id = @pubvis_id
+
+END
+GO
+
+/*============================== STORED PROCEDURE JUAN ==============================*/
+
+IF OBJECT_ID('J2LA.Publicaciones_Visibilidades_BajaLogica') IS NOT NULL
+DROP PROCEDURE J2LA.Publicaciones_Visibilidades_BajaLogica
+GO
+CREATE PROCEDURE J2LA.Publicaciones_Visibilidades_BajaLogica
+	@pubvis_id Int
+AS
+BEGIN
+
+	UPDATE J2LA.Publicaciones_Visibilidades 
+	SET	[pubvis_Eliminado] = 1
+	WHERE pubvis_id = @pubvis_id
+
+END
+GO
+
+/*============================== STORED PROCEDURE JUAN ==============================*/

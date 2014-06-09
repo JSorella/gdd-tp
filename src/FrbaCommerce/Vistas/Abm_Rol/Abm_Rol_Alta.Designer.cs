@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.name_rol = new System.Windows.Forms.TextBox();
+            this.txtRolName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.list_funcionalidades = new System.Windows.Forms.CheckedListBox();
-            this.butt_Cleaning = new System.Windows.Forms.Button();
-            this.butt_add = new System.Windows.Forms.Button();
+            this.listfunc = new System.Windows.Forms.CheckedListBox();
+            this.btnLimpiar = new System.Windows.Forms.Button();
+            this.btnGenerar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -45,12 +45,12 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Nombre del Rol:";
             // 
-            // name_rol
+            // txtRolName
             // 
-            this.name_rol.Location = new System.Drawing.Point(106, 12);
-            this.name_rol.Name = "name_rol";
-            this.name_rol.Size = new System.Drawing.Size(146, 20);
-            this.name_rol.TabIndex = 2;
+            this.txtRolName.Location = new System.Drawing.Point(106, 12);
+            this.txtRolName.Name = "txtRolName";
+            this.txtRolName.Size = new System.Drawing.Size(146, 20);
+            this.txtRolName.TabIndex = 1;
             // 
             // label2
             // 
@@ -61,50 +61,52 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "Funcionalidades: ";
             // 
-            // list_funcionalidades
+            // listfunc
             // 
-            this.list_funcionalidades.FormattingEnabled = true;
-            this.list_funcionalidades.Location = new System.Drawing.Point(15, 60);
-            this.list_funcionalidades.Name = "list_funcionalidades";
-            this.list_funcionalidades.Size = new System.Drawing.Size(237, 184);
-            this.list_funcionalidades.TabIndex = 4;
+            this.listfunc.CheckOnClick = true;
+            this.listfunc.FormattingEnabled = true;
+            this.listfunc.Location = new System.Drawing.Point(15, 60);
+            this.listfunc.Name = "listfunc";
+            this.listfunc.Size = new System.Drawing.Size(237, 184);
+            this.listfunc.TabIndex = 2;
             // 
-            // butt_Cleaning
+            // btnLimpiar
             // 
-            this.butt_Cleaning.Location = new System.Drawing.Point(15, 256);
-            this.butt_Cleaning.Name = "butt_Cleaning";
-            this.butt_Cleaning.Size = new System.Drawing.Size(103, 27);
-            this.butt_Cleaning.TabIndex = 5;
-            this.butt_Cleaning.Text = "Limpiar";
-            this.butt_Cleaning.UseVisualStyleBackColor = true;
-            this.butt_Cleaning.Click += new System.EventHandler(this.butt_Cleaning_Click);
+            this.btnLimpiar.Location = new System.Drawing.Point(149, 256);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(103, 27);
+            this.btnLimpiar.TabIndex = 4;
+            this.btnLimpiar.Text = "Limpiar";
+            this.btnLimpiar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
-            // butt_add
+            // btnGenerar
             // 
-            this.butt_add.Location = new System.Drawing.Point(149, 256);
-            this.butt_add.Name = "butt_add";
-            this.butt_add.Size = new System.Drawing.Size(103, 27);
-            this.butt_add.TabIndex = 6;
-            this.butt_add.Text = "Agregar";
-            this.butt_add.UseVisualStyleBackColor = true;
-            this.butt_add.Click += new System.EventHandler(this.butt_add_Click);
+            this.btnGenerar.Location = new System.Drawing.Point(15, 256);
+            this.btnGenerar.Name = "btnGenerar";
+            this.btnGenerar.Size = new System.Drawing.Size(103, 27);
+            this.btnGenerar.TabIndex = 3;
+            this.btnGenerar.Text = "Generar";
+            this.btnGenerar.UseVisualStyleBackColor = true;
+            this.btnGenerar.Click += new System.EventHandler(this.btnGenerar_Click);
             // 
             // Abm_Rol_Alta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(262, 295);
-            this.Controls.Add(this.butt_add);
-            this.Controls.Add(this.butt_Cleaning);
-            this.Controls.Add(this.list_funcionalidades);
+            this.Controls.Add(this.btnGenerar);
+            this.Controls.Add(this.btnLimpiar);
+            this.Controls.Add(this.listfunc);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.name_rol);
+            this.Controls.Add(this.txtRolName);
             this.Controls.Add(this.label1);
             this.MaximizeBox = false;
             this.Name = "Abm_Rol_Alta";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Alta Rol";
-            this.Load += new System.EventHandler(this.list_funcionalidades_Load);
+            this.Text = "Alta de Roles";
+            this.Load += new System.EventHandler(this.Abm_Rol_Alta_Load);
+            this.VisibleChanged += new System.EventHandler(this.Abm_Rol_Alta_VisibleChanged);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -113,10 +115,10 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox name_rol;
+        private System.Windows.Forms.TextBox txtRolName;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.CheckedListBox list_funcionalidades;
-        private System.Windows.Forms.Button butt_Cleaning;
-        private System.Windows.Forms.Button butt_add;
+        private System.Windows.Forms.CheckedListBox listfunc;
+        private System.Windows.Forms.Button btnLimpiar;
+        private System.Windows.Forms.Button btnGenerar;
     }
 }

@@ -44,6 +44,11 @@ namespace FrbaCommerce
             {
                 ConfirmarLogIn();
             }
+
+            if (e.KeyCode == Keys.Escape)
+            {
+                this.Close();
+            }
         }
 
         private void ConfirmarLogIn()

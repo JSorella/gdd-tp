@@ -169,7 +169,6 @@ namespace FrbaCommerce
                 oDTPubli = InterfazBD.getPublicacion(Convert.ToInt32(oFrm.Resultado["Codigo"]));
 
                 txtCodPubli.Text = oFrm.Resultado["Codigo"].ToString();
-                oDtPubRubros = InterfazBD.getPublicaciones_Rubros(Convert.ToInt32(oFrm.Resultado["Codigo"]));
 
                 Aplicar();
             }
@@ -406,7 +405,7 @@ namespace FrbaCommerce
 
         private void btnGenerar_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Confirma que desea Guardar los cambios en la Publicación?", "Nueva Publicación", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show("Confirma que desea Guardar los cambios en la Publicación?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 if (ValidaGenerar())
                 {
@@ -419,7 +418,6 @@ namespace FrbaCommerce
             }
         }
 
-        //VEEEEEEEEEEEEEEEEEEER
         private bool ValidaGenerar()
         {
             bool datosOk = true;
@@ -474,7 +472,7 @@ namespace FrbaCommerce
             }
 
             if (!datosOk)
-                MessageBox.Show(mensaje, "Validaciones - Nueva Publicación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(mensaje, "Validaciones - Editar Publicación", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             return datosOk;
         }
@@ -552,13 +550,13 @@ namespace FrbaCommerce
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Confirma que desea Limpiar los datos ingresados?", "Nueva Publicación", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show("Confirma que desea Limpiar los datos ingresados?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 Limpiar(false);
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Confirma que desea Cancelar los datos ingresados?", "Nueva Publicación", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show("Confirma que desea Cancelar los datos ingresados?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 Limpiar(true);
                 HabilitarMod(false);

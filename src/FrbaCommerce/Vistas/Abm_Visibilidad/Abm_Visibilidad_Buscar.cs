@@ -9,11 +9,11 @@ using System.Windows.Forms;
 
 namespace FrbaCommerce
 {
-    public partial class Abm_Rol_Busqueda : Form
+    public partial class Abm_Visibilidad_Buscar : Form
     {
         private DataRow mobjDrResultado; // Variable para pasar a los formularios que llamen a la busqueda.
 
-        public Abm_Rol_Busqueda()
+        public Abm_Visibilidad_Buscar()
         {
             InitializeComponent();
         }
@@ -23,7 +23,7 @@ namespace FrbaCommerce
             get { return mobjDrResultado; }
         }
 
-        private void Abm_Rol_Busqueda_Load(object sender, EventArgs e)
+        private void Abm_Visibilidad_Buscar_Load(object sender, EventArgs e)
         {
             mobjDrResultado = null;
         }
@@ -48,7 +48,12 @@ namespace FrbaCommerce
             this.Close();
         }
 
-        private void dgvRoles_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void txtNombre_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = Funciones.SoloNumeros(e.KeyChar);
+        }
+
+        private void dgvVisib_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             Seleccionar();
         }
@@ -56,7 +61,8 @@ namespace FrbaCommerce
         private void Limpiar()
         {
             txtNombre.Text = string.Empty;
-            dgvRoles.DataSource = null;
+            textBox1.Text = string.Empty;
+            dgvVisib.DataSource = null;
         }
 
         private void Buscar()
@@ -64,7 +70,7 @@ namespace FrbaCommerce
             try
             {
                 //Cargamos el data_grid con el resultado de la busqueda
-                dgvRoles.DataSource = InterfazBD.BuscarRoles(txtNombre.Text);
+                dgvVisib.DataSource = InterfazBD.BuscarVisibilidades(txtNombre.Text, textBox1.Text);
             }
             catch (Exception ex)
             {
@@ -74,12 +80,12 @@ namespace FrbaCommerce
 
         private void Seleccionar()
         {
-            DataGridViewSelectedRowCollection list = this.dgvRoles.SelectedRows;
+            DataGridViewSelectedRowCollection list = this.dgvVisib.SelectedRows;
 
             if (list.Count > 0)
-                mobjDrResultado = ((DataRowView)dgvRoles.SelectedRows[0].DataBoundItem).Row;
+                mobjDrResultado = ((DataRowView)dgvVisib.SelectedRows[0].DataBoundItem).Row;
             else
-                MessageBox.Show("Seleccione un Rol.", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Seleccione una Visibilidad.", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
             this.Close();
         }

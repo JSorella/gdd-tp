@@ -75,7 +75,7 @@ namespace FrbaCommerce
 
             ejemploToolStripMenuItem.Visible = true;
 
-            DataTable oDt = InterfazBD.getFuncionalidadesPorRol(Singleton.sessionRol_Nombre);
+            DataTable oDt = InterfazBD.getRoles_Funcionalidades(Singleton.sessionRol_Id);
 
             foreach (DataRow oDr in oDt.Rows)
             {

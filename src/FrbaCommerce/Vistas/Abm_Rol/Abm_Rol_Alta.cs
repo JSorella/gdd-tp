@@ -11,90 +11,159 @@ namespace FrbaCommerce
 {
     public partial class Abm_Rol_Alta : Form
     {
-        Funciones func = new Funciones();
-        
+        DataTable oDtFunRol;//Relacion - Roles_Funcionalidades
+
+        bool cerrarForm = false;
+
         public Abm_Rol_Alta()
         {
             this.InitializeComponent();
         }
 
-        private void limpiar()
-        {
-            //refresca la pantalla 
-            this.name_rol.Clear();
-
-            //destildamos las opciones que estaban marcadas
-            int i;
-            for (i = 0; i < (this.list_funcionalidades.Items.Count); i++)
-            {
-                this.list_funcionalidades.SetItemChecked(i, false);
-            }
-        }
-
-        private void list_funcionalidades_Load(object sender, EventArgs e)
-        {
-            //DataSource es el origen de los datos en nuestro caso la tabla que alberga el resultado de la query
-            list_funcionalidades.DataSource = InterfazBD.getFuncionalidades();
-
-            //Displaymember es la columna de la tabla que se va a mostrar en nuestro caso hay una sola
-            list_funcionalidades.DisplayMember = "fun_nombre";
-
-            //ValueMembermember es el valor que tiene el campo seleccionado en nuestro caso ponemos la PK
-            list_funcionalidades.ValueMember = "fun_id";
-        }
-
         private void Abm_Rol_Alta_Load(object sender, EventArgs e)
         {
-
+            ArmarDataTables();
+            CargarFuncionalidades();
+            Limpiar();
         }
 
-        private void butt_Cleaning_Click(object sender, EventArgs e)
+        private void btnLimpiar_Click(object sender, EventArgs e)
         {
-            this.limpiar();
+            Limpiar();
         }
 
-        private void butt_add_Click(object sender, EventArgs e)
+        private void btnGenerar_Click(object sender, EventArgs e)
         {
-            bool error = false;
-
-            if (this.name_rol.Text == "")
+            if (MessageBox.Show("Confirma que desea grabar los Datos?", "Nuevo Rol", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                MessageBox.Show("Debe ingresar un nombre de Rol", "Alta de Rol", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                error = true;
+                if (ValidaGenerar())
+                {
+                    if (Generar())
+                    {
+                        Limpiar();
+                    }
+                }
+            }
+        }
+
+        private void ArmarDataTables()
+        {
+            try
+            {
+                oDtFunRol = InterfazBD.getDTRol_Fun();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error en ArmarDataTables: " + System.Environment.NewLine + ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                cerrarForm = true;
+            }
+        }
+
+        private void CargarFuncionalidades()
+        {
+            try
+            {
+                //DataSource es el origen de los datos en nuestro caso la tabla que alberga las funcionalidades
+                listfunc.DataSource = InterfazBD.getFuncionalidades();
+
+                //Displaymember es la columna de la tabla que se va a mostrar en nuestro caso hay una sola
+                listfunc.DisplayMember = "fun_nombre";
+
+                //ValueMembermember es el valor que tiene el campo seleccionado en nuestro caso ponemos la PK
+                listfunc.ValueMember = "fun_id";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error en CargarFuncionalidades: " + System.Environment.NewLine + ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                cerrarForm = true;
+            }
+        }
+
+        private void Limpiar()
+        {
+            if (cerrarForm) return;
+
+            txtRolName.Text = string.Empty;
+
+            //destildamos todas las opciones
+            for (int i = 0; i < (listfunc.Items.Count); i++)
+                listfunc.SetItemChecked(i, false);
+        }
+
+        private bool ValidaGenerar()
+        {
+            bool datosOk = true;
+            string mensaje = "";
+
+            if (txtRolName.Text == "")
+            {
+                mensaje = mensaje + "Debe ingresar un nombre de Rol.";
+                datosOk = false;
             }
 
-            if (this.list_funcionalidades.CheckedIndices.Count == 0)
+            if (listfunc.CheckedIndices.Count == 0)
             {
-                MessageBox.Show("Debe seleccionar al menos una funcionalidad", "Alta de Rol", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                error = true;
+                mensaje = mensaje + "Debe seleccionar al menos una funcionalidad";
+                datosOk = false;
             }
 
             //controlamos que el nombre de rol ingresado NO este en la base de datos
-            if (InterfazBD.existe_nombre_rol(name_rol.Text) == true)
+            if (InterfazBD.ExisteNombreRol(txtRolName.Text))
             {
-                MessageBox.Show("Nombre de Rol existente en la Base de Datos", "Alta de Rol", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                error = true;
+                mensaje = mensaje + "El Nombre que indicó para el Nuevo Rol ya existe en el Sistema.";
+                txtRolName.Text = string.Empty;
+                datosOk = false;
             }
 
-            if (error)
+            if (!datosOk)
+                MessageBox.Show(mensaje, "Validaciones - Nuevo Rol", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            return datosOk;
+        }
+
+        private bool Generar()
+        {
+            bool result;
+
+            try
             {
-                this.limpiar();
-                return;
+                CargarDtFuncs(0);
+
+                result = InterfazBD.NuevoRol(txtRolName.Text, oDtFunRol);
+
+                MessageBox.Show("El Rol fue generado con exito.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                return result;
             }
-
-            InterfazBD.insert_Rol(name_rol.Text);
-
-            //Lo mejor seria armar un DT y pasarlo para usar Singleton.conexion.executeQuerySPMasivo
-
-            foreach (int indice_func in this.list_funcionalidades.CheckedIndices) //checkedIndices devuelve la coleccion de los indices activados
+            catch (Exception ex)
             {
-                this.list_funcionalidades.SelectedIndex = indice_func; //establecemos que el elemento seleccionado posee el indice marcado correspondiente
-                //selectValue retorna el value_member del item seleccionado (seleccionado != tildado)
-                //insertamos las funcionalidades del nuevo rol
-                InterfazBD.insert_funcxrol(name_rol.Text, Convert.ToInt32(this.list_funcionalidades.SelectedValue));
+                MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
-            MessageBox.Show("Rol Insertado Correctamente", "Alta de Rol", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            this.limpiar();
+        }
+
+        private void CargarDtFuncs(int rol_id)
+        {
+            oDtFunRol.Rows.Clear();
+            DataRow oDr;
+
+            foreach (int x in listfunc.CheckedIndices)
+            {
+                oDr = oDtFunRol.NewRow();
+
+                listfunc.SelectedIndex = x;
+
+                oDr["rolfun_rol_Id"] = rol_id;
+                oDr["rolfun_fun_Id"] = listfunc.SelectedValue;
+
+                oDtFunRol.Rows.Add(oDr);
+            }
+        }
+
+        private void Abm_Rol_Alta_VisibleChanged(object sender, EventArgs e)
+        {
+            if (cerrarForm)
+                this.Close();
         }
     }
 }

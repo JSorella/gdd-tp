@@ -30,8 +30,8 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.txtRol = new System.Windows.Forms.TextBox();
-            this.select_boton = new System.Windows.Forms.Button();
-            this.baja_boton = new System.Windows.Forms.Button();
+            this.btnSeleccionar = new System.Windows.Forms.Button();
+            this.btnBaja = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -50,39 +50,41 @@
             this.txtRol.Size = new System.Drawing.Size(133, 20);
             this.txtRol.TabIndex = 1;
             // 
-            // select_boton
+            // btnSeleccionar
             // 
-            this.select_boton.Location = new System.Drawing.Point(243, 8);
-            this.select_boton.Name = "select_boton";
-            this.select_boton.Size = new System.Drawing.Size(101, 27);
-            this.select_boton.TabIndex = 2;
-            this.select_boton.Text = "Seleccionar";
-            this.select_boton.UseVisualStyleBackColor = true;
-            this.select_boton.Click += new System.EventHandler(this.select_boton_Click);
+            this.btnSeleccionar.Location = new System.Drawing.Point(243, 8);
+            this.btnSeleccionar.Name = "btnSeleccionar";
+            this.btnSeleccionar.Size = new System.Drawing.Size(101, 27);
+            this.btnSeleccionar.TabIndex = 2;
+            this.btnSeleccionar.Text = "Seleccionar";
+            this.btnSeleccionar.UseVisualStyleBackColor = true;
+            this.btnSeleccionar.Click += new System.EventHandler(this.btnSeleccionar_Click);
             // 
-            // baja_boton
+            // btnBaja
             // 
-            this.baja_boton.Location = new System.Drawing.Point(243, 56);
-            this.baja_boton.Name = "baja_boton";
-            this.baja_boton.Size = new System.Drawing.Size(101, 27);
-            this.baja_boton.TabIndex = 3;
-            this.baja_boton.Text = "Dar de Baja";
-            this.baja_boton.UseVisualStyleBackColor = true;
-            this.baja_boton.Click += new System.EventHandler(this.baja_boton_Click);
+            this.btnBaja.Location = new System.Drawing.Point(243, 60);
+            this.btnBaja.Name = "btnBaja";
+            this.btnBaja.Size = new System.Drawing.Size(101, 27);
+            this.btnBaja.TabIndex = 3;
+            this.btnBaja.Text = "Dar de Baja";
+            this.btnBaja.UseVisualStyleBackColor = true;
+            this.btnBaja.Click += new System.EventHandler(this.btnBaja_Click);
             // 
             // Abm_Rol_Baja
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(353, 99);
-            this.Controls.Add(this.baja_boton);
-            this.Controls.Add(this.select_boton);
+            this.Controls.Add(this.btnBaja);
+            this.Controls.Add(this.btnSeleccionar);
             this.Controls.Add(this.txtRol);
             this.Controls.Add(this.label1);
-            this.MinimizeBox = false;
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(369, 137);
+            this.MinimumSize = new System.Drawing.Size(369, 137);
             this.Name = "Abm_Rol_Baja";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Abm_Rol_Baja";
+            this.Text = "Baja de Roles";
             this.Load += new System.EventHandler(this.Abm_Rol_Baja_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -93,7 +95,7 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtRol;
-        private System.Windows.Forms.Button select_boton;
-        private System.Windows.Forms.Button baja_boton;
+        private System.Windows.Forms.Button btnSeleccionar;
+        private System.Windows.Forms.Button btnBaja;
     }
 }
