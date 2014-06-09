@@ -179,3 +179,5 @@ C:\Users\Juan\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.C
 C:\Users\Juan\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.AltaPregunta.resources
 C:\Users\Juan\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.DetallesPublicacion.resources
 C:\Users\Juan\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.EjemploGrilla.resources
+C:\Users\Lucas\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.AltaPregunta.resources
+C:\Users\Lucas\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.EjemploGrilla.resources

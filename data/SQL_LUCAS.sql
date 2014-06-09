@@ -181,7 +181,7 @@ AS
 			END
 		
 		
-		IF (@usu_Inhabilitado_Comprar = 1 AND @cant_Compras_No_Calificadas <= 5)
+		IF (@usu_Inhabilitado_Comprar = 1 AND @cant_Compras_No_Calificadas = 0)
 			BEGIN
 				UPDATE J2LA.Usuarios
 				SET usu_Inhabilitado_Comprar = 0

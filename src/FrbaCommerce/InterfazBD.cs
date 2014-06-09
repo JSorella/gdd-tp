@@ -852,14 +852,15 @@ namespace FrbaCommerce
 
         public static void ActualizarReputacion(string usu_UserName, int comp_Id, int cal_Cant_Estrellas)
         {
-             try
+            try
             {
-                string query = "exec J2LA.ActualizarReputacion "+usu_UserName+", "+comp_Id+", "+cal_Cant_Estrellas;
-                Singleton.conexion.executeQueryTable(query, null, null);
-            }            
+                Singleton.conexion.executeQuerySP("J2LA.ActualizarReputacion", null, new String[3, 2] { { "usu_UserName", usu_UserName},
+                                                  {"comp_Id", comp_Id.ToString()},
+                                                  {"cal_Cant_Estrellas", cal_Cant_Estrellas.ToString()}});
+            }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                throw new Exception(ex.Message);
             }
         }
 
@@ -867,12 +868,14 @@ namespace FrbaCommerce
         {
             try
             {
-                string query = "exec J2LA.CargarCalificacion "+comp_Id+", "+cal_Cant_Estrellas+", '"+cal_Comentario+"'";
-                Singleton.conexion.executeQueryTable(query, null, null);
-            }            
+                Singleton.conexion.executeQuerySP("J2LA.CargarCalificacion", null,
+                        new String[3, 2] { { "comp_Id", comp_Id.ToString()},
+                                            {"cal_Cant_Estrellas", cal_Cant_Estrellas.ToString()},
+                                            {"cal_Comentario", cal_Comentario}});
+            }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                throw new Exception(ex.Message);
             }
         }
 
