@@ -898,21 +898,11 @@ namespace FrbaCommerce
         {
             try
             {
-<<<<<<< HEAD
-                string query = "exec J2LA.ActualizarReputacion "+usu_UserName+", "+comp_Id+", "+cal_Cant_Estrellas;
-                Singleton.conexion.executeQueryTable(query, null, null);
-
                 Singleton.conexion.executeQuerySP("J2LA.ActualizarReputacion", null,
                        new String[3, 2] { { "usu_UserName", usu_UserName},
 							                {"comp_Id", comp_Id.ToString()},
 							                {"cal_Cant_Estrellas", cal_Cant_Estrellas.ToString()}});
             }            
-=======
-                Singleton.conexion.executeQuerySP("J2LA.ActualizarReputacion", null, new String[3, 2] { { "usu_UserName", usu_UserName},
-                                                  {"comp_Id", comp_Id.ToString()},
-                                                  {"cal_Cant_Estrellas", cal_Cant_Estrellas.ToString()}});
-            }
->>>>>>> abc964c7bbf971e37646546fb533faf7f9d3281c
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
