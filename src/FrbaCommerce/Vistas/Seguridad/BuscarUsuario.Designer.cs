@@ -1,6 +1,6 @@
 ﻿namespace FrbaCommerce
 {
-    partial class CambiarPass
+    partial class BuscarUsuario
     {
         /// <summary>
         /// Required designer variable.
@@ -30,13 +30,14 @@
         {
             this.SuspendLayout();
             // 
-            // CambiarPass
+            // BuscarUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(355, 193);
-            this.Name = "CambiarPass";
-            this.Text = "CambiarPass";
+            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.Name = "BuscarUsuario";
+            this.Text = "BuscarUsuario";
+            this.Load += new System.EventHandler(this.BuscarUsuario_Load);
             this.ResumeLayout(false);
 
         }

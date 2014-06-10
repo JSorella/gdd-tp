@@ -141,6 +141,12 @@
     <Compile Include="Vistas\Comprar_Ofertar\DetallesPublicacion.Designer.cs">
       <DependentUpon>DetallesPublicacion.cs</DependentUpon>
     </Compile>
+    <Compile Include="Vistas\Seguridad\BuscarUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Seguridad\BuscarUsuario.Designer.cs">
+      <DependentUpon>BuscarUsuario.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\Seguridad\CambiarPass.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -337,6 +343,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Facturar_Publicaciones\FacturarPublicaciones.resx">
       <DependentUpon>FacturarPublicaciones.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Seguridad\BuscarUsuario.resx">
+      <DependentUpon>BuscarUsuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Seguridad\CambiarPass.resx">
+      <DependentUpon>CambiarPass.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Utilidades\ComboCheck.resx">
       <DependentUpon>ComboCheck.cs</DependentUpon>
