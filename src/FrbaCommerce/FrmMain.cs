@@ -75,7 +75,7 @@ namespace FrbaCommerce
 
             ejemploToolStripMenuItem.Visible = true;
 
-            DataTable oDt = InterfazBD.getFuncionalidadesPorRol(Singleton.sessionRol_Nombre);
+            DataTable oDt = InterfazBD.getRoles_Funcionalidades(Singleton.sessionRol_Id);
 
             foreach (DataRow oDr in oDt.Rows)
             {
@@ -263,7 +263,7 @@ namespace FrbaCommerce
 
         private void tsmiPublicacionPreg_Click(object sender, EventArgs e)
         {
-            
+            ejecutarForm(new GestionPreguntas());
         }
 
         private void tsmiPublicacionComp_Click(object sender, EventArgs e)
@@ -322,16 +322,6 @@ namespace FrbaCommerce
         private void ejemploToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ejecutarForm(new EjemploGrilla());
-        }
-
-        private void responderPreguntasToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ejecutarForm(new Responder_preguntas());
-        }
-
-        private void verRespuestasToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ejecutarForm(new Ver_Respuestas());
         }
     }
 }

@@ -96,7 +96,6 @@ namespace FrbaCommerce
             string query = "EXECUTE J2LA.setCantidadIntentos @idUsuario, @cantIntentos";
             try
             {
-                //SqlCommand comando = new SqlCommand(query, Singleton.conexion.connector());
                 SqlCommand comando = new SqlCommand(query);
 
                 comando.Parameters.AddWithValue("@idUsuario", usuario.id);
@@ -113,19 +112,12 @@ namespace FrbaCommerce
         /// <summary>
         /// Trae las funcionalidades de un rol
         /// </summary>
-        public static DataTable getFuncionalidadesPorRol(string nombreRol)
+        public static DataTable getRoles_Funcionalidades(int rol_Id)
         {
-            //SqlDataAdapter da;
-            //Console.WriteLine(nombreRol);
-            //da = new SqlDataAdapter("SELECT * FROM J2LA.getFuncionalidadesPorRol(@nombreRol)", Singleton.conexion.connector());
-            //da.SelectCommand.Parameters.AddWithValue("@nombreRol", nombreRol);
-            //var dt = new DataTable();
-            //da.Fill(dt);
-            //return dt;
-
             try
             {
-                return Singleton.conexion.executeQueryTable("Select * From J2LA.getFuncionalidadesPorRol(@nombreRol)", null, new String[1, 2] { { "nombreRol", nombreRol } });
+                return Singleton.conexion.executeQueryTable("Select * From J2LA.getRoles_Funcionalidades(@rol_id)", null, 
+                            new String[1, 2] { { "rol_Id", rol_Id.ToString() } });
             }
             catch (Exception ex)
             {
@@ -249,7 +241,7 @@ namespace FrbaCommerce
             }
         }
 
-        public static bool existe_nombre_rol(string rol_nombre)
+        public static bool ExisteNombreRol(string rol_nombre)
         {
             bool existe_rol;
 
@@ -268,7 +260,9 @@ namespace FrbaCommerce
         {
             try
             {
-                String query = "Select * From J2LA.Roles " +
+                String query = "Select [Id] = rol_Id, [Nombre] = rol_nombre, " +
+                                "[Inhabilitado] = (Case When rol_Inhabilitado = 1 Then 'Si' Else 'No' End) " + 
+                                "From J2LA.Roles " +
                                 "WHERE rol_Eliminado = 0 " +
                                 "And rol_nombre like '%" + rol_nombre + "%' " +
                                 "Order By rol_nombre";
@@ -281,17 +275,14 @@ namespace FrbaCommerce
             }
         }
 
-        public static void insert_Rol(string nombre_rol)
+        public static DataTable getRol(String rol_nombre)
         {
             try
             {
-                //string query = "EXECUTE J2LA.insert_Rol" +nombre_rol + "'";
+                String query = "Select rol_Id, rol_nombre, rol_Inhabilitado From J2LA.Roles " +
+                                "Where UPPER(rol_nombre) = '" + rol_nombre.ToUpper() + "'";
 
-                // ESTE SP PODRIA TENER UN PARAMETRO OUTPUT PARA EL ID DE ROL, ASI SE LO PASAS A LA FUNCION insert_funcxrol - Ver Generacion Publi
-                // ESTE SP PODRIA TENER UN PARAMETRO OUTPUT PARA EL ID DE ROL, ASI SE LO PASAS A LA FUNCION insert_funcxrol - Ver Generacion Publi
-                // ESTE SP PODRIA TENER UN PARAMETRO OUTPUT PARA EL ID DE ROL, ASI SE LO PASAS A LA FUNCION insert_funcxrol - Ver Generacion Publi
-                // ESTE SP PODRIA TENER UN PARAMETRO OUTPUT PARA EL ID DE ROL, ASI SE LO PASAS A LA FUNCION insert_funcxrol - Ver Generacion Publi
-                Singleton.conexion.executeQuerySP("J2LA.insert_Rol", null, new String[1, 2] { { "@nombre_rol", nombre_rol } });
+                return Singleton.conexion.executeQueryTable(query, null, null);
             }
             catch (Exception ex)
             {
@@ -299,86 +290,104 @@ namespace FrbaCommerce
             }
         }
 
-        public static void insert_funcxrol(string nombre_rol, int func_id)
+        public static bool NuevoRol(string rol_nombre, DataTable oDtRolFun)
+        {
+            int rol_Id;
+
+            SqlTransaction tran = null;
+            SqlConnection conn = new SqlConnection(Singleton.ConnectionString);
+            SqlCommand cmd = new SqlCommand("", conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            try
+            {
+                conn.Open();
+                tran = conn.BeginTransaction();
+                cmd.Transaction = tran;
+
+                //Alta de Rol
+                Singleton.conexion.executeCommandMasivo(ref cmd, "J2LA.Roles_Insert", null, new String[2, 2] { { "rol_Id", "0" }, { "rol_nombre", rol_nombre } }, "rol_Id|");
+
+                //Obtenemos el Rol_Id generado pra actualizar el DT de Roles_Funcionalidades
+                rol_Id = Convert.ToInt32(cmd.Parameters["@rol_Id"].Value);
+
+                oDtRolFun.AsEnumerable().All(c => { c["rolfun_rol_Id"] = rol_Id; return true; });
+
+                //Alta Roles_Funcionalidades
+                Singleton.conexion.executeCommandMasivo(ref cmd, "J2LA.Roles_Insert_Funcionalidades", oDtRolFun, null, "");
+
+                tran.Commit();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                tran.Rollback();
+                throw new Exception("Se detecto un error al Generar el Rol: " + ex.Message);
+            }
+            finally
+            {
+                if (conn.State != ConnectionState.Closed)
+                    conn.Close();
+
+                conn.Dispose();
+            }
+        }
+
+        public static bool ModificarRol(DataTable oDtRol, DataTable oDtRolFun)
+        {
+            String rol_Id;
+
+            SqlTransaction tran = null;
+            SqlConnection conn = new SqlConnection(Singleton.ConnectionString);
+            SqlCommand cmd = new SqlCommand("", conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            try
+            {
+                conn.Open();
+                tran = conn.BeginTransaction();
+                cmd.Transaction = tran;
+
+                rol_Id = oDtRol.Rows[0]["rol_Id"].ToString();
+
+                //Update Roles - Si se Inhabilita se quitan las asignaciones de Usuarios.-
+                Singleton.conexion.executeCommandMasivo(ref cmd, "J2LA.Roles_Update", oDtRol, null, "");
+
+                //Delete Roles_Funcionalidades
+                Singleton.conexion.executeCommandMasivo(ref cmd, "J2LA.Roles_Delete_Funcionalidades", null, new String[1, 2] { { "rol_Id", rol_Id } }, "");
+
+                //Insert Roles_Funcionalidades
+                Singleton.conexion.executeCommandMasivo(ref cmd, "J2LA.Roles_Insert_Funcionalidades", oDtRolFun, null, "");
+
+                tran.Commit();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                tran.Rollback();
+                throw new Exception("Se detecto un error al Modificar el Rol : " + ex.Message);
+            }
+            finally
+            {
+                if (conn.State != ConnectionState.Closed)
+                    conn.Close();
+
+                conn.Dispose();
+            }
+        }
+
+        public static bool RealizarBajaRol(int rol_id)
         {
             try
             {
-                // ESTA FUNCION DEBERIA RECIBIR EL ID_ROL Y NO EL NOMBRE. EN CASO DE RECIBIR EL NOMBRE, EL SELECT PARA EL ID DEBERIA HACERLO DENTRO DEL SP DE INSERT Y NO DESDE AFUERA.
-                //OTRA OPCION SERIA LA DE IR A BUSCARLO UNA SOLA VEZ Y DESPUES EJECUTAR EL SP DE INSERT CON UNA TABLA UTILIZANDO Singleton.conexion.executeQuerySPMasivo
-
-                // ESTA FUNCION DEBERIA RECIBIR EL ID_ROL Y NO EL NOMBRE. EN CASO DE RECIBIR EL NOMBRE, EL SELECT PARA EL ID DEBERIA HACERLO DENTRO DEL SP DE INSERT Y NO DESDE AFUERA.
-                //OTRA OPCION SERIA LA DE IR A BUSCARLO UNA SOLA VEZ Y DESPUES EJECUTAR EL SP DE INSERT CON UNA TABLA UTILIZANDO Singleton.conexion.executeQuerySPMasivo
-
-
-                string query = "SELECT rol_id FROM J2LA.Roles WHERE rol_nombre = '" + nombre_rol + "'";
-
-                DataTable table_rol = Singleton.conexion.executeQueryTable(query, null, null);
-
-                string rol_id = table_rol.Rows[0].ItemArray[0].ToString();
-
-                query = "EXECUTE J2LA.insert_rolfun " + rol_id + ", " + func_id.ToString();
-
-                Singleton.conexion.executeQueryTable(query, null, null);
-
-                // ESTA FUNCION DEBERIA RECIBIR EL ID_ROL Y NO EL NOMBRE. EN CASO DE RECIBIR EL NOMBRE, EL SELECT PARA EL ID DEBERIA HACERLO DENTRO DEL SP DE INSERT Y NO DESDE AFUERA.
-                //OTRA OPCION SERIA LA DE IR A BUSCARLO UNA SOLA VEZ Y DESPUES EJECUTAR EL SP DE INSERT CON UNA TABLA UTILIZANDO Singleton.conexion.executeQuerySPMasivo
-
-                // ESTA FUNCION DEBERIA RECIBIR EL ID_ROL Y NO EL NOMBRE. EN CASO DE RECIBIR EL NOMBRE, EL SELECT PARA EL ID DEBERIA HACERLO DENTRO DEL SP DE INSERT Y NO DESDE AFUERA.
-                //OTRA OPCION SERIA LA DE IR A BUSCARLO UNA SOLA VEZ Y DESPUES EJECUTAR EL SP DE INSERT CON UNA TABLA UTILIZANDO Singleton.conexion.executeQuerySPMasivo
-
-
+                Singleton.conexion.executeQuerySP("J2LA.Roles_BajaLogica", null, new String[1, 2] { { "rol_Id", rol_id.ToString() }});
+                return true;
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
-            }
-        }
-
-        public static void delete_funcxrol(int rol_id, string func_id)
-        {
-            try
-            {
-                string query = "EXECUTE J2LA.delete_rolfun " + rol_id + ", " + func_id;
-                Singleton.conexion.executeQueryTable(query, null, null);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
-
-        public static void update_rol(int rol_id, string rol_nombre, bool rol_estado)
-        {
-            try
-            {
-                //VALIDAR NOMBRE DE PARAMETROS
-                //VALIDAR NOMBRE DE PARAMETROS
-                //VALIDAR NOMBRE DE PARAMETROS
-                String[,] aPram = new String[3, 2] { { "@rol_id", rol_id.ToString() }, { "@rol_nombre", rol_nombre }, { "@rol_estado", rol_estado.ToString() } };
-                Singleton.conexion.executeQueryTable("J2LA.update_rol", null, aPram);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
-
-        public static void baja_rol(string rol_nombre, int rol_id) 
-        {
-            try
-            {
-                //EL SP DE BAJA SOLO DEBERIA TENER COMO PARAMETRO EL ID.-
-                //EL SP DE BAJA SOLO DEBERIA TENER COMO PARAMETRO EL ID.-
-                //EL SP DE BAJA SOLO DEBERIA TENER COMO PARAMETRO EL ID.-
-                //EL SP DE BAJA SOLO DEBERIA TENER COMO PARAMETRO EL ID.-
-
-                string query = "EXECUTE J2LA.baja_rol " + rol_id + ", '" + rol_nombre;
-                Singleton.conexion.executeQueryTable(query, null, null);
-            }
-            catch (Exception)
-            {
-                
-                throw;
             }
         }
 
@@ -442,6 +451,18 @@ namespace FrbaCommerce
             }
         }
 
+        public static DataTable getDTVisibilidades()
+        {
+            try
+            {
+                return Singleton.conexion.executeQueryTable("Select * From J2LA.Publicaciones_Visibilidades Where 1 = 0", null, null);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public static DataTable getEstadosPubli()
         {
             try
@@ -459,6 +480,30 @@ namespace FrbaCommerce
             try
             {
                 return Singleton.conexion.executeQueryTable("Select * From J2LA.Publicaciones_Tipos Order By pubtip_Nombre", null, null);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public static DataTable getDTRol()
+        {
+            try
+            {
+                return Singleton.conexion.executeQueryTable("Select * From J2LA.Roles Where 1 = 0", null, null);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public static DataTable getDTRol_Fun()
+        {
+            try
+            {
+                return Singleton.conexion.executeQueryTable("Select * From J2LA.Roles_Funcionalidades Where 1 = 0", null, null);
             }
             catch (Exception ex)
             {
@@ -521,7 +566,6 @@ namespace FrbaCommerce
                 throw new Exception(ex.Message);
             }
         }
-
 
         /// <summary>
         /// Trae una Publicación con su tipo, su estado y su usuario asociado
@@ -711,7 +755,7 @@ namespace FrbaCommerce
             }
         }
 
-        public static bool EditarPublicacion(DataTable oDtPubli, DataTable oDTRubros)
+        public static bool EditarPublicacion(DataTable oDtPubli, DataTable oDtPubRubros)
         {
             String pub_Codigo;
 
@@ -745,7 +789,7 @@ namespace FrbaCommerce
                 Singleton.conexion.executeCommandMasivo(ref cmd, "J2LA.Publicaciones_Delete_Rubros", null, new String[1, 2] { { "pub_Codigo", pub_Codigo } }, "");
 
                 //Insert Publicacion_Rubros
-                Singleton.conexion.executeCommandMasivo(ref cmd, "J2LA.Publicaciones_Insert_Rubros", oDTRubros, null, "");
+                Singleton.conexion.executeCommandMasivo(ref cmd, "J2LA.Publicaciones_Insert_Rubros", oDtPubRubros, null, "");
 
                 tran.Commit();
 
@@ -754,7 +798,7 @@ namespace FrbaCommerce
             catch (Exception ex)
             {
                 tran.Rollback();
-                throw new Exception("Se detecto un error al Generar la Publicacion: " + ex.Message);
+                throw new Exception("Se detecto un error al Modificar la Publicacion: " + ex.Message);
             }
             finally
             {
@@ -852,14 +896,16 @@ namespace FrbaCommerce
 
         public static void ActualizarReputacion(string usu_UserName, int comp_Id, int cal_Cant_Estrellas)
         {
-             try
+            try
             {
-                string query = "exec J2LA.ActualizarReputacion "+usu_UserName+", "+comp_Id+", "+cal_Cant_Estrellas;
-                Singleton.conexion.executeQueryTable(query, null, null);
+                Singleton.conexion.executeQuerySP("J2LA.ActualizarReputacion", null,
+                       new String[3, 2] { { "usu_UserName", usu_UserName},
+							                {"comp_Id", comp_Id.ToString()},
+							                {"cal_Cant_Estrellas", cal_Cant_Estrellas.ToString()}});
             }            
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                throw new Exception(ex.Message);
             }
         }
 
@@ -867,12 +913,14 @@ namespace FrbaCommerce
         {
             try
             {
-                string query = "exec J2LA.CargarCalificacion "+comp_Id+", "+cal_Cant_Estrellas+", '"+cal_Comentario+"'";
-                Singleton.conexion.executeQueryTable(query, null, null);
-            }            
+                Singleton.conexion.executeQuerySP("J2LA.CargarCalificacion", null,
+                        new String[3, 2] { { "comp_Id", comp_Id.ToString()},
+                                            {"cal_Cant_Estrellas", cal_Cant_Estrellas.ToString()},
+                                            {"cal_Comentario", cal_Comentario}});
+            }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                throw new Exception(ex.Message);
             }
         }
 
@@ -968,39 +1016,74 @@ namespace FrbaCommerce
             return new PaginarGrilla(o_adpter, oDs, oDt, "Publicaciones", 50);
         }
 
-        internal static DataTable respuestas()
+        public static bool NuevaVisibilidad(DataTable oDtVisib)
         {
             try
             {
-                string query = "select top 20 [Texto] = PR.preg_Comentario, [Descripcion] = PU.pub_descripcion " +
-                                    "from J2LA.Preguntas PR inner Join J2LA.Publicaciones PU " +
-                                    "on PR.preg_pub_Codigo = PU.pub_Codigo " +
-                                    "where PR.preg_usu_Id = " + Singleton.usuario["usu_Id"] + " and (select COUNT(PR1.preg_id) from J2LA.Preguntas PR1 where PR1.preg_id = PR.preg_Id) > 1 " +
-                                    "order by PR.preg_Id, PR.preg_Tipo";
-                return Singleton.conexion.executeQueryTable(query, null, null);
+                Singleton.conexion.executeQuerySP("J2LA.Publicaciones_Visibilidades_Insert", oDtVisib, null);
+                return true;
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
-                return new DataTable();
+                throw new Exception(ex.Message);
             }
         }
 
-        internal static DataTable preguntas()
+        public static DataTable getVisibilidad(int pubvis_Codigo)
         {
             try
             {
-                string query = "select [Texto] = PR.preg_Comentario, [Descripcion] = PU.pub_descripcion " +
-                                    "from J2LA.Preguntas PR inner Join J2LA.Publicaciones PU " +
-                                    "on PR.preg_pub_Codigo = PU.pub_Codigo " +
-                                    "where PR.preg_usu_Id = " + Singleton.usuario["usu_Id"] + " and (select COUNT(PR1.preg_id) from J2LA.Preguntas PR1 where PR1.preg_id = PR.preg_Id) = 1 " +
-                                    "order by PR.preg_Id, PR.preg_Tipo";
+                String query = "Select * From J2LA.Publicaciones_Visibilidades " +
+                                "Where pubvis_Eliminado = 0 And pubvis_Codigo = " + pubvis_Codigo.ToString();
+
                 return Singleton.conexion.executeQueryTable(query, null, null);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
-                return new DataTable();
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public static bool ModificarVisibilidad(DataTable oDtVisib)
+        {
+            Singleton.conexion.executeQuerySP("J2LA.Publicaciones_Visibilidades_Update", oDtVisib, null);
+            return true;
+        }
+
+        public static object BuscarVisibilidades(string pubvis_Codigo, string pubvis_Descripcion)
+        {
+            try
+            {
+                String query = "SELECT [Codigo] = pubvis_Codigo, [Descripcion] = pubvis_Descripcion, " +
+                                "[Precio] = pubvis_Precio, [Porcentaje] = pubvis_Porcentaje, " +
+                                "[Dias Vto.] = pubvis_Dias_Vto " +
+                                "FROM J2LA.Publicaciones_Visibilidades " +
+                                "WHERE pubvis_Eliminado = 0 " +
+                                "And pubvis_Descripcion like '%" + pubvis_Descripcion + "%' ";
+
+                if (pubvis_Codigo != "")
+                    query = query + "AND pubvis_Codigo = 0 ";
+
+                query = query + "Order By pubvis_Descripcion";
+
+                return Singleton.conexion.executeQueryTable(query, null, null);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public static bool RealizarBajaVisibilidad(int pubvis_Id)
+        {
+            try
+            {
+                Singleton.conexion.executeQuerySP("J2LA.Publicaciones_Visibilidades_BajaLogica", null, new String[1, 2] { { "pubvis_Id", pubvis_Id.ToString() } });
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
         }
     }
