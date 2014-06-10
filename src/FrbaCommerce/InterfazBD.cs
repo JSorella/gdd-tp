@@ -1149,5 +1149,25 @@ AND P.pub_tipo_Id = T.pubtip_Id";
                 throw new Exception(ex.Message);
             }
         }
+
+        public static object BuscarUsuarios(string usu_userName)
+        {
+            try
+            {
+                String query = "Select usu_Id, [Usuario] = usu_UserName, usu_Pass, " +
+                                "[Inhabilitado] = (Case When usu_Inhabilitado = 1 Then 'Si' Else 'No' End), " +
+                                "[Motivo Inh.] = usu_Motivo " +
+                                "From J2LA.Usuarios " +
+                                "WHERE usu_Eliminado = 0 " +
+                                "And usu_UserName like '%" + usu_userName + "%' " +
+                                "Order By usu_UserName";
+
+                return Singleton.conexion.executeQueryTable(query, null, null);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

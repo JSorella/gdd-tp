@@ -64,7 +64,10 @@ namespace FrbaCommerce
             try
             {
                 //Cargamos el data_grid con el resultado de la busqueda
-                //dgvUsu.DataSource = InterfazBD.BuscarUsuarios(txtNombre.Text);
+                dgvUsu.DataSource = InterfazBD.BuscarUsuarios(txtNombre.Text);
+
+                dgvUsu.Columns["usu_Id"].Visible = false;
+                dgvUsu.Columns["usu_Pass"].Visible = false;
             }
             catch (Exception ex)
             {

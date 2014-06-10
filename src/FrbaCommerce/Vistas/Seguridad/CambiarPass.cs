@@ -20,5 +20,25 @@ namespace FrbaCommerce
         {
 
         }
+
+        private void btnSeleccionar_Click(object sender, EventArgs e)
+        {
+            BuscarUsuario oFrm = new BuscarUsuario();
+            oFrm.ShowDialog();
+
+            if ((oFrm.Resultado != null)) //Resultado es el DataRow.-
+            {
+                //oDtRol = InterfazBD.getRol(oFrm.Resultado["Nombre"].ToString());
+
+                txtRolName.Text = oFrm.Resultado["Usuario"].ToString();
+
+                //Aplicar();
+            }
+        }
+
+        private void btnAceptar_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

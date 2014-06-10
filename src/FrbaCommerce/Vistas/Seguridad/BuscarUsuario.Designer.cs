@@ -145,7 +145,9 @@
             this.Controls.Add(this.grpParam);
             this.Controls.Add(this.btnSeleccionar);
             this.Controls.Add(this.dgvUsu);
+            this.MaximizeBox = false;
             this.Name = "BuscarUsuario";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "BuscarUsuario";
             this.Load += new System.EventHandler(this.BuscarUsuario_Load);
             this.grpParam.ResumeLayout(false);
