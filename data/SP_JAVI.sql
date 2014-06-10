@@ -114,7 +114,23 @@ GO
 IF OBJECT_ID('J2LA.setNuevoCliente') IS NOT NULL
 DROP PROCEDURE J2LA.setNuevoCliente
 GO
-CREATE PROCEDURE J2LA.setNuevoCliente @userName varchar(255), @password varchar(255), @nombre varchar(255), @apellido varchar(255), @dni numeric(18,0), @tipoDoc int, @mail varchar(255), @telefono varchar(255), @nomCalle varchar(255), @nroCalle numeric(18,0), @piso numeric(28,0), @depto varchar(50), @localidad varchar(255), @cp varchar(50), @fecnac datetime, @cuil varchar(50)
+CREATE PROCEDURE J2LA.setNuevoCliente 
+	@userName varchar(255), 
+	@password varchar(255), 
+	@nombre varchar(255), 
+	@apellido varchar(255), 
+	@dni numeric(18,0), 
+	@tipoDoc int, 
+	@mail varchar(255), 
+	@telefono varchar(255), 
+	@nomCalle varchar(255), 
+	@nroCalle numeric(18,0), 
+	@piso numeric(28,0), 
+	@depto varchar(50), 
+	@localidad varchar(255), 
+	@cp varchar(50), 
+	@fecnac datetime, 
+	@cuil varchar(50)
 AS
 BEGIN
 	EXECUTE J2LA.setNuevoUsuario @userName, @password
@@ -136,17 +152,28 @@ GO
 IF OBJECT_ID('J2LA.setPregunta') IS NOT NULL
 DROP PROCEDURE J2LA.setPregunta
 GO
-CREATE PROCEDURE J2LA.setPregunta @preg_pub_codigo numeric(18,0), @preg_Id int, @preg_Tipo char(1), @preg_Comentario varchar(255), @preg_usu_Id int
+CREATE PROCEDURE J2LA.setPregunta 
+	@preg_pub_codigo numeric(18,0), 
+	@preg_Id int, 
+	@preg_Tipo char(1), 
+	@preg_Comentario varchar(255), 
+	@preg_usu_Id int, 
+	@preg_Fecha datetime
 AS
 BEGIN
-	DECLARE @maxId INT
-	SET @maxId = (SELECT MAX(preg_Id)FROM J2LA.Preguntas)
-	SET @preg_Id = CASE WHEN @maxId IS NULL THEN 1 ELSE (@maxId + 1) END
+	
+	IF (@preg_Tipo = 'P')
+	BEGIN
+		DECLARE @maxId INT
+		SET @maxId = (SELECT MAX(preg_Id)FROM J2LA.Preguntas)
+		SET @preg_Id = CASE WHEN @maxId IS NULL THEN 1 ELSE (@maxId + 1) END
+	END
+	/* Si es 'R', traigo el que viene por parámetro*/
 
 	INSERT INTO
-		J2LA.Preguntas (preg_Id, preg_pub_codigo, preg_Tipo, preg_Comentario, preg_usu_Id)
+		J2LA.Preguntas (preg_Id, preg_pub_codigo, preg_Tipo, preg_Comentario, preg_usu_Id, preg_Fecha)
 	VALUES
-		(@preg_Id, @preg_pub_codigo, @preg_Tipo, @preg_Comentario, @preg_usu_Id)
+		(@preg_Id, @preg_pub_codigo, @preg_Tipo, @preg_Comentario, @preg_usu_Id, @preg_Fecha)
 END
 GO
 
