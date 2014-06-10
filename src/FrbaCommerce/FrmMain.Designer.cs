@@ -67,12 +67,14 @@
             this.mosaicoHorizontalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cerrarTodoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.ejemploToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsslRol = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsslUsuario = new System.Windows.Forms.ToolStripStatusLabel();
             this.tssiFecSystem = new System.Windows.Forms.ToolStripStatusLabel();
-            this.ejemploToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.responderPreguntasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.verPreguntasYRespuestasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -260,21 +262,21 @@
             // tsmiVisibilidadAlta
             // 
             this.tsmiVisibilidadAlta.Name = "tsmiVisibilidadAlta";
-            this.tsmiVisibilidadAlta.Size = new System.Drawing.Size(144, 22);
+            this.tsmiVisibilidadAlta.Size = new System.Drawing.Size(152, 22);
             this.tsmiVisibilidadAlta.Text = "Alta";
             this.tsmiVisibilidadAlta.Click += new System.EventHandler(this.tsmiVisibilidadAlta_Click);
             // 
             // tsmiVisibilidadBaja
             // 
             this.tsmiVisibilidadBaja.Name = "tsmiVisibilidadBaja";
-            this.tsmiVisibilidadBaja.Size = new System.Drawing.Size(144, 22);
+            this.tsmiVisibilidadBaja.Size = new System.Drawing.Size(152, 22);
             this.tsmiVisibilidadBaja.Text = "Baja";
             this.tsmiVisibilidadBaja.Click += new System.EventHandler(this.tsmiVisibilidadBaja_Click);
             // 
             // tsmiVisibilidadMod
             // 
             this.tsmiVisibilidadMod.Name = "tsmiVisibilidadMod";
-            this.tsmiVisibilidadMod.Size = new System.Drawing.Size(144, 22);
+            this.tsmiVisibilidadMod.Size = new System.Drawing.Size(152, 22);
             this.tsmiVisibilidadMod.Text = "Modificación";
             this.tsmiVisibilidadMod.Click += new System.EventHandler(this.tsmiVisibilidadMod_Click);
             // 
@@ -306,6 +308,9 @@
             // 
             // tsmiPublicacionPreg
             // 
+            this.tsmiPublicacionPreg.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.responderPreguntasToolStripMenuItem,
+            this.verPreguntasYRespuestasToolStripMenuItem});
             this.tsmiPublicacionPreg.Name = "tsmiPublicacionPreg";
             this.tsmiPublicacionPreg.Size = new System.Drawing.Size(197, 22);
             this.tsmiPublicacionPreg.Text = "Gestión de Preguntas";
@@ -392,6 +397,13 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(174, 6);
             // 
+            // ejemploToolStripMenuItem
+            // 
+            this.ejemploToolStripMenuItem.Name = "ejemploToolStripMenuItem";
+            this.ejemploToolStripMenuItem.Size = new System.Drawing.Size(62, 19);
+            this.ejemploToolStripMenuItem.Text = "Ejemplo";
+            this.ejemploToolStripMenuItem.Click += new System.EventHandler(this.ejemploToolStripMenuItem_Click);
+            // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -437,12 +449,19 @@
             this.tssiFecSystem.Size = new System.Drawing.Size(134, 20);
             this.tssiFecSystem.Text = "toolStripStatusLabel1";
             // 
-            // ejemploToolStripMenuItem
+            // responderPreguntasToolStripMenuItem
             // 
-            this.ejemploToolStripMenuItem.Name = "ejemploToolStripMenuItem";
-            this.ejemploToolStripMenuItem.Size = new System.Drawing.Size(62, 19);
-            this.ejemploToolStripMenuItem.Text = "Ejemplo";
-            this.ejemploToolStripMenuItem.Click += new System.EventHandler(this.ejemploToolStripMenuItem_Click);
+            this.responderPreguntasToolStripMenuItem.Name = "responderPreguntasToolStripMenuItem";
+            this.responderPreguntasToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.responderPreguntasToolStripMenuItem.Text = "Responder Preguntas";
+            this.responderPreguntasToolStripMenuItem.Click += new System.EventHandler(this.responderPreguntasToolStripMenuItem_Click);
+            // 
+            // verPreguntasYRespuestasToolStripMenuItem
+            // 
+            this.verPreguntasYRespuestasToolStripMenuItem.Name = "verPreguntasYRespuestasToolStripMenuItem";
+            this.verPreguntasYRespuestasToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.verPreguntasYRespuestasToolStripMenuItem.Text = "Ver Preguntas y Respuestas";
+            this.verPreguntasYRespuestasToolStripMenuItem.Click += new System.EventHandler(this.verPreguntasYRespuestasToolStripMenuItem_Click);
             // 
             // FrmMain
             // 
@@ -513,5 +532,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripMenuItem ejemploToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem responderPreguntasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem verPreguntasYRespuestasToolStripMenuItem;
     }
 }

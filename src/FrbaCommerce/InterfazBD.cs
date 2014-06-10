@@ -1121,11 +1121,25 @@ namespace FrbaCommerce
         {
             try
             {
-                string query = "select top 20 [Texto] = PR.preg_Comentario, [Descripcion] = PU.pub_descripcion " +
-                                    "from J2LA.Preguntas PR inner Join J2LA.Publicaciones PU " +
-                                    "on PR.preg_pub_Codigo = PU.pub_Codigo " +
-                                    "where PR.preg_usu_Id = " + Singleton.usuario["usu_Id"] + " and (select COUNT(PR1.preg_id) from J2LA.Preguntas PR1 where PR1.preg_id = PR.preg_Id) > 1 " +
-                                    "order by PR.preg_Id desc, PR.preg_Tipo";
+                //string query = "select top 20 [Texto] = PR.preg_Comentario, [Descripcion] = PU.pub_descripcion " +
+                //                    "from J2LA.Preguntas PR inner Join J2LA.Publicaciones PU " +
+                //                    "on PR.preg_pub_Codigo = PU.pub_Codigo " +
+                //                    "where PR.preg_usu_Id = " + Singleton.usuario["usu_Id"] + " and (select COUNT(PR1.preg_id) from J2LA.Preguntas PR1 where PR1.preg_id = PR.preg_Id) > 1 " +
+                //                    "order by PR.preg_Id desc, PR.preg_Tipo";
+
+                String query = "Select [Codigo Publi.] = PU.pub_Codigo, [Descripcion] = PU.pub_Descripcion, " +
+                                "[Fecha Vto.] = Convert(varchar,PU.pub_Fecha_Vto, 103), " +
+                                "[Precio] = PU.pub_Precio, [Stock] = PU.pub_Stock, " +
+                                "[Pregunta] = P.preg_Comentario, " +
+                                "[Fecha Preg] = Convert(varchar, P.preg_fecha, 103), " +
+                                "[Respuesta] = ISNULL(R.preg_Comentario, ''), " +
+                                "[Fecha Rta] = ISNULL(Convert(varchar, R.preg_fecha, 103), '') " +
+                                "From J2LA.Preguntas P " +
+                                "Inner Join J2LA.Publicaciones PU On PU.pub_Codigo = P.preg_pub_Codigo " +
+                                "Left Join J2LA.Preguntas R On R.preg_Tipo = 'R' And R.preg_Id = P.preg_Id " +
+                                "Where P.preg_usu_Id = " + Singleton.usuario["usu_Id"] +
+                                "And P.preg_Tipo = 'P' " +
+                                "Order By PU.pub_Codigo, P.preg_Fecha ";
 
                 return Singleton.conexion.executeQueryTable(query, null, null);
             }

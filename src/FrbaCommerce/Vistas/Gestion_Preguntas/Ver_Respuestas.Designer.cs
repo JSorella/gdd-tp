@@ -50,13 +50,13 @@
             this.dgvPreguntas.Name = "dgvPreguntas";
             this.dgvPreguntas.ReadOnly = true;
             this.dgvPreguntas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPreguntas.Size = new System.Drawing.Size(646, 346);
+            this.dgvPreguntas.Size = new System.Drawing.Size(773, 352);
             this.dgvPreguntas.TabIndex = 5;
             // 
             // btnRefrescar
             // 
             this.btnRefrescar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRefrescar.Location = new System.Drawing.Point(502, 366);
+            this.btnRefrescar.Location = new System.Drawing.Point(629, 372);
             this.btnRefrescar.Name = "btnRefrescar";
             this.btnRefrescar.Size = new System.Drawing.Size(75, 23);
             this.btnRefrescar.TabIndex = 6;
@@ -66,7 +66,8 @@
             // 
             // btnSalir
             // 
-            this.btnSalir.Location = new System.Drawing.Point(583, 366);
+            this.btnSalir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSalir.Location = new System.Drawing.Point(710, 372);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(75, 23);
             this.btnSalir.TabIndex = 7;
@@ -78,12 +79,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(670, 401);
+            this.ClientSize = new System.Drawing.Size(797, 407);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.btnRefrescar);
             this.Controls.Add(this.dgvPreguntas);
             this.Name = "Ver_Respuestas";
-            this.Text = "Ver Respuestas";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "Ver Preguntas y Respuestas";
             this.Load += new System.EventHandler(this.Ver_Respuestas_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPreguntas)).EndInit();
             this.ResumeLayout(false);
