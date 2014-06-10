@@ -52,7 +52,7 @@ namespace FrbaCommerce
 
                 DTpregunta.Rows.Add(pregunta);
 
-                InterfazBD.setPreguntaRespuesta(DTpregunta);
+                InterfazBD.setPregunta(DTpregunta);
                 Funciones.mostrarInformacion("Su Pregunta ha sido publicada!", "Preguntas");
             }
             catch (Exception ex)

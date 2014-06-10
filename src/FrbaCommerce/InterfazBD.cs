@@ -956,11 +956,11 @@ namespace FrbaCommerce
         /// <summary>
         /// Inserta una nueva Pregunta
         /// </summary>
-        public static void setPreguntaRespuesta(DataTable pregunta)
+        public static void setPregunta(DataTable pregunta)
         {
             try
             {
-                Singleton.conexion.executeQuerySP("J2LA.setPreguntaRespuesta", pregunta, null);
+                Singleton.conexion.executeQuerySP("J2LA.setPregunta", pregunta, null);
 
             }
             catch (Exception ex)
@@ -978,7 +978,7 @@ namespace FrbaCommerce
             try
             {
                 return Singleton.conexion.executeQueryTable(
-                    @"Select [Tipo]=(CASE WHEN P.preg_tipo = 'R' THEN 'Respuesta' ELSE 'Pregunta' END), [Comentario]= P.preg_Comentario
+                    @"Select  [Pregunta]= P.preg_Comentario
                     From J2LA.Preguntas P
                     Where preg_pub_codigo = " + preg_pub_codigo, null, null);
             }
