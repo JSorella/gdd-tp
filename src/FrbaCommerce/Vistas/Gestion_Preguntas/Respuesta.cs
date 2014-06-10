@@ -54,7 +54,7 @@ namespace FrbaCommerce
 
                 DTrespuesta.Rows.Add(respuesta);
 
-                InterfazBD.setPregunta(DTrespuesta);
+                InterfazBD.setPreguntaRespuesta(DTrespuesta);
 
                 Funciones.mostrarInformacion("Su Respuesta ha sido publicada!", "Preguntas");
                 this.Close();

@@ -76,5 +76,10 @@ namespace FrbaCommerce
             else
                 MessageBox.Show("Seleccione una pregunta.", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
+
+        private void btnRefrescar_Click(object sender, EventArgs e)
+        {
+            cargarPreguntas();
+        }
     }
 }

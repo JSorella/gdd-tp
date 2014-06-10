@@ -64,14 +64,14 @@ namespace FrbaCommerce
             try
             {
                 String query = @"SELECT *
-                                    FROM J2LA.Usuarios u  
-                                        ,J2LA.Usuarios_Roles ur
-                                        ,J2LA.Roles r
-                                    WHERE usu_username = " + "'" + nombre + @" '
-                                    AND u.usu_Id = ur.usurol_usu_id 
-                                    AND ur.usurol_rol_id = r.rol_Id
-                                    AND r.rol_eliminado = 0
-                                    AND r.rol_Inhabilitado = 0";
+FROM J2LA.Usuarios u
+,J2LA.Usuarios_Roles ur
+,J2LA.Roles r
+WHERE usu_username = " + "'" + nombre + @" '
+AND u.usu_Id = ur.usurol_usu_id
+AND ur.usurol_rol_id = r.rol_Id
+AND r.rol_eliminado = 0
+AND r.rol_Inhabilitado = 0";
 
                 DataTable usuarioResult = Singleton.conexion.executeQueryTable(query, null, null);
 
@@ -116,12 +116,12 @@ namespace FrbaCommerce
         {
             try
             {
-                return Singleton.conexion.executeQueryTable("Select * From J2LA.getRoles_Funcionalidades(@rol_id)", null, 
+                return Singleton.conexion.executeQueryTable("Select * From J2LA.getRoles_Funcionalidades(@rol_id)", null,
                             new String[1, 2] { { "rol_Id", rol_Id.ToString() } });
             }
             catch (Exception ex)
             {
-                
+
                 throw new Exception(ex.Message);
             }
 
@@ -144,8 +144,8 @@ namespace FrbaCommerce
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
-            }            
-         }
+            }
+        }
 
         /// <summary>
         /// Trae todos los tipos de documento
@@ -179,22 +179,22 @@ namespace FrbaCommerce
             //SI ESTA FUNCION RECIBIERA UN DATATABLE DE CLIENTE CON LOS CAMPOS DEL SP SE PODRIA USAR LA FUNCION Singleton.conexion.executeQuerySP("J2LA.setNuevoCliente", oDataTableCli);
 
             string query = @"J2LA.setNuevoCliente";
-//                                @userName, 
-//                                @password, 
-//                                @nombre, 
-//                                @apellido, 
-//                                @dni, 
-//                                @tipoDoc, 
-//                                @mail, 
-//                                @telefono, 
-//                                @nomCalle, 
-//                                @nroCalle, 
-//                                @piso, 
-//                                @depto, 
-//                                @localidad, 
-//                                @cp, 
-//                                @fecnac,
-//                                @cuil";
+            // @userName,
+            // @password,
+            // @nombre,
+            // @apellido,
+            // @dni,
+            // @tipoDoc,
+            // @mail,
+            // @telefono,
+            // @nomCalle,
+            // @nroCalle,
+            // @piso,
+            // @depto,
+            // @localidad,
+            // @cp,
+            // @fecnac,
+            // @cuil";
 
             //SqlCommand comando = new SqlCommand(query, Singleton.conexion.connector());
 
@@ -261,7 +261,7 @@ namespace FrbaCommerce
             try
             {
                 String query = "Select [Id] = rol_Id, [Nombre] = rol_nombre, " +
-                                "[Inhabilitado] = (Case When rol_Inhabilitado = 1 Then 'Si' Else 'No' End) " + 
+                                "[Inhabilitado] = (Case When rol_Inhabilitado = 1 Then 'Si' Else 'No' End) " +
                                 "From J2LA.Roles " +
                                 "WHERE rol_Eliminado = 0 " +
                                 "And rol_nombre like '%" + rol_nombre + "%' " +
@@ -382,7 +382,7 @@ namespace FrbaCommerce
         {
             try
             {
-                Singleton.conexion.executeQuerySP("J2LA.Roles_BajaLogica", null, new String[1, 2] { { "rol_Id", rol_id.ToString() }});
+                Singleton.conexion.executeQuerySP("J2LA.Roles_BajaLogica", null, new String[1, 2] { { "rol_Id", rol_id.ToString() } });
                 return true;
             }
             catch (Exception ex)
@@ -575,27 +575,27 @@ namespace FrbaCommerce
             try
             {
                 String query =
-                    @"SELECT 
-                        P.pub_Codigo,
-                        P.pub_Descripcion,
-                        P.pub_Stock,
-                        P.pub_Fecha_Vto,
-                        P.pub_Fecha_Ini,
-                        P.pub_Precio,
-                        P.pub_Permite_Preg,
-                        E.pubest_Descripcion,
-                        T.pubtip_Nombre,
-                        U.usu_UserName                      
-                    FROM
-                        J2LA.Publicaciones P,
-                        J2LA.Publicaciones_Tipos T,
-                        J2LA.Publicaciones_Estados E,
-                        J2LA.Usuarios U
-                    WHERE 
-                        pub_Codigo = " + pub_codigo + @"
-                        AND P.pub_usu_Id =  U.usu_id
-                        AND P.pub_estado_Id = E.pubest_Id
-                        AND P.pub_tipo_Id = T.pubtip_Id";
+                    @"SELECT
+P.pub_Codigo,
+P.pub_Descripcion,
+P.pub_Stock,
+P.pub_Fecha_Vto,
+P.pub_Fecha_Ini,
+P.pub_Precio,
+P.pub_Permite_Preg,
+E.pubest_Descripcion,
+T.pubtip_Nombre,
+U.usu_UserName
+FROM
+J2LA.Publicaciones P,
+J2LA.Publicaciones_Tipos T,
+J2LA.Publicaciones_Estados E,
+J2LA.Usuarios U
+WHERE
+pub_Codigo = " + pub_codigo + @"
+AND P.pub_usu_Id = U.usu_id
+AND P.pub_estado_Id = E.pubest_Id
+AND P.pub_tipo_Id = T.pubtip_Id";
 
                 return Singleton.conexion.executeQueryTable(query, null, null);
             }
@@ -616,10 +616,10 @@ namespace FrbaCommerce
                                 "[Precio] = P.pub_Precio, [Visibilidad] = V.pubvis_Descripcion, " +
                                 "[Estado] = E.pubest_Descripcion, " +
                                 "[Permite Preguntas] = (Case When P.pub_Permite_Preg = 1 Then 'Si' Else 'No' End), " +
-                                "Rubros = J2LA.ObtenerRubrosPubli(P.pub_Codigo) " + 
+                                "Rubros = J2LA.ObtenerRubrosPubli(P.pub_Codigo) " +
                                 "From J2LA.Publicaciones P " +
                                 "Inner Join J2LA.Publicaciones_Rubros PR On PR.pubrub_pub_Codigo = P.pub_Codigo " +
-                                "Inner Join J2LA.Publicaciones_Tipos   T On T.pubtip_Id = P.pub_tipo_Id " +
+                                "Inner Join J2LA.Publicaciones_Tipos T On T.pubtip_Id = P.pub_tipo_Id " +
                                 "Inner Join J2LA.Publicaciones_Estados E On E.pubest_Id = P.pub_estado_Id " +
                                 "Inner Join J2LA.Publicaciones_Visibilidades V On V.pubvis_id = P.pub_visibilidad_Id " +
                                 filtros +
@@ -648,7 +648,7 @@ namespace FrbaCommerce
                                 "[Publicación Precio] = V.pubvis_Precio " +
                                 "From J2LA.Publicaciones P " +
                                 "Inner Join J2LA.Publicaciones_Rubros PR On PR.pubrub_pub_Codigo = P.pub_Codigo " +
-                                "Inner Join J2LA.Publicaciones_Tipos   T On T.pubtip_Id = P.pub_tipo_Id " +
+                                "Inner Join J2LA.Publicaciones_Tipos T On T.pubtip_Id = P.pub_tipo_Id " +
                                 "Inner Join J2LA.Publicaciones_Estados E On E.pubest_Id = P.pub_estado_Id " +
                                 "Inner Join J2LA.Publicaciones_Visibilidades V On V.pubvis_id = P.pub_visibilidad_Id " +
                                 filtros +
@@ -699,7 +699,7 @@ namespace FrbaCommerce
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
-            }   
+            }
         }
 
         public static String NuevaPublicacion(DataTable oDtPubli, DataTable oDTRubros)
@@ -717,7 +717,7 @@ namespace FrbaCommerce
             }
             catch (Exception ex)
             {
-                
+
                 throw new Exception(ex.Message);
             }
 
@@ -842,21 +842,22 @@ namespace FrbaCommerce
             try
             {
                 string string_trimestre = null;
-                switch (trimestre) {
+                switch (trimestre)
+                {
                     case 1: string_trimestre = "Primero";
-                            break;
+                        break;
                     case 2: string_trimestre = "Segundo";
-                            break;
+                        break;
                     case 3: string_trimestre = "Tercero";
-                            break;
+                        break;
                     case 4: string_trimestre = "Cuarto";
-                            break;
+                        break;
                     default: break;
                 }
 
-                string query = "SELECT TOP 5 UserName,Reputacion_Trimestre_"+string_trimestre+
-                                " FROM J2LA.ViewVendedoresConMayoresCalificaciones WHERE Anio="+anio+
-                                "ORDER BY Reputacion_Trimestre_"+string_trimestre+" DESC";
+                string query = "SELECT TOP 5 UserName,Reputacion_Trimestre_" + string_trimestre +
+                                " FROM J2LA.ViewVendedoresConMayoresCalificaciones WHERE Anio=" + anio +
+                                "ORDER BY Reputacion_Trimestre_" + string_trimestre + " DESC";
                 return Singleton.conexion.executeQueryTable(query, null, null);
             }
             catch (Exception ex)
@@ -900,9 +901,9 @@ namespace FrbaCommerce
             {
                 Singleton.conexion.executeQuerySP("J2LA.ActualizarReputacion", null,
                        new String[3, 2] { { "usu_UserName", usu_UserName},
-							                {"comp_Id", comp_Id.ToString()},
-							                {"cal_Cant_Estrellas", cal_Cant_Estrellas.ToString()}});
-            }            
+{"comp_Id", comp_Id.ToString()},
+{"cal_Cant_Estrellas", cal_Cant_Estrellas.ToString()}});
+            }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
@@ -929,13 +930,13 @@ namespace FrbaCommerce
             try
             {
                 return (int)Singleton.conexion.executeQueryFuncEscalar("J2LA.CantPubliGratis(@usu_id, @pub_codigo)", null,
-                                        new String[2, 2] { { "usu_id", Singleton.usuario["usu_id"].ToString() }, 
+                                        new String[2, 2] { { "usu_id", Singleton.usuario["usu_id"].ToString() },
                                                             { "pub_codigo", pub_codigo.ToString() } });
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
-            }  
+            }
         }
 
         /// <summary>
@@ -956,18 +957,18 @@ namespace FrbaCommerce
         /// <summary>
         /// Inserta una nueva Pregunta
         /// </summary>
-        public static void setPregunta(DataTable pregunta)
+        public static void setPreguntaRespuesta(DataTable pregunta)
         {
             try
             {
-                Singleton.conexion.executeQuerySP("J2LA.setPregunta", pregunta, null);
+                Singleton.conexion.executeQuerySP("J2LA.setPreguntaRespuesta", pregunta, null);
 
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
-           
+
         }
 
         /// <summary>
@@ -978,7 +979,7 @@ namespace FrbaCommerce
             try
             {
                 return Singleton.conexion.executeQueryTable(
-                    @"Select  [Pregunta]= P.preg_Comentario
+                    @"Select [Tipo]=(CASE WHEN P.preg_tipo = 'R' THEN 'Respuesta' ELSE 'Pregunta' END), [Comentario]= P.preg_Comentario
                     From J2LA.Preguntas P
                     Where preg_pub_codigo = " + preg_pub_codigo, null, null);
             }
@@ -1000,12 +1001,12 @@ namespace FrbaCommerce
                                 "[Precio] = P.pub_Precio, [Visibilidad] = V.pubvis_Descripcion, " +
                                 "[Estado] = E.pubest_Descripcion, " +
                                 "[Permite Preguntas] = (Case When P.pub_Permite_Preg = 1 Then 'Si' Else 'No' End), " +
-                                //"Rubros = J2LA.ObtenerRubrosPubli(P.pub_Codigo), " +
-                                //Con esta funcion tarda mas, y me parece que si no la usas, no pasa nada
+                //"Rubros = J2LA.ObtenerRubrosPubli(P.pub_Codigo), " +
+                //Con esta funcion tarda mas, y me parece que si no la usas, no pasa nada
                                 "[Publicación Precio] = V.pubvis_Precio " +
                                 "From J2LA.Publicaciones P " +
                                 "Inner Join J2LA.Publicaciones_Rubros PR On PR.pubrub_pub_Codigo = P.pub_Codigo " +
-                                "Inner Join J2LA.Publicaciones_Tipos   T On T.pubtip_Id = P.pub_tipo_Id " +
+                                "Inner Join J2LA.Publicaciones_Tipos T On T.pubtip_Id = P.pub_tipo_Id " +
                                 "Inner Join J2LA.Publicaciones_Estados E On E.pubest_Id = P.pub_estado_Id " +
                                 "Inner Join J2LA.Publicaciones_Visibilidades V On V.pubvis_id = P.pub_visibilidad_Id " +
                                 filtros +
@@ -1092,11 +1093,11 @@ namespace FrbaCommerce
             try
             {
                 //string query = "select [Texto] = PR.preg_Comentario, [Descripcion] = PU.pub_descripcion " +
-                //                    "from J2LA.Preguntas PR inner Join J2LA.Publicaciones PU " +
-                //                    "on PR.preg_pub_Codigo = PU.pub_Codigo " +
-                //                    "where PR.preg_usu_Id = " + Singleton.usuario["usu_Id"] + 
-                //                    " and (select COUNT(PR1.preg_id) from J2LA.Preguntas PR1 where PR1.preg_id = PR.preg_Id) = 1 " +
-                //                    "order by PR.preg_Id desc, PR.preg_Tipo";
+                // "from J2LA.Preguntas PR inner Join J2LA.Publicaciones PU " +
+                // "on PR.preg_pub_Codigo = PU.pub_Codigo " +
+                // "where PR.preg_usu_Id = " + Singleton.usuario["usu_Id"] +
+                // " and (select COUNT(PR1.preg_id) from J2LA.Preguntas PR1 where PR1.preg_id = PR.preg_Id) = 1 " +
+                // "order by PR.preg_Id desc, PR.preg_Tipo";
 
                 String query = "SELECT [Codigo Publi] = PU.pub_Codigo, [Pregunta] = PR.preg_Comentario, " +
                                 "[Fecha] = Convert(varchar, PR.preg_fecha, 103), " +
@@ -1121,11 +1122,25 @@ namespace FrbaCommerce
         {
             try
             {
-                string query = "select top 20 [Texto] = PR.preg_Comentario, [Descripcion] = PU.pub_descripcion " +
-                                    "from J2LA.Preguntas PR inner Join J2LA.Publicaciones PU " +
-                                    "on PR.preg_pub_Codigo = PU.pub_Codigo " +
-                                    "where PR.preg_usu_Id = " + Singleton.usuario["usu_Id"] + " and (select COUNT(PR1.preg_id) from J2LA.Preguntas PR1 where PR1.preg_id = PR.preg_Id) > 1 " +
-                                    "order by PR.preg_Id desc, PR.preg_Tipo";
+                //string query = "select top 20 [Texto] = PR.preg_Comentario, [Descripcion] = PU.pub_descripcion " +
+                // "from J2LA.Preguntas PR inner Join J2LA.Publicaciones PU " +
+                // "on PR.preg_pub_Codigo = PU.pub_Codigo " +
+                // "where PR.preg_usu_Id = " + Singleton.usuario["usu_Id"] + " and (select COUNT(PR1.preg_id) from J2LA.Preguntas PR1 where PR1.preg_id = PR.preg_Id) > 1 " +
+                // "order by PR.preg_Id desc, PR.preg_Tipo";
+
+                String query = "Select [Codigo Publi.] = PU.pub_Codigo, [Descripcion] = PU.pub_Descripcion, " +
+                                "[Fecha Vto.] = Convert(varchar,PU.pub_Fecha_Vto, 103), " +
+                                "[Precio] = PU.pub_Precio, [Stock] = PU.pub_Stock, " +
+                                "[Pregunta] = P.preg_Comentario, " +
+                                "[Fecha Preg] = Convert(varchar, P.preg_fecha, 103), " +
+                                "[Respuesta] = ISNULL(R.preg_Comentario, ''), " +
+                                "[Fecha Rta] = ISNULL(Convert(varchar, R.preg_fecha, 103), '') " +
+                                "From J2LA.Preguntas P " +
+                                "Inner Join J2LA.Publicaciones PU On PU.pub_Codigo = P.preg_pub_Codigo " +
+                                "Left Join J2LA.Preguntas R On R.preg_Tipo = 'R' And R.preg_Id = P.preg_Id " +
+                                "Where P.preg_usu_Id = " + Singleton.usuario["usu_Id"] +
+                                "And P.preg_Tipo = 'P' " +
+                                "Order By PU.pub_Codigo, P.preg_Fecha ";
 
                 return Singleton.conexion.executeQueryTable(query, null, null);
             }
@@ -1136,5 +1151,3 @@ namespace FrbaCommerce
         }
     }
 }
-
-

@@ -9,6 +9,11 @@ GO
 IF OBJECT_ID('J2LA.getFuncionalidadesPorRol') IS NOT NULL
 DROP FUNCTION J2LA.getFuncionalidadesPorRol
 GO
+IF OBJECT_ID('J2LA.setPreguntaRespuesta') IS NOT NULL
+DROP PROCEDURE J2LA.setPreguntaRespuesta
+GO
+
+
 
 /*-----------LUCAS-------------*/
 
