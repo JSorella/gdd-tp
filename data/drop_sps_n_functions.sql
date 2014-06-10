@@ -10,10 +10,6 @@ IF OBJECT_ID('J2LA.getFuncionalidadesPorRol') IS NOT NULL
 DROP FUNCTION J2LA.getFuncionalidadesPorRol
 GO
 
-IF OBJECT_ID('J2LA.setPregunta') IS NOT NULL
-DROP PROCEDURE J2LA.setPregunta
-GO
-
 /*-----------LUCAS-------------*/
 
 IF OBJECT_ID('J2LA.getTop5VendedoresConMayorCantDeProdNoVendidos') IS NOT NULL

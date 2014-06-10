@@ -32,9 +32,6 @@ namespace FrbaCommerce
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (!validarCampos())
-                return;
-
             try
             {
                 this.DTpregunta = InterfazBD.getDTPregunta();
@@ -48,31 +45,18 @@ namespace FrbaCommerce
                 pregunta["preg_tipo"] = "P";
                 pregunta["preg_Comentario"] = txtDesc.Text;
                 pregunta["preg_usu_Id"] = Singleton.usuario["usu_Id"];
-                pregunta["preg_fecha"] = Singleton.FechaDelSistema;
 
                 DTpregunta.Rows.Add(pregunta);
 
                 InterfazBD.setPregunta(DTpregunta);
-                Funciones.mostrarInformacion("Su Pregunta ha sido publicada!", "Preguntas");
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error en Alta Pregunta: " + System.Environment.NewLine + ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.Close();
             }
-            
+            Funciones.mostrarInformacion("Su Pregunta ha sido publicada!", "Preguntas");
             this.Close();
         }
-
-        private Boolean validarCampos()
-        {
-            if (this.txtDesc.Text == "")
-            {
-                Funciones.mostrarAlert("Falta ingresar una pregunta", this.Text); return false;
-            }
-
-            return true;
-        }
-
     }
 }
