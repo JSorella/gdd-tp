@@ -20,5 +20,23 @@ namespace FrbaCommerce
         {
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Responder_preguntas oFrm = new Responder_preguntas();
+            oFrm.Show();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Respuesta oFrm = new Respuesta();
+            oFrm.Show();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Ver_Respuestas oFrm = new Ver_Respuestas();
+            oFrm.Show();
+        }
     }
 }

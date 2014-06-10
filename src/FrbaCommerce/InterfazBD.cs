@@ -1086,6 +1086,44 @@ namespace FrbaCommerce
                 throw new Exception(ex.Message);
             }
         }
+
+        public static DataTable getPreguntasSinRta()
+        {
+            try
+            {
+                string query = "SELECT [Texto] = PR.preg_Comentario, [Descripcion] = PU.pub_descripcion " +
+                                    "FROM J2LA.Preguntas PR INNER JOIN J2LA.Publicaciones PU " +
+                                    "On PR.preg_pub_Codigo = PU.pub_Codigo " +
+                                    "WHERE PR.preg_usu_Id = " + Singleton.usuario["usu_Id"] + 
+                                    " AND (SELECT COUNT(PR1.preg_id) FROM J2LA.Preguntas PR1 WHERE PR1.preg_id = PR.preg_Id) = 1 " +
+                                    "ORDER BY PR.preg_Id, PR.preg_Tipo";
+
+                return Singleton.conexion.executeQueryTable(query, null, null);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public static DataTable getRespuestas()
+        {
+            try
+            {
+                string query = "SELECT top 20 [Texto] = PR.preg_Comentario, [Descripcion] = PU.pub_descripcion " +
+                                    "FROM J2LA.Preguntas PR INNER JOIN J2LA.Publicaciones PU " +
+                                    "ON PR.preg_pub_Codigo = PU.pub_Codigo " +
+                                    "WHERE PR.preg_usu_Id = " + Singleton.usuario["usu_Id"] + 
+                                    " AND (SELECT COUNT(PR1.preg_id) FROM J2LA.Preguntas PR1 WHERE PR1.preg_id = PR.preg_Id) > 1 " +
+                                    "ORDER BY PR.preg_Id, PR.preg_Tipo";
+
+                return Singleton.conexion.executeQueryTable(query, null, null);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }
 

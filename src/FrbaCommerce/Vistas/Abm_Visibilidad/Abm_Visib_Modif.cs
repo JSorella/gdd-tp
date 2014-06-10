@@ -24,6 +24,7 @@ namespace FrbaCommerce
             ArmarDataTables();
             Limpiar(true);
             HabilitarMod(false);
+            txtCodVisib.Focus();
         }
 
         private void Abm_Visib_Modif_VisibleChanged(object sender, EventArgs e)

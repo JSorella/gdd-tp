@@ -22,6 +22,7 @@ namespace FrbaCommerce
         private void Abm_Visib_Alta_Load(object sender, EventArgs e)
         {
             ArmarDataTables();
+            txtCodigo.Focus();
         }
 
         private void btnGenerar_Click(object sender, EventArgs e)
@@ -40,14 +41,14 @@ namespace FrbaCommerce
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Confirma que desea Limpiar los datos ingresados?", "Nueva Visibilidad", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                Limpiar();
+            //if (MessageBox.Show("Confirma que desea Limpiar los datos ingresados?", "Nueva Visibilidad", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            Limpiar();
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Confirma que desea Salir?", "Nueva Visibilidad", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                this.Close();
+            //if (MessageBox.Show("Confirma que desea Salir?", "Nueva Visibilidad", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            this.Close();
         }
 
         private void txtCodigo_KeyPress(object sender, KeyPressEventArgs e)
