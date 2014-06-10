@@ -11,7 +11,7 @@ namespace FrbaCommerce
 {
     public partial class Respuesta : Form
     {
-        DataTable oDtRespuesta;
+        DataTable DTrespuesta;
         DataRow oDrPregunta;
 
         public Respuesta()
@@ -19,38 +19,50 @@ namespace FrbaCommerce
             InitializeComponent();
         }
 
-        public DataRow Pregunta
+        public DataRow PreguntaDr
         {
-            get { return oDrPregunta; }
+            set { oDrPregunta = value; }
         }
 
-        private void btnrespond_Click(object sender, EventArgs e)
+        private void Respuesta_Load(object sender, EventArgs e)
+        {
+            lblLenght.Text = "Caracteres restantes: " + txtRespuesta.MaxLength.ToString();
+            txtPregunta.Text = oDrPregunta["Pregunta"].ToString();
+        }
+
+        private void txtRespuesta_TextChanged(object sender, EventArgs e)
+        {
+            lblLenght.Text = "Caracteres restantes: " + (txtRespuesta.MaxLength - txtRespuesta.TextLength).ToString();
+        }
+
+        private void btnResponder_Click(object sender, EventArgs e)
         {
             try
             {
-                oDtRespuesta = InterfazBD.getDTPregunta();
-                
-                oDtRespuesta.Rows.Clear();
+                DTrespuesta = InterfazBD.getDTPregunta();
 
-                DataRow pregunta = oDtRespuesta.NewRow();
+                DTrespuesta.Rows.Clear();
 
-                pregunta["preg_Id"] = oDrPregunta["preg_Id"]; //codigo de la pregunta;
-                pregunta["preg_pub_codigo"] = oDrPregunta["preg_pub_codigo"]; //this.codigoPublicacion;
-                pregunta["preg_tipo"] = "R";
-                pregunta["preg_Comentario"] = txtRespuesta.Text;
-                pregunta["preg_usu_Id"] = Singleton.usuario["usu_Id"];
+                DataRow respuesta = DTrespuesta.NewRow();
 
-                oDtRespuesta.Rows.Add(pregunta);
+                respuesta["preg_Id"] = oDrPregunta["preg_Id"];
+                respuesta["preg_pub_codigo"] = oDrPregunta["preg_pub_Codigo"];
+                respuesta["preg_tipo"] = "R";
+                respuesta["preg_Comentario"] = txtRespuesta.Text;
+                respuesta["preg_Fecha"] = Singleton.FechaDelSistema; //Nuevo campo que no tuvimos en cuenta.
+                respuesta["preg_usu_Id"] = Singleton.usuario["usu_Id"];
 
-                InterfazBD.setPregunta(oDtRespuesta);
+                DTrespuesta.Rows.Add(respuesta);
 
-                Funciones.mostrarInformacion("Su Respuesta ha sido publicada!", "Responder Preguntas");
+                InterfazBD.setPregunta(DTrespuesta);
 
+                Funciones.mostrarInformacion("Su Respuesta ha sido publicada!", "Preguntas");
                 this.Close();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error en Alta de Respuesta: " + System.Environment.NewLine + ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error en Respuesta: " + System.Environment.NewLine + ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
             }
         }
     }

@@ -20,8 +20,8 @@ namespace FrbaCommerce
         {
             try
             {
-                gridRespuestas.Visible = true;
-                gridRespuestas.DataSource = InterfazBD.getRespuestas();
+                dgvPreguntas.Visible = true;
+                dgvPreguntas.DataSource = InterfazBD.getRespuestas();
             }
             catch (Exception ex)
             {
@@ -32,6 +32,16 @@ namespace FrbaCommerce
         private void Ver_Respuestas_Load(object sender, EventArgs e)
         {
             cargarPreguntasRespuestas();
+        }
+
+        private void btnRefrescar_Click(object sender, EventArgs e)
+        {
+            cargarPreguntasRespuestas();
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
 
 

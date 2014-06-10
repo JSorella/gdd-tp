@@ -28,21 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.gridPreguntas = new System.Windows.Forms.DataGridView();
             this.btnResponder = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.gridPreguntas)).BeginInit();
+            this.btnSalir = new System.Windows.Forms.Button();
+            this.dgvPreguntas = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPreguntas)).BeginInit();
             this.SuspendLayout();
-            // 
-            // gridPreguntas
-            // 
-            this.gridPreguntas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gridPreguntas.Location = new System.Drawing.Point(13, 13);
-            this.gridPreguntas.Name = "gridPreguntas";
-            this.gridPreguntas.Size = new System.Drawing.Size(577, 234);
-            this.gridPreguntas.TabIndex = 0;
             // 
             // btnResponder
             // 
+            this.btnResponder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnResponder.Location = new System.Drawing.Point(13, 253);
             this.btnResponder.Name = "btnResponder";
             this.btnResponder.Size = new System.Drawing.Size(110, 40);
@@ -51,23 +45,57 @@
             this.btnResponder.UseVisualStyleBackColor = true;
             this.btnResponder.Click += new System.EventHandler(this.btnResponder_Click);
             // 
+            // btnSalir
+            // 
+            this.btnSalir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSalir.Location = new System.Drawing.Point(480, 253);
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(110, 40);
+            this.btnSalir.TabIndex = 2;
+            this.btnSalir.Text = "Salir";
+            this.btnSalir.UseVisualStyleBackColor = true;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
+            // 
+            // dgvPreguntas
+            // 
+            this.dgvPreguntas.AllowUserToAddRows = false;
+            this.dgvPreguntas.AllowUserToDeleteRows = false;
+            this.dgvPreguntas.AllowUserToOrderColumns = true;
+            this.dgvPreguntas.AllowUserToResizeRows = false;
+            this.dgvPreguntas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvPreguntas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgvPreguntas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPreguntas.Location = new System.Drawing.Point(13, 12);
+            this.dgvPreguntas.MultiSelect = false;
+            this.dgvPreguntas.Name = "dgvPreguntas";
+            this.dgvPreguntas.ReadOnly = true;
+            this.dgvPreguntas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvPreguntas.Size = new System.Drawing.Size(577, 235);
+            this.dgvPreguntas.TabIndex = 5;
+            this.dgvPreguntas.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPreguntas_CellDoubleClick);
+            // 
             // Responder_preguntas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(602, 300);
+            this.Controls.Add(this.dgvPreguntas);
+            this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.btnResponder);
-            this.Controls.Add(this.gridPreguntas);
             this.Name = "Responder_preguntas";
             this.Text = "Responder preguntas";
-            ((System.ComponentModel.ISupportInitialize)(this.gridPreguntas)).EndInit();
+            this.Load += new System.EventHandler(this.Responder_preguntas_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPreguntas)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.DataGridView gridPreguntas;
         private System.Windows.Forms.Button btnResponder;
+        private System.Windows.Forms.Button btnSalir;
+        private System.Windows.Forms.DataGridView dgvPreguntas;
     }
 }

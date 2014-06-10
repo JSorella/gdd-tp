@@ -1091,12 +1091,23 @@ namespace FrbaCommerce
         {
             try
             {
-                string query = "SELECT [Texto] = PR.preg_Comentario, [Descripcion] = PU.pub_descripcion " +
-                                    "FROM J2LA.Preguntas PR INNER JOIN J2LA.Publicaciones PU " +
+                //string query = "select [Texto] = PR.preg_Comentario, [Descripcion] = PU.pub_descripcion " +
+                //                    "from J2LA.Preguntas PR inner Join J2LA.Publicaciones PU " +
+                //                    "on PR.preg_pub_Codigo = PU.pub_Codigo " +
+                //                    "where PR.preg_usu_Id = " + Singleton.usuario["usu_Id"] + 
+                //                    " and (select COUNT(PR1.preg_id) from J2LA.Preguntas PR1 where PR1.preg_id = PR.preg_Id) = 1 " +
+                //                    "order by PR.preg_Id desc, PR.preg_Tipo";
+
+                String query = "SELECT [Codigo Publi] = PU.pub_Codigo, [Pregunta] = PR.preg_Comentario, " +
+                                "[Fecha] = Convert(varchar, PR.preg_fecha, 103), " +
+                                "[Usuario] = U.usu_UserName, " +
+                                "[Descripcion Publi] = PU.pub_descripcion, PR.preg_pub_Codigo, PR.preg_Id " +
+                                "FROM J2LA.Preguntas PR INNER JOIN J2LA.Publicaciones PU " +
                                     "On PR.preg_pub_Codigo = PU.pub_Codigo " +
-                                    "WHERE PR.preg_usu_Id = " + Singleton.usuario["usu_Id"] + 
-                                    " AND (SELECT COUNT(PR1.preg_id) FROM J2LA.Preguntas PR1 WHERE PR1.preg_id = PR.preg_Id) = 1 " +
-                                    "ORDER BY PR.preg_Id, PR.preg_Tipo";
+                                "INNER JOIN J2LA.Usuarios U On U.usu_Id = PR.preg_usu_Id " +
+                                "WHERE PU.pub_usu_Id = " + Singleton.usuario["usu_Id"] + " " +
+                                "And Not Exists (Select 1 From J2LA.Preguntas PR1 WHERE PR1.preg_id = PR.preg_Id And PR1.preg_Tipo = 'R')" +
+                                "ORDER BY PR.preg_fecha";
 
                 return Singleton.conexion.executeQueryTable(query, null, null);
             }
@@ -1110,12 +1121,11 @@ namespace FrbaCommerce
         {
             try
             {
-                string query = "SELECT top 20 [Texto] = PR.preg_Comentario, [Descripcion] = PU.pub_descripcion " +
-                                    "FROM J2LA.Preguntas PR INNER JOIN J2LA.Publicaciones PU " +
-                                    "ON PR.preg_pub_Codigo = PU.pub_Codigo " +
-                                    "WHERE PR.preg_usu_Id = " + Singleton.usuario["usu_Id"] + 
-                                    " AND (SELECT COUNT(PR1.preg_id) FROM J2LA.Preguntas PR1 WHERE PR1.preg_id = PR.preg_Id) > 1 " +
-                                    "ORDER BY PR.preg_Id, PR.preg_Tipo";
+                string query = "select top 20 [Texto] = PR.preg_Comentario, [Descripcion] = PU.pub_descripcion " +
+                                    "from J2LA.Preguntas PR inner Join J2LA.Publicaciones PU " +
+                                    "on PR.preg_pub_Codigo = PU.pub_Codigo " +
+                                    "where PR.preg_usu_Id = " + Singleton.usuario["usu_Id"] + " and (select COUNT(PR1.preg_id) from J2LA.Preguntas PR1 where PR1.preg_id = PR.preg_Id) > 1 " +
+                                    "order by PR.preg_Id desc, PR.preg_Tipo";
 
                 return Singleton.conexion.executeQueryTable(query, null, null);
             }

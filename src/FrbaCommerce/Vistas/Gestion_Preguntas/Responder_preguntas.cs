@@ -11,18 +11,33 @@ namespace FrbaCommerce
 {
     public partial class Responder_preguntas : Form
     {
+        DataRow oDrSeleccion;
+
         public Responder_preguntas()
         {
             InitializeComponent();
+        }
+
+        private void Responder_preguntas_Load(object sender, EventArgs e)
+        {
             cargarPreguntas();
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            oDrSeleccion = null;
+            this.Close();
         }
 
         private void cargarPreguntas()
         {
             try
             {
-                gridPreguntas.Visible = true;
-                gridPreguntas.DataSource = InterfazBD.getPreguntasSinRta();
+                dgvPreguntas.Visible = true;
+                dgvPreguntas.DataSource = InterfazBD.getPreguntasSinRta();
+
+                dgvPreguntas.Columns["preg_pub_Codigo"].Visible = false;
+                dgvPreguntas.Columns["preg_Id"].Visible = false;
             }
             catch (Exception ex)
             {
@@ -32,16 +47,34 @@ namespace FrbaCommerce
 
         private void btnResponder_Click(object sender, EventArgs e)
         {
-            DataGridViewSelectedRowCollection list = this.gridPreguntas.SelectedRows;
-            Respuesta oFrm = new Respuesta();
-            oFrm.ShowDialog();
+            DataGridViewSelectedRowCollection list = dgvPreguntas.SelectedRows;
+            if (list.Count > 0)
+            {
+                oDrSeleccion = ((DataRowView)dgvPreguntas.SelectedRows[0].DataBoundItem).Row;
+                Respuesta oFrm = new Respuesta();
+                oFrm.PreguntaDr = oDrSeleccion; //Le paso los datos de la Pregunta.
+                oFrm.ShowDialog();
+
+                cargarPreguntas(); //Refresco la grilla
+            }
+            else
+                MessageBox.Show("Seleccione una pregunta.", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
-        private void gridPreguntas_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvPreguntas_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            DataGridViewSelectedRowCollection list = this.gridPreguntas.SelectedRows;
-            Respuesta oFrm = new Respuesta();
-            oFrm.ShowDialog();
+            DataGridViewSelectedRowCollection list = dgvPreguntas.SelectedRows;
+            if (list.Count > 0)
+            {
+                oDrSeleccion = ((DataRowView)dgvPreguntas.SelectedRows[0].DataBoundItem).Row;
+                Respuesta oFrm = new Respuesta();
+                oFrm.PreguntaDr = oDrSeleccion; //Le paso los datos de la Pregunta.
+                oFrm.ShowDialog();
+
+                cargarPreguntas(); //Refresco la grilla
+            }
+            else
+                MessageBox.Show("Seleccione una pregunta.", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
     }
 }
