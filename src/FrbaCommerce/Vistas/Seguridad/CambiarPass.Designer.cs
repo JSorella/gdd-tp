@@ -37,6 +37,7 @@
             this.ClientSize = new System.Drawing.Size(355, 193);
             this.Name = "CambiarPass";
             this.Text = "CambiarPass";
+            this.Load += new System.EventHandler(this.CambiarPass_Load);
             this.ResumeLayout(false);
 
         }
