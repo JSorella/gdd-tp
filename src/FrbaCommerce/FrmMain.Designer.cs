@@ -56,6 +56,8 @@
             this.tsmiPublicacionAlta = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiPublicacionMod = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiPublicacionPreg = new System.Windows.Forms.ToolStripMenuItem();
+            this.responderPreguntasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.verRespuestasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiPublicacionComp = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiPublicacionCalif = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiHistorialCli = new System.Windows.Forms.ToolStripMenuItem();
@@ -67,12 +69,12 @@
             this.mosaicoHorizontalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cerrarTodoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.ejemploToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsslRol = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsslUsuario = new System.Windows.Forms.ToolStripStatusLabel();
             this.tssiFecSystem = new System.Windows.Forms.ToolStripStatusLabel();
-            this.ejemploToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -306,10 +308,27 @@
             // 
             // tsmiPublicacionPreg
             // 
+            this.tsmiPublicacionPreg.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.responderPreguntasToolStripMenuItem,
+            this.verRespuestasToolStripMenuItem});
             this.tsmiPublicacionPreg.Name = "tsmiPublicacionPreg";
             this.tsmiPublicacionPreg.Size = new System.Drawing.Size(197, 22);
             this.tsmiPublicacionPreg.Text = "Gestión de Preguntas";
             this.tsmiPublicacionPreg.Click += new System.EventHandler(this.tsmiPublicacionPreg_Click);
+            // 
+            // responderPreguntasToolStripMenuItem
+            // 
+            this.responderPreguntasToolStripMenuItem.Name = "responderPreguntasToolStripMenuItem";
+            this.responderPreguntasToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.responderPreguntasToolStripMenuItem.Text = "Responder preguntas";
+            this.responderPreguntasToolStripMenuItem.Click += new System.EventHandler(this.responderPreguntasToolStripMenuItem_Click);
+            // 
+            // verRespuestasToolStripMenuItem
+            // 
+            this.verRespuestasToolStripMenuItem.Name = "verRespuestasToolStripMenuItem";
+            this.verRespuestasToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.verRespuestasToolStripMenuItem.Text = "Ver respuestas";
+            this.verRespuestasToolStripMenuItem.Click += new System.EventHandler(this.verRespuestasToolStripMenuItem_Click);
             // 
             // tsmiPublicacionComp
             // 
@@ -392,6 +411,13 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(174, 6);
             // 
+            // ejemploToolStripMenuItem
+            // 
+            this.ejemploToolStripMenuItem.Name = "ejemploToolStripMenuItem";
+            this.ejemploToolStripMenuItem.Size = new System.Drawing.Size(62, 19);
+            this.ejemploToolStripMenuItem.Text = "Ejemplo";
+            this.ejemploToolStripMenuItem.Click += new System.EventHandler(this.ejemploToolStripMenuItem_Click);
+            // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -436,13 +462,6 @@
             this.tssiFecSystem.Name = "tssiFecSystem";
             this.tssiFecSystem.Size = new System.Drawing.Size(134, 20);
             this.tssiFecSystem.Text = "toolStripStatusLabel1";
-            // 
-            // ejemploToolStripMenuItem
-            // 
-            this.ejemploToolStripMenuItem.Name = "ejemploToolStripMenuItem";
-            this.ejemploToolStripMenuItem.Size = new System.Drawing.Size(62, 19);
-            this.ejemploToolStripMenuItem.Text = "Ejemplo";
-            this.ejemploToolStripMenuItem.Click += new System.EventHandler(this.ejemploToolStripMenuItem_Click);
             // 
             // FrmMain
             // 
@@ -513,5 +532,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripMenuItem ejemploToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem responderPreguntasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem verRespuestasToolStripMenuItem;
     }
 }
