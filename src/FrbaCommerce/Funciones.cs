@@ -57,25 +57,6 @@ namespace FrbaCommerce
                 }
         }
 
-
-        // Esta funcion no se va a usar, esta solo por compatibilidad.Despues sacarla.
-        // Esta funcion no se va a usar, esta solo por compatibilidad.Despues sacarla.
-        // Esta funcion no se va a usar, esta solo por compatibilidad.Despues sacarla.
-        // Esta funcion no se va a usar, esta solo por compatibilidad.Despues sacarla.
-        public bool check_func_activa(int id_rol, int id_func)
-        {
-            bool func_activa = false;
-
-            string query = "SELECT rolfun_fun_id FROM J2LA.Roles_Funcionalidades WHERE rolfun_rol_id = " + id_rol + " and rolfun_fun_id = " + id_func;
-
-            DataTable table_rol = Singleton.conexion.executeQueryTable(query, null, null);
-
-            if (table_rol.Rows.Count > 0)
-                func_activa = true;
-
-            return func_activa;
-        }
-
         public static bool mostrarAlert(string mensaje, string caption)
         {
             MessageBox.Show(mensaje, caption, MessageBoxButtons.OK, MessageBoxIcon.Error);

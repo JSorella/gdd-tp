@@ -375,3 +375,18 @@ END
 GO
 
 /*============================== STORED PROCEDURE JUAN ==============================*/
+
+IF OBJECT_ID('J2LA.Usuario_CambiarPass') IS NOT NULL
+DROP PROCEDURE J2LA.Usuario_CambiarPass
+GO
+CREATE PROCEDURE J2LA.Usuario_CambiarPass
+	@usu_Id Int,
+	@usu_Pass nvarchar(255)
+AS
+BEGIN
+
+	UPDATE J2LA.Usuarios
+	SET	[usu_Pass] = @usu_Pass
+	WHERE usu_Id = @usu_Id
+END
+GO

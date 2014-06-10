@@ -1169,5 +1169,35 @@ AND P.pub_tipo_Id = T.pubtip_Id";
                 throw new Exception(ex.Message);
             }
         }
+
+        public static DataTable getUsuario(String nombre)
+        {
+            try
+            {
+                String query = "SELECT * FROM J2LA.Usuarios " +
+                            "WHERE usu_username = " + "'" + nombre + "' " +
+                            "AND usu_eliminado = 0";
+
+                return Singleton.conexion.executeQueryTable(query, null, null);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public static bool CambiarPassUsuario(int usu_Id, string usu_pass)
+        {
+            try
+            {
+                Singleton.conexion.executeQuerySP("J2LA.Usuario_CambiarPass", null,
+                        new String[2, 2] { { "usu_Id", usu_Id.ToString() }, { "usu_pass", usu_pass .ToString()} });
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }
