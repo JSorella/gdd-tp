@@ -204,3 +204,13 @@ C:\Users\jtonelli.NACION\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\Frb
 C:\Users\jtonelli.NACION\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.Responder_preguntas.resources
 C:\Users\jtonelli.NACION\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.Respuesta.resources
 C:\Users\jtonelli.NACION\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.Ver_Respuestas.resources
+C:\Users\jsorella\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.Abm_Visibilidad_Buscar.resources
+C:\Users\jsorella\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.Abm_Visib_Alta.resources
+C:\Users\jsorella\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.Abm_Visib_Baja.resources
+C:\Users\jsorella\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.Abm_Visib_Modif.resources
+C:\Users\jsorella\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.Responder_preguntas.resources
+C:\Users\jsorella\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.Respuesta.resources
+C:\Users\jsorella\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.Ver_Respuestas.resources
+C:\Users\jsorella\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.BuscarUsuario.resources
+C:\Users\jsorella\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.CambiarPass.resources
+C:\Users\jsorella\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.EjemploGrilla.resources
