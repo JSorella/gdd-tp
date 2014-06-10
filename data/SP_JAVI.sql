@@ -149,10 +149,10 @@ END
 GO
 
 /*-------------------------STORED PROCEDURE (JAVI)--------------------------*/
-IF OBJECT_ID('J2LA.setPregunta') IS NOT NULL
-DROP PROCEDURE J2LA.setPregunta
+IF OBJECT_ID('J2LA.setPreguntaRespuesta') IS NOT NULL
+DROP PROCEDURE J2LA.setPreguntaRespuesta
 GO
-CREATE PROCEDURE J2LA.setPregunta 
+CREATE PROCEDURE J2LA.setPreguntaRespuesta 
 	@preg_pub_codigo numeric(18,0), 
 	@preg_Id int, 
 	@preg_Tipo char(1), 
