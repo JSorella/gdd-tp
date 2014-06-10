@@ -15,5 +15,10 @@ namespace FrbaCommerce
         {
             InitializeComponent();
         }
+
+        private void CambiarPass_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
