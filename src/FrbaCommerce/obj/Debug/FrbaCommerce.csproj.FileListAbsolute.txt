@@ -219,3 +219,4 @@ C:\Users\Juan\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.R
 C:\Users\Juan\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.Ver_Respuestas.resources
 C:\Users\Juan\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.BuscarUsuario.resources
 C:\Users\Juan\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.CambiarPass.resources
+C:\Users\jsorella\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.AltaCompra.resources

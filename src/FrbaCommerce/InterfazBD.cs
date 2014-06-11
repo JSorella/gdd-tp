@@ -64,14 +64,14 @@ namespace FrbaCommerce
             try
             {
                 String query = @"SELECT *
-FROM J2LA.Usuarios u
-,J2LA.Usuarios_Roles ur
-,J2LA.Roles r
-WHERE usu_username = " + "'" + nombre + @" '
-AND u.usu_Id = ur.usurol_usu_id
-AND ur.usurol_rol_id = r.rol_Id
-AND r.rol_eliminado = 0
-AND r.rol_Inhabilitado = 0";
+                FROM J2LA.Usuarios u
+                ,J2LA.Usuarios_Roles ur
+                ,J2LA.Roles r
+                WHERE usu_username = " + "'" + nombre + @" '
+                AND u.usu_Id = ur.usurol_usu_id
+                AND ur.usurol_rol_id = r.rol_Id
+                AND r.rol_eliminado = 0
+                AND r.rol_Inhabilitado = 0";
 
                 DataTable usuarioResult = Singleton.conexion.executeQueryTable(query, null, null);
 
@@ -953,6 +953,20 @@ AND P.pub_tipo_Id = T.pubtip_Id";
                 throw new Exception(ex.Message);
             }
         }
+        /// <summary>
+        /// Trae DataTable Compra
+        /// </summary>
+        public static DataTable getDTCompra()
+        {
+            try
+            {
+                return Singleton.conexion.executeQueryTable("Select * From J2LA.Compras Where 1 = 0", null, null);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
 
         /// <summary>
         /// Inserta una nueva Pregunta
@@ -981,12 +995,32 @@ AND P.pub_tipo_Id = T.pubtip_Id";
                 return Singleton.conexion.executeQueryTable(
                     @"Select [Tipo]=(CASE WHEN P.preg_tipo = 'R' THEN 'Respuesta' ELSE 'Pregunta' END), [Comentario]= P.preg_Comentario
                     From J2LA.Preguntas P
-                    Where preg_pub_codigo = " + preg_pub_codigo, null, null);
+                    Where preg_pub_codigo = " + preg_pub_codigo + @" 
+                    ORDER BY
+                        P.preg_Id, P.preg_tipo
+                    ", null, null);
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
+        }
+
+        /// <summary>
+        /// Inserta una nueva Compra
+        /// </summary>
+        public static void setCompra(DataTable compra)
+        {
+            try
+            {
+                Singleton.conexion.executeQuerySP("J2LA.setCompra", compra, null);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
         }
 
         public static PaginarGrilla BuscarPublicacionesOrdenadas(String filtros)
