@@ -45,12 +45,18 @@
             // 
             // gridCalificacionesPendientes
             // 
-            this.gridCalificacionesPendientes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.gridCalificacionesPendientes.AllowUserToAddRows = false;
+            this.gridCalificacionesPendientes.AllowUserToDeleteRows = false;
+            this.gridCalificacionesPendientes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.gridCalificacionesPendientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridCalificacionesPendientes.Location = new System.Drawing.Point(18, 59);
+            this.gridCalificacionesPendientes.MultiSelect = false;
             this.gridCalificacionesPendientes.Name = "gridCalificacionesPendientes";
+            this.gridCalificacionesPendientes.ReadOnly = true;
+            this.gridCalificacionesPendientes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gridCalificacionesPendientes.Size = new System.Drawing.Size(469, 145);
             this.gridCalificacionesPendientes.TabIndex = 1;
+            this.gridCalificacionesPendientes.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridCalificacionesPendientes_CellDoubleClick);
             // 
             // SeleccionarCompra
             // 

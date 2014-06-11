@@ -81,7 +81,7 @@ CREATE FUNCTION J2LA.getCalificacionesPendientes(@usu_Id int)
 RETURNS TABLE
 AS
 	RETURN
-		SELECT U.usu_userName Vendedor, C.comp_Id Codigo_de_Compra, P.pub_Descripcion Descripcion, C.comp_Fecha Fecha
+		SELECT C.comp_Id Codigo, C.comp_Fecha Fecha, U.usu_userName Vendedor, P.pub_Descripcion Descripcion
 		FROM J2LA.Compras C, J2LA.Publicaciones P, J2LA.Usuarios U
 		WHERE C.comp_pub_Codigo = P.pub_Codigo
 		AND P.pub_usu_Id = U.usu_Id
@@ -133,7 +133,7 @@ As
 					BEGIN
 						UPDATE J2LA.Usuarios_Calificaciones
 						SET usucal_Puntos_Cuarto = usucal_Puntos_Cuarto + @cal_Cant_Estrellas,
-				    		    usucal_Cant_Ventas_Cuarto = usucal_Cant_Ventas_Cuarto + 1
+				    		usucal_Cant_Ventas_Cuarto = usucal_Cant_Ventas_Cuarto + 1
 						WHERE usucal_usu_Id = @usu_Id
 						AND usucal_Anio = YEAR(@comp_Fecha)
 					END

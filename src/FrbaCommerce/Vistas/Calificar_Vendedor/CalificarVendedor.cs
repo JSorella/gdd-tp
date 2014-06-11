@@ -11,9 +11,16 @@ namespace FrbaCommerce
 {
     public partial class CalificarVendedor : Form
     {
+        DataRow drCompraSeleccionada;
+
         public CalificarVendedor()
         {
             InitializeComponent();
+        }
+
+        public DataRow Compra
+        {
+            set { drCompraSeleccionada = value; }
         }
 
         private void CalificarVendedor_Load(object sender, EventArgs e)
@@ -56,12 +63,13 @@ namespace FrbaCommerce
 
         private void Guardar_Click(object sender, EventArgs e)
         {
-            string usu_userName_Vendedor = Convert.ToString(CalificarBusqueda.Compra["Vendedor"]);
-            int comp_Id = Convert.ToInt32(CalificarBusqueda.Compra["codigo_de_Compra"]);
+            string usu_userName_Vendedor = Convert.ToString(drCompraSeleccionada["Vendedor"]);
+            int comp_Id = Convert.ToInt32(drCompraSeleccionada["Codigo"]);
             int cal_Cant_Estrellas = getCalificacion();
             string cal_Comentario = getComentario();
             InterfazBD.CargarCalificacion(comp_Id, cal_Cant_Estrellas, cal_Comentario);
             InterfazBD.ActualizarReputacion(usu_userName_Vendedor, comp_Id, cal_Cant_Estrellas);
+            MessageBox.Show("La calificacion ha sido cargada con exito. Gracias por su colaboracion.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.Close();
         }
     }
