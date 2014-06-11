@@ -12,6 +12,12 @@ GO
 IF OBJECT_ID('J2LA.setPreguntaRespuesta') IS NOT NULL
 DROP PROCEDURE J2LA.setPreguntaRespuesta
 GO
+IF OBJECT_ID('J2LA.setCompra') IS NOT NULL
+DROP PROCEDURE J2LA.setCompra
+GO
+IF OBJECT_ID('J2LA.updateStockPublicacion') IS NOT NULL
+DROP PROCEDURE J2LA.updateStockPublicacion
+GO
 
 
 

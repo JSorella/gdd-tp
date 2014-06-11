@@ -80,7 +80,6 @@
             this.pnlDatos.Name = "pnlDatos";
             this.pnlDatos.Size = new System.Drawing.Size(603, 304);
             this.pnlDatos.TabIndex = 7;
-            this.pnlDatos.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlDatos_Paint);
             // 
             // btnOfertar
             // 
@@ -99,6 +98,7 @@
             this.btnComprar.TabIndex = 47;
             this.btnComprar.Text = "Comprar!";
             this.btnComprar.UseVisualStyleBackColor = true;
+            this.btnComprar.Click += new System.EventHandler(this.btnComprar_Click);
             // 
             // btnPregunta
             // 

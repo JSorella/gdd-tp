@@ -65,7 +65,7 @@
             this.button1.Location = new System.Drawing.Point(507, 190);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(90, 23);
-            this.button1.TabIndex = 22;
+            this.button1.TabIndex = 16;
             this.button1.Text = "Dar de Alta";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -75,14 +75,14 @@
             this.apellido_textbox.Location = new System.Drawing.Point(94, 40);
             this.apellido_textbox.Name = "apellido_textbox";
             this.apellido_textbox.Size = new System.Drawing.Size(191, 20);
-            this.apellido_textbox.TabIndex = 19;
+            this.apellido_textbox.TabIndex = 2;
             // 
             // nombre_textbox
             // 
             this.nombre_textbox.Location = new System.Drawing.Point(94, 14);
             this.nombre_textbox.Name = "nombre_textbox";
             this.nombre_textbox.Size = new System.Drawing.Size(191, 20);
-            this.nombre_textbox.TabIndex = 18;
+            this.nombre_textbox.TabIndex = 1;
             // 
             // label2
             // 
@@ -107,21 +107,21 @@
             this.dni_textbox.Location = new System.Drawing.Point(94, 66);
             this.dni_textbox.Name = "dni_textbox";
             this.dni_textbox.Size = new System.Drawing.Size(191, 20);
-            this.dni_textbox.TabIndex = 23;
+            this.dni_textbox.TabIndex = 3;
             // 
             // mail_textbox
             // 
             this.mail_textbox.Location = new System.Drawing.Point(93, 144);
             this.mail_textbox.Name = "mail_textbox";
             this.mail_textbox.Size = new System.Drawing.Size(191, 20);
-            this.mail_textbox.TabIndex = 25;
+            this.mail_textbox.TabIndex = 6;
             // 
             // telefono_textbox
             // 
             this.telefono_textbox.Location = new System.Drawing.Point(93, 170);
             this.telefono_textbox.Name = "telefono_textbox";
             this.telefono_textbox.Size = new System.Drawing.Size(191, 20);
-            this.telefono_textbox.TabIndex = 26;
+            this.telefono_textbox.TabIndex = 7;
             // 
             // label4
             // 
@@ -173,7 +173,7 @@
             this.calle_textbox.Location = new System.Drawing.Point(406, 40);
             this.calle_textbox.Name = "calle_textbox";
             this.calle_textbox.Size = new System.Drawing.Size(191, 20);
-            this.calle_textbox.TabIndex = 31;
+            this.calle_textbox.TabIndex = 10;
             // 
             // label8
             // 
@@ -198,7 +198,7 @@
             this.piso_textbox.Location = new System.Drawing.Point(406, 92);
             this.piso_textbox.Name = "piso_textbox";
             this.piso_textbox.Size = new System.Drawing.Size(36, 20);
-            this.piso_textbox.TabIndex = 34;
+            this.piso_textbox.TabIndex = 12;
             // 
             // label10
             // 
@@ -214,14 +214,14 @@
             this.depto_textbox.Location = new System.Drawing.Point(561, 92);
             this.depto_textbox.Name = "depto_textbox";
             this.depto_textbox.Size = new System.Drawing.Size(36, 20);
-            this.depto_textbox.TabIndex = 36;
+            this.depto_textbox.TabIndex = 13;
             // 
             // localidad_textbox
             // 
             this.localidad_textbox.Location = new System.Drawing.Point(406, 118);
             this.localidad_textbox.Name = "localidad_textbox";
             this.localidad_textbox.Size = new System.Drawing.Size(191, 20);
-            this.localidad_textbox.TabIndex = 38;
+            this.localidad_textbox.TabIndex = 14;
             // 
             // label11
             // 
@@ -246,7 +246,7 @@
             this.cp_textbox.Location = new System.Drawing.Point(406, 144);
             this.cp_textbox.Name = "cp_textbox";
             this.cp_textbox.Size = new System.Drawing.Size(100, 20);
-            this.cp_textbox.TabIndex = 41;
+            this.cp_textbox.TabIndex = 15;
             // 
             // label13
             // 
@@ -263,7 +263,7 @@
             this.fechaNacimiento.Location = new System.Drawing.Point(93, 219);
             this.fechaNacimiento.Name = "fechaNacimiento";
             this.fechaNacimiento.Size = new System.Drawing.Size(194, 20);
-            this.fechaNacimiento.TabIndex = 44;
+            this.fechaNacimiento.TabIndex = 8;
             this.fechaNacimiento.Value = new System.DateTime(2014, 5, 25, 22, 55, 23, 0);
             // 
             // comboDoc
@@ -274,7 +274,7 @@
             this.comboDoc.Name = "comboDoc";
             this.comboDoc.Size = new System.Drawing.Size(190, 21);
             this.comboDoc.Sorted = true;
-            this.comboDoc.TabIndex = 45;
+            this.comboDoc.TabIndex = 4;
             this.comboDoc.TabStop = false;
             // 
             // label14
@@ -291,7 +291,7 @@
             this.altura_textbox.Location = new System.Drawing.Point(406, 66);
             this.altura_textbox.Name = "altura_textbox";
             this.altura_textbox.Size = new System.Drawing.Size(100, 20);
-            this.altura_textbox.TabIndex = 46;
+            this.altura_textbox.TabIndex = 11;
             // 
             // label15
             // 
@@ -307,7 +307,7 @@
             this.cuil_textbox.Location = new System.Drawing.Point(94, 118);
             this.cuil_textbox.Name = "cuil_textbox";
             this.cuil_textbox.Size = new System.Drawing.Size(191, 20);
-            this.cuil_textbox.TabIndex = 48;
+            this.cuil_textbox.TabIndex = 5;
             // 
             // Abm_Cliente_Alta
             // 

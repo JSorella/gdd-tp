@@ -178,4 +178,52 @@ END
 GO
 
 
+/*-------------------------STORED PROCEDURE (JAVI)--------------------------*/
+IF OBJECT_ID('J2LA.setCompra') IS NOT NULL
+DROP PROCEDURE J2LA.setCompra
+GO
+CREATE PROCEDURE J2LA.setCompra 
+	@comp_Id int,
+	@comp_pub_Codigo numeric(18,0), 
+	@comp_usu_Id int,
+	@comp_Fecha datetime,
+	@comp_Cantidad numeric(18,0),
+	@comp_Comision numeric(18,1),
+	@comp_cal_Codigo numeric(18,0)
+AS
+BEGIN
+	DECLARE @maxId INT
+	SET @maxId = (SELECT MAX(comp_Id)FROM J2LA.Compras)
+	SET @comp_Id = CASE WHEN @maxId IS NULL THEN 1 ELSE (@comp_Id + 1) END
+
+	INSERT INTO
+		J2LA.Compras ( comp_pub_Codigo, comp_usu_Id, comp_Fecha, comp_Cantidad, comp_Comision)
+	VALUES
+		( @comp_pub_Codigo, @comp_usu_Id, @comp_Fecha, @comp_Cantidad, @comp_Comision)
+END
+GO
+
+/*-------------------------TRIGGER (JAVI)--------------------------*/
+IF OBJECT_ID('J2LA.updateStockPublicacion') IS NOT NULL
+DROP PROCEDURE J2LA.updateStockPublicacion
+GO
+CREATE TRIGGER J2LA.updateStockPublicacion 
+ON J2LA.Compras
+AFTER INSERT
+AS
+BEGIN
+	/* Debo decrementar el Stock en la publicación */
+	DECLARE @comp_Cantidad numeric(18,0)
+	DECLARE	@comp_pub_Codigo numeric(18,0)
+	SET @comp_Cantidad = (SELECT comp_Cantidad FROM inserted)
+	SET @comp_pub_Codigo = (SELECT comp_pub_Codigo FROM inserted)
+	
+	UPDATE J2LA.Publicaciones
+		SET	pub_estado_Id = CASE WHEN (pub_Stock - @comp_Cantidad = 0) THEN (SELECT pubest_Id FROM J2LA.Publicaciones_Estados WHERE pubest_Descripcion = 'Finalizada') ELSE pub_estado_Id END,
+			pub_Stock = (pub_Stock - @comp_Cantidad)
+		WHERE pub_Codigo = @comp_pub_Codigo
+END
+GO
+
+
 

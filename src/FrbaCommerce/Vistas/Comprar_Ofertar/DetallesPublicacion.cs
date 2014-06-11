@@ -93,21 +93,19 @@ namespace FrbaCommerce
             }
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pnlDatos_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
 
         private void btnPregunta_Click(object sender, EventArgs e)
         {
             AltaPregunta oFrm = new AltaPregunta(this.codigoPublicacion);
             oFrm.ShowDialog();
         }
+
+        private void btnComprar_Click(object sender, EventArgs e)
+        {
+            AltaCompra oFrm = new AltaCompra(this.codigoPublicacion);
+            oFrm.ShowDialog();
+        }
+        
 
 
  
