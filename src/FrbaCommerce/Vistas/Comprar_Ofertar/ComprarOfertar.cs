@@ -66,6 +66,7 @@ namespace FrbaCommerce
             {
                 dgvPubli.DataSource = null;
                 dgvPubli.DataSource = InterfazBD.BuscarPublicacionesOrdenadasPorPeso(ArmarFiltros());
+                dgvPubli.Columns["Publicación Precio"].Visible = false;
             }
             catch (Exception ex)
             {
