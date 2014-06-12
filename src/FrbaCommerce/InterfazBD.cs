@@ -1424,7 +1424,7 @@ namespace FrbaCommerce
         {
             try
             {
-                String query = "select [COMPRADOR] = CO.comp_usu_id, [VENDEDOR] = P.pub_usu_id, " +
+                String query = "select [COMPRADOR] = (select U.usu_id from J2LA.Usuarios U where U.usu_id = CO.comp_usu_id), [VENDEDOR] = (select U2.usu_id from J2LA.Usuarios U2 where U2.usu_id = P.pub_usu_id), " +
                                 "[Publicación] = P.pub_descripcion, [Fecha] = CO.comp_fecha, [Calificación] = CA.cal_comentario, [Estrellas] = CA.cal_cant_estrellas " +
                                 "from J2LA.COMPRAS CO join J2LA.PUBLICACIONES P on CO.comp_pub_codigo = P.pub_codigo " +
                                 "join J2LA.CALIFICACIONES CA on CO.comp_cal_codigo = CA.cal_codigo " +
