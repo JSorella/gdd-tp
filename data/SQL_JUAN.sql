@@ -461,7 +461,35 @@ CREATE FUNCTION J2LA.getPendientesFact( @usu_id int )
 RETURNS TABLE
 AS
 RETURN 
-	(SELECT Prueba = 0)
+	(
+Select	P.pub_Codigo, comp_Id = 0, [Facturar] = CONVERT(Bit, 0),
+		[Codigo Publi] = P.pub_Codigo, [Tipo] = 'P',
+		[Fecha] = Convert(varchar, P.pub_Fecha_Ini, 103),
+		[Concepto] = 'Costo por Publicacion Nro. ' + LTRIM(RTRIM(STR(P.pub_Codigo))) +
+				' - Visib.: ' + PV.pubvis_Descripcion,
+		[Cantidad] = 1,
+		[Importe] = P.pub_vis_Precio
+From J2LA.Publicaciones P
+Inner Join J2LA.Publicaciones_Visibilidades PV On PV.pubvis_id = P.pub_visibilidad_Id
+Where P.pub_usu_Id = @usu_id
+AND P.pub_Facturada = 0
+
+Union All
+
+Select	P.pub_Codigo, comp_Id = 0, [Facturar] = CONVERT(Bit, 0),
+		[Codigo Publi] = P.pub_Codigo, [Tipo] = 'C',
+		[Fecha] = Convert(varchar, C.comp_Fecha, 103),
+		[Concepto] = 'Comision por Compra en Publicacion Nro. ' + LTRIM(RTRIM(STR(P.pub_Codigo))) +
+				' - Fecha: ' + Convert(varchar, C.comp_Fecha, 103) +
+				' - Usuario: ' + U.usu_UserName,
+		[Cantidad] = 1,
+		[Importe] = P.pub_vis_Precio
+From J2LA.Compras C
+Inner Join J2LA.Publicaciones P On P.pub_Codigo = C.comp_pub_Codigo
+Inner Join J2LA.Usuarios U On U.usu_Id = C.comp_usu_Id
+Where P.pub_usu_Id = @usu_id
+AND C.comp_Facturada = 0
+)
 GO
 
 /*============================== STORED PROCEDURE JUAN ==============================*/
