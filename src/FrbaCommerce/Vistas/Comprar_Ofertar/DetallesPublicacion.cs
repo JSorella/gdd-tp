@@ -45,7 +45,7 @@ namespace FrbaCommerce
             txtDesc.Text = oDr["pub_Descripcion"].ToString();
             txtStock.Text = oDr["pub_Stock"].ToString();
             dteFecVto = Convert.ToDateTime(oDr["pub_Fecha_Vto"]);
-            txtPrecio.Text = oDr["pub_Precio"].ToString();
+            txtPrecio.Text = oDr["Precio"].ToString();
             txtEstado.Text = oDr["pubest_Descripcion"].ToString();
             btnPregunta.Visible = Convert.ToBoolean(oDr["pub_Permite_Preg"]);
 
@@ -103,6 +103,12 @@ namespace FrbaCommerce
         private void btnComprar_Click(object sender, EventArgs e)
         {
             AltaCompra oFrm = new AltaCompra(this.codigoPublicacion);
+            oFrm.ShowDialog();
+        }
+
+        private void btnOfertar_Click(object sender, EventArgs e)
+        {
+            AltaOferta oFrm = new AltaOferta(this.codigoPublicacion);
             oFrm.ShowDialog();
         }
         

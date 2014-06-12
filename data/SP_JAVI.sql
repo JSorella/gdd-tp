@@ -205,7 +205,7 @@ GO
 
 /*-------------------------TRIGGER (JAVI)--------------------------*/
 IF OBJECT_ID('J2LA.updateStockPublicacion') IS NOT NULL
-DROP PROCEDURE J2LA.updateStockPublicacion
+DROP TRIGGER J2LA.updateStockPublicacion
 GO
 CREATE TRIGGER J2LA.updateStockPublicacion 
 ON J2LA.Compras
@@ -225,5 +225,23 @@ BEGIN
 END
 GO
 
+/*-------------------------FUNCTION (JAVI)--------------------------*/
+IF OBJECT_ID('J2LA.getPrecioMax') IS NOT NULL
+DROP FUNCTION J2LA.getPrecioMax
+GO
+CREATE FUNCTION J2LA.getPrecioMax(@pub_Codigo numeric(18,0))
+RETURNS numeric(18,2)
+AS
+BEGIN
+	DECLARE @precio_max numeric(18,2)
+	SET @precio_max = 
+			(CASE 
+			WHEN (SELECT COUNT(*) FROM J2LA.Ofertas WHERE @pub_Codigo = ofer_pub_Codigo) > 0 
+            THEN (SELECT MAX(ofer_Monto) FROM J2LA.Ofertas WHERE @pub_Codigo = ofer_pub_Codigo)
+            ELSE (SELECT P.pub_precio FROM J2LA.Publicaciones P WHERE P.pub_Codigo = @pub_Codigo) END)
+	
+	RETURN @precio_max
+END
+GO
 
 

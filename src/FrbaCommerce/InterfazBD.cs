@@ -576,26 +576,26 @@ namespace FrbaCommerce
             {
                 String query =
                     @"SELECT
-P.pub_Codigo,
-P.pub_Descripcion,
-P.pub_Stock,
-P.pub_Fecha_Vto,
-P.pub_Fecha_Ini,
-P.pub_Precio,
-P.pub_Permite_Preg,
-E.pubest_Descripcion,
-T.pubtip_Nombre,
-U.usu_UserName
-FROM
-J2LA.Publicaciones P,
-J2LA.Publicaciones_Tipos T,
-J2LA.Publicaciones_Estados E,
-J2LA.Usuarios U
-WHERE
-pub_Codigo = " + pub_codigo + @"
-AND P.pub_usu_Id = U.usu_id
-AND P.pub_estado_Id = E.pubest_Id
-AND P.pub_tipo_Id = T.pubtip_Id";
+                        P.pub_Codigo,
+                        P.pub_Descripcion,
+                        P.pub_Stock,
+                        P.pub_Fecha_Vto,
+                        P.pub_Fecha_Ini,
+                        [Precio] = J2LA.getPrecioMax(P.pub_Codigo),
+                        P.pub_Permite_Preg,
+                        E.pubest_Descripcion,
+                        T.pubtip_Nombre,
+                        U.usu_UserName
+                     FROM
+                        J2LA.Publicaciones P,
+                        J2LA.Publicaciones_Tipos T,
+                        J2LA.Publicaciones_Estados E,
+                        J2LA.Usuarios U
+                     WHERE
+                        pub_Codigo = " + pub_codigo + @"
+                        AND P.pub_usu_Id = U.usu_id
+                        AND P.pub_estado_Id = E.pubest_Id
+                        AND P.pub_tipo_Id = T.pubtip_Id";
 
                 return Singleton.conexion.executeQueryTable(query, null, null);
             }
@@ -641,16 +641,18 @@ AND P.pub_tipo_Id = T.pubtip_Id";
                                 "[Descripcion] = P.pub_Descripcion, [Stock] = P.pub_Stock, " +
                                 "[Fecha Inicial] = Convert(varchar, P.pub_Fecha_Ini, 103), " +
                                 "[Fecha Vto.] = Convert(varchar,P.pub_Fecha_Vto, 103), " +
-                                "[Precio] = P.pub_Precio, [Visibilidad] = V.pubvis_Descripcion, " +
+                                @"[Precio] = J2LA.getPrecioMax(P.pub_Codigo), 
+                                [Visibilidad] = V.pubvis_Descripcion, " +
                                 "[Estado] = E.pubest_Descripcion, " +
                                 "[Permite Preguntas] = (Case When P.pub_Permite_Preg = 1 Then 'Si' Else 'No' End), " +
                                 "Rubros = J2LA.ObtenerRubrosPubli(P.pub_Codigo), " +
                                 "[Publicación Precio] = V.pubvis_Precio " +
-                                "From J2LA.Publicaciones P " +
+                                "FROM J2LA.Publicaciones P " +
                                 "Inner Join J2LA.Publicaciones_Rubros PR On PR.pubrub_pub_Codigo = P.pub_Codigo " +
                                 "Inner Join J2LA.Publicaciones_Tipos T On T.pubtip_Id = P.pub_tipo_Id " +
                                 "Inner Join J2LA.Publicaciones_Estados E On E.pubest_Id = P.pub_estado_Id " +
                                 "Inner Join J2LA.Publicaciones_Visibilidades V On V.pubvis_id = P.pub_visibilidad_Id " +
+                                
                                 filtros +
                                 " Order By V.pubvis_Precio desc";
 
@@ -901,8 +903,8 @@ AND P.pub_tipo_Id = T.pubtip_Id";
             {
                 Singleton.conexion.executeQuerySP("J2LA.ActualizarReputacion", null,
                        new String[3, 2] { { "usu_UserName", usu_UserName},
-{"comp_Id", comp_Id.ToString()},
-{"cal_Cant_Estrellas", cal_Cant_Estrellas.ToString()}});
+                                        {"comp_Id", comp_Id.ToString()},
+                                        {"cal_Cant_Estrellas", cal_Cant_Estrellas.ToString()}});
             }
             catch (Exception ex)
             {
@@ -969,6 +971,21 @@ AND P.pub_tipo_Id = T.pubtip_Id";
         }
 
         /// <summary>
+        /// Trae DataTable Oferta
+        /// </summary>
+        public static DataTable getDTOferta()
+        {
+            try
+            {
+                return Singleton.conexion.executeQueryTable("Select * From J2LA.Ofertas Where 1 = 0", null, null);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        /// <summary>
         /// Inserta una nueva Pregunta
         /// </summary>
         public static void setPreguntaRespuesta(DataTable pregunta)
@@ -1023,6 +1040,43 @@ AND P.pub_tipo_Id = T.pubtip_Id";
 
         }
 
+        /// <summary>
+        /// Inserta una nueva Oferta
+        /// </summary>
+        public static void setOferta(DataTable oferta)
+        {
+            try
+            {
+                Singleton.conexion.executeQuerySP("J2LA.setOferta", oferta, null);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+        }
+
+        /// <summary>
+        /// Trae PrecioMáximo de ofertas
+        /// </summary>
+        public static decimal getPrecioMax(int pub_codigo)
+        {
+            try
+            {
+                //String query = "SELECT J2LA.getPrecioMax("+pub_codigo+")";
+                //return Convert.ToDecimal(Singleton.conexion.executeQueryTable(query,null,null));
+                String query = " J2LA.getPrecioMax(@pub_Codigo)";
+                Console.WriteLine(Singleton.conexion.executeQueryFuncEscalar(query, null, new String[1, 2] { { "pub_codigo", pub_codigo.ToString() } }));
+                return 0;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+        }
+
         public static PaginarGrilla BuscarPublicacionesOrdenadas(String filtros)
         {
             DataSet oDs = new DataSet();
@@ -1031,7 +1085,7 @@ AND P.pub_tipo_Id = T.pubtip_Id";
             String query = "Select Distinct Top 10000 [Codigo] = P.pub_Codigo, [Tipo] = T.pubtip_Nombre, " +
                                 "[Descripcion] = P.pub_Descripcion, [Stock] = P.pub_Stock, " +
                                 "[Fecha Inicial] = Convert(varchar, P.pub_Fecha_Ini, 103), " +
-                                "[Fecha Vto.] = Convert(varchar,P.pub_Fecha_Vto, 103), " +
+                                "[Fecha Vto.] = Convert(va rchar,P.pub_Fecha_Vto, 103), " +
                                 "[Precio] = P.pub_Precio, [Visibilidad] = V.pubvis_Descripcion, " +
                                 "[Estado] = E.pubest_Descripcion, " +
                                 "[Permite Preguntas] = (Case When P.pub_Permite_Preg = 1 Then 'Si' Else 'No' End), " +

@@ -135,6 +135,12 @@
     <Compile Include="Vistas\Comprar_Ofertar\AltaCompra.Designer.cs">
       <DependentUpon>AltaCompra.cs</DependentUpon>
     </Compile>
+    <Compile Include="Vistas\Comprar_Ofertar\AltaOferta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Comprar_Ofertar\AltaOferta.Designer.cs">
+      <DependentUpon>AltaOferta.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\Comprar_Ofertar\AltaPregunta.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -352,6 +358,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Comprar_Ofertar\AltaCompra.resx">
       <DependentUpon>AltaCompra.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Comprar_Ofertar\AltaOferta.resx">
+      <DependentUpon>AltaOferta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Comprar_Ofertar\AltaPregunta.resx">
       <DependentUpon>AltaPregunta.cs</DependentUpon>
