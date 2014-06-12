@@ -146,6 +146,9 @@ namespace FrbaCommerce
 
                     case "Historial de Cliente":
                         tsmiHistorialCli.Visible = true;
+                        comprasToolStripMenuItem.Visible = true;
+                        ofertasToolStripMenuItem.Visible = true;
+                        calificacionesToolStripMenuItem.Visible = true;
                         break;
 
                     case "Facturar Publicaciones":
