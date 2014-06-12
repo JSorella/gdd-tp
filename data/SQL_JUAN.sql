@@ -390,3 +390,78 @@ BEGIN
 	WHERE usu_Id = @usu_Id
 END
 GO
+
+/*============================== STORED PROCEDURE JUAN ==============================*/
+
+IF OBJECT_ID('J2LA.Facturas_Insert') IS NOT NULL
+DROP PROCEDURE J2LA.Facturas_Insert
+GO
+CREATE PROCEDURE J2LA.Facturas_Insert
+	@fac_Numero numeric(18,0) OUTPUT,
+	@fac_usu_Id int,
+	@fac_Fecha datetime,
+	@fac_Total numeric(18,2),
+	@fac_Forma_Pago_Desc nvarchar(255)
+AS
+BEGIN
+
+	SELECT @fac_Numero = MAX(fac_Numero) + 1 FROM J2LA.Facturas
+
+	INSERT INTO J2LA.Facturas
+		([fac_Numero],[fac_usu_Id],[fac_Fecha],[fac_Total],[fac_Forma_Pago_Desc])
+	VALUES(@fac_Numero, @fac_usu_Id, @fac_Fecha, @fac_Total, @fac_Forma_Pago_Desc)
+		
+END
+GO
+
+/*============================== STORED PROCEDURE JUAN ==============================*/
+
+IF OBJECT_ID('J2LA.Facturas_Insert_Detalle') IS NOT NULL
+DROP PROCEDURE J2LA.Facturas_Insert_Detalle
+GO
+CREATE PROCEDURE J2LA.Facturas_Insert_Detalle
+	@facdet_fac_Numero numeric(18,0),
+	@facdet_pub_Codigo numeric(18,0),
+	@facdet_Cantidad numeric(18,0),
+	@facdet_Importe numeric(18,2),
+	@facdet_Concepto nvarchar(255),
+	@facdet_comp_Id int
+AS
+BEGIN
+
+	INSERT INTO J2LA.Facturas_Det
+		([facdet_fac_Numero],[facdet_pub_Codigo],[facdet_Cantidad],
+		[facdet_Importe],[facdet_Concepto], [facdet_comp_Id])
+	VALUES(@facdet_fac_Numero, @facdet_pub_Codigo, @facdet_Cantidad, 
+		@facdet_Importe, @facdet_Concepto, @facdet_comp_Id)
+		
+	-- La marco como Facturada.
+	IF(@facdet_comp_Id = 0)
+	BEGIN
+		UPDATE J2LA.Publicaciones 
+		SET pub_Facturada = 1
+		WHERE pub_Codigo = @facdet_pub_Codigo
+	END
+	ELSE
+	BEGIN
+		UPDATE J2LA.Compras
+		SET comp_Facturada = 1
+		WHERE comp_Id = @facdet_comp_Id
+	END
+		
+END
+GO
+
+/*============================== STORED PROCEDURE JUAN ==============================*/
+
+IF OBJECT_ID('J2LA.getPendientesFact') IS NOT NULL
+DROP FUNCTION J2LA.getPendientesFact
+GO
+CREATE FUNCTION J2LA.getPendientesFact( @usu_id int )
+RETURNS TABLE
+AS
+RETURN 
+	(SELECT Prueba = 0)
+GO
+
+/*============================== STORED PROCEDURE JUAN ==============================*/

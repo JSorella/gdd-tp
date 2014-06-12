@@ -1287,5 +1287,99 @@ namespace FrbaCommerce
                 throw new Exception(ex.Message);
             }
         }
+
+        public static DataTable getDTFactEncab()
+        {
+            try
+            {
+                return Singleton.conexion.executeQueryTable("SELECT * FROM J2LA.Facturas WHERE 1 = 0", null, null);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public static DataTable getDTFactDet()
+        {
+            try
+            {
+                return Singleton.conexion.executeQueryTable("SELECT * FROM J2LA.Facturas_Det WHERE 1 = 0", null, null);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public static DataTable getFormasDePago()
+        {
+            try
+            {
+                return Singleton.conexion.executeQueryTable("SELECT * FROM J2LA.FormasDePago Order By fdp_Descripcion", null, null);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public static DataTable BuscarPendientesFact(int usu_Id)
+        {
+            try
+            {
+                String query = "Select * From J2LA.getPendientesFact(@usu_id)";
+
+                return Singleton.conexion.executeQueryTable(query, null,
+                            new String[1, 2] { { "usu_Id", usu_Id.ToString() } });
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public static String GenerarFactura(DataTable oDtFactEcab, DataTable oDtFactDet)
+        {
+            int fac_Numero;
+
+            SqlTransaction tran = null;
+            SqlConnection conn = new SqlConnection(Singleton.ConnectionString);
+            SqlCommand cmd = new SqlCommand("", conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            try
+            {
+                conn.Open();
+                tran = conn.BeginTransaction();
+                cmd.Transaction = tran;
+
+                //Alta Encabezado de Factura
+                Singleton.conexion.executeCommandMasivo(ref cmd, "J2LA.Facturas_Insert", oDtFactEcab, null, "fac_Numero|");
+
+                fac_Numero = Convert.ToInt32(cmd.Parameters["@fac_Numero"].Value);
+
+                oDtFactDet.AsEnumerable().All(c => { c["facdet_fac_Numero"] = fac_Numero; return true; });
+
+                //Alta Detalle de Factura
+                Singleton.conexion.executeCommandMasivo(ref cmd, "J2LA.Facturas_Insert_Detalle", oDtFactDet, null, "");
+
+                tran.Commit();
+
+                return "true|" + fac_Numero.ToString();
+            }
+            catch (Exception ex)
+            {
+                tran.Rollback();
+                throw new Exception("Se detecto un error al Generar la Factura: " + ex.Message);
+            }
+            finally
+            {
+                if (conn.State != ConnectionState.Closed)
+                    conn.Close();
+
+                conn.Dispose();
+            }
+        }
     }
 }
