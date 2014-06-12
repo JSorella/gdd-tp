@@ -1406,11 +1406,15 @@ namespace FrbaCommerce
         {
             try
             {                      //NO TERMINADA TODAVIA!!!
-                String query = "select O.ofer_id, P.pub_descripcion, P.pub_precio, O.ofer_fecha, " +
-                                "'GANADA', CA.cal_comentario, CA.cal_cant_estrellas " +
-                                "from J2LA.OFERTAS O join J2LA.PUBLICACIONES P on O.ofer_pub_codigo = P.pub_codigo " +
-                                "join J2LA.CALIFICACIONES CA on CO.comp_cal_codigo = CA.cal_codigo " +
-                                "where CO.comp_usu_id = " + Singleton.usuario["usu_Id"];
+                String query = "select [Monto Oferta] = O.ofer_monto, [Publicacion] = P.pub_descripcion, [Fecha] = O.ofer_fecha, " +
+                               "[Ganada] = 'Si' from J2LA.OFERTAS O join J2LA.PUBLICACIONES P on O.ofer_pub_codigo = P.pub_codigo " +
+                               "where O.ofer_usu_id =  " + Singleton.usuario["usu_Id"] +
+                               "and O.ofer_pub_codigo in (select comp_pub_codigo from J2LA.Compras) " +
+                               "union " +
+                               "select [Monto Oferta] = O.ofer_monto, [Publicacion] = P.pub_descripcion, [Fecha] = O.ofer_fecha, " +
+                               "[Ganada] = 'No' from J2LA.OFERTAS O join J2LA.PUBLICACIONES P on O.ofer_pub_codigo = P.pub_codigo " +
+                               "where O.ofer_usu_id =  " + Singleton.usuario["usu_Id"] +
+                               "and O.ofer_pub_codigo not in (select comp_pub_codigo from J2LA.Compras)";
 
                 return Singleton.conexion.executeQueryTable(query, null, null);
             }
