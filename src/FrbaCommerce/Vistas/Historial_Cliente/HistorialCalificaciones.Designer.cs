@@ -1,6 +1,6 @@
 ﻿namespace FrbaCommerce
 {
-    partial class HistorialCliente
+    partial class HistorialCalificaciones
     {
         /// <summary>
         /// Required designer variable.
@@ -28,34 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dgvHistorialC = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvHistorialC)).BeginInit();
+            this.dgvHistorialCal = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvHistorialCal)).BeginInit();
             this.SuspendLayout();
             // 
-            // dgvHistorialC
+            // dgvHistorialCal
             // 
-            this.dgvHistorialC.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvHistorialC.Location = new System.Drawing.Point(13, 13);
-            this.dgvHistorialC.Name = "dgvHistorialC";
-            this.dgvHistorialC.Size = new System.Drawing.Size(725, 314);
-            this.dgvHistorialC.TabIndex = 0;
+            this.dgvHistorialCal.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvHistorialCal.Location = new System.Drawing.Point(13, 13);
+            this.dgvHistorialCal.Name = "dgvHistorialCal";
+            this.dgvHistorialCal.Size = new System.Drawing.Size(696, 356);
+            this.dgvHistorialCal.TabIndex = 0;
             // 
-            // HistorialCliente
+            // HistorialCalificaciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(750, 339);
-            this.Controls.Add(this.dgvHistorialC);
-            this.Name = "HistorialCliente";
-            this.Text = "Historial de Cliente - Compras";
-            this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvHistorialC)).EndInit();
+            this.ClientSize = new System.Drawing.Size(721, 381);
+            this.Controls.Add(this.dgvHistorialCal);
+            this.Name = "HistorialCalificaciones";
+            this.Text = "Historial Cliente - Calificaciones";
+            ((System.ComponentModel.ISupportInitialize)(this.dgvHistorialCal)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dgvHistorialC;
+        private System.Windows.Forms.DataGridView dgvHistorialCal;
     }
 }

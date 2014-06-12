@@ -9,24 +9,24 @@ using System.Windows.Forms;
 
 namespace FrbaCommerce
 {
-    public partial class HistorialCliente : Form
+    public partial class HistorialOfertas : Form
     {
-        public HistorialCliente()
+        public HistorialOfertas()
         {
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void HistorialOfertas_Load(object sender, EventArgs e)
         {
-            cargarHistorialCompras();
+            cargarHistorialOfertas();
         }
 
-        private void cargarHistorialCompras()
+        private void cargarHistorialOfertas()
         {
             try
             {
-                dgvHistorialC.Visible = true;
-                dgvHistorialC.DataSource = InterfazBD.getHistorialCompras();
+                dgvHistorialO.Visible = true;
+                dgvHistorialO.DataSource = InterfazBD.getHistorialOfertas();
             }
             catch (Exception ex)
             {

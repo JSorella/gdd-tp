@@ -1381,5 +1381,61 @@ namespace FrbaCommerce
                 conn.Dispose();
             }
         }
+
+        public static DataTable getHistorialCompras()
+        {
+            try
+            {
+                String query = "select [Usuario] = U.usu_username, [Publicación] = P.pub_descripcion, [Precio] = P.pub_precio, [Fecha] = CO.comp_fecha, " +
+                                "[Tipo de Compra] = PT.pubtip_nombre, [Calificación] = CA.cal_comentario, [Estrellas] = CA.cal_cant_estrellas " +
+                                "from J2LA.COMPRAS CO join J2LA.USUARIOS U on CO.comp_usu_id = U.usu_id " +
+                                "join J2LA.PUBLICACIONES P on CO.comp_pub_codigo = P.pub_codigo " +
+                                "join J2LA.PUBLICACIONES_TIPOS PT on P.pub_tipo_id = PT.pubtip_id " +
+                                "join J2LA.CALIFICACIONES CA on CO.comp_cal_codigo = CA.cal_codigo " +
+                                "where CO.comp_usu_id = " + Singleton.usuario["usu_Id"];
+
+                return Singleton.conexion.executeQueryTable(query, null, null);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public static DataTable getHistorialOfertas()
+        {
+            try
+            {                      //NO TERMINADA TODAVIA!!!
+                String query = "select O.ofer_id, P.pub_descripcion, P.pub_precio, O.ofer_fecha, " +
+                                "'GANADA', CA.cal_comentario, CA.cal_cant_estrellas " +
+                                "from J2LA.OFERTAS O join J2LA.PUBLICACIONES P on O.ofer_pub_codigo = P.pub_codigo " +
+                                "join J2LA.CALIFICACIONES CA on CO.comp_cal_codigo = CA.cal_codigo " +
+                                "where CO.comp_usu_id = " + Singleton.usuario["usu_Id"];
+
+                return Singleton.conexion.executeQueryTable(query, null, null);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public static DataTable getHistorialCalificaciones()
+        {
+            try
+            {
+                String query = "select [COMPRADOR] = CO.comp_usu_id, [VENDEDOR] = P.pub_usu_id, " +
+                                "[Publicación] = P.pub_descripcion, [Fecha] = CO.comp_fecha, [Calificación] = CA.cal_comentario, [Estrellas] = CA.cal_cant_estrellas " +
+                                "from J2LA.COMPRAS CO join J2LA.PUBLICACIONES P on CO.comp_pub_codigo = P.pub_codigo " +
+                                "join J2LA.CALIFICACIONES CA on CO.comp_cal_codigo = CA.cal_codigo " +
+                                "where CO.comp_usu_id = " + Singleton.usuario["usu_Id"] + " or P.pub_usu_id = " + Singleton.usuario["usu_Id"];
+
+                return Singleton.conexion.executeQueryTable(query, null, null);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

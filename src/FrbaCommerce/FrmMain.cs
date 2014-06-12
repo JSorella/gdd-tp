@@ -286,11 +286,6 @@ namespace FrbaCommerce
             ejecutarForm(new ListadoEstadistico());
         }
 
-        private void tsmiHistorialCli_Click(object sender, EventArgs e)
-        {
-            ejecutarForm(new HistorialCliente());
-        }
-
         private void cascadaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.LayoutMdi(MdiLayout.Cascade);
@@ -332,6 +327,21 @@ namespace FrbaCommerce
         private void verPreguntasYRespuestasToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ejecutarForm(new Ver_Respuestas());
+        }
+
+        private void comprasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ejecutarForm(new HistorialCliente());
+        }
+
+        private void ofertasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ejecutarForm(new HistorialOfertas());
+        }
+
+        private void calificacionesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ejecutarForm(new HistorialCalificaciones());
         }
     }
 }
