@@ -69,7 +69,7 @@ GO
 IF OBJECT_ID('J2LA.setNuevoUsuario') IS NOT NULL
 DROP PROCEDURE J2LA.setNuevoUsuario
 GO
-CREATE PROCEDURE J2LA.setNuevoUsuario @userName varchar(255), @password varchar(255), @admin bit
+CREATE PROCEDURE J2LA.setNuevoUsuario @userName varchar(255), @password varchar(255)
 AS
 BEGIN
 	INSERT INTO
