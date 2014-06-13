@@ -220,7 +220,7 @@ BEGIN
 	SET @comp_pub_Codigo = (SELECT comp_pub_Codigo FROM inserted)
 	
 	UPDATE J2LA.Publicaciones
-		SET	pub_estado_Id = CASE WHEN (pub_Stock - @comp_Cantidad = 0) THEN (SELECT pubest_Id FROM J2LA.Publicaciones_Estados WHERE pubest_Descripcion = 'Finalizada') ELSE pub_estado_Id END,
+		SET	pub_estado_Id = CASE WHEN (pub_Stock - @comp_Cantidad = 0) THEN 4 ELSE pub_estado_Id END,
 			pub_Stock = (pub_Stock - @comp_Cantidad)
 		WHERE pub_Codigo = @comp_pub_Codigo
 END
