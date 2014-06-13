@@ -28,21 +28,419 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.timePickerFechaCreacion = new System.Windows.Forms.DateTimePicker();
+            this.tboxCodPostal = new System.Windows.Forms.TextBox();
+            this.tboxCiudad = new System.Windows.Forms.TextBox();
+            this.tboxLocalidad = new System.Windows.Forms.TextBox();
+            this.tboxDpto = new System.Windows.Forms.TextBox();
+            this.tboxPiso = new System.Windows.Forms.TextBox();
+            this.tboxAltura = new System.Windows.Forms.TextBox();
+            this.tboxCalle = new System.Windows.Forms.TextBox();
+            this.tboxNombreContacto = new System.Windows.Forms.TextBox();
+            this.tboxCUIT = new System.Windows.Forms.TextBox();
+            this.tboxTelefono = new System.Windows.Forms.TextBox();
+            this.tboxMail = new System.Windows.Forms.TextBox();
+            this.tboxRazonSocial = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.btnGuardar = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btnAceptar = new System.Windows.Forms.Button();
+            this.btnSeleccionar = new System.Windows.Forms.Button();
+            this.tboxEmpresaSeleccionada = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // timePickerFechaCreacion
+            // 
+            this.timePickerFechaCreacion.Location = new System.Drawing.Point(133, 172);
+            this.timePickerFechaCreacion.Name = "timePickerFechaCreacion";
+            this.timePickerFechaCreacion.Size = new System.Drawing.Size(199, 20);
+            this.timePickerFechaCreacion.TabIndex = 55;
+            // 
+            // tboxCodPostal
+            // 
+            this.tboxCodPostal.Location = new System.Drawing.Point(445, 139);
+            this.tboxCodPostal.Name = "tboxCodPostal";
+            this.tboxCodPostal.Size = new System.Drawing.Size(70, 20);
+            this.tboxCodPostal.TabIndex = 54;
+            // 
+            // tboxCiudad
+            // 
+            this.tboxCiudad.Location = new System.Drawing.Point(445, 171);
+            this.tboxCiudad.Name = "tboxCiudad";
+            this.tboxCiudad.Size = new System.Drawing.Size(187, 20);
+            this.tboxCiudad.TabIndex = 53;
+            // 
+            // tboxLocalidad
+            // 
+            this.tboxLocalidad.Location = new System.Drawing.Point(445, 113);
+            this.tboxLocalidad.Name = "tboxLocalidad";
+            this.tboxLocalidad.Size = new System.Drawing.Size(187, 20);
+            this.tboxLocalidad.TabIndex = 52;
+            // 
+            // tboxDpto
+            // 
+            this.tboxDpto.Location = new System.Drawing.Point(567, 84);
+            this.tboxDpto.Name = "tboxDpto";
+            this.tboxDpto.Size = new System.Drawing.Size(48, 20);
+            this.tboxDpto.TabIndex = 51;
+            // 
+            // tboxPiso
+            // 
+            this.tboxPiso.Location = new System.Drawing.Point(445, 84);
+            this.tboxPiso.Name = "tboxPiso";
+            this.tboxPiso.Size = new System.Drawing.Size(37, 20);
+            this.tboxPiso.TabIndex = 50;
+            // 
+            // tboxAltura
+            // 
+            this.tboxAltura.Location = new System.Drawing.Point(445, 61);
+            this.tboxAltura.Name = "tboxAltura";
+            this.tboxAltura.Size = new System.Drawing.Size(84, 20);
+            this.tboxAltura.TabIndex = 49;
+            // 
+            // tboxCalle
+            // 
+            this.tboxCalle.Location = new System.Drawing.Point(445, 34);
+            this.tboxCalle.Name = "tboxCalle";
+            this.tboxCalle.Size = new System.Drawing.Size(187, 20);
+            this.tboxCalle.TabIndex = 48;
+            // 
+            // tboxNombreContacto
+            // 
+            this.tboxNombreContacto.Location = new System.Drawing.Point(134, 139);
+            this.tboxNombreContacto.Name = "tboxNombreContacto";
+            this.tboxNombreContacto.Size = new System.Drawing.Size(198, 20);
+            this.tboxNombreContacto.TabIndex = 47;
+            // 
+            // tboxCUIT
+            // 
+            this.tboxCUIT.Location = new System.Drawing.Point(132, 110);
+            this.tboxCUIT.Name = "tboxCUIT";
+            this.tboxCUIT.Size = new System.Drawing.Size(200, 20);
+            this.tboxCUIT.TabIndex = 46;
+            // 
+            // tboxTelefono
+            // 
+            this.tboxTelefono.Location = new System.Drawing.Point(133, 79);
+            this.tboxTelefono.Name = "tboxTelefono";
+            this.tboxTelefono.Size = new System.Drawing.Size(199, 20);
+            this.tboxTelefono.TabIndex = 45;
+            // 
+            // tboxMail
+            // 
+            this.tboxMail.Location = new System.Drawing.Point(133, 49);
+            this.tboxMail.Name = "tboxMail";
+            this.tboxMail.Size = new System.Drawing.Size(199, 20);
+            this.tboxMail.TabIndex = 44;
+            // 
+            // tboxRazonSocial
+            // 
+            this.tboxRazonSocial.Location = new System.Drawing.Point(132, 18);
+            this.tboxRazonSocial.Name = "tboxRazonSocial";
+            this.tboxRazonSocial.Size = new System.Drawing.Size(200, 20);
+            this.tboxRazonSocial.TabIndex = 43;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(355, 117);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(53, 13);
+            this.label14.TabIndex = 42;
+            this.label14.Text = "Localidad";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(355, 147);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(71, 13);
+            this.label13.TabIndex = 41;
+            this.label13.Text = "Código postal";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(355, 64);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(34, 13);
+            this.label12.TabIndex = 40;
+            this.label12.Text = "Altura";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(513, 87);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(30, 13);
+            this.label11.TabIndex = 39;
+            this.label11.Text = "Dpto";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(355, 37);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(30, 13);
+            this.label10.TabIndex = 38;
+            this.label10.Text = "Calle";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(355, 94);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(27, 13);
+            this.label9.TabIndex = 37;
+            this.label9.Text = "Piso";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(355, 178);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(40, 13);
+            this.label8.TabIndex = 36;
+            this.label8.Text = "Ciudad";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(477, 10);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(52, 13);
+            this.label7.TabIndex = 35;
+            this.label7.Text = "Dirección";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(7, 178);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(96, 13);
+            this.label6.TabIndex = 34;
+            this.label6.Text = "Fecha de creación";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(7, 142);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(104, 13);
+            this.label5.TabIndex = 33;
+            this.label5.Text = "Nombre de contacto";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(7, 113);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(32, 13);
+            this.label4.TabIndex = 32;
+            this.label4.Text = "CUIT";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(7, 82);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(49, 13);
+            this.label3.TabIndex = 31;
+            this.label3.Text = "Teléfono";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(7, 52);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(26, 13);
+            this.label2.TabIndex = 30;
+            this.label2.Text = "Mail";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(7, 21);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(70, 13);
+            this.label1.TabIndex = 29;
+            this.label1.Text = "Razón Social";
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(10, 212);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(124, 17);
+            this.checkBox1.TabIndex = 57;
+            this.checkBox1.Text = "Empresa Inhabilitada";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // btnGuardar
+            // 
+            this.btnGuardar.Location = new System.Drawing.Point(270, 332);
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.Size = new System.Drawing.Size(117, 32);
+            this.btnGuardar.TabIndex = 58;
+            this.btnGuardar.Text = "Guardar";
+            this.btnGuardar.UseVisualStyleBackColor = true;
+            // 
+            // panel1
+            // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.btnAceptar);
+            this.panel1.Controls.Add(this.btnSeleccionar);
+            this.panel1.Controls.Add(this.tboxEmpresaSeleccionada);
+            this.panel1.Controls.Add(this.label15);
+            this.panel1.Location = new System.Drawing.Point(13, 12);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(643, 46);
+            this.panel1.TabIndex = 59;
+            // 
+            // btnAceptar
+            // 
+            this.btnAceptar.Location = new System.Drawing.Point(514, 7);
+            this.btnAceptar.Name = "btnAceptar";
+            this.btnAceptar.Size = new System.Drawing.Size(68, 30);
+            this.btnAceptar.TabIndex = 3;
+            this.btnAceptar.Text = "Aceptar";
+            this.btnAceptar.UseVisualStyleBackColor = true;
+            // 
+            // btnSeleccionar
+            // 
+            this.btnSeleccionar.Location = new System.Drawing.Point(435, 7);
+            this.btnSeleccionar.Name = "btnSeleccionar";
+            this.btnSeleccionar.Size = new System.Drawing.Size(73, 30);
+            this.btnSeleccionar.TabIndex = 2;
+            this.btnSeleccionar.Text = "Seleccionar";
+            this.btnSeleccionar.UseVisualStyleBackColor = true;
+            // 
+            // tboxEmpresaSeleccionada
+            // 
+            this.tboxEmpresaSeleccionada.Location = new System.Drawing.Point(210, 13);
+            this.tboxEmpresaSeleccionada.Name = "tboxEmpresaSeleccionada";
+            this.tboxEmpresaSeleccionada.Size = new System.Drawing.Size(219, 20);
+            this.tboxEmpresaSeleccionada.TabIndex = 1;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(24, 16);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(184, 13);
+            this.label15.TabIndex = 0;
+            this.label15.Text = "Indique la razón social de la empresa:";
+            // 
+            // panel2
+            // 
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.checkBox1);
+            this.panel2.Controls.Add(this.timePickerFechaCreacion);
+            this.panel2.Controls.Add(this.tboxCodPostal);
+            this.panel2.Controls.Add(this.tboxCiudad);
+            this.panel2.Controls.Add(this.tboxLocalidad);
+            this.panel2.Controls.Add(this.tboxDpto);
+            this.panel2.Controls.Add(this.tboxPiso);
+            this.panel2.Controls.Add(this.tboxAltura);
+            this.panel2.Controls.Add(this.tboxCalle);
+            this.panel2.Controls.Add(this.tboxNombreContacto);
+            this.panel2.Controls.Add(this.tboxCUIT);
+            this.panel2.Controls.Add(this.tboxTelefono);
+            this.panel2.Controls.Add(this.tboxMail);
+            this.panel2.Controls.Add(this.tboxRazonSocial);
+            this.panel2.Controls.Add(this.label14);
+            this.panel2.Controls.Add(this.label13);
+            this.panel2.Controls.Add(this.label12);
+            this.panel2.Controls.Add(this.label11);
+            this.panel2.Controls.Add(this.label10);
+            this.panel2.Controls.Add(this.label9);
+            this.panel2.Controls.Add(this.label8);
+            this.panel2.Controls.Add(this.label7);
+            this.panel2.Controls.Add(this.label6);
+            this.panel2.Controls.Add(this.label5);
+            this.panel2.Controls.Add(this.label4);
+            this.panel2.Controls.Add(this.label3);
+            this.panel2.Controls.Add(this.label2);
+            this.panel2.Controls.Add(this.label1);
+            this.panel2.Location = new System.Drawing.Point(13, 73);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(643, 244);
+            this.panel2.TabIndex = 60;
             // 
             // Abm_Empresa_Modif
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.ClientSize = new System.Drawing.Size(670, 374);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.btnGuardar);
             this.MaximizeBox = false;
             this.Name = "Abm_Empresa_Modif";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Abm_Empresa_Modif";
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private System.Windows.Forms.DateTimePicker timePickerFechaCreacion;
+        private System.Windows.Forms.TextBox tboxCodPostal;
+        private System.Windows.Forms.TextBox tboxCiudad;
+        private System.Windows.Forms.TextBox tboxLocalidad;
+        private System.Windows.Forms.TextBox tboxDpto;
+        private System.Windows.Forms.TextBox tboxPiso;
+        private System.Windows.Forms.TextBox tboxAltura;
+        private System.Windows.Forms.TextBox tboxCalle;
+        private System.Windows.Forms.TextBox tboxNombreContacto;
+        private System.Windows.Forms.TextBox tboxCUIT;
+        private System.Windows.Forms.TextBox tboxTelefono;
+        private System.Windows.Forms.TextBox tboxMail;
+        private System.Windows.Forms.TextBox tboxRazonSocial;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Button btnGuardar;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button btnAceptar;
+        private System.Windows.Forms.Button btnSeleccionar;
+        private System.Windows.Forms.TextBox tboxEmpresaSeleccionada;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Panel panel2;
     }
 }

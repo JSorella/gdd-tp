@@ -51,6 +51,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Vistas\Abm_Empresa\Abm_Empresas_Busqueda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Abm_Empresa\Abm_Empresas_Busqueda.Designer.cs">
+      <DependentUpon>Abm_Empresas_Busqueda.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\Abm_Visibilidad\Abm_Visibilidad_Buscar.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -328,6 +334,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Abm_Cliente\Abm_Cliente_Modif.resx">
       <DependentUpon>Abm_Cliente_Modif.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Abm_Empresa\Abm_Empresas_Busqueda.resx">
+      <DependentUpon>Abm_Empresas_Busqueda.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Abm_Empresa\Abm_Empresa_Alta.resx">
       <DependentUpon>Abm_Empresa_Alta.cs</DependentUpon>
