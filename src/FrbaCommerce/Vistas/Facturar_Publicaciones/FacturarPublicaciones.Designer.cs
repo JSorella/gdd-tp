@@ -275,10 +275,11 @@
             this.dgvPubli.Location = new System.Drawing.Point(13, 30);
             this.dgvPubli.MultiSelect = false;
             this.dgvPubli.Name = "dgvPubli";
-            this.dgvPubli.ReadOnly = true;
             this.dgvPubli.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPubli.Size = new System.Drawing.Size(689, 363);
             this.dgvPubli.TabIndex = 4;
+            this.dgvPubli.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPubli_CellDoubleClick);
+            this.dgvPubli.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPubli_CellContentClick);
             // 
             // label2
             // 
