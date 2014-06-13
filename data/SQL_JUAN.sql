@@ -34,6 +34,17 @@ BEGIN
 		@pub_Fecha_Ini,@pub_Precio,@pub_visibilidad_Id,@pub_estado_Id,
 		@pub_Permite_Preg,@pub_usu_Id,@pub_vis_Precio,@pub_vis_Porcentaje)
 		
+	-- Agrego un Registro para controlar la Facturacion por Visibilidad
+	-- Para un Bonificacion cada 10 Publicidades Rendidas
+	IF NOT EXISTS ( SELECT * FROM J2LA.Usuarios_CantFactxTipoVis
+					WHERE ucftv_usu_Id = @pub_usu_Id
+					AND ucftv_vis_Id = @pub_visibilidad_Id)
+	BEGIN
+		INSERT INTO J2LA.Usuarios_CantFactxTipoVis
+			([ucftv_usu_Id], [ucftv_vis_Id], [ucftv_Cantidad])
+		VALUES (@pub_usu_Id, @pub_visibilidad_Id, 0)
+	END
+	
 END
 GO
 
