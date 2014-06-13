@@ -16,11 +16,6 @@ namespace FrbaCommerce
             InitializeComponent();
         }
 
-        private void HistorialOfertas_Load(object sender, EventArgs e)
-        {
-            cargarHistorialOfertas();
-        }
-
         private void cargarHistorialOfertas()
         {
             try
@@ -32,6 +27,11 @@ namespace FrbaCommerce
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void HistorialOfertas_Load_1(object sender, EventArgs e)
+        {
+            cargarHistorialOfertas();
         }
     }
 }

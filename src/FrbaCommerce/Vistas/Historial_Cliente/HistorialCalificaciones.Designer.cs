@@ -48,6 +48,7 @@
             this.Controls.Add(this.dgvHistorialCal);
             this.Name = "HistorialCalificaciones";
             this.Text = "Historial Cliente - Calificaciones";
+            this.Load += new System.EventHandler(this.HistorialCalificaciones_Load_1);
             ((System.ComponentModel.ISupportInitialize)(this.dgvHistorialCal)).EndInit();
             this.ResumeLayout(false);
 

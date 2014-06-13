@@ -16,11 +16,6 @@ namespace FrbaCommerce
             InitializeComponent();
         }
 
-        private void HistorialCalificaciones_Load(object sender, EventArgs e)
-        {
-            cargarHistorialCalificaciones();
-        }
-
         private void cargarHistorialCalificaciones()
         {
             try
@@ -32,6 +27,11 @@ namespace FrbaCommerce
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void HistorialCalificaciones_Load_1(object sender, EventArgs e)
+        {
+            cargarHistorialCalificaciones();
         }
     }
 }

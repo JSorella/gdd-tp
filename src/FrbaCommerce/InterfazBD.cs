@@ -1453,16 +1453,16 @@ namespace FrbaCommerce
         public static DataTable getHistorialOfertas()
         {
             try
-            {                      //NO TERMINADA TODAVIA!!!
+            { 
                 String query = "select [Monto Oferta] = O.ofer_monto, [Publicacion] = P.pub_descripcion, [Fecha] = O.ofer_fecha, " +
                                "[Ganada] = 'Si' from J2LA.OFERTAS O join J2LA.PUBLICACIONES P on O.ofer_pub_codigo = P.pub_codigo " +
                                "where O.ofer_usu_id =  " + Singleton.usuario["usu_Id"] +
-                               "and O.ofer_pub_codigo in (select comp_pub_codigo from J2LA.Compras) " +
+                               " and O.ofer_pub_codigo in (select comp_pub_codigo from J2LA.Compras) " +
                                "union " +
                                "select [Monto Oferta] = O.ofer_monto, [Publicacion] = P.pub_descripcion, [Fecha] = O.ofer_fecha, " +
                                "[Ganada] = 'No' from J2LA.OFERTAS O join J2LA.PUBLICACIONES P on O.ofer_pub_codigo = P.pub_codigo " +
                                "where O.ofer_usu_id =  " + Singleton.usuario["usu_Id"] +
-                               "and O.ofer_pub_codigo not in (select comp_pub_codigo from J2LA.Compras)";
+                               " and O.ofer_pub_codigo not in (select comp_pub_codigo from J2LA.Compras)";
 
                 return Singleton.conexion.executeQueryTable(query, null, null);
             }
@@ -1476,7 +1476,7 @@ namespace FrbaCommerce
         {
             try
             {
-                String query = "select [COMPRADOR] = (select U.usu_id from J2LA.Usuarios U where U.usu_id = CO.comp_usu_id), [VENDEDOR] = (select U2.usu_id from J2LA.Usuarios U2 where U2.usu_id = P.pub_usu_id), " +
+                String query = "select [COMPRADOR] = (select U.usu_username from J2LA.Usuarios U where U.usu_id = CO.comp_usu_id), [VENDEDOR] = (select U2.usu_username from J2LA.Usuarios U2 where U2.usu_id = P.pub_usu_id), " +
                                 "[Publicación] = P.pub_descripcion, [Fecha] = CO.comp_fecha, [Calificación] = CA.cal_comentario, [Estrellas] = CA.cal_cant_estrellas " +
                                 "from J2LA.COMPRAS CO join J2LA.PUBLICACIONES P on CO.comp_pub_codigo = P.pub_codigo " +
                                 "join J2LA.CALIFICACIONES CA on CO.comp_cal_codigo = CA.cal_codigo " +

@@ -48,6 +48,7 @@
             this.Controls.Add(this.dgvHistorialO);
             this.Name = "HistorialOfertas";
             this.Text = "Historial Cliente - Ofertas";
+            this.Load += new System.EventHandler(this.HistorialOfertas_Load_1);
             ((System.ComponentModel.ISupportInitialize)(this.dgvHistorialO)).EndInit();
             this.ResumeLayout(false);
 
