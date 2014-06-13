@@ -189,7 +189,8 @@ CREATE PROCEDURE J2LA.setCompra
 	@comp_Fecha datetime,
 	@comp_Cantidad numeric(18,0),
 	@comp_Comision numeric(18,1),
-	@comp_cal_Codigo numeric(18,0)
+	@comp_cal_Codigo numeric(18,0),
+	@comp_Facturada bit
 AS
 BEGIN
 	DECLARE @maxId INT
@@ -197,9 +198,9 @@ BEGIN
 	SET @comp_Id = CASE WHEN @maxId IS NULL THEN 1 ELSE (@comp_Id + 1) END
 
 	INSERT INTO
-		J2LA.Compras ( comp_pub_Codigo, comp_usu_Id, comp_Fecha, comp_Cantidad, comp_Comision)
+		J2LA.Compras ( comp_pub_Codigo, comp_usu_Id, comp_Fecha, comp_Cantidad, comp_Comision, comp_Facturada)
 	VALUES
-		( @comp_pub_Codigo, @comp_usu_Id, @comp_Fecha, @comp_Cantidad, @comp_Comision)
+		( @comp_pub_Codigo, @comp_usu_Id, @comp_Fecha, @comp_Cantidad, @comp_Comision, @comp_Facturada)
 END
 GO
 
@@ -274,13 +275,45 @@ AS
 	IF (( SELECT COUNT(*) FROM J2LA.Clientes  WHERE cli_usu_Id = @idUsuario ) > 0 )
 	BEGIN
 		
-		 SELECT * FROM J2LA.Clientes WHERE cli_usu_Id = @idUsuario
+		 SELECT
+			 [Nombre] = cli_Nombre,
+			 [Apellido] = cli_Apellido,
+			 [Documento] =  (cli_Tipodoc_Id +' '+cli_Nro_Doc),
+			 [Mail] = cli_Mail, 
+			 [Teléfono] = cli_Tel , 
+			 [Calle] = cli_Dom_Calle, 
+			 [Altura] = cli_Nro_Calle , 
+			 [Piso] = cli_Piso, 
+			 [Depto] = cli_Dpto, 
+			 [Localidad] = cli_Localidad, 
+			 [CP] = cli_CP, 
+			 [CUIL] = cli_Cuil 
+		 FROM 
+			J2LA.Clientes 
+		 WHERE 
+			cli_usu_Id = @idUsuario
 		
 	END
 	IF ((SELECT COUNT(*) FROM J2LA.Empresas WHERE emp_usu_Id = @idUsuario ) > 0)
 	BEGIN
 		
-		SELECT * FROM J2LA.Empresas WHERE emp_usu_Id = @idUsuario
+		SELECT 
+			[Razón Social] = emp_Razon_Social,
+			[CUIT] = emp_CUIT,
+			[Mail] = emp_Mail,
+			[Telefono] = emp_Tel,
+			[Calle] = emp_Dom_Calle,
+			[Altura] = emp_Nro_Calle,
+			[Piso] = emp_Piso,
+			[Depto] = emp_Dpto,
+			[Localidad] = emp_Localidad,
+			[CP] = emp_CP,
+			[Ciudad] = emp_Ciudad,
+			[Contacto] = emp_Contacto
+		FROM 
+			J2LA.Empresas 
+		WHERE 
+			emp_usu_Id = @idUsuario
 		
 	END
 

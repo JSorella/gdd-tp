@@ -67,6 +67,7 @@ namespace FrbaCommerce
                 DataRow oDr = oDTPubli.Rows[0];
                 compra["comp_Comision"] = decimal.Multiply(decimal.Multiply(Convert.ToDecimal(oDr["pub_vis_Porcentaje"]), Convert.ToDecimal(oDr["pub_Precio"])) , nudCantidad.Value);
                 compra["comp_cal_Codigo"] = 0;
+                compra["comp_Facturada"] = 0;
 
                 DTcompra.Rows.Add(compra);
 
