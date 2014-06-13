@@ -19,7 +19,8 @@ CREATE PROCEDURE J2LA.Publicaciones_Insert
 	@pub_Permite_Preg bit,
 	@pub_usu_Id int,
 	@pub_vis_Precio numeric(18,2),
-	@pub_vis_Porcentaje numeric(18,2)
+	@pub_vis_Porcentaje numeric(18,2),
+	@pub_Facturada Bit
 AS
 BEGIN
 
@@ -27,12 +28,12 @@ BEGIN
 
 	INSERT INTO J2LA.Publicaciones
 		([pub_Codigo],[pub_tipo_Id],[pub_Descripcion],[pub_Stock],[pub_Fecha_Vto]
-		,[pub_Fecha_Ini],[pub_Precio],[pub_visibilidad_Id],[pub_estado_Id]
-		,[pub_Permite_Preg],[pub_usu_Id],[pub_vis_Precio],[pub_vis_Porcentaje])
+		,[pub_Fecha_Ini],[pub_Precio],[pub_visibilidad_Id],[pub_estado_Id],[pub_Permite_Preg],
+		[pub_usu_Id],[pub_vis_Precio],[pub_vis_Porcentaje], [pub_Facturada])
 	VALUES(
 		@pub_Codigo,@pub_tipo_Id,@pub_Descripcion,@pub_Stock,@pub_Fecha_Vto,
-		@pub_Fecha_Ini,@pub_Precio,@pub_visibilidad_Id,@pub_estado_Id,
-		@pub_Permite_Preg,@pub_usu_Id,@pub_vis_Precio,@pub_vis_Porcentaje)
+		@pub_Fecha_Ini,@pub_Precio,@pub_visibilidad_Id,@pub_estado_Id,@pub_Permite_Preg,
+		@pub_usu_Id,@pub_vis_Precio,@pub_vis_Porcentaje,@pub_Facturada)
 		
 	-- Agrego un Registro para controlar la Facturacion por Visibilidad
 	-- Para un Bonificacion cada 10 Publicidades Rendidas
@@ -66,7 +67,8 @@ CREATE PROCEDURE J2LA.Publicaciones_Update
 	@pub_Permite_Preg bit,
 	@pub_usu_Id int,
 	@pub_vis_Precio numeric(18,2),
-	@pub_vis_Porcentaje numeric(18,2)
+	@pub_vis_Porcentaje numeric(18,2),
+	@pub_Facturada Bit
 AS
 BEGIN
 
@@ -502,5 +504,23 @@ Where P.pub_usu_Id = @usu_id
 AND C.comp_Facturada = 0
 )
 GO
+
+/*============================== STORED PROCEDURE JUAN ==============================*/
+
+IF OBJECT_ID('J2LA.getOfertaGanadora') IS NOT NULL
+DROP FUNCTION J2LA.getOfertaGanadora
+GO
+CREATE FUNCTION J2LA.getOfertaGanadora( @pub_Codigo int )
+RETURNS TABLE
+AS
+RETURN 
+	(
+Select *
+From J2LA.Ofertas O
+Where O.ofer_pub_Codigo = @pub_Codigo
+And O.ofer_Monto = (Select MAX(O.ofer_Monto)
+					From J2LA.Ofertas O
+					Where O.ofer_pub_Codigo = @pub_Codigo)
+)
 
 /*============================== STORED PROCEDURE JUAN ==============================*/

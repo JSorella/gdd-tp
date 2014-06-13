@@ -796,12 +796,37 @@ namespace FrbaCommerce
                 Singleton.conexion.executeCommandMasivo(ref cmd, "J2LA.Publicaciones_Insert_Rubros", oDtPubRubros, null, "");
 
                 //Si es Subasta  Finalizada con Costo por Publicar y tiene Ofertas => Grabo una Compra.-
-                //Valido Publicaciones Activas Gratis Antes de Grabar si es Activa y Gratuita.-
                 if ((Convert.ToInt32(oDtPubli.Rows[0]["pub_pub_tipo_Id"]) == 4) //Subasta
                         && (Convert.ToInt32(oDtPubli.Rows[0]["pub_estado_Id"]) == 4) //Finalizada
                         && (Convert.ToDecimal(oDtPubli.Rows[0]["pub_vis_Precio"]) != Convert.ToDecimal(0))) //Con Costo por Publicar
                 {
-                    DataTable oDtOfer = new DataTable();
+                    //Obtengo la Oferta Ganadora.-
+                    DataTable oDtOfer = getOfertaGanadora(pub_Codigo);
+
+                    if (oDtOfer.Rows.Count > 0)
+                    {
+                        DataTable oDtCompra = getDTCompra();
+                        DataRow oDr = oDtCompra.NewRow();
+
+                        decimal decComision = decimal.Multiply(decimal.Multiply(
+                                                Convert.ToDecimal(oDtPubli.Rows[0]["pub_vis_Porcentaje"]),
+                                                Convert.ToDecimal(oDtPubli.Rows[0]["pub_Precio"])),
+                                                Convert.ToDecimal(oDtPubli.Rows[0]["pub_Stock"]));
+
+                        oDr["comp_Id"] = 0;
+                        oDr["comp_pub_Codigo"] = pub_Codigo;
+                        oDr["comp_usu_Id"] = oDtOfer.Rows[0]["ofer_usu_Id"];
+                        oDr["comp_Fecha"] = Singleton.FechaDelSistema;
+                        oDr["comp_Cantidad"] = oDtPubli.Rows[0]["pub_Stock"];
+                        oDr["comp_Comision"] = decComision;
+                        oDr["comp_cal_Codigo"] = 0;
+                        oDr["comp_Facturada"] = false;
+
+                        oDtCompra.Rows.Add(oDr);
+
+                        //Grabo la Compra
+                        Singleton.conexion.executeCommandMasivo(ref cmd, "J2LA.setCompra", oDtCompra, null, "");
+                    }
                 }
 
                 tran.Commit();
@@ -819,6 +844,21 @@ namespace FrbaCommerce
                     conn.Close();
 
                 conn.Dispose();
+            }
+        }
+
+        private static DataTable getOfertaGanadora(string pub_Codigo)
+        {
+            try
+            {
+
+                String query = "Select * From J2LA.getOfertaGanadora(@pub_Codigo)";
+                return Singleton.conexion.executeQueryTable(query, null,
+                    new String[1, 2] { { "pub_Codigo", pub_Codigo } });
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
         }
 

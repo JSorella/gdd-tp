@@ -544,6 +544,7 @@ namespace FrbaCommerce
             oDr["pub_Permite_Preg"] = chkPreguntas.Checked;
             oDr["pub_vis_Precio"] = rowVis["pubvis_Precio"];
             oDr["pub_vis_Porcentaje"] = rowVis["pubvis_Porcentaje"];
+            oDr["pub_Facturada"] = false;
 
             oDr.EndEdit();
         }

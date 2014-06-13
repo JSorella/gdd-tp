@@ -325,6 +325,7 @@ namespace FrbaCommerce
             oDr["pub_usu_id"] = Singleton.usuario["usu_id"];
             oDr["pub_vis_Precio"] = rowVis["pubvis_Precio"];
             oDr["pub_vis_Porcentaje"] = rowVis["pubvis_Porcentaje"];
+            oDr["pub_Facturada"] = false;
 
             oDTPubli.Rows.Add(oDr);
         }
