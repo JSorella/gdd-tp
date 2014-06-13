@@ -188,3 +188,106 @@ AS
 				WHERE usu_Id = @comp_usu_Id
 			END
 	END
+GO
+	
+IF OBJECT_ID('J2LA.CargarEmpresa') IS NOT NULL
+DROP PROCEDURE J2LA.CargarEmpresa
+GO
+CREATE PROCEDURE J2LA.CargarEmpresa(
+	@userName nvarchar(255),
+	@pass nvarchar(255),
+	@emp_Razon_Social nvarchar(255),
+	@emp_CUIT nvarchar(50),
+	@emp_Mail nvarchar(50),
+	@emp_Tel nvarchar(50),
+	@emp_Dom_Calle nvarchar(255),
+	@emp_Nro_Calle numeric(18,0),
+	@emp_Piso numeric(18,0),
+	@emp_Dpto nvarchar(255),
+	@emp_Localidad nvarchar(255),
+	@emp_CP nvarchar(50),
+	@emp_Ciudad nvarchar(255),
+	@emp_Contacto nvarchar(255),
+	@emp_Fecha_Creacion datetime)
+AS
+	BEGIN
+		DECLARE @usu_Id int
+		
+		EXEC J2LA.setNuevoUsuario @userName,@pass
+		
+		SET @usu_Id = J2LA.getUserId(@userName)
+	
+		INSERT INTO J2LA.Empresas(
+			emp_Razon_Social,
+			emp_CUIT,
+			emp_Mail,
+			emp_Tel,
+			emp_Dom_Calle,
+			emp_Nro_Calle,
+			emp_Piso,
+			emp_Dpto,
+			emp_Localidad,
+			emp_CP,
+			emp_Ciudad,
+			emp_Contacto,
+			emp_Fecha_Creacion,
+			emp_usu_Id)
+		VALUES (
+			@emp_Razon_Social,
+			@emp_CUIT,
+			@emp_Mail,
+			@emp_Tel,
+			@emp_Dom_Calle,
+			@emp_Nro_Calle,
+			@emp_Piso,
+			@emp_Dpto,
+			@emp_Localidad,
+			@emp_CP,
+			@emp_Ciudad,
+			@emp_Contacto,
+			@emp_Fecha_Creacion,
+			@usu_Id)
+		
+		INSERT INTO J2LA.Usuarios_Roles (usurol_usu_Id, usurol_rol_Id)
+		VALUES (@usu_Id, J2LA.getRolId('Empresa'))
+	END
+GO
+
+IF OBJECT_ID('J2LA.ActualizarEmpresa') IS NOT NULL
+DROP PROCEDURE J2LA.ActualizarEmpresa
+GO
+CREATE PROCEDURE J2LA.ActualizarEmpresa(
+	@emp_usu_id int,
+	@emp_Razon_Social nvarchar(255),
+	@emp_CUIT nvarchar(50),
+	@emp_Mail nvarchar(50),
+	@emp_Tel nvarchar(50),
+	@emp_Dom_Calle nvarchar(255),
+	@emp_Nro_Calle numeric(18,0),
+	@emp_Piso numeric(18,0),
+	@emp_Dpto nvarchar(255),
+	@emp_Localidad nvarchar(255),
+	@emp_CP nvarchar(50),
+	@emp_Ciudad nvarchar(255),
+	@emp_Contacto nvarchar(255),
+	@emp_Fecha_Creacion datetime)
+AS
+	BEGIN
+		UPDATE J2LA.Empresas
+		SET
+			emp_Razon_Social = @emp_Razon_Social,
+			emp_CUIT = @emp_CUIT,
+			emp_Mail = @emp_Mail,
+			emp_Tel = @emp_Tel,
+			emp_Dom_Calle = @emp_Dom_Calle,
+			emp_Nro_Calle = @emp_Nro_Calle,
+			emp_Piso = @emp_Piso,
+			emp_Dpto = @emp_Dpto,
+			emp_Localidad = @emp_Localidad,
+			emp_CP = @emp_CP,
+			emp_Ciudad = @emp_Ciudad,
+			emp_Contacto = @emp_Contacto,
+			emp_Fecha_Creacion = @emp_Fecha_Creacion
+		WHERE emp_usu_Id = @emp_usu_Id
+	END
+GO
