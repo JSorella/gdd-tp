@@ -263,3 +263,5 @@ C:\Users\jsorella\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommer
 C:\Users\jsorella\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.HistorialCalificaciones.resources
 C:\Users\jsorella\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.HistorialOfertas.resources
 C:\Users\jsorella\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.DatosVendedor.resources
+C:\Users\jtonelli.NACION\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.Abm_Empresas_Busqueda.resources
+C:\Users\jtonelli.NACION\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.DatosVendedor.resources

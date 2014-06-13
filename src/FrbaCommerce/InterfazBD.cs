@@ -795,6 +795,15 @@ namespace FrbaCommerce
                 //Insert Publicacion_Rubros
                 Singleton.conexion.executeCommandMasivo(ref cmd, "J2LA.Publicaciones_Insert_Rubros", oDtPubRubros, null, "");
 
+                //Si es Subasta  Finalizada con Costo por Publicar y tiene Ofertas => Grabo una Compra.-
+                //Valido Publicaciones Activas Gratis Antes de Grabar si es Activa y Gratuita.-
+                if ((Convert.ToInt32(oDtPubli.Rows[0]["pub_pub_tipo_Id"]) == 4) //Subasta
+                        && (Convert.ToInt32(oDtPubli.Rows[0]["pub_estado_Id"]) == 4) //Finalizada
+                        && (Convert.ToDecimal(oDtPubli.Rows[0]["pub_vis_Precio"]) != Convert.ToDecimal(0))) //Con Costo por Publicar
+                {
+                    DataTable oDtOfer = new DataTable();
+                }
+
                 tran.Commit();
 
                 return true;
@@ -1440,6 +1449,7 @@ namespace FrbaCommerce
                 throw new Exception(ex.Message);
             }
         }
+
         public static DataTable getVendedor(int idUsuario)
         {
             try
@@ -1452,5 +1462,19 @@ namespace FrbaCommerce
                 throw new Exception(ex.Message);
             }
         }
+
+        public static DataTable getCantFactxTipoVis(int usu_Id)
+        {
+            try
+            {
+                String query = "Select * From J2LA.Usuarios_CantFactxTipoVis Where ucftv_usu_Id = " + usu_Id;
+                return Singleton.conexion.executeQueryTable(query, null, null);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
     }
 }
