@@ -26,7 +26,7 @@ namespace FrbaCommerce
             try
             {
 
-                oDTPubli = InterfazBD.getPublicacion(Convert.ToInt32(this.codigoPublicacion));
+                this.oDTPubli = InterfazBD.getPublicacion(Convert.ToInt32(this.codigoPublicacion));
                 this.CargarDatosPubli();
                 nudCantidad.Maximum = Convert.ToInt32(oDTPubli.Rows[0]["pub_Stock"]);
 
@@ -72,6 +72,11 @@ namespace FrbaCommerce
 
                 InterfazBD.setCompra(DTcompra);
                 Funciones.mostrarInformacion("Su Compra se ha efectuado Satisfactoriamente!", "Compra Efectuada");
+
+                DatosVendedor oFrm = new DatosVendedor(Convert.ToInt32(oDTPubli.Rows[0]["pub_usu_Id"]));
+                oFrm.ShowDialog();
+                
+
             }
             catch (Exception ex)
             {

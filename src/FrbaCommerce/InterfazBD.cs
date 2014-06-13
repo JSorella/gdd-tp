@@ -23,37 +23,38 @@ namespace FrbaCommerce
                             "WHERE usu_username = " + "'" + nombre + "' " +
                             "AND usu_eliminado = 0";
 
-            DataTable usuarioResult = Singleton.conexion.executeQueryTable(query, null, null);
-
-            if (usuarioResult.Rows.Count == 0)
-            {
-                throw new Exception("Usuario Inexistente!");
-            }
-
-            if ((bool)usuarioResult.Rows[0]["usu_Inhabilitado"])
-            {
-                string mensaje = "Usuario Inhabilitado!" + Environment.NewLine +
-                                @"Motivo: " + usuarioResult.Rows[0]["usu_Motivo"];
-                throw new Exception(mensaje);
-            }
-
-            Usuario usuario = new Usuario();
-
             try
             {
+
+                DataTable usuarioResult = Singleton.conexion.executeQueryTable(query, null, null);
+
+                if (usuarioResult.Rows.Count == 0)
+                {
+                    throw new Exception("Usuario Inexistente!");
+                }
+
+                if ((bool)usuarioResult.Rows[0]["usu_Inhabilitado"])
+                {
+                    string mensaje = "Usuario Inhabilitado!" + Environment.NewLine +
+                                    @"Motivo: " + usuarioResult.Rows[0]["usu_Motivo"];
+                    throw new Exception(mensaje);
+                }
+
+                Usuario usuario = new Usuario();         
                 usuario.id = (int)usuarioResult.Rows[0]["usu_Id"];
                 usuario.nombre = (string)usuarioResult.Rows[0]["usu_UserName"];
                 usuario.pass = (string)usuarioResult.Rows[0]["usu_Pass"];
                 usuario.cantidadIntentos = (int)usuarioResult.Rows[0]["usu_Cant_Intentos"];
                 usuario.inhabilitado = (bool)(usuarioResult.Rows[0]["usu_Inhabilitado"]);
                 usuario.motivo = (string)usuarioResult.Rows[0]["usu_Motivo"].ToString();
+                return usuario;
             }
             catch (Exception e) //otro error
             {
                 throw new Exception("Error en SP Usuario: " + e.Message);
             }
 
-            return usuario;
+           
         }
 
         /// <summary>
@@ -63,15 +64,16 @@ namespace FrbaCommerce
         {
             try
             {
-                String query = @"SELECT *
+                String query = @"
+                SELECT *
                 FROM J2LA.Usuarios u
-                ,J2LA.Usuarios_Roles ur
-                ,J2LA.Roles r
+                    ,J2LA.Usuarios_Roles ur
+                    ,J2LA.Roles r
                 WHERE usu_username = " + "'" + nombre + @" '
-                AND u.usu_Id = ur.usurol_usu_id
-                AND ur.usurol_rol_id = r.rol_Id
-                AND r.rol_eliminado = 0
-                AND r.rol_Inhabilitado = 0";
+                    AND u.usu_Id = ur.usurol_usu_id
+                    AND ur.usurol_rol_id = r.rol_Id
+                    AND r.rol_eliminado = 0
+                    AND r.rol_Inhabilitado = 0";
 
                 DataTable usuarioResult = Singleton.conexion.executeQueryTable(query, null, null);
 
@@ -1064,11 +1066,8 @@ namespace FrbaCommerce
         {
             try
             {
-                //String query = "SELECT J2LA.getPrecioMax("+pub_codigo+")";
-                //return Convert.ToDecimal(Singleton.conexion.executeQueryTable(query,null,null));
                 String query = " J2LA.getPrecioMax(@pub_Codigo)";
                 return Convert.ToDecimal(Singleton.conexion.executeQueryFuncEscalar(query, null, new String[1, 2] { { "pub_codigo", pub_codigo.ToString() } }));
-                
             }
             catch (Exception ex)
             {
@@ -1434,6 +1433,18 @@ namespace FrbaCommerce
                                 "join J2LA.CALIFICACIONES CA on CO.comp_cal_codigo = CA.cal_codigo " +
                                 "where CO.comp_usu_id = " + Singleton.usuario["usu_Id"] + " or P.pub_usu_id = " + Singleton.usuario["usu_Id"];
 
+                return Singleton.conexion.executeQueryTable(query, null, null);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public static DataTable getVendedor(int idUsuario)
+        {
+            try
+            {
+                string query = "exec J2LA.getVendedor " + idUsuario;
                 return Singleton.conexion.executeQueryTable(query, null, null);
             }
             catch (Exception ex)

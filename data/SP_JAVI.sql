@@ -264,4 +264,24 @@ BEGIN
 END
 GO
 
+/*-------------------------FUNCTION (JAVI)--------------------------*/
+IF OBJECT_ID('J2LA.getVendedor') IS NOT NULL
+DROP PROCEDURE J2LA.getVendedor
+GO
+CREATE PROCEDURE J2LA.getVendedor @idUsuario int
+AS
 
+	IF (( SELECT COUNT(*) FROM J2LA.Clientes  WHERE cli_usu_Id = @idUsuario ) > 0 )
+	BEGIN
+		
+		 SELECT * FROM J2LA.Clientes WHERE cli_usu_Id = @idUsuario
+		
+	END
+	IF ((SELECT COUNT(*) FROM J2LA.Empresas WHERE emp_usu_Id = @idUsuario ) > 0)
+	BEGIN
+		
+		SELECT * FROM J2LA.Empresas WHERE emp_usu_Id = @idUsuario
+		
+	END
+
+GO
