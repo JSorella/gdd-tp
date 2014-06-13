@@ -442,6 +442,9 @@ CREATE PROCEDURE J2LA.Facturas_Insert_Detalle
 AS
 BEGIN
 
+	DECLARE @pub_visibilidad_Id INT
+	DECLARE @pub_usu_Id INT
+
 	INSERT INTO J2LA.Facturas_Det
 		([facdet_fac_Numero],[facdet_pub_Codigo],[facdet_Cantidad],
 		[facdet_Importe],[facdet_Concepto], [facdet_comp_Id])
@@ -461,7 +464,17 @@ BEGIN
 		SET comp_Facturada = 1
 		WHERE comp_Id = @facdet_comp_Id
 	END
-		
+
+	SELECT @pub_visibilidad_Id = pub_visibilidad_Id,
+			@pub_usu_Id = pub_usu_Id
+	FROM J2LA.Publicaciones 
+	Where pub_Codigo = @facdet_pub_Codigo
+
+	Update J2LA.Usuarios_CantFactxTipoVis
+	Set	ucftv_Cantidad = ucftv_Cantidad + 1
+	Where ucftv_usu_Id = @pub_usu_Id
+	And ucftv_vis_Id = @pub_visibilidad_Id
+
 END
 GO
 
@@ -481,7 +494,8 @@ Select	P.pub_Codigo, comp_Id = 0, [Facturar] = CONVERT(Bit, 0),
 		[Concepto] = 'Costo por Publicacion Nro. ' + LTRIM(RTRIM(STR(P.pub_Codigo))) +
 				' - Visib.: ' + PV.pubvis_Descripcion,
 		[Cantidad] = 1,
-		[Importe] = P.pub_vis_Precio
+		[Importe] = P.pub_vis_Precio,
+		P.pub_visibilidad_Id
 From J2LA.Publicaciones P
 Inner Join J2LA.Publicaciones_Visibilidades PV On PV.pubvis_id = P.pub_visibilidad_Id
 Where P.pub_usu_Id = @usu_id
@@ -496,7 +510,8 @@ Select	P.pub_Codigo, comp_Id = 0, [Facturar] = CONVERT(Bit, 0),
 				' - Fecha: ' + Convert(varchar, C.comp_Fecha, 103) +
 				' - Usuario: ' + U.usu_UserName,
 		[Cantidad] = 1,
-		[Importe] = P.pub_vis_Precio
+		[Importe] = P.pub_vis_Precio,
+		P.pub_visibilidad_Id
 From J2LA.Compras C
 Inner Join J2LA.Publicaciones P On P.pub_Codigo = C.comp_pub_Codigo
 Inner Join J2LA.Usuarios U On U.usu_Id = C.comp_usu_Id

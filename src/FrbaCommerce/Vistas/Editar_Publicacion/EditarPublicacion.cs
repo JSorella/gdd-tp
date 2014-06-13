@@ -85,6 +85,7 @@ namespace FrbaCommerce
             txtFechaIni.Text = string.Empty;
             txtFechaVto.Text = string.Empty;
             chkPreguntas.Checked = false;
+            chkFacturada.Checked = false;
 
             oDTPubli.Rows.Clear();
             oDtPubRubros.Rows.Clear();
@@ -187,6 +188,7 @@ namespace FrbaCommerce
             cmbTipoVis.SelectedValue = oDr["pub_visibilidad_Id"];
             cmbEstado.SelectedValue = oDr["pub_estado_Id"];
             chkPreguntas.Checked = Convert.ToBoolean(oDr["pub_Permite_Preg"]);
+            chkFacturada.Checked = Convert.ToBoolean(oDr["pub_Facturada"]);
 
             txtFechaIni.Text = dteFecIni.ToShortDateString();
             txtFechaVto.Text = dteFecVto.ToShortDateString();
@@ -277,9 +279,11 @@ namespace FrbaCommerce
             nudStock.Enabled = false;
             btnSelFec.Enabled = false;
             chkPreguntas.Enabled = false;
+
             listRubros.Enabled = false;
             listRubros.DataSource = oDtPubRubros.Copy();
             listRubros.ValueMember = "pubrub_rub_Id";
+
             //Tildamos los rubros
             for (int i = 0; i < (this.listRubros.Items.Count); i++)
             {
@@ -324,6 +328,7 @@ namespace FrbaCommerce
             listRubros.Enabled = false;
             listRubros.DataSource = oDtPubRubros.Copy();
             listRubros.ValueMember = "pubrub_rub_Id";
+
             //Tildamos los rubros
             for (int i = 0; i < (this.listRubros.Items.Count); i++)
             {
@@ -385,6 +390,7 @@ namespace FrbaCommerce
 
             if (!oFrm.Cancelado)
                 dteFecIni = oFrm.FechaSeleccionada;
+
             txtFechaIni.Text = oFrm.FechaSeleccionada.ToShortDateString();
 
             ActualizarVto();
@@ -536,8 +542,8 @@ namespace FrbaCommerce
 
             oDr["pub_Descripcion"] = txtDesc.Text;
             oDr["pub_Stock"] = nudStock.Value;
-            oDr["pub_Fecha_Vto"] = dteFecIni;
-            oDr["pub_Fecha_Ini"] = dteFecVto;
+            oDr["pub_Fecha_Vto"] = dteFecVto;
+            oDr["pub_Fecha_Ini"] = dteFecIni;
             oDr["pub_Precio"] = nudPrecio.Value;
             oDr["pub_visibilidad_Id"] = cmbTipoVis.SelectedValue;
             oDr["pub_estado_Id"] = cmbEstado.SelectedValue;

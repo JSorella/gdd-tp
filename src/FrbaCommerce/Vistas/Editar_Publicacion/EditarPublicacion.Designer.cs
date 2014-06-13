@@ -57,6 +57,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnLimpiar = new System.Windows.Forms.Button();
+            this.chkFacturada = new System.Windows.Forms.CheckBox();
             this.pnlDatos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudStock)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPrecio)).BeginInit();
@@ -69,7 +70,7 @@
             this.btnGenerar.Location = new System.Drawing.Point(371, 447);
             this.btnGenerar.Name = "btnGenerar";
             this.btnGenerar.Size = new System.Drawing.Size(75, 23);
-            this.btnGenerar.TabIndex = 15;
+            this.btnGenerar.TabIndex = 16;
             this.btnGenerar.Text = "Guardar";
             this.btnGenerar.UseVisualStyleBackColor = true;
             this.btnGenerar.Click += new System.EventHandler(this.btnGenerar_Click);
@@ -80,6 +81,7 @@
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlDatos.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlDatos.Controls.Add(this.chkFacturada);
             this.pnlDatos.Controls.Add(this.cmbTipoPubli);
             this.pnlDatos.Controls.Add(this.nudStock);
             this.pnlDatos.Controls.Add(this.nudPrecio);
@@ -283,8 +285,8 @@
             this.listRubros.FormattingEnabled = true;
             this.listRubros.Location = new System.Drawing.Point(295, 160);
             this.listRubros.Name = "listRubros";
-            this.listRubros.Size = new System.Drawing.Size(286, 184);
-            this.listRubros.TabIndex = 14;
+            this.listRubros.Size = new System.Drawing.Size(286, 199);
+            this.listRubros.TabIndex = 15;
             // 
             // txtDesc
             // 
@@ -366,7 +368,7 @@
             this.btnCancelar.Location = new System.Drawing.Point(533, 447);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
-            this.btnCancelar.TabIndex = 17;
+            this.btnCancelar.TabIndex = 18;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
@@ -377,10 +379,22 @@
             this.btnLimpiar.Location = new System.Drawing.Point(452, 447);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(75, 23);
-            this.btnLimpiar.TabIndex = 16;
+            this.btnLimpiar.TabIndex = 17;
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.UseVisualStyleBackColor = true;
             this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
+            // 
+            // chkFacturada
+            // 
+            this.chkFacturada.AutoSize = true;
+            this.chkFacturada.Enabled = false;
+            this.chkFacturada.Location = new System.Drawing.Point(164, 334);
+            this.chkFacturada.Name = "chkFacturada";
+            this.chkFacturada.Size = new System.Drawing.Size(74, 17);
+            this.chkFacturada.TabIndex = 14;
+            this.chkFacturada.Text = "Facturada";
+            this.chkFacturada.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chkFacturada.UseVisualStyleBackColor = true;
             // 
             // EditarPublicacion
             // 
@@ -438,5 +452,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cmbTipoPubli;
+        private System.Windows.Forms.CheckBox chkFacturada;
     }
 }

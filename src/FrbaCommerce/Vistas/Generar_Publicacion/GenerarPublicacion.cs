@@ -316,8 +316,8 @@ namespace FrbaCommerce
             oDr["pub_tipo_Id"] = cmbTipoPubli.SelectedValue;
             oDr["pub_Descripcion"] = txtDesc.Text;
             oDr["pub_Stock"] = nudStock.Value;
-            oDr["pub_Fecha_Vto"] = dteFecIni;
-            oDr["pub_Fecha_Ini"] = dteFecVto;
+            oDr["pub_Fecha_Vto"] = dteFecVto;
+            oDr["pub_Fecha_Ini"] = dteFecIni;
             oDr["pub_Precio"] = nudPrecio.Value;
             oDr["pub_visibilidad_Id"] = cmbTipoVis.SelectedValue;
             oDr["pub_estado_Id"] = cmbEstado.SelectedValue;
