@@ -1067,8 +1067,8 @@ namespace FrbaCommerce
                 //String query = "SELECT J2LA.getPrecioMax("+pub_codigo+")";
                 //return Convert.ToDecimal(Singleton.conexion.executeQueryTable(query,null,null));
                 String query = " J2LA.getPrecioMax(@pub_Codigo)";
-                Console.WriteLine(Singleton.conexion.executeQueryFuncEscalar(query, null, new String[1, 2] { { "pub_codigo", pub_codigo.ToString() } }));
-                return 0;
+                return Convert.ToDecimal(Singleton.conexion.executeQueryFuncEscalar(query, null, new String[1, 2] { { "pub_codigo", pub_codigo.ToString() } }));
+                
             }
             catch (Exception ex)
             {

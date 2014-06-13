@@ -69,7 +69,7 @@ GO
 IF OBJECT_ID('J2LA.setNuevoUsuario') IS NOT NULL
 DROP PROCEDURE J2LA.setNuevoUsuario
 GO
-CREATE PROCEDURE J2LA.setNuevoUsuario @userName varchar(255), @password varchar(255)
+CREATE PROCEDURE J2LA.setNuevoUsuario @userName varchar(255), @password varchar(255), @admin bit
 AS
 BEGIN
 	INSERT INTO
@@ -241,6 +241,26 @@ BEGIN
             ELSE (SELECT P.pub_precio FROM J2LA.Publicaciones P WHERE P.pub_Codigo = @pub_Codigo) END)
 	
 	RETURN @precio_max
+END
+GO
+
+/*-------------------------STORED PROCEDURE (JAVI)--------------------------*/
+IF OBJECT_ID('J2LA.setOferta') IS NOT NULL
+DROP PROCEDURE J2LA.setOferta
+GO
+CREATE PROCEDURE J2LA.setOferta 
+	@ofer_Id int,
+	@ofer_pub_Codigo numeric(18,0), 
+	@ofer_usu_Id int,
+	@ofer_Fecha datetime,
+	@ofer_Monto numeric(18,2)
+AS
+BEGIN
+	INSERT INTO
+		J2LA.Ofertas 
+		(ofer_pub_Codigo, ofer_usu_Id, ofer_Fecha, ofer_Monto)
+	VALUES
+		( @ofer_pub_Codigo, @ofer_usu_Id, @ofer_Fecha, @ofer_Monto)
 END
 GO
 

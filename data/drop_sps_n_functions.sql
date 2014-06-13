@@ -18,7 +18,12 @@ GO
 IF OBJECT_ID('J2LA.updateStockPublicacion') IS NOT NULL
 DROP PROCEDURE J2LA.updateStockPublicacion
 GO
-
+IF OBJECT_ID('J2LA.getPrecioMax') IS NOT NULL
+DROP FUNCTION J2LA.getPrecioMax
+GO
+IF OBJECT_ID('J2LA.setOferta') IS NOT NULL
+DROP PROCEDURE J2LA.setOferta
+GO
 
 
 /*-----------LUCAS-------------*/

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+
 namespace FrbaCommerce
 {
     public partial class AltaOferta : Form
@@ -79,6 +80,15 @@ namespace FrbaCommerce
             if (this.nudCantidad.Value == 0)
             {
                 Funciones.mostrarAlert("Falta ingresar Cantidad a comprar", this.Text); return false;
+            }
+            if (this.nudCantidad.Value < nudCantidad.Minimum)
+            {
+                Funciones.mostrarAlert("Debe ofertar por encima del mínimo", this.Text); return false;
+            }
+
+            if (this.nudCantidad.Value - (int)this.nudCantidad.Value != 0 )
+            {
+                Funciones.mostrarAlert("Debe ingresar un valor Entero", this.Text); return false;
             }
 
             return true;
