@@ -291,3 +291,18 @@ AS
 		WHERE emp_usu_Id = @emp_usu_Id
 	END
 GO
+
+IF OBJECT_ID('J2LA.BajaEmpresa') IS NOT NULL
+DROP PROCEDURE J2LA.BajaEmpresa
+GO
+CREATE PROCEDURE J2LA.BajaEmpresa(@emp_CUIT nvarchar(50))
+AS
+	BEGIN
+		DECLARE @emp_usu_Id int
+		SET @emp_usu_Id = (SELECT emp_usu_Id FROM J2LA.Empresas WHERE emp_Cuit = @emp_CUIT)
+		
+		UPDATE J2LA.Usuarios
+		SET usu_Inhabilitado = 1
+		WHERE usu_Id = @emp_usu_Id
+	END
+GO	
