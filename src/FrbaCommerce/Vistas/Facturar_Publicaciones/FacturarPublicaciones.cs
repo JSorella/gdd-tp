@@ -12,8 +12,11 @@ namespace FrbaCommerce
     public partial class FacturarPublicaciones : Form
     {
         int usu_Id = 0;
+
         decimal decTotal = 0;
         decimal decAcum = 0;
+        int cantBonif = 0;
+        decimal decBonif = 0;
 
         DataTable oDtFactEcab;
         DataTable oDtFactDet;
@@ -109,31 +112,55 @@ namespace FrbaCommerce
             }
         }
 
+        private void btnHistBonif_Click(object sender, EventArgs e)
+        {
+            HistorialBinificacion oFrm = new HistorialBinificacion();
+            oFrm._Datos = oDtBonif;
+            oFrm.ShowDialog();
+        }
+
+        private void dgvPubli_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            string RowsNumber = (e.RowIndex + 1).ToString();
+
+            SizeF size = e.Graphics.MeasureString(RowsNumber, this.Font);
+
+            if (dgvPubli.RowHeadersWidth < Convert.ToInt32(size.Width + 20))
+            {
+                dgvPubli.RowHeadersWidth = Convert.ToInt32(size.Width + 20);
+            }
+
+            Brush ob = SystemBrushes.ControlText;
+            e.Graphics.DrawString(RowsNumber, this.Font, ob, e.RowBounds.Location.X + 15, e.RowBounds.Location.Y + ((e.RowBounds.Height - size.Height) / 2));
+        }
+
         private void dgvPubli_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == dgvPubli.Columns["Facturar"].Index)
             {
+                //Invertimos el valor del Check.
                 dgvPubli.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = !(bool)dgvPubli.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
-
                 dgvPubli.EndEdit();  //Cancelo la Edicion para Confirmar el cambio.-
 
-                //ValidarCompras
+                //Validar Compras - Debe Cancelar en orden de Fecha Desc.
                 if ((Convert.ToBoolean(dgvPubli.Rows[e.RowIndex].Cells["Facturar"].Value))
                     && (dgvPubli.Rows[e.RowIndex].Cells["Tipo"].Value.ToString() == "C"))
                 {
                     if (!ValidarComprasAnteriores(e.ColumnIndex, e.RowIndex))
                     {
+                        //Si no es Valido lo Destildo.-
                         dgvPubli.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = false;
                     }
                 }
 
-                //Validar Bonificacion
+                //Validar Bonificacion - Cada 10 Costos de Pub de un mismo Tipo 1 Bonif.-
                 if (dgvPubli.Rows[e.RowIndex].Cells["Tipo"].Value.ToString() == "P")
                 {
                     CalcularBonificacion(e.ColumnIndex, e.RowIndex);
                 }
 
-                CalcularAcumulado();
+                //Actualizamos los Totales
+                CalcularValores();
             }
         }
 
@@ -141,53 +168,57 @@ namespace FrbaCommerce
         {
             if (e.ColumnIndex == dgvPubli.Columns["Facturar"].Index)
             {
+                //Invertimos el valor del Check.
                 dgvPubli.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = !(bool)dgvPubli.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
-
                 dgvPubli.EndEdit();  //Cancelo la Edicion para Confirmar el cambio.-
 
-                //ValidarCompras
+                //Validar Compras - Debe Cancelar en orden de Fecha Desc.
                 if ((Convert.ToBoolean(dgvPubli.Rows[e.RowIndex].Cells["Facturar"].Value))
                     && (dgvPubli.Rows[e.RowIndex].Cells["Tipo"].Value.ToString() == "C"))
                 {
                     if (!ValidarComprasAnteriores(e.ColumnIndex, e.RowIndex))
                     {
+                        //Si no es Valido lo Destildo.-
                         dgvPubli.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = false;
                     }
                 }
 
-                //Validar Bonificacion
+                //Validar Bonificacion - Cada 10 Costos de Pub de un mismo Tipo 1 Bonif.-
                 if (dgvPubli.Rows[e.RowIndex].Cells["Tipo"].Value.ToString() == "P")
                 {
                     CalcularBonificacion(e.ColumnIndex, e.RowIndex);
                 }
 
-                CalcularAcumulado();
+                //Actualizamos los Totales
+                CalcularValores();
             }
         }
 
         private void CalcularBonificacion(int colIndex, int rowIndex)
         {
-            int cantbonif;
             DataTable oDtBonifAux = oDtBonif.Copy();
             DataTable oDtCobAux = oDtCobrar.Clone();
             DataRow[] aDrs;
             DataRow oDr;
 
-            EliminarBonificaciones();
+            int contador = 0;
+
+            EliminarBonificaciones(); //Elimino todas para Recalcular.-
 
             foreach (DataGridViewRow row in dgvPubli.Rows)
             {
-                if ((Convert.ToBoolean(row.Cells["Facturar"].Value))
-                    && ((row.Cells["Tipo"].Value.ToString() == "P")))
+                if ((Convert.ToBoolean(row.Cells["Facturar"].Value)) //Si esta Marcada
+                    && ((row.Cells["Tipo"].Value.ToString() == "P"))) //Si es Costo x Publicar
                 {
+                    //Obtengo el contador por Visibilidad
                     aDrs = oDtBonifAux.Select("ucftv_vis_Id = " + row.Cells["pub_visibilidad_Id"].Value);
 
                     if (aDrs.Length > 0)
                     {
-                        cantbonif = Convert.ToInt32(aDrs[0]["ucftv_Cantidad"]) + 1;
-                        aDrs[0]["ucftv_Cantidad"] = cantbonif;
+                        contador = Convert.ToInt32(aDrs[0]["ucftv_Cantidad"]) + 1;
+                        aDrs[0]["ucftv_Cantidad"] = contador;
 
-                        if ((cantbonif % 10) == 0) //Se bonifica.-
+                        if ((contador % 10) == 0) //Si es multiplo de 10 => Se bonifica.-
                         {
                             oDr = oDtCobAux.NewRow();
 
@@ -221,14 +252,23 @@ namespace FrbaCommerce
                 }
             }
 
+            //inicializo contadores
+            cantBonif = 0;
+            decBonif = 0;
+
             //Cambio el color de las Filas de las Bonificaciones
             foreach (DataGridViewRow row in dgvPubli.Rows)
             {
                 if(row.Cells["Tipo"].Value.ToString() == "B")
                 {
-                    row.DefaultCellStyle.BackColor = Color.LightCoral;
+                    row.DefaultCellStyle.BackColor = Color.LightBlue;
+                    cantBonif++;
+                    decBonif = decBonif + Convert.ToDecimal(row.Cells["Importe"].Value);
                 }
             }
+
+            txtCantBonif.Text = cantBonif.ToString();
+            txtBonif.Text = "$ " + decBonif.ToString();
         }
 
         private void EliminarBonificaciones()
@@ -303,8 +343,10 @@ namespace FrbaCommerce
 
             txtAcum.Text = "$ 0,00";
             txtCantItems.Text = "0";
+            txtCantBonif.Text = "0";
             txtSaldo.Text = "$ 0,00";
             txtTotal.Text = "$ 0,00";
+            txtBonif.Text = "$ 0,00";
 
             oDtFactEcab.Rows.Clear();
             oDtFactDet.Rows.Clear();
@@ -410,6 +452,7 @@ namespace FrbaCommerce
 
         private void CalcularAcumulado()
         {
+            dgvPubli.EndEdit(); //Cancelo edicion antes de calcular los valores.
             decAcum = oDtCobrar.AsEnumerable().Sum(x => x.Field<decimal>("Importe"));
             txtAcum.Text = "$ " + decAcum.ToString();
             CalcularValores();
@@ -425,7 +468,11 @@ namespace FrbaCommerce
                 oDtBonif = InterfazBD.getCantFactxTipoVis(usu_Id);
 
                 dgvPubli.DataSource = oDtCobrar;
+
                 ConfigurarGrilla();
+
+                if (oDtBonif.Rows.Count == 0)
+                    btnHistBonif.Visible = false;
             }
             catch (Exception ex)
             {
@@ -438,6 +485,7 @@ namespace FrbaCommerce
         {
             dgvPubli.Columns["pub_Codigo"].Visible = false;
             dgvPubli.Columns["comp_Id"].Visible = false;
+            dgvPubli.Columns["pub_visibilidad_id"].Visible = false;
 
             dgvPubli.Columns["Codigo Publi"].ReadOnly = true;
             dgvPubli.Columns["Tipo"].ReadOnly = true;
@@ -445,6 +493,17 @@ namespace FrbaCommerce
             dgvPubli.Columns["Concepto"].ReadOnly = true;
             dgvPubli.Columns["Cantidad"].ReadOnly = true;
             dgvPubli.Columns["Importe"].ReadOnly = true;
+
+            dgvPubli.Columns[0].Width = 100;
+            dgvPubli.Columns[1].Width = 100;
+            dgvPubli.Columns[2].Width = 54;
+            dgvPubli.Columns[3].Width = 89;
+            dgvPubli.Columns[4].Width = 43;
+            dgvPubli.Columns[5].Width = 73;
+            dgvPubli.Columns[6].Width = 274;
+            dgvPubli.Columns[7].Width = 60;
+            dgvPubli.Columns[8].Width = 53;
+            dgvPubli.Columns[9].Width = 100;
         }
 
         private bool ValidaGenerar()
@@ -531,8 +590,9 @@ namespace FrbaCommerce
             DataRow oDr = oDtFactEcab.NewRow();
 
             oDr["fac_Numero"] = 0;
-            oDr["fac_usu_Id"] = Singleton.usuario["usu_id"];
+            oDr["fac_usu_Id"] = usu_Id;
             oDr["fac_Fecha"] = Singleton.FechaDelSistema;
+            oDr["fac_usu_id_gen"] = Singleton.usuario["usu_Id"];
             oDr["fac_Total"] = decTotal;
 
             if(txtTarjeta.Text != "")
@@ -557,10 +617,9 @@ namespace FrbaCommerce
                 }
             }
 
-            txtSaldo.Text = "$ " + (decAcum - decTotal).ToString();
+            txtSaldo.Text = "$ " + (decAcum - decTotal + decBonif).ToString();
             txtCantItems.Text = count.ToString();
             txtTotal.Text = "$ " + decTotal.ToString();
         }
-
     }
 }

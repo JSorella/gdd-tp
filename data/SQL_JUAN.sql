@@ -419,15 +419,16 @@ CREATE PROCEDURE J2LA.Facturas_Insert
 	@fac_usu_Id int,
 	@fac_Fecha datetime,
 	@fac_Total numeric(18,2),
-	@fac_Forma_Pago_Desc nvarchar(255)
+	@fac_Forma_Pago_Desc nvarchar(255),
+	@fac_usu_Id_gen int
 AS
 BEGIN
 
 	SELECT @fac_Numero = MAX(fac_Numero) + 1 FROM J2LA.Facturas
 
 	INSERT INTO J2LA.Facturas
-		([fac_Numero],[fac_usu_Id],[fac_Fecha],[fac_Total],[fac_Forma_Pago_Desc])
-	VALUES(@fac_Numero, @fac_usu_Id, @fac_Fecha, @fac_Total, @fac_Forma_Pago_Desc)
+		([fac_Numero],[fac_usu_Id],[fac_Fecha],[fac_Total],[fac_Forma_Pago_Desc],[fac_usu_Id_gen])
+	VALUES(@fac_Numero, @fac_usu_Id, @fac_Fecha, @fac_Total, @fac_Forma_Pago_Desc, @fac_usu_Id_gen)
 		
 END
 GO
@@ -542,5 +543,23 @@ And O.ofer_Monto = (Select MAX(O.ofer_Monto)
 					From J2LA.Ofertas O
 					Where O.ofer_pub_Codigo = @pub_Codigo)
 )
-
+GO
 /*============================== STORED PROCEDURE JUAN ==============================*/
+
+IF OBJECT_ID('J2LA.getCantFactxTipoVis') IS NOT NULL
+DROP FUNCTION J2LA.getCantFactxTipoVis
+GO
+CREATE FUNCTION J2LA.getCantFactxTipoVis( @usu_Id int )
+RETURNS TABLE
+AS
+RETURN 
+	(
+Select ucftv_usu_Id, ucftv_vis_Id, 
+		[Visibilidad] = pubvis_Descripcion,
+		[Cantidad] = ucftv_Cantidad,
+		ucftv_Cantidad
+From J2LA.Usuarios_CantFactxTipoVis U
+Inner Join J2LA.Publicaciones_Visibilidades V On V.pubvis_id = U.ucftv_vis_Id
+Where ucftv_usu_Id = @usu_Id
+)
+GO

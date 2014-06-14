@@ -35,6 +35,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnSeleccionar = new System.Windows.Forms.Button();
             this.pnlDatos = new System.Windows.Forms.Panel();
+            this.txtBonif = new System.Windows.Forms.TextBox();
+            this.txtCantBonif = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.txtSaldo = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.lblInfoTarjeta = new System.Windows.Forms.Label();
@@ -53,6 +56,7 @@
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnGenerar = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.btnHistBonif = new System.Windows.Forms.Button();
             this.pnlParam.SuspendLayout();
             this.pnlDatos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPubli)).BeginInit();
@@ -115,6 +119,10 @@
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlDatos.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlDatos.Controls.Add(this.btnHistBonif);
+            this.pnlDatos.Controls.Add(this.txtBonif);
+            this.pnlDatos.Controls.Add(this.txtCantBonif);
+            this.pnlDatos.Controls.Add(this.label7);
             this.pnlDatos.Controls.Add(this.txtSaldo);
             this.pnlDatos.Controls.Add(this.label8);
             this.pnlDatos.Controls.Add(this.lblInfoTarjeta);
@@ -134,10 +142,44 @@
             this.pnlDatos.Size = new System.Drawing.Size(707, 486);
             this.pnlDatos.TabIndex = 20;
             // 
+            // txtBonif
+            // 
+            this.txtBonif.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.txtBonif.BackColor = System.Drawing.Color.LightBlue;
+            this.txtBonif.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBonif.Location = new System.Drawing.Point(400, 425);
+            this.txtBonif.Name = "txtBonif";
+            this.txtBonif.ReadOnly = true;
+            this.txtBonif.Size = new System.Drawing.Size(80, 20);
+            this.txtBonif.TabIndex = 23;
+            this.txtBonif.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // txtCantBonif
+            // 
+            this.txtCantBonif.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.txtCantBonif.BackColor = System.Drawing.Color.LightBlue;
+            this.txtCantBonif.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCantBonif.Location = new System.Drawing.Point(365, 425);
+            this.txtCantBonif.Name = "txtCantBonif";
+            this.txtCantBonif.ReadOnly = true;
+            this.txtCantBonif.Size = new System.Drawing.Size(29, 20);
+            this.txtCantBonif.TabIndex = 21;
+            this.txtCantBonif.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label7
+            // 
+            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(270, 428);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(88, 13);
+            this.label7.TabIndex = 22;
+            this.label7.Text = "Bonnificaciones :";
+            // 
             // txtSaldo
             // 
             this.txtSaldo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtSaldo.BackColor = System.Drawing.Color.LightBlue;
+            this.txtSaldo.BackColor = System.Drawing.SystemColors.Info;
             this.txtSaldo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSaldo.Location = new System.Drawing.Point(365, 399);
             this.txtSaldo.Name = "txtSaldo";
@@ -169,7 +211,7 @@
             // txtAcum
             // 
             this.txtAcum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtAcum.BackColor = System.Drawing.Color.LightBlue;
+            this.txtAcum.BackColor = System.Drawing.SystemColors.Info;
             this.txtAcum.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtAcum.Location = new System.Drawing.Point(125, 399);
             this.txtAcum.Name = "txtAcum";
@@ -191,7 +233,7 @@
             // txtTotal
             // 
             this.txtTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtTotal.BackColor = System.Drawing.Color.LightBlue;
+            this.txtTotal.BackColor = System.Drawing.SystemColors.Info;
             this.txtTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTotal.Location = new System.Drawing.Point(604, 425);
             this.txtTotal.Name = "txtTotal";
@@ -213,7 +255,7 @@
             // txtCantItems
             // 
             this.txtCantItems.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtCantItems.BackColor = System.Drawing.Color.LightBlue;
+            this.txtCantItems.BackColor = System.Drawing.SystemColors.Info;
             this.txtCantItems.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCantItems.Location = new System.Drawing.Point(604, 399);
             this.txtCantItems.Name = "txtCantItems";
@@ -247,6 +289,7 @@
             // 
             this.txtTarjeta.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtTarjeta.BackColor = System.Drawing.Color.White;
             this.txtTarjeta.Location = new System.Drawing.Point(125, 452);
             this.txtTarjeta.Name = "txtTarjeta";
             this.txtTarjeta.Size = new System.Drawing.Size(577, 20);
@@ -266,7 +309,6 @@
             // 
             this.dgvPubli.AllowUserToAddRows = false;
             this.dgvPubli.AllowUserToDeleteRows = false;
-            this.dgvPubli.AllowUserToOrderColumns = true;
             this.dgvPubli.AllowUserToResizeRows = false;
             this.dgvPubli.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
@@ -279,6 +321,7 @@
             this.dgvPubli.Size = new System.Drawing.Size(689, 363);
             this.dgvPubli.TabIndex = 4;
             this.dgvPubli.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPubli_CellDoubleClick);
+            this.dgvPubli.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvPubli_RowPostPaint);
             this.dgvPubli.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPubli_CellContentClick);
             // 
             // label2
@@ -322,6 +365,16 @@
             this.btnGenerar.Text = "Generar";
             this.btnGenerar.UseVisualStyleBackColor = true;
             this.btnGenerar.Click += new System.EventHandler(this.btnGenerar_Click);
+            // 
+            // btnHistBonif
+            // 
+            this.btnHistBonif.Location = new System.Drawing.Point(560, 3);
+            this.btnHistBonif.Name = "btnHistBonif";
+            this.btnHistBonif.Size = new System.Drawing.Size(142, 23);
+            this.btnHistBonif.TabIndex = 24;
+            this.btnHistBonif.Text = "Historial para Bonifcación";
+            this.btnHistBonif.UseVisualStyleBackColor = true;
+            this.btnHistBonif.Click += new System.EventHandler(this.btnHistBonif_Click);
             // 
             // FacturarPublicaciones
             // 
@@ -373,5 +426,9 @@
         private System.Windows.Forms.TextBox txtSaldo;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.TextBox txtCantBonif;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox txtBonif;
+        private System.Windows.Forms.Button btnHistBonif;
     }
 }

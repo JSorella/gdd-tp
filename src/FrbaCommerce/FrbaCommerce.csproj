@@ -165,6 +165,12 @@
     <Compile Include="Vistas\Comprar_Ofertar\DetallesPublicacion.Designer.cs">
       <DependentUpon>DetallesPublicacion.cs</DependentUpon>
     </Compile>
+    <Compile Include="Vistas\Facturar_Publicaciones\HistorialBinificacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Facturar_Publicaciones\HistorialBinificacion.Designer.cs">
+      <DependentUpon>HistorialBinificacion.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\Gestion_Preguntas\Responder_preguntas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -408,6 +414,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Facturar_Publicaciones\FacturarPublicaciones.resx">
       <DependentUpon>FacturarPublicaciones.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Facturar_Publicaciones\HistorialBinificacion.resx">
+      <DependentUpon>HistorialBinificacion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Gestion_Preguntas\Responder_preguntas.resx">
       <DependentUpon>Responder_preguntas.cs</DependentUpon>
