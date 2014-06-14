@@ -12,12 +12,26 @@ namespace FrbaCommerce
     public partial class Abm_Empresa_Modif : Form
     {
         DataTable oDtEmpresa;
+        DateTime dteFecCreac;
 
         bool cerrarForm = false;
 
         public Abm_Empresa_Modif()
         {
             InitializeComponent();
+        }
+
+        private void btnSelFec_Click(object sender, EventArgs e)
+        {
+            Point ppos = this.btnSelFec.PointToScreen(new Point());
+            ppos.X = ppos.X + this.btnSelFec.Width;
+
+            FrbaCommerce.ControlFecha oFrm = new FrbaCommerce.ControlFecha(ppos.X, ppos.Y);
+            oFrm.ShowDialog();
+
+            if (!oFrm.Cancelado)
+                dteFecCreac = oFrm.FechaSeleccionada;
+            tboxFechaCreacion.Text = oFrm.FechaSeleccionada.ToShortDateString();
         }
 
         private void Abm_Empresa_Modif_Load(object sender, EventArgs e)
@@ -37,8 +51,6 @@ namespace FrbaCommerce
                 oDtEmpresa = InterfazBD.getEmpresa(oFrm.Resultado["emp_CUIT"].ToString());
 
                 tboxEmpresaSeleccionada.Text = oFrm.Resultado["emp_CUIT"].ToString();
-
-                Aplicar();
             }
         }
 
@@ -51,6 +63,7 @@ namespace FrbaCommerce
             tboxTelefono.Text = oDr["emp_Tel"].ToString();
             tboxCUIT.Text = oDr["emp_CUIT"].ToString();
             tboxNombreContacto.Text = oDr["emp_Contacto"].ToString();
+            dteFecCreac = Convert.ToDateTime(oDr["emp_Fecha_Creacion"]);
             tboxCalle.Text = oDr["emp_Dom_Calle"].ToString();
             tboxAltura.Text = oDr["emp_Nro_Calle"].ToString();
             tboxPiso.Text = oDr["emp_Piso"].ToString();
@@ -58,6 +71,9 @@ namespace FrbaCommerce
             tboxLocalidad.Text = oDr["emp_Localidad"].ToString();
             tboxCiudad.Text = oDr["emp_Ciudad"].ToString();
             tboxCodPostal.Text = oDr["emp_CP"].ToString();
+
+            tboxFechaCreacion.Text = dteFecCreac.ToShortDateString();
+
             if (Convert.ToInt32(oDr["usu_Inhabilitado"]) == 1)
             {
                 chkboxInhabilitada.Checked = true;

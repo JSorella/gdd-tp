@@ -13,6 +13,7 @@ namespace FrbaCommerce
     {
         private string usuario;
         private string pass;
+        DateTime dteFecCreac;
 
         public Abm_Empresa_Alta()        //Alta desde Admin
         {
@@ -26,6 +27,24 @@ namespace FrbaCommerce
             this.usuario = _usuario;
             this.pass = _pass;
             InitializeComponent();
+        }
+
+        private void Abm_Empresa_Alta_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnSelFec_Click(object sender, EventArgs e)
+        {
+            Point ppos = this.btnSelFec.PointToScreen(new Point());
+            ppos.X = ppos.X + this.btnSelFec.Width;
+
+            FrbaCommerce.ControlFecha oFrm = new FrbaCommerce.ControlFecha(ppos.X, ppos.Y);
+            oFrm.ShowDialog();
+
+            if (!oFrm.Cancelado)
+                dteFecCreac = oFrm.FechaSeleccionada;
+                tboxFechaCreacion.Text = oFrm.FechaSeleccionada.ToShortDateString();
         }
     }
 }

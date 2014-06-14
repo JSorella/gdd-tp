@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.timePickerFechaCreacion = new System.Windows.Forms.DateTimePicker();
             this.tboxCodPostal = new System.Windows.Forms.TextBox();
             this.tboxCiudad = new System.Windows.Forms.TextBox();
             this.tboxLocalidad = new System.Windows.Forms.TextBox();
@@ -63,16 +62,11 @@
             this.tboxEmpresaSeleccionada = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.pnlDatos = new System.Windows.Forms.Panel();
+            this.btnSelFec = new System.Windows.Forms.Button();
+            this.tboxFechaCreacion = new System.Windows.Forms.TextBox();
             this.pnlParam.SuspendLayout();
             this.pnlDatos.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // timePickerFechaCreacion
-            // 
-            this.timePickerFechaCreacion.Location = new System.Drawing.Point(133, 172);
-            this.timePickerFechaCreacion.Name = "timePickerFechaCreacion";
-            this.timePickerFechaCreacion.Size = new System.Drawing.Size(199, 20);
-            this.timePickerFechaCreacion.TabIndex = 55;
             // 
             // tboxCodPostal
             // 
@@ -354,8 +348,9 @@
             // pnlDatos
             // 
             this.pnlDatos.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlDatos.Controls.Add(this.btnSelFec);
+            this.pnlDatos.Controls.Add(this.tboxFechaCreacion);
             this.pnlDatos.Controls.Add(this.chkboxInhabilitada);
-            this.pnlDatos.Controls.Add(this.timePickerFechaCreacion);
             this.pnlDatos.Controls.Add(this.tboxCodPostal);
             this.pnlDatos.Controls.Add(this.tboxCiudad);
             this.pnlDatos.Controls.Add(this.tboxLocalidad);
@@ -387,6 +382,24 @@
             this.pnlDatos.Size = new System.Drawing.Size(643, 244);
             this.pnlDatos.TabIndex = 60;
             // 
+            // btnSelFec
+            // 
+            this.btnSelFec.Location = new System.Drawing.Point(205, 171);
+            this.btnSelFec.Name = "btnSelFec";
+            this.btnSelFec.Size = new System.Drawing.Size(75, 23);
+            this.btnSelFec.TabIndex = 59;
+            this.btnSelFec.Text = "Seleccionar";
+            this.btnSelFec.UseVisualStyleBackColor = true;
+            this.btnSelFec.Click += new System.EventHandler(this.btnSelFec_Click);
+            // 
+            // tboxFechaCreacion
+            // 
+            this.tboxFechaCreacion.Location = new System.Drawing.Point(132, 173);
+            this.tboxFechaCreacion.Name = "tboxFechaCreacion";
+            this.tboxFechaCreacion.ReadOnly = true;
+            this.tboxFechaCreacion.Size = new System.Drawing.Size(67, 20);
+            this.tboxFechaCreacion.TabIndex = 58;
+            // 
             // Abm_Empresa_Modif
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -410,7 +423,6 @@
 
         #endregion
 
-        private System.Windows.Forms.DateTimePicker timePickerFechaCreacion;
         private System.Windows.Forms.TextBox tboxCodPostal;
         private System.Windows.Forms.TextBox tboxCiudad;
         private System.Windows.Forms.TextBox tboxLocalidad;
@@ -445,5 +457,7 @@
         private System.Windows.Forms.TextBox tboxEmpresaSeleccionada;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Panel pnlDatos;
+        private System.Windows.Forms.Button btnSelFec;
+        private System.Windows.Forms.TextBox tboxFechaCreacion;
     }
 }
