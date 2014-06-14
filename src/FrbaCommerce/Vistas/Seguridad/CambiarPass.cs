@@ -75,7 +75,7 @@ namespace FrbaCommerce
 
         private void btnGenerar_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Confirma que desea Guardar los cambios en el Rol?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show("Confirma nueva contraseña?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 if (ValidaGenerar())
                 {
@@ -83,7 +83,12 @@ namespace FrbaCommerce
                     {
                         Limpiar(true);
                         HabilitarMod(false);
-                        if (!admin) this.Close();
+                        if (!admin)
+                        {
+                            InterfazBD.setPrimerIngresoValido(Convert.ToInt32(Singleton.usuario["usu_Id"]));
+                            Singleton.debeCambiarPass = false;
+                            this.Close();
+                        } 
                     }
                 }
             }

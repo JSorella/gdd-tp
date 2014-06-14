@@ -21,6 +21,7 @@ namespace FrbaCommerce
 
         public static DataRow usuario; //= new DataTable();
         public static int sessionRol_Id = 0;
+        public static bool debeCambiarPass = false;
 
         //El constructor del Singleton siempre debe ser privado para evitar ser instanciado
         private Singleton() { }

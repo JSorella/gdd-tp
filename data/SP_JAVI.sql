@@ -99,6 +99,43 @@ BEGIN
 END
 GO
 
+/*-------------------------FUNCTION (JAVI)--------------------------*/
+IF OBJECT_ID('J2LA.validarPrimerIngreso') IS NOT NULL
+DROP FUNCTION J2LA.validarPrimerIngreso
+GO
+CREATE FUNCTION J2LA.validarPrimerIngreso(@usu_Id int)
+RETURNS BIT
+AS
+BEGIN
+
+	DECLARE @primer_intento BIT
+	
+	SET @primer_intento = (
+		SELECT usu_Primer_Ingreso 
+		FROM J2LA.Usuarios 
+		WHERE usu_Id = @usu_Id
+		)
+
+	RETURN @primer_intento
+END
+GO
+
+
+/*-------------------------PROCEDURE (JAVI)--------------------------*/
+IF OBJECT_ID('J2LA.setPrimerIngresoValido') IS NOT NULL
+DROP PROCEDURE J2LA.setPrimerIngresoValido
+GO
+CREATE PROCEDURE J2LA.setPrimerIngresoValido @usu_Id int
+AS
+BEGIN
+		UPDATE J2LA.Usuarios
+		SET usu_Primer_Ingreso = 0
+		WHERE usu_Id = @usu_Id
+END
+GO
+
+
+
 /*-------------------------STORED PROCEDURE (JAVI)--------------------------*/
 IF OBJECT_ID('J2LA.setNuevoUsuario') IS NOT NULL
 DROP PROCEDURE J2LA.setNuevoUsuario

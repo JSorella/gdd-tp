@@ -13,6 +13,8 @@ namespace FrbaCommerce
     public partial class Login : Form
     {
         Connection connect = new Connection();
+        private Usuario usuario = new Usuario();
+        DataTable oDTRolesxUsuario;
 
         public Login()
         {
@@ -56,25 +58,26 @@ namespace FrbaCommerce
             if (!Validar())
                 return;
 
-            Usuario usuario = new Usuario();
-
             try
             {
                 usuario = InterfazBD.getUsuarioSinRoles(this.txtUserName.Text);
                 //NOTA: es importante que sea sin roles ya que, de no tenerlos, el user debería poder loguearse igual y ser informado de esto
 
                 //evaluamos si esta bien la contraseña
-                if (Funciones.get_hash(txtPass.Text) == usuario.pass)
+                if (Funciones.get_hash(txtPass.Text) == usuario.pass) //Login Successful!!
                 {
-                    //Login Successful!! ... abrimos el formulario de Funcionalides
-                    //limpiamos cant_intentos
-                    usuario.cantidadIntentos = 0;
-                    InterfazBD.setCantidadIntentos(usuario);
+                    
+                    limpiarCantidadIntentos();
+                    oDTRolesxUsuario = InterfazBD.getUsuarioConRoles(usuario.nombre);
+                    cargarUsuarioEnSingleton();
+                    validarPrimerIngreso();
 
-                    DataTable oDTRolesxUsuario = InterfazBD.getUsuarioConRoles(usuario.nombre);
-
-                    Singleton.usuario = oDTRolesxUsuario.NewRow();
-                    Singleton.usuario.ItemArray = oDTRolesxUsuario.Rows[0].ItemArray;
+                    //Abro forms de acuerdo a la cantidad de Roles asignados
+                    if (Singleton.debeCambiarPass)
+                    {
+                        Funciones.mostrarAlert("Debe cambiar password para proseguir", "Acceso al Sistema");
+                        return;
+                    }
 
                     if (oDTRolesxUsuario.Rows.Count == 1)
                     {
@@ -137,5 +140,26 @@ namespace FrbaCommerce
             return true;
         }
 
+        private void limpiarCantidadIntentos()
+        {
+            this.usuario.cantidadIntentos = 0;
+            InterfazBD.setCantidadIntentos(this.usuario);
+        }
+
+        private void cargarUsuarioEnSingleton()
+        {
+            Singleton.usuario = oDTRolesxUsuario.NewRow();
+            Singleton.usuario.ItemArray = oDTRolesxUsuario.Rows[0].ItemArray;
+        }
+
+        private void validarPrimerIngreso()
+        {
+            if (InterfazBD.validarPrimerIngreso(Convert.ToInt32(Singleton.usuario["usu_Id"])))
+            {
+                Singleton.debeCambiarPass = true;
+                CambiarPass oForm = new CambiarPass();
+                oForm.ShowDialog();
+            }
+        }
     }
 }

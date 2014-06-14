@@ -189,7 +189,9 @@ namespace FrbaCommerce
             if (Singleton.sessionRol_Id == 1) //Soy el Admin
             {
                 this.usuario = this.dni_textbox.Text + ((DataRowView)this.comboDoc.SelectedItem).Row["tipodoc_Id"];
-                this.pass = this.telefono_textbox.Text;
+                // Estaría bueno que el password sea el Teléfono, pero es un bardo para testear
+                //this.pass = this.telefono_textbox.Text;
+                this.pass = this.usuario;
             } 
         }
 

@@ -212,6 +212,41 @@ namespace FrbaCommerce
         }
 
         /// <summary>
+        /// Valido si es el primer Ingreso del Usuario
+        /// </summary>
+        public static bool validarPrimerIngreso(Int32 usu_Id)
+        {
+            try
+            {
+                return (bool)Singleton.conexion.executeQueryFuncEscalar("J2LA.validarPrimerIngreso(@usu_Id)", null,
+                                        new String[1, 2] { { "usu_Id", usu_Id.ToString() } });
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Setea el primer ingreso en 0
+        /// </summary>
+        public static void setPrimerIngresoValido(int usu_Id)
+        {
+            try
+            {
+                Singleton.conexion.executeQuerySP("J2LA.setPrimerIngresoValido", null,
+                       new String[1, 2] { { "usu_Id", usu_Id.ToString() } });
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        
+
+        /// <summary>
         /// Trae todos los tipos de documento
         /// </summary>
         public static DataTable getTiposDoc()

@@ -18,6 +18,12 @@ GO
 IF OBJECT_ID('J2LA.existeDni') IS NOT NULL
 DROP FUNCTION J2LA.existeDni
 GO
+IF OBJECT_ID('J2LA.validarPrimerIngreso') IS NOT NULL
+DROP FUNCTION J2LA.validarPrimerIngreso
+GO
+IF OBJECT_ID('J2LA.setPrimerIngresoValido') IS NOT NULL
+DROP PROCEDURE J2LA.setPrimerIngresoValido
+GO
 IF OBJECT_ID('J2LA.setNuevoUsuario') IS NOT NULL
 DROP PROCEDURE J2LA.setNuevoUsuario
 GO
