@@ -35,15 +35,20 @@ BEGIN
 		@pub_Fecha_Ini,@pub_Precio,@pub_visibilidad_Id,@pub_estado_Id,@pub_Permite_Preg,
 		@pub_usu_Id,@pub_vis_Precio,@pub_vis_Porcentaje,@pub_Facturada)
 		
-	-- Agrego un Registro para controlar la Facturacion por Visibilidad
-	-- Para un Bonificacion cada 10 Publicidades Rendidas
-	IF NOT EXISTS ( SELECT * FROM J2LA.Usuarios_CantFactxTipoVis
-					WHERE ucftv_usu_Id = @pub_usu_Id
-					AND ucftv_vis_Id = @pub_visibilidad_Id)
+	--Si es una Publicacion No Gratuita
+	IF( @pub_Precio > 0)
 	BEGIN
-		INSERT INTO J2LA.Usuarios_CantFactxTipoVis
-			([ucftv_usu_Id], [ucftv_vis_Id], [ucftv_Cantidad])
-		VALUES (@pub_usu_Id, @pub_visibilidad_Id, 0)
+		-- Si ya No existe un regitros en la Tabla
+		IF NOT EXISTS ( SELECT * FROM J2LA.Usuarios_CantFactxTipoVis
+						WHERE ucftv_usu_Id = @pub_usu_Id
+						AND ucftv_vis_Id = @pub_visibilidad_Id)
+		BEGIN
+			-- Agrego un Registro para controlar la Facturacion por Visibilidad
+			-- Para un Bonificacion cada 10 Publicidades Rendidas
+			INSERT INTO J2LA.Usuarios_CantFactxTipoVis
+				([ucftv_usu_Id], [ucftv_vis_Id], [ucftv_Cantidad])
+			VALUES (@pub_usu_Id, @pub_visibilidad_Id, 0)
+		END
 	END
 	
 END
@@ -503,7 +508,7 @@ AND P.pub_Facturada = 0
 
 Union All
 
-Select	P.pub_Codigo, comp_Id = 0, [Facturar] = CONVERT(Bit, 0),
+Select	P.pub_Codigo, C.comp_Id, [Facturar] = CONVERT(Bit, 0),
 		[Codigo Publi] = P.pub_Codigo, [Tipo] = 'C',
 		[Fecha] = Convert(varchar, C.comp_Fecha, 103),
 		[Concepto] = 'Comision por Compra en Publicacion Nro. ' + LTRIM(RTRIM(STR(P.pub_Codigo))) +

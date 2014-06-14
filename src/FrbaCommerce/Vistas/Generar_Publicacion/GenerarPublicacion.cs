@@ -109,6 +109,11 @@ namespace FrbaCommerce
                 nudStock.Value = 1;
                 nudStock.Enabled = false;
             }
+            else
+            {
+                nudStock.Value = 0;
+                nudStock.Enabled = true;
+            }
 
         }
 

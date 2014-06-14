@@ -162,106 +162,112 @@ namespace FrbaCommerce
             }
         }
 
-        private void ejecutarForm(Form oFrm)
+        private void ejecutarForm(Form oFrm, object sender)
         {
+            System.Drawing.Bitmap oBitmap = (System.Drawing.Bitmap)((ToolStripMenuItem)sender).Image;
+
+            if(oBitmap != null) 
+                oFrm.Icon = System.Drawing.Icon.FromHandle(oBitmap.GetHicon());
+
             oFrm.MdiParent = this;
             oFrm.StartPosition = FormStartPosition.CenterScreen;
+
             oFrm.Show();
         }
 
         private void tsmiCambiarPass_Click(object sender, EventArgs e)
         {
-            ejecutarForm(new CambiarPass());
+            ejecutarForm(new CambiarPass(), sender);
         }
 
         private void tsmiBajaUsuario_Click(object sender, EventArgs e)
         {
-            ejecutarForm(new Usuarios_Baja());
+            ejecutarForm(new Usuarios_Baja(), sender);
         }
 
         private void tsmiRolAlta_Click(object sender, EventArgs e)
         {
-            ejecutarForm(new Abm_Rol_Alta());
+            ejecutarForm(new Abm_Rol_Alta(), sender);
         }
 
         private void tsmiRolBaja_Click(object sender, EventArgs e)
         {
-            ejecutarForm(new Abm_Rol_Baja());
+            ejecutarForm(new Abm_Rol_Baja(), sender);
         }
 
         private void tsmiRolMod_Click(object sender, EventArgs e)
         {
-            ejecutarForm(new Abm_Rol_Modif());
+            ejecutarForm(new Abm_Rol_Modif(), sender);
         }
 
         private void tsmiClienteAlta_Click(object sender, EventArgs e)
         {
-            ejecutarForm(new Abm_Cliente_Alta());
+            ejecutarForm(new Abm_Cliente_Alta(), sender);
         }
 
         private void tsmiClienteBaja_Click(object sender, EventArgs e)
         {
-            ejecutarForm(new Abm_Cliente_Baja());
+            ejecutarForm(new Abm_Cliente_Baja(), sender);
         }
 
         private void tsmiClienteMod_Click(object sender, EventArgs e)
         {
-            ejecutarForm(new Abm_Cliente_Modif());
+            ejecutarForm(new Abm_Cliente_Modif(), sender);
         }
 
         private void tsmiEmpresaAlta_Click(object sender, EventArgs e)
         {
-            ejecutarForm(new Abm_Empresa_Alta());
+            ejecutarForm(new Abm_Empresa_Alta(), sender);
         }
 
         private void tsmiEmpresaBaja_Click(object sender, EventArgs e)
         {
-            ejecutarForm(new Abm_Empresa_Baja());
+            ejecutarForm(new Abm_Empresa_Baja(), sender);
         }
 
         private void tsmiEmpresaMod_Click(object sender, EventArgs e)
         {
-            ejecutarForm(new Abm_Empresa_Modif());
+            ejecutarForm(new Abm_Empresa_Modif(), sender);
         }
 
         private void tsmiRubroAlta_Click(object sender, EventArgs e)
         {
-            ejecutarForm(new Abm_Rubro_Alta());
+            ejecutarForm(new Abm_Rubro_Alta(), sender);
         }
 
         private void tsmiRubroBaja_Click(object sender, EventArgs e)
         {
-            ejecutarForm(new Abm_Rubro_Baja());
+            ejecutarForm(new Abm_Rubro_Baja(), sender);
         }
 
         private void tsmiRubroMod_Click(object sender, EventArgs e)
         {
-            ejecutarForm(new Abm_Rubro_Modif());
+            ejecutarForm(new Abm_Rubro_Modif(), sender);
         }
 
         private void tsmiVisibilidadAlta_Click(object sender, EventArgs e)
         {
-            ejecutarForm(new Abm_Visib_Alta());
+            ejecutarForm(new Abm_Visib_Alta(), sender);
         }
 
         private void tsmiVisibilidadBaja_Click(object sender, EventArgs e)
         {
-            ejecutarForm(new Abm_Visib_Baja());
+            ejecutarForm(new Abm_Visib_Baja(), sender);
         }
 
         private void tsmiVisibilidadMod_Click(object sender, EventArgs e)
         {
-            ejecutarForm(new Abm_Visib_Modif());
+            ejecutarForm(new Abm_Visib_Modif(), sender);
         }
 
         private void tsmiPublicacionAlta_Click(object sender, EventArgs e)
         {
-            ejecutarForm(new GenerarPublicacion());
+            ejecutarForm(new GenerarPublicacion(), sender);
         }
 
         private void tsmiPublicacionMod_Click(object sender, EventArgs e)
         {
-            ejecutarForm(new EditarPublicacion());
+            ejecutarForm(new EditarPublicacion(), sender);
         }
 
         private void tsmiPublicacionPreg_Click(object sender, EventArgs e)
@@ -271,22 +277,22 @@ namespace FrbaCommerce
 
         private void tsmiPublicacionComp_Click(object sender, EventArgs e)
         {
-            ejecutarForm(new ComprarOfertar());
+            ejecutarForm(new ComprarOfertar(), sender);
         }
 
         private void tsmiPublicacionCalif_Click(object sender, EventArgs e)
         {
-            ejecutarForm(new CalificarBusqueda());
+            ejecutarForm(new CalificarBusqueda(), sender);
         }
 
         private void tsmiFacturacion_Click(object sender, EventArgs e)
         {
-            ejecutarForm(new FacturarPublicaciones());
+            ejecutarForm(new FacturarPublicaciones(), sender);
         }
 
         private void tsmiEstadisticas_Click(object sender, EventArgs e)
         {
-            ejecutarForm(new ListadoEstadistico());
+            ejecutarForm(new ListadoEstadistico(), sender);
         }
 
         private void cascadaToolStripMenuItem_Click(object sender, EventArgs e)
@@ -319,32 +325,32 @@ namespace FrbaCommerce
 
         private void ejemploToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ejecutarForm(new EjemploGrilla());
+            ejecutarForm(new EjemploGrilla(), sender);
         }
 
         private void responderPreguntasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ejecutarForm(new Responder_preguntas());
+            ejecutarForm(new Responder_preguntas(), sender);
         }
 
         private void verPreguntasYRespuestasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ejecutarForm(new Ver_Respuestas());
+            ejecutarForm(new Ver_Respuestas(), sender);
         }
 
         private void comprasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ejecutarForm(new HistorialCliente());
+            ejecutarForm(new HistorialCliente(), sender);
         }
 
         private void ofertasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ejecutarForm(new HistorialOfertas());
+            ejecutarForm(new HistorialOfertas(), sender);
         }
 
         private void calificacionesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ejecutarForm(new HistorialCalificaciones());
+            ejecutarForm(new HistorialCalificaciones(), sender);
         }
     }
 }

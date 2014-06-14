@@ -136,6 +136,7 @@
             this.cmbCombo.Size = new System.Drawing.Size(192, 21);
             this.cmbCombo.TabIndex = 1;
             this.cmbCombo.MouseClick += new System.Windows.Forms.MouseEventHandler(this.cmbCombo_MouseClick);
+            this.cmbCombo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbCombo_KeyPress);
             // 
             // ComboCheck
             // 

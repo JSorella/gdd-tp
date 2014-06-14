@@ -23,6 +23,8 @@ namespace FrbaCommerce
 
         bool cerrarForm = false;
 
+        decimal decStockAnterior = 0;
+
         public EditarPublicacion()
         {
             InitializeComponent();
@@ -193,6 +195,8 @@ namespace FrbaCommerce
             txtFechaIni.Text = dteFecIni.ToShortDateString();
             txtFechaVto.Text = dteFecVto.ToShortDateString();
 
+            decStockAnterior = nudStock.Value;
+
             MarcarRubros();
         }
 
@@ -230,7 +234,7 @@ namespace FrbaCommerce
             if ((Convert.ToInt32(cmbEstado.SelectedValue) != 4) //Si no esta Finalizada 
                     && (dteFecVto < Singleton.FechaDelSistema)) //Y esta vencida.
             {
-                MessageBox.Show("Esta Publicacion esta venció el dia: " + dteFecVto.ToShortDateString() + " - No podrá realizar cambios en ella.-",
+                MessageBox.Show("Esta Publicacion venció el dia: " + dteFecVto.ToShortDateString() + " - No podrá realizar cambios en ella.-",
                     this.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 ActivarVistaFinalizada(); //Sin Modificaciones en la Publicacion
                 return;
@@ -300,11 +304,14 @@ namespace FrbaCommerce
 
             if (dteFecVto > Singleton.FechaDelSistema) //Si no esta vencida puede cambiar a Activa.
             {
-                //Solo puede volver a Activa.
-                cmbEstado.DataSource = oDTEstados.Select("pubest_id in (1)").CopyToDataTable();
+                //Solo puede ser Activa o Pausada.
+                cmbEstado.DataSource = oDTEstados.Select("pubest_id in (1,3)").CopyToDataTable();
                 cmbEstado.SelectedValue = oDTPubli.Rows[0]["pub_estado_Id"];
                 cmbEstado.Enabled = true;
             }
+
+            //Puede Grabar
+            btnGenerar.Enabled = true;
         }
 
         private void ActivarVistaActiva()
@@ -328,6 +335,8 @@ namespace FrbaCommerce
             listRubros.Enabled = false;
             listRubros.DataSource = oDtPubRubros.Copy();
             listRubros.ValueMember = "pubrub_rub_Id";
+
+            btnLimpiar.Enabled = false;
 
             //Tildamos los rubros
             for (int i = 0; i < (this.listRubros.Items.Count); i++)
@@ -453,6 +462,12 @@ namespace FrbaCommerce
                 datosOk = false;
             }
 
+            if (decStockAnterior > nudStock.Value)
+            {
+                mensaje = mensaje + "Solo puede Incrementar el Stock de la Publicacion." + System.Environment.NewLine;
+                datosOk = false;
+            }
+
             if (nudPrecio.Value < 1)
             {
                 mensaje = mensaje + "Debe indicar un Precio Mayor o Igual a $1,00." + System.Environment.NewLine;
@@ -563,7 +578,7 @@ namespace FrbaCommerce
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Confirma que desea Cancelar los datos ingresados?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (!btnGenerar.Enabled || MessageBox.Show("Confirma que desea Cancelar?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 Limpiar(true);
                 HabilitarMod(false);

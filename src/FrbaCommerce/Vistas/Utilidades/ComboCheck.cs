@@ -195,5 +195,10 @@ namespace FrbaCommerce
                     MostrarPanel();
             }
         }
+
+        private void cmbCombo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
     }
 }

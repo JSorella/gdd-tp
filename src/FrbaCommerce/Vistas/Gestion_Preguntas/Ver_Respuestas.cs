@@ -20,8 +20,15 @@ namespace FrbaCommerce
         {
             try
             {
-                dgvPreguntas.Visible = true;
-                dgvPreguntas.DataSource = InterfazBD.getRespuestas();
+                //Obtengo las Preguntas que hizo el usuario logueado
+                //y que respuestas obtuvo.
+                dgvMisPreguntas.Visible = true;
+                dgvMisPreguntas.DataSource = InterfazBD.getPreguntasDelUsuario();
+
+                //Obtengo las Respuestas que dio el usuario logueado
+                //a las preguntas recibidas en sus Publicaciones
+                dgvMisRespuestas.Visible = true;
+                dgvMisRespuestas.DataSource = InterfazBD.getRespuestasDelUsuario();
             }
             catch (Exception ex)
             {
@@ -32,6 +39,11 @@ namespace FrbaCommerce
         private void Ver_Respuestas_Load(object sender, EventArgs e)
         {
             cargarPreguntasRespuestas();
+
+            if (Singleton.sessionRol_Id == 3)
+            {
+                tabPreguntas.TabPages.Remove(tpMisPreguntas);
+            }
         }
 
         private void btnRefrescar_Click(object sender, EventArgs e)

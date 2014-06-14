@@ -34,31 +34,31 @@
             this.btnRefrescar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPreguntas)).BeginInit();
             this.SuspendLayout();
-            //
+            // 
             // btnResponder
-            //
+            // 
             this.btnResponder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnResponder.Location = new System.Drawing.Point(13, 263);
+            this.btnResponder.Location = new System.Drawing.Point(13, 265);
             this.btnResponder.Name = "btnResponder";
-            this.btnResponder.Size = new System.Drawing.Size(110, 30);
+            this.btnResponder.Size = new System.Drawing.Size(75, 23);
             this.btnResponder.TabIndex = 1;
             this.btnResponder.Text = "Responder";
             this.btnResponder.UseVisualStyleBackColor = true;
             this.btnResponder.Click += new System.EventHandler(this.btnResponder_Click);
-            //
+            // 
             // btnSalir
-            //
+            // 
             this.btnSalir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSalir.Location = new System.Drawing.Point(480, 258);
+            this.btnSalir.Location = new System.Drawing.Point(515, 265);
             this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(110, 30);
+            this.btnSalir.Size = new System.Drawing.Size(75, 23);
             this.btnSalir.TabIndex = 2;
             this.btnSalir.Text = "Salir";
             this.btnSalir.UseVisualStyleBackColor = true;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
-            //
+            // 
             // dgvPreguntas
-            //
+            // 
             this.dgvPreguntas.AllowUserToAddRows = false;
             this.dgvPreguntas.AllowUserToDeleteRows = false;
             this.dgvPreguntas.AllowUserToOrderColumns = true;
@@ -73,23 +73,23 @@
             this.dgvPreguntas.Name = "dgvPreguntas";
             this.dgvPreguntas.ReadOnly = true;
             this.dgvPreguntas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPreguntas.Size = new System.Drawing.Size(577, 235);
+            this.dgvPreguntas.Size = new System.Drawing.Size(577, 247);
             this.dgvPreguntas.TabIndex = 5;
             this.dgvPreguntas.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPreguntas_CellDoubleClick);
-            //
+            // 
             // btnRefrescar
-            //
+            // 
             this.btnRefrescar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRefrescar.Location = new System.Drawing.Point(364, 258);
+            this.btnRefrescar.Location = new System.Drawing.Point(434, 265);
             this.btnRefrescar.Name = "btnRefrescar";
-            this.btnRefrescar.Size = new System.Drawing.Size(110, 30);
+            this.btnRefrescar.Size = new System.Drawing.Size(75, 23);
             this.btnRefrescar.TabIndex = 6;
             this.btnRefrescar.Text = "Refrescar";
             this.btnRefrescar.UseVisualStyleBackColor = true;
             this.btnRefrescar.Click += new System.EventHandler(this.btnRefrescar_Click);
-            //
+            // 
             // Responder_preguntas
-            //
+            // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(602, 300);

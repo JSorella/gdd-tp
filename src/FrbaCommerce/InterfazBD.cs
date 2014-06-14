@@ -853,10 +853,9 @@ namespace FrbaCommerce
                 //Insert Publicacion_Rubros
                 Singleton.conexion.executeCommandMasivo(ref cmd, "J2LA.Publicaciones_Insert_Rubros", oDtPubRubros, null, "");
 
-                //Si es Subasta  Finalizada con Costo por Publicar y tiene Ofertas => Grabo una Compra.-
-                if ((Convert.ToInt32(oDtPubli.Rows[0]["pub_pub_tipo_Id"]) == 4) //Subasta
-                        && (Convert.ToInt32(oDtPubli.Rows[0]["pub_estado_Id"]) == 4) //Finalizada
-                        && (Convert.ToDecimal(oDtPubli.Rows[0]["pub_vis_Precio"]) != Convert.ToDecimal(0))) //Con Costo por Publicar
+                //Si es Subasta Finalizada y tiene Ofertas => Grabo una Compra.-
+                if ((Convert.ToInt32(oDtPubli.Rows[0]["pub_tipo_Id"]) == 2) //Subasta
+                        && (Convert.ToInt32(oDtPubli.Rows[0]["pub_estado_Id"]) == 4)) //Finalizada
                 {
                     //Obtengo la Oferta Ganadora.-
                     DataTable oDtOfer = getOfertaGanadora(pub_Codigo);
@@ -1317,13 +1316,6 @@ namespace FrbaCommerce
         {
             try
             {
-                //string query = "select [Texto] = PR.preg_Comentario, [Descripcion] = PU.pub_descripcion " +
-                // "from J2LA.Preguntas PR inner Join J2LA.Publicaciones PU " +
-                // "on PR.preg_pub_Codigo = PU.pub_Codigo " +
-                // "where PR.preg_usu_Id = " + Singleton.usuario["usu_Id"] +
-                // " and (select COUNT(PR1.preg_id) from J2LA.Preguntas PR1 where PR1.preg_id = PR.preg_Id) = 1 " +
-                // "order by PR.preg_Id desc, PR.preg_Tipo";
-
                 String query = "SELECT [Codigo Publi] = PU.pub_Codigo, [Pregunta] = PR.preg_Comentario, " +
                                 "[Fecha] = Convert(varchar, PR.preg_fecha, 103), " +
                                 "[Usuario] = U.usu_UserName, " +
@@ -1343,16 +1335,10 @@ namespace FrbaCommerce
             }
         }
 
-        public static DataTable getRespuestas()
+        public static DataTable getPreguntasDelUsuario()
         {
             try
             {
-                //string query = "select top 20 [Texto] = PR.preg_Comentario, [Descripcion] = PU.pub_descripcion " +
-                // "from J2LA.Preguntas PR inner Join J2LA.Publicaciones PU " +
-                // "on PR.preg_pub_Codigo = PU.pub_Codigo " +
-                // "where PR.preg_usu_Id = " + Singleton.usuario["usu_Id"] + " and (select COUNT(PR1.preg_id) from J2LA.Preguntas PR1 where PR1.preg_id = PR.preg_Id) > 1 " +
-                // "order by PR.preg_Id desc, PR.preg_Tipo";
-
                 String query = "Select [Codigo Publi.] = PU.pub_Codigo, [Descripcion] = PU.pub_Descripcion, " +
                                 "[Fecha Vto.] = Convert(varchar,PU.pub_Fecha_Vto, 103), " +
                                 "[Precio] = PU.pub_Precio, [Stock] = PU.pub_Stock, " +
@@ -1596,7 +1582,8 @@ namespace FrbaCommerce
         {
             try
             {
-                String query = "Select * From J2LA.Usuarios_CantFactxTipoVis Where ucftv_usu_Id = " + usu_Id;
+                String query = "Select ucftv_usu_Id,ucftv_vis_Id,ucftv_Cantidad,pub_codigo = 0 " +
+                                "From J2LA.Usuarios_CantFactxTipoVis Where ucftv_usu_Id = " + usu_Id;
                 return Singleton.conexion.executeQueryTable(query, null, null);
             }
             catch (Exception ex)
@@ -1605,5 +1592,32 @@ namespace FrbaCommerce
             }
         }
 
+        public static DataTable getRespuestasDelUsuario()
+        {
+            try
+            {
+                String query = "Select [Codigo Publi.] = PU.pub_Codigo, [Descripcion] = PU.pub_Descripcion, " +
+                                "[Fecha Vto.] = Convert(varchar,PU.pub_Fecha_Vto, 103), " +
+                                "[Precio] = PU.pub_Precio, [Stock] = PU.pub_Stock, " +
+                                "[Usuario] = U.usu_UserName, " +
+                                "[Pregunta] = P.preg_Comentario, " +
+                                "[Fecha Preg] = Convert(varchar, P.preg_fecha, 103), " +
+                                "[Respuesta] = ISNULL(R.preg_Comentario, ''), " +
+                                "[Fecha Rta] = ISNULL(Convert(varchar, R.preg_fecha, 103), '') " +
+                                "From J2LA.Preguntas P " +
+                                "Inner Join J2LA.Publicaciones PU On PU.pub_Codigo = P.preg_pub_Codigo " +
+                                "Inner Join J2LA.Usuarios U On U.usu_Id = P.preg_usu_Id " +
+                                "Left Join J2LA.Preguntas R On R.preg_Tipo = 'R' And R.preg_Id = P.preg_Id " +
+                                "Where PU.pub_usu_Id = " + Singleton.usuario["usu_Id"] +
+                                "And P.preg_Tipo = 'P' " +
+                                "Order By PU.pub_Codigo, P.preg_Fecha ";
+
+                return Singleton.conexion.executeQueryTable(query, null, null);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }
