@@ -151,20 +151,57 @@ namespace FrbaCommerce
         }
 
         /// <summary>
-        /// Pregunto si existe un username en la tabla Usuario
+        /// Valido si existe un username en la tabla Usuarios
         /// </summary>
         public static string existeUsuario(string userName)
         {
-            //SqlCommand comando = new SqlCommand("SELECT J2LA.existeUsuario(@userName)", Singleton.conexion.connector());
-            //comando.Parameters.AddWithValue("@userName", userName);
-            //return (bool)comando.ExecuteScalar();
-
             try
             {
                 if ((bool)Singleton.conexion.executeQueryFuncEscalar("J2LA.existeUsuario(@userName)", null,
                                         new String[1, 2] { { "userName", userName } }))
                 {
                     throw new Exception("Ya existe un usuario con este nombre. Por Favor, ingrese uno distinto.");
+                }
+                return "";
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Valido si existe un teléfono en la tabla Clientes
+        /// </summary>
+        public static string existeTelefono(Int64 cli_tel)
+        {
+            try
+            {
+                if ((bool)Singleton.conexion.executeQueryFuncEscalar("J2LA.existeTelefono(@cli_tel)", null,
+                                        new String[1, 2] { { "cli_tel", cli_tel.ToString() } }))
+                {
+                    throw new Exception("Ya existe un cliente con este Teléfono.");
+                }
+                return "";
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Valido si existe un Dni en la tabla Clientes
+        /// </summary>
+        public static string existeDni(Int32 cli_Tipodoc_id, Int64 cli_Nro_doc)
+        {
+            try
+            {
+                if ((bool)Singleton.conexion.executeQueryFuncEscalar("J2LA.existeDni(@cli_Tipodoc_id, @cli_Nro_doc)", null,
+                                        new String[2, 2] { { "cli_Tipodoc_id", cli_Tipodoc_id.ToString() }, 
+                                                           { "cli_Nro_doc", cli_Nro_doc.ToString() } }))
+                {
+                    throw new Exception("Ya existe un cliente con este Dni.");
                 }
                 return "";
             }

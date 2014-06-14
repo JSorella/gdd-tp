@@ -101,68 +101,87 @@ namespace FrbaCommerce
 
         private Boolean validarCampos()
         {
-            if (this.nombre_textbox.Text == "")
+            try
             {
-                Funciones.mostrarAlert("Ingrese Nombre", this.Text); return false;
-            }
-            if (this.apellido_textbox.Text == "")
-            {
-                Funciones.mostrarAlert("Ingrese Apellido", this.Text); return false;
-            }
-            if (this.dni_textbox.Text == "")
-            {
-                Funciones.mostrarAlert("Ingrese DNI", this.Text); return false;
-            }
-            if (this.comboDoc.Text == "")
-            {
-                Funciones.mostrarAlert("Ingrese Tipo Documento", this.Text); return false;
-            }
-            if (this.cuil_textbox.Text == "")
-            {
-                Funciones.mostrarAlert("Ingrese Cuil", this.Text); return false;
-            }
-            if (this.mail_textbox.Text == "")
-            {
-                Funciones.mostrarAlert("Ingrese Email", this.Text); return false;
-            }
-            if (this.apellido_textbox.Text == "")
-            {
-                Funciones.mostrarAlert("Ingrese Apellido", this.Text); return false;
-            }
-            if (this.telefono_textbox.Text == "")
-            {
-                Funciones.mostrarAlert("Ingrese Teléfono", this.Text); return false;
-            }
-            if (this.calle_textbox.Text == "")
-            {
-                Funciones.mostrarAlert("Ingrese Calle", this.Text); return false;
-            }
-            if (this.altura_textbox.Text == "")
-            {
-                Funciones.mostrarAlert("Ingrese Altura Calle", this.Text); return false;
-            }
-            if (this.piso_textbox.Text == "")
-            {
-                Funciones.mostrarAlert("Ingrese Piso", this.Text); return false;
-            }
-            if (this.depto_textbox.Text == "")
-            {
-                Funciones.mostrarAlert("Ingrese Departamento", this.Text); return false;
-            }
-            if (this.localidad_textbox.Text == "")
-            {
-                Funciones.mostrarAlert("Ingrese Localidad", this.Text); return false;
-            }
-            if (this.cp_textbox.Text == "")
-            {
-                Funciones.mostrarAlert("Ingrese Código Postal", this.Text); return false;
-            }
-            if (this.fechaNacimiento.Text == "")
-            {
-                Funciones.mostrarAlert("Ingrese Fecha Nacimiento", this.Text); return false;
-            }
+                if (this.nombre_textbox.Text == "")
+                {
+                    Funciones.mostrarAlert("Ingrese Nombre", this.Text); return false;
+                }
+                if (this.apellido_textbox.Text == "")
+                {
+                    Funciones.mostrarAlert("Ingrese Apellido", this.Text); return false;
+                }
+                if (this.dni_textbox.Text == "")
+                {
+                    Funciones.mostrarAlert("Ingrese DNI", this.Text); return false;
+                }
+                if (this.comboDoc.Text == "")
+                {
+                    Funciones.mostrarAlert("Ingrese Tipo Documento", this.Text); return false;
+                }
+                if (this.cuil_textbox.Text == "")
+                {
+                    Funciones.mostrarAlert("Ingrese Cuil", this.Text); return false;
+                }
+                if (this.mail_textbox.Text == "")
+                {
+                    Funciones.mostrarAlert("Ingrese Email", this.Text); return false;
+                }
+                if (this.apellido_textbox.Text == "")
+                {
+                    Funciones.mostrarAlert("Ingrese Apellido", this.Text); return false;
+                }
+                if (this.telefono_textbox.Text == "")
+                {
+                    Funciones.mostrarAlert("Ingrese Teléfono", this.Text); return false;
+                }
+                if (this.calle_textbox.Text == "")
+                {
+                    Funciones.mostrarAlert("Ingrese Calle", this.Text); return false;
+                }
+                if (this.altura_textbox.Text == "")
+                {
+                    Funciones.mostrarAlert("Ingrese Altura Calle", this.Text); return false;
+                }
+                if (this.piso_textbox.Text == "")
+                {
+                    Funciones.mostrarAlert("Ingrese Piso", this.Text); return false;
+                }
+                if (this.depto_textbox.Text == "")
+                {
+                    Funciones.mostrarAlert("Ingrese Departamento", this.Text); return false;
+                }
+                if (this.localidad_textbox.Text == "")
+                {
+                    Funciones.mostrarAlert("Ingrese Localidad", this.Text); return false;
+                }
+                if (this.cp_textbox.Text == "")
+                {
+                    Funciones.mostrarAlert("Ingrese Código Postal", this.Text); return false;
+                }
+                if (this.fechaNacimiento.Text == "")
+                {
+                    Funciones.mostrarAlert("Ingrese Fecha Nacimiento", this.Text); return false;
+                }
 
-            return true;
+                //Validamos que el nombre de usuario no existe actualmente... (otra vez, por si acaso)
+                InterfazBD.existeUsuario(this.usuario);
+
+                //Validamos que el teléfono no esté repetido
+                InterfazBD.existeTelefono(Convert.ToInt64(this.telefono_textbox.Text));
+
+                //Validamos que el DNI no esté repetido
+                InterfazBD.existeDni(
+                    Convert.ToInt32(((DataRowView)this.comboDoc.SelectedItem).Row["tipodoc_Id"]),
+                    Convert.ToInt64(this.dni_textbox.Text));
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Funciones.mostrarAlert(ex.Message, this.Text);
+                return false;
+            }
         }
 
         private void altaAdminDatosUsuario()

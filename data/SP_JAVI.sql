@@ -59,7 +59,41 @@ CREATE FUNCTION J2LA.existeUsuario(@userName nvarchar(255))
 RETURNS BIT
 AS
 BEGIN
-	IF( (SELECT usu_userName FROM J2LA.Usuarios where usu_Username = @userName) IS NOT NULL)
+	IF( (SELECT COUNT(usu_userName) FROM J2LA.Usuarios where usu_Username = @userName) > 0 )
+		RETURN 1
+	RETURN 0
+END
+GO
+
+/*-------------------------FUNCTION (JAVI)--------------------------*/
+IF OBJECT_ID('J2LA.existeTelefono') IS NOT NULL
+DROP FUNCTION J2LA.existeTelefono
+GO
+CREATE FUNCTION J2LA.existeTelefono(@cli_tel nvarchar(255))
+RETURNS BIT
+AS
+BEGIN
+	IF( (SELECT COUNT(cli_tel) FROM J2LA.Clientes where cli_tel = @cli_tel) > 0)
+		RETURN 1
+	RETURN 0
+END
+GO
+
+/*-------------------------FUNCTION (JAVI)--------------------------*/
+IF OBJECT_ID('J2LA.existeDni') IS NOT NULL
+DROP FUNCTION J2LA.existeDni
+GO
+CREATE FUNCTION J2LA.existeDni(@cli_Tipodoc_Id int, @cli_Nro_Doc numeric(18,0))
+RETURNS BIT
+AS
+BEGIN
+	IF( (	SELECT COUNT(cli_Nro_Doc) 
+			FROM J2LA.Clientes 
+			WHERE 
+				cli_Nro_Doc = @cli_Nro_Doc
+			AND	
+				cli_Tipodoc_Id = @cli_Tipodoc_Id
+		) > 0 )
 		RETURN 1
 	RETURN 0
 END

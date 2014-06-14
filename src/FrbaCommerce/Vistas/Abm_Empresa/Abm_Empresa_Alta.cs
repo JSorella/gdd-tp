@@ -39,7 +39,7 @@ namespace FrbaCommerce
             Point ppos = this.btnSelFec.PointToScreen(new Point());
             ppos.X = ppos.X + this.btnSelFec.Width;
 
-            FrbaCommerce.ControlFecha oFrm = new FrbaCommerce.ControlFecha(ppos.X, ppos.Y);
+            FrbaCommerce.ControlFecha oFrm = new FrbaCommerce.ControlFecha(ppos.X, ppos.Y, false);
             oFrm.ShowDialog();
 
             if (!oFrm.Cancelado)
