@@ -136,9 +136,38 @@ BEGIN
 	EXECUTE J2LA.setNuevoUsuario @userName, @password
 	
 	INSERT INTO
-		J2LA.Clientes (cli_Nombre, cli_Apellido, cli_Nro_Doc, cli_Tipodoc_Id, cli_Mail, cli_Tel, cli_Dom_Calle, cli_Nro_Calle, cli_Piso, cli_Dpto, cli_Localidad, cli_CP, cli_Fecha_Nac, cli_Cuil, cli_usu_Id)
+		J2LA.Clientes (
+			cli_Nombre, 
+			cli_Apellido, 
+			cli_Nro_Doc, 
+			cli_Tipodoc_Id, 
+			cli_Mail, 
+			cli_Tel, 
+			cli_Dom_Calle, 
+			cli_Nro_Calle, 
+			cli_Piso, 
+			cli_Dpto, 
+			cli_Localidad, 
+			cli_CP, 
+			cli_Fecha_Nac, 
+			cli_Cuil, 
+			cli_usu_Id)
 	VALUES
-		(@nombre, @apellido, @dni, @tipoDoc, @mail, @telefono, @nomCalle, @nroCalle, @piso, @depto, @localidad, @cp, @fecnac, @cuil, J2LA.getUserId(@userName))
+		(@nombre, 
+		@apellido, 
+		@dni, 
+		@tipoDoc, 
+		@mail, 
+		@telefono, 
+		@nomCalle, 
+		@nroCalle, 
+		@piso, 
+		@depto, 
+		@localidad, 
+		@cp, 
+		@fecnac, 
+		@cuil, 
+		J2LA.getUserId(@userName))
 
 	INSERT INTO
 		J2LA.Usuarios_Roles (usurol_usu_Id, usurol_rol_Id)
@@ -265,7 +294,7 @@ BEGIN
 END
 GO
 
-/*-------------------------FUNCTION (JAVI)--------------------------*/
+/*-------------------------STORED PROCEDURE (JAVI)--------------------------*/
 IF OBJECT_ID('J2LA.getVendedor') IS NOT NULL
 DROP PROCEDURE J2LA.getVendedor
 GO

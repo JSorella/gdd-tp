@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnDarDeBaja = new System.Windows.Forms.Button();
             this.btnSeleccionar = new System.Windows.Forms.Button();
             this.tboxEmpresaSeleccionada = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
+            this.btnDarDeBaja = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -46,15 +46,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(499, 46);
             this.panel1.TabIndex = 60;
-            // 
-            // btnDarDeBaja
-            // 
-            this.btnDarDeBaja.Location = new System.Drawing.Point(206, 70);
-            this.btnDarDeBaja.Name = "btnDarDeBaja";
-            this.btnDarDeBaja.Size = new System.Drawing.Size(108, 30);
-            this.btnDarDeBaja.TabIndex = 3;
-            this.btnDarDeBaja.Text = "Dar de Baja";
-            this.btnDarDeBaja.UseVisualStyleBackColor = true;
             // 
             // btnSeleccionar
             // 
@@ -80,6 +71,16 @@
             this.label15.Size = new System.Drawing.Size(184, 13);
             this.label15.TabIndex = 0;
             this.label15.Text = "Indique la razón social de la empresa:";
+            // 
+            // btnDarDeBaja
+            // 
+            this.btnDarDeBaja.Location = new System.Drawing.Point(206, 70);
+            this.btnDarDeBaja.Name = "btnDarDeBaja";
+            this.btnDarDeBaja.Size = new System.Drawing.Size(108, 30);
+            this.btnDarDeBaja.TabIndex = 3;
+            this.btnDarDeBaja.Text = "Dar de Baja";
+            this.btnDarDeBaja.UseVisualStyleBackColor = true;
+            this.btnDarDeBaja.Click += new System.EventHandler(this.btnDarDeBaja_Click);
             // 
             // Abm_Empresa_Baja
             // 

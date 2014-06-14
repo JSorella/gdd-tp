@@ -15,5 +15,10 @@ namespace FrbaCommerce
         {
             InitializeComponent();
         }
+
+        private void btnDarDeBaja_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

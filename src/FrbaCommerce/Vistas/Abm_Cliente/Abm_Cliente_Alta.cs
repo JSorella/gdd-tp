@@ -13,11 +13,15 @@ namespace FrbaCommerce
     {
         private string usuario;
         private string pass;
+        private bool altaAdmin;
+        DateTime dteFecCreac;
+
 
         public Abm_Cliente_Alta()    //Alta desde Admin
         {
             this.usuario = "";
             this.pass = "";
+            this.altaAdmin = true;
             InitializeComponent();
         }
 
@@ -25,6 +29,7 @@ namespace FrbaCommerce
         {
             this.usuario = _usuario;
             this.pass = _pass;
+            this.altaAdmin = false;
             InitializeComponent();
         }
 
@@ -42,6 +47,8 @@ namespace FrbaCommerce
 
             try
             {
+                altaAdminDatosUsuario();
+
                 Cliente cliente = new Cliente(
                                     this.usuario, 
                                     this.pass, 
@@ -56,8 +63,8 @@ namespace FrbaCommerce
                                     Convert.ToInt32(this.piso_textbox.Text), 
                                     this.depto_textbox.Text, 
                                     this.localidad_textbox.Text, 
-                                    this.cp_textbox.Text, 
-                                    (DateTime)this.fechaNacimiento.Value,
+                                    this.cp_textbox.Text,
+                                    (DateTime)this.dteFecCreac,
                                     Convert.ToInt64(this.cuil_textbox.Text) 
                                     );
 
@@ -137,6 +144,33 @@ namespace FrbaCommerce
             }
 
             return true;
+        }
+
+        private void altaAdminDatosUsuario()
+        {
+            if (this.altaAdmin)
+            {
+                this.usuario = this.dni_textbox.Text + ((DataRowView)this.comboDoc.SelectedItem).Row["tipodoc_Id"];
+                this.pass = this.telefono_textbox.Text;
+            } 
+        }
+
+        private void btnSelFec_Click(object sender, EventArgs e)
+        {
+            Point ppos = this.btnSelFec.PointToScreen(new Point());
+            ppos.X = ppos.X + this.btnSelFec.Width;
+
+            FrbaCommerce.ControlFecha oFrm = new FrbaCommerce.ControlFecha(ppos.X, ppos.Y);
+            oFrm.ShowDialog();
+
+            if (!oFrm.Cancelado)
+                dteFecCreac = oFrm.FechaSeleccionada;
+                fechaNacimiento.Text = oFrm.FechaSeleccionada.ToShortDateString();
+        }
+
+        private void textbox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = Funciones.SoloNumeros(e.KeyChar);
         }
     }
 }

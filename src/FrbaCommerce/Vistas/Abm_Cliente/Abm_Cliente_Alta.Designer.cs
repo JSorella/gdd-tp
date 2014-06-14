@@ -52,12 +52,13 @@
             this.label12 = new System.Windows.Forms.Label();
             this.cp_textbox = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.fechaNacimiento = new System.Windows.Forms.DateTimePicker();
             this.comboDoc = new System.Windows.Forms.ComboBox();
             this.label14 = new System.Windows.Forms.Label();
             this.altura_textbox = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.cuil_textbox = new System.Windows.Forms.TextBox();
+            this.btnSelFec = new System.Windows.Forms.Button();
+            this.fechaNacimiento = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // button1
@@ -108,6 +109,7 @@
             this.dni_textbox.Name = "dni_textbox";
             this.dni_textbox.Size = new System.Drawing.Size(191, 20);
             this.dni_textbox.TabIndex = 3;
+            this.dni_textbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textbox_KeyPress);
             // 
             // mail_textbox
             // 
@@ -122,6 +124,7 @@
             this.telefono_textbox.Name = "telefono_textbox";
             this.telefono_textbox.Size = new System.Drawing.Size(191, 20);
             this.telefono_textbox.TabIndex = 7;
+            this.telefono_textbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textbox_KeyPress);
             // 
             // label4
             // 
@@ -257,15 +260,6 @@
             this.label13.TabIndex = 43;
             this.label13.Text = "Fecha de Nacimiento";
             // 
-            // fechaNacimiento
-            // 
-            this.fechaNacimiento.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
-            this.fechaNacimiento.Location = new System.Drawing.Point(93, 219);
-            this.fechaNacimiento.Name = "fechaNacimiento";
-            this.fechaNacimiento.Size = new System.Drawing.Size(194, 20);
-            this.fechaNacimiento.TabIndex = 8;
-            this.fechaNacimiento.Value = new System.DateTime(2014, 5, 25, 22, 55, 23, 0);
-            // 
             // comboDoc
             // 
             this.comboDoc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -292,6 +286,7 @@
             this.altura_textbox.Name = "altura_textbox";
             this.altura_textbox.Size = new System.Drawing.Size(100, 20);
             this.altura_textbox.TabIndex = 11;
+            this.altura_textbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textbox_KeyPress);
             // 
             // label15
             // 
@@ -308,18 +303,38 @@
             this.cuil_textbox.Name = "cuil_textbox";
             this.cuil_textbox.Size = new System.Drawing.Size(191, 20);
             this.cuil_textbox.TabIndex = 5;
+            this.cuil_textbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textbox_KeyPress);
+            // 
+            // btnSelFec
+            // 
+            this.btnSelFec.Location = new System.Drawing.Point(209, 214);
+            this.btnSelFec.Name = "btnSelFec";
+            this.btnSelFec.Size = new System.Drawing.Size(75, 23);
+            this.btnSelFec.TabIndex = 8;
+            this.btnSelFec.Text = "Seleccionar";
+            this.btnSelFec.UseVisualStyleBackColor = true;
+            this.btnSelFec.Click += new System.EventHandler(this.btnSelFec_Click);
+            // 
+            // fechaNacimiento
+            // 
+            this.fechaNacimiento.Location = new System.Drawing.Point(136, 217);
+            this.fechaNacimiento.Name = "fechaNacimiento";
+            this.fechaNacimiento.ReadOnly = true;
+            this.fechaNacimiento.Size = new System.Drawing.Size(67, 20);
+            this.fechaNacimiento.TabIndex = 50;
             // 
             // Abm_Cliente_Alta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(635, 267);
+            this.Controls.Add(this.btnSelFec);
+            this.Controls.Add(this.fechaNacimiento);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.cuil_textbox);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.altura_textbox);
             this.Controls.Add(this.comboDoc);
-            this.Controls.Add(this.fechaNacimiento);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.cp_textbox);
             this.Controls.Add(this.label12);
@@ -380,11 +395,12 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox cp_textbox;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.DateTimePicker fechaNacimiento;
         private System.Windows.Forms.ComboBox comboDoc;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TextBox altura_textbox;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox cuil_textbox;
+        private System.Windows.Forms.Button btnSelFec;
+        private System.Windows.Forms.TextBox fechaNacimiento;
     }
 }
