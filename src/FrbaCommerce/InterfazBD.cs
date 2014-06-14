@@ -978,6 +978,37 @@ namespace FrbaCommerce
             }
         }
 
+        public static DataTable BuscarEmpresas(String filtros)
+        {
+            try
+            {
+                String query = "Select emp_CUIT,emp_Razon_Social,emp_Mail from J2LA.Empresas" +
+                                filtros +
+                                " Order By emp_CUIT ASC";
+
+                return Singleton.conexion.executeQueryTable(query, null, null);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public static DataTable getEmpresa(string emp_CUIT)
+        {
+            try
+            {
+                String query = "Select * From J2LA.Empresas,J2LA.Usuarios " +
+                                "Where emp_usu_Id = usu_Id and emp_CUIT = '" + emp_CUIT + "'";
+
+                return Singleton.conexion.executeQueryTable(query, null, null);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public static int getCantPubliGratis(int pub_codigo)
         {
             try

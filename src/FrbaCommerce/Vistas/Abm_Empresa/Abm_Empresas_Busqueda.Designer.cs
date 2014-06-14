@@ -31,15 +31,16 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.tboxRazonSocial = new System.Windows.Forms.TextBox();
+            this.tboxMail = new System.Windows.Forms.TextBox();
+            this.tboxCUIT = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnBuscar = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.gridEmpresas = new System.Windows.Forms.DataGridView();
             this.btnSeleccionar = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridEmpresas)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -69,33 +70,34 @@
             this.label3.TabIndex = 2;
             this.label3.Text = "Mail";
             // 
-            // textBox1
+            // tboxRazonSocial
             // 
-            this.textBox1.Location = new System.Drawing.Point(91, 28);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(283, 20);
-            this.textBox1.TabIndex = 3;
+            this.tboxRazonSocial.Location = new System.Drawing.Point(91, 28);
+            this.tboxRazonSocial.Name = "tboxRazonSocial";
+            this.tboxRazonSocial.Size = new System.Drawing.Size(283, 20);
+            this.tboxRazonSocial.TabIndex = 3;
             // 
-            // textBox2
+            // tboxMail
             // 
-            this.textBox2.Location = new System.Drawing.Point(91, 91);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(283, 20);
-            this.textBox2.TabIndex = 4;
+            this.tboxMail.Location = new System.Drawing.Point(91, 91);
+            this.tboxMail.Name = "tboxMail";
+            this.tboxMail.Size = new System.Drawing.Size(283, 20);
+            this.tboxMail.TabIndex = 4;
             // 
-            // textBox3
+            // tboxCUIT
             // 
-            this.textBox3.Location = new System.Drawing.Point(91, 60);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(283, 20);
-            this.textBox3.TabIndex = 5;
+            this.tboxCUIT.Location = new System.Drawing.Point(91, 60);
+            this.tboxCUIT.Name = "tboxCUIT";
+            this.tboxCUIT.Size = new System.Drawing.Size(283, 20);
+            this.tboxCUIT.TabIndex = 5;
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnLimpiar);
             this.groupBox1.Controls.Add(this.btnBuscar);
-            this.groupBox1.Controls.Add(this.textBox3);
-            this.groupBox1.Controls.Add(this.textBox2);
-            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.tboxCUIT);
+            this.groupBox1.Controls.Add(this.tboxMail);
+            this.groupBox1.Controls.Add(this.tboxRazonSocial);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
@@ -106,6 +108,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros de búsqueda";
             // 
+            // btnLimpiar
+            // 
+            this.btnLimpiar.Location = new System.Drawing.Point(12, 125);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(70, 30);
+            this.btnLimpiar.TabIndex = 7;
+            this.btnLimpiar.Text = "Limpiar";
+            this.btnLimpiar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
+            // 
             // btnBuscar
             // 
             this.btnBuscar.Location = new System.Drawing.Point(302, 125);
@@ -114,14 +126,21 @@
             this.btnBuscar.TabIndex = 6;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
-            // dataGridView1
+            // gridEmpresas
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 194);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(387, 215);
-            this.dataGridView1.TabIndex = 7;
+            this.gridEmpresas.AllowUserToAddRows = false;
+            this.gridEmpresas.AllowUserToDeleteRows = false;
+            this.gridEmpresas.AllowUserToOrderColumns = true;
+            this.gridEmpresas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridEmpresas.Location = new System.Drawing.Point(12, 194);
+            this.gridEmpresas.Name = "gridEmpresas";
+            this.gridEmpresas.ReadOnly = true;
+            this.gridEmpresas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.gridEmpresas.Size = new System.Drawing.Size(387, 215);
+            this.gridEmpresas.TabIndex = 7;
+            this.gridEmpresas.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridEmpresas_CellDoubleClick);
             // 
             // btnSeleccionar
             // 
@@ -131,6 +150,7 @@
             this.btnSeleccionar.TabIndex = 8;
             this.btnSeleccionar.Text = "Seleccionar";
             this.btnSeleccionar.UseVisualStyleBackColor = true;
+            this.btnSeleccionar.Click += new System.EventHandler(this.btnSeleccionar_Click);
             // 
             // Abm_Empresas_Busqueda
             // 
@@ -138,13 +158,14 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(412, 462);
             this.Controls.Add(this.btnSeleccionar);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.gridEmpresas);
             this.Controls.Add(this.groupBox1);
             this.Name = "Abm_Empresas_Busqueda";
             this.Text = "Abm_Empresas_Busqueda";
+            this.Load += new System.EventHandler(this.Abm_Empresas_Busqueda_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridEmpresas)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -154,12 +175,13 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox tboxRazonSocial;
+        private System.Windows.Forms.TextBox tboxMail;
+        private System.Windows.Forms.TextBox tboxCUIT;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnBuscar;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView gridEmpresas;
         private System.Windows.Forms.Button btnSeleccionar;
+        private System.Windows.Forms.Button btnLimpiar;
     }
 }

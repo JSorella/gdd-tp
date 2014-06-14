@@ -55,16 +55,16 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.chkboxInhabilitada = new System.Windows.Forms.CheckBox();
             this.btnGuardar = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.pnlParam = new System.Windows.Forms.Panel();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.btnSeleccionar = new System.Windows.Forms.Button();
             this.tboxEmpresaSeleccionada = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
+            this.pnlDatos = new System.Windows.Forms.Panel();
+            this.pnlParam.SuspendLayout();
+            this.pnlDatos.SuspendLayout();
             this.SuspendLayout();
             // 
             // timePickerFechaCreacion
@@ -284,15 +284,15 @@
             this.label1.TabIndex = 29;
             this.label1.Text = "Razón Social";
             // 
-            // checkBox1
+            // chkboxInhabilitada
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(10, 212);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(124, 17);
-            this.checkBox1.TabIndex = 57;
-            this.checkBox1.Text = "Empresa Inhabilitada";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.chkboxInhabilitada.AutoSize = true;
+            this.chkboxInhabilitada.Location = new System.Drawing.Point(10, 212);
+            this.chkboxInhabilitada.Name = "chkboxInhabilitada";
+            this.chkboxInhabilitada.Size = new System.Drawing.Size(124, 17);
+            this.chkboxInhabilitada.TabIndex = 57;
+            this.chkboxInhabilitada.Text = "Empresa Inhabilitada";
+            this.chkboxInhabilitada.UseVisualStyleBackColor = true;
             // 
             // btnGuardar
             // 
@@ -303,17 +303,17 @@
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
             // 
-            // panel1
+            // pnlParam
             // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.btnAceptar);
-            this.panel1.Controls.Add(this.btnSeleccionar);
-            this.panel1.Controls.Add(this.tboxEmpresaSeleccionada);
-            this.panel1.Controls.Add(this.label15);
-            this.panel1.Location = new System.Drawing.Point(13, 12);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(643, 46);
-            this.panel1.TabIndex = 59;
+            this.pnlParam.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlParam.Controls.Add(this.btnAceptar);
+            this.pnlParam.Controls.Add(this.btnSeleccionar);
+            this.pnlParam.Controls.Add(this.tboxEmpresaSeleccionada);
+            this.pnlParam.Controls.Add(this.label15);
+            this.pnlParam.Location = new System.Drawing.Point(13, 12);
+            this.pnlParam.Name = "pnlParam";
+            this.pnlParam.Size = new System.Drawing.Size(643, 46);
+            this.pnlParam.TabIndex = 59;
             // 
             // btnAceptar
             // 
@@ -323,6 +323,7 @@
             this.btnAceptar.TabIndex = 3;
             this.btnAceptar.Text = "Aceptar";
             this.btnAceptar.UseVisualStyleBackColor = true;
+            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
             // 
             // btnSeleccionar
             // 
@@ -332,6 +333,7 @@
             this.btnSeleccionar.TabIndex = 2;
             this.btnSeleccionar.Text = "Seleccionar";
             this.btnSeleccionar.UseVisualStyleBackColor = true;
+            this.btnSeleccionar.Click += new System.EventHandler(this.btnSeleccionar_Click);
             // 
             // tboxEmpresaSeleccionada
             // 
@@ -345,62 +347,63 @@
             this.label15.AutoSize = true;
             this.label15.Location = new System.Drawing.Point(24, 16);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(184, 13);
+            this.label15.Size = new System.Drawing.Size(160, 13);
             this.label15.TabIndex = 0;
-            this.label15.Text = "Indique la razón social de la empresa:";
+            this.label15.Text = "Indique el CUIT de una empresa";
             // 
-            // panel2
+            // pnlDatos
             // 
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.checkBox1);
-            this.panel2.Controls.Add(this.timePickerFechaCreacion);
-            this.panel2.Controls.Add(this.tboxCodPostal);
-            this.panel2.Controls.Add(this.tboxCiudad);
-            this.panel2.Controls.Add(this.tboxLocalidad);
-            this.panel2.Controls.Add(this.tboxDpto);
-            this.panel2.Controls.Add(this.tboxPiso);
-            this.panel2.Controls.Add(this.tboxAltura);
-            this.panel2.Controls.Add(this.tboxCalle);
-            this.panel2.Controls.Add(this.tboxNombreContacto);
-            this.panel2.Controls.Add(this.tboxCUIT);
-            this.panel2.Controls.Add(this.tboxTelefono);
-            this.panel2.Controls.Add(this.tboxMail);
-            this.panel2.Controls.Add(this.tboxRazonSocial);
-            this.panel2.Controls.Add(this.label14);
-            this.panel2.Controls.Add(this.label13);
-            this.panel2.Controls.Add(this.label12);
-            this.panel2.Controls.Add(this.label11);
-            this.panel2.Controls.Add(this.label10);
-            this.panel2.Controls.Add(this.label9);
-            this.panel2.Controls.Add(this.label8);
-            this.panel2.Controls.Add(this.label7);
-            this.panel2.Controls.Add(this.label6);
-            this.panel2.Controls.Add(this.label5);
-            this.panel2.Controls.Add(this.label4);
-            this.panel2.Controls.Add(this.label3);
-            this.panel2.Controls.Add(this.label2);
-            this.panel2.Controls.Add(this.label1);
-            this.panel2.Location = new System.Drawing.Point(13, 73);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(643, 244);
-            this.panel2.TabIndex = 60;
+            this.pnlDatos.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlDatos.Controls.Add(this.chkboxInhabilitada);
+            this.pnlDatos.Controls.Add(this.timePickerFechaCreacion);
+            this.pnlDatos.Controls.Add(this.tboxCodPostal);
+            this.pnlDatos.Controls.Add(this.tboxCiudad);
+            this.pnlDatos.Controls.Add(this.tboxLocalidad);
+            this.pnlDatos.Controls.Add(this.tboxDpto);
+            this.pnlDatos.Controls.Add(this.tboxPiso);
+            this.pnlDatos.Controls.Add(this.tboxAltura);
+            this.pnlDatos.Controls.Add(this.tboxCalle);
+            this.pnlDatos.Controls.Add(this.tboxNombreContacto);
+            this.pnlDatos.Controls.Add(this.tboxCUIT);
+            this.pnlDatos.Controls.Add(this.tboxTelefono);
+            this.pnlDatos.Controls.Add(this.tboxMail);
+            this.pnlDatos.Controls.Add(this.tboxRazonSocial);
+            this.pnlDatos.Controls.Add(this.label14);
+            this.pnlDatos.Controls.Add(this.label13);
+            this.pnlDatos.Controls.Add(this.label12);
+            this.pnlDatos.Controls.Add(this.label11);
+            this.pnlDatos.Controls.Add(this.label10);
+            this.pnlDatos.Controls.Add(this.label9);
+            this.pnlDatos.Controls.Add(this.label8);
+            this.pnlDatos.Controls.Add(this.label7);
+            this.pnlDatos.Controls.Add(this.label6);
+            this.pnlDatos.Controls.Add(this.label5);
+            this.pnlDatos.Controls.Add(this.label4);
+            this.pnlDatos.Controls.Add(this.label3);
+            this.pnlDatos.Controls.Add(this.label2);
+            this.pnlDatos.Controls.Add(this.label1);
+            this.pnlDatos.Location = new System.Drawing.Point(13, 73);
+            this.pnlDatos.Name = "pnlDatos";
+            this.pnlDatos.Size = new System.Drawing.Size(643, 244);
+            this.pnlDatos.TabIndex = 60;
             // 
             // Abm_Empresa_Modif
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(670, 374);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.pnlDatos);
+            this.Controls.Add(this.pnlParam);
             this.Controls.Add(this.btnGuardar);
             this.MaximizeBox = false;
             this.Name = "Abm_Empresa_Modif";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Abm_Empresa_Modif";
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
+            this.Load += new System.EventHandler(this.Abm_Empresa_Modif_Load);
+            this.pnlParam.ResumeLayout(false);
+            this.pnlParam.PerformLayout();
+            this.pnlDatos.ResumeLayout(false);
+            this.pnlDatos.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -434,13 +437,13 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox chkboxInhabilitada;
         private System.Windows.Forms.Button btnGuardar;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pnlParam;
         private System.Windows.Forms.Button btnAceptar;
         private System.Windows.Forms.Button btnSeleccionar;
         private System.Windows.Forms.TextBox tboxEmpresaSeleccionada;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel pnlDatos;
     }
 }
