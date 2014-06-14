@@ -44,21 +44,22 @@
             this.panel1.Controls.Add(this.label15);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(499, 46);
+            this.panel1.Size = new System.Drawing.Size(465, 46);
             this.panel1.TabIndex = 60;
             // 
             // btnSeleccionar
             // 
-            this.btnSeleccionar.Location = new System.Drawing.Point(415, 6);
+            this.btnSeleccionar.Location = new System.Drawing.Point(386, 6);
             this.btnSeleccionar.Name = "btnSeleccionar";
             this.btnSeleccionar.Size = new System.Drawing.Size(73, 30);
             this.btnSeleccionar.TabIndex = 2;
             this.btnSeleccionar.Text = "Seleccionar";
             this.btnSeleccionar.UseVisualStyleBackColor = true;
+            this.btnSeleccionar.Click += new System.EventHandler(this.btnSeleccionar_Click);
             // 
             // tboxEmpresaSeleccionada
             // 
-            this.tboxEmpresaSeleccionada.Location = new System.Drawing.Point(190, 12);
+            this.tboxEmpresaSeleccionada.Location = new System.Drawing.Point(161, 12);
             this.tboxEmpresaSeleccionada.Name = "tboxEmpresaSeleccionada";
             this.tboxEmpresaSeleccionada.Size = new System.Drawing.Size(219, 20);
             this.tboxEmpresaSeleccionada.TabIndex = 1;
@@ -68,13 +69,13 @@
             this.label15.AutoSize = true;
             this.label15.Location = new System.Drawing.Point(4, 15);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(184, 13);
+            this.label15.Size = new System.Drawing.Size(153, 13);
             this.label15.TabIndex = 0;
-            this.label15.Text = "Indique la razón social de la empresa:";
+            this.label15.Text = "Indique el CUIT de la empresa:";
             // 
             // btnDarDeBaja
             // 
-            this.btnDarDeBaja.Location = new System.Drawing.Point(206, 70);
+            this.btnDarDeBaja.Location = new System.Drawing.Point(179, 68);
             this.btnDarDeBaja.Name = "btnDarDeBaja";
             this.btnDarDeBaja.Size = new System.Drawing.Size(108, 30);
             this.btnDarDeBaja.TabIndex = 3;
@@ -86,13 +87,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(524, 109);
+            this.ClientSize = new System.Drawing.Size(490, 107);
             this.Controls.Add(this.btnDarDeBaja);
             this.Controls.Add(this.panel1);
             this.MaximizeBox = false;
             this.Name = "Abm_Empresa_Baja";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Abm_Empresa_Baja";
+            this.Load += new System.EventHandler(this.Abm_Empresa_Baja_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
