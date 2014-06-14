@@ -115,9 +115,9 @@
             // 
             this.txtconfirm.Location = new System.Drawing.Point(99, 39);
             this.txtconfirm.Name = "txtconfirm";
-            this.txtconfirm.PasswordChar = '•';
             this.txtconfirm.Size = new System.Drawing.Size(188, 20);
             this.txtconfirm.TabIndex = 5;
+            this.txtconfirm.UseSystemPasswordChar = true;
             // 
             // label3
             // 
@@ -132,9 +132,9 @@
             // 
             this.txtnewpass.Location = new System.Drawing.Point(99, 13);
             this.txtnewpass.Name = "txtnewpass";
-            this.txtnewpass.PasswordChar = '•';
             this.txtnewpass.Size = new System.Drawing.Size(188, 20);
             this.txtnewpass.TabIndex = 4;
+            this.txtnewpass.UseSystemPasswordChar = true;
             // 
             // label2
             // 
