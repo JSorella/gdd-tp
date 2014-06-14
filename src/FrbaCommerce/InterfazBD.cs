@@ -1595,9 +1595,9 @@ namespace FrbaCommerce
         {
             try
             {
-                String query = "Select ucftv_usu_Id,ucftv_vis_Id,ucftv_Cantidad,pub_codigo = 0 " +
-                                "From J2LA.Usuarios_CantFactxTipoVis Where ucftv_usu_Id = " + usu_Id;
-                return Singleton.conexion.executeQueryTable(query, null, null);
+                String query = "SELECT * FROM J2LA.getCantFactxTipoVis(@usu_Id) Order By Visibilidad";
+                return Singleton.conexion.executeQueryTable(query, null,
+                            new String[1, 2] { { "usu_Id", usu_Id.ToString() } });
             }
             catch (Exception ex)
             {
