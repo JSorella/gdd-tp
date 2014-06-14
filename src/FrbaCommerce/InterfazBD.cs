@@ -1066,6 +1066,19 @@ namespace FrbaCommerce
             }
         }
 
+        public static bool RealizarBajaEmpresa(string emp_CUIT)
+        {
+            try
+            {
+                Singleton.conexion.executeQuerySP("J2LA.BajaEmpresa", null, new String[1, 2] { { "emp_CUIT", emp_CUIT } });
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public static int getCantPubliGratis(int pub_codigo)
         {
             try
