@@ -13,15 +13,15 @@ namespace FrbaCommerce
     {
         private string usuario;
         private string pass;
-        private bool altaAdmin;
         DateTime dteFecCreac;
+        private bool usu_Primer_Ingreso;  
 
 
         public Abm_Cliente_Alta()    //Alta desde Admin
         {
             this.usuario = "";
             this.pass = "";
-            this.altaAdmin = true;
+            this.usu_Primer_Ingreso = true;
             InitializeComponent();
         }
 
@@ -29,7 +29,7 @@ namespace FrbaCommerce
         {
             this.usuario = _usuario;
             this.pass = _pass;
-            this.altaAdmin = false;
+            this.usu_Primer_Ingreso = false; //si soy el usuario, no necesito cambiar contraseña, ya la elegi yo!
             InitializeComponent();
         }
 
@@ -49,26 +49,45 @@ namespace FrbaCommerce
             {
                 altaAdminDatosUsuario();
 
-                Cliente cliente = new Cliente(
-                                    this.usuario, 
-                                    this.pass, 
-                                    this.nombre_textbox.Text, 
-                                    this.apellido_textbox.Text, 
-                                    Convert.ToInt64(this.dni_textbox.Text), 
-                                    Convert.ToInt32(((DataRowView)this.comboDoc.SelectedItem).Row["tipodoc_Id"]), 
-                                    this.mail_textbox.Text, 
-                                    Convert.ToInt64(this.telefono_textbox.Text), 
-                                    this.calle_textbox.Text, 
-                                    Convert.ToInt32(this.altura_textbox.Text), 
-                                    Convert.ToInt32(this.piso_textbox.Text), 
-                                    this.depto_textbox.Text, 
-                                    this.localidad_textbox.Text, 
-                                    this.cp_textbox.Text,
-                                    (DateTime)this.dteFecCreac,
-                                    Convert.ToInt64(this.cuil_textbox.Text) 
-                                    );
 
-                InterfazBD.setNuevoCliente(cliente);
+                DataTable DTCliente = new DataTable();
+                DTCliente = InterfazBD.getDTCliente();
+
+                DTCliente.Rows.Clear();
+
+                DataRow clienteUsuario = DTCliente.NewRow();
+                //Cliente
+                clienteUsuario["cli_Nombre"] = this.nombre_textbox.Text;
+                clienteUsuario["cli_Apellido"] = this.apellido_textbox.Text;
+                clienteUsuario["cli_Tipodoc_Id"] = Convert.ToInt32(((DataRowView)this.comboDoc.SelectedItem).Row["tipodoc_Id"]);
+                clienteUsuario["cli_Nro_Doc"] = Convert.ToInt64(this.dni_textbox.Text);
+                clienteUsuario["cli_Mail"] = this.mail_textbox.Text;
+                clienteUsuario["cli_Tel"] = Convert.ToInt64(this.telefono_textbox.Text);
+                clienteUsuario["cli_Dom_Calle"] = this.calle_textbox.Text;
+                clienteUsuario["cli_Nro_Calle"] = Convert.ToInt32(this.altura_textbox.Text);
+                clienteUsuario["cli_Piso"] = Convert.ToInt32(this.piso_textbox.Text);
+                clienteUsuario["cli_Dpto"] = this.depto_textbox.Text;
+                clienteUsuario["cli_Localidad"] = this.localidad_textbox.Text; 
+                clienteUsuario["cli_CP"] = this.cp_textbox.Text;
+                clienteUsuario["cli_Fecha_Nac"] = (DateTime)this.dteFecCreac;
+                clienteUsuario["cli_Cuil"] = Convert.ToInt64(this.cuil_textbox.Text);
+                clienteUsuario["cli_usu_Id"] = 0;
+                //Usuario
+                clienteUsuario["usu_Id"] = 0;
+                clienteUsuario["usu_UserName"] = this.usuario;
+                clienteUsuario["usu_Pass"] = Funciones.get_hash(this.pass);  //Encripto el Password;
+                clienteUsuario["usu_Cant_Intentos"] = 0;
+                clienteUsuario["usu_Inhabilitado"] = 0;
+                clienteUsuario["usu_Motivo"] = "";
+                clienteUsuario["usu_Eliminado"] = 0;
+                clienteUsuario["usu_Primer_Ingreso"] = this.usu_Primer_Ingreso ? 1 : 0;
+                clienteUsuario["Publ_Cli_Dni"] = 0;
+                clienteUsuario["Publ_Empresa_Cuit"] = 0;
+                clienteUsuario["usu_Inhabilitado_Comprar"] = 0;
+
+                DTCliente.Rows.Add(clienteUsuario);
+
+                InterfazBD.setNuevoCliente(DTCliente);
             }
             catch (Exception error)
             {
@@ -148,7 +167,7 @@ namespace FrbaCommerce
 
         private void altaAdminDatosUsuario()
         {
-            if (this.altaAdmin)
+            if (Singleton.sessionRol_Id == 1) //Soy el Admin
             {
                 this.usuario = this.dni_textbox.Text + ((DataRowView)this.comboDoc.SelectedItem).Row["tipodoc_Id"];
                 this.pass = this.telefono_textbox.Text;
@@ -160,7 +179,7 @@ namespace FrbaCommerce
             Point ppos = this.btnSelFec.PointToScreen(new Point());
             ppos.X = ppos.X + this.btnSelFec.Width;
 
-            FrbaCommerce.ControlFecha oFrm = new FrbaCommerce.ControlFecha(ppos.X, ppos.Y);
+            FrbaCommerce.ControlFecha oFrm = new FrbaCommerce.ControlFecha(ppos.X, ppos.Y, false);
             oFrm.ShowDialog();
 
             if (!oFrm.Cancelado)

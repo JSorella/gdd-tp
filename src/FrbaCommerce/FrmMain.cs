@@ -34,7 +34,7 @@ namespace FrbaCommerce
                 return;
             }
 
-            this.tsslRol.Text = "Rol : " + Singleton.sessionRol_Nombre + " ";
+            this.tsslRol.Text = "Rol : " + Singleton.sessionRol_Nombre() + " ";
             this.tsslUsuario.Text = "Usuario : " + Singleton.usuario["usu_UserName"].ToString() + " ";
             this.tssiFecSystem.Text = "Fecha del Sistema: " + Singleton.FechaDelSistema.ToShortDateString() + " ";
 

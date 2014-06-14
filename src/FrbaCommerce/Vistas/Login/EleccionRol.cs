@@ -34,8 +34,6 @@ namespace FrbaCommerce
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             Singleton.sessionRol_Id = Convert.ToInt32(cmbRoles.SelectedValue);
-            Singleton.sessionRol_Nombre = cmbRoles.Text;
-
             this.Close();
         }
     }

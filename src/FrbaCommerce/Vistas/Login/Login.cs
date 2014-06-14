@@ -73,20 +73,12 @@ namespace FrbaCommerce
 
                     DataTable oDTRolesxUsuario = InterfazBD.getUsuarioConRoles(usuario.nombre);
 
-                    //if (oDTRolesxUsuario.Rows.Count == 0)
-                    //{
-                    //    Funciones.mostrarAlert("Usuario sin Roles Asignados. Informe al Administrador del Sistema. Gracias.");
-                    //    this.Close();
-                    //    return;
-                    //}
-
                     Singleton.usuario = oDTRolesxUsuario.NewRow();
                     Singleton.usuario.ItemArray = oDTRolesxUsuario.Rows[0].ItemArray;
 
                     if (oDTRolesxUsuario.Rows.Count == 1)
                     {
                         Singleton.sessionRol_Id = Convert.ToInt32(oDTRolesxUsuario.Rows[0]["rol_Id"]);
-                        Singleton.sessionRol_Nombre = oDTRolesxUsuario.Rows[0]["rol_Nombre"].ToString();
 
                         this.Close(); //Volvemos al Main!
                         return;

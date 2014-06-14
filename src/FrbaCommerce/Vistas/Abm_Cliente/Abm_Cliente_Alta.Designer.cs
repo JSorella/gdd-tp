@@ -202,6 +202,7 @@
             this.piso_textbox.Name = "piso_textbox";
             this.piso_textbox.Size = new System.Drawing.Size(36, 20);
             this.piso_textbox.TabIndex = 12;
+            this.piso_textbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textbox_KeyPress);
             // 
             // label10
             // 

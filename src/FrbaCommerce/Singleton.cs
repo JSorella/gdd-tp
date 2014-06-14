@@ -20,7 +20,6 @@ namespace FrbaCommerce
         public static DateTime FechaDelSistema;
 
         public static DataRow usuario; //= new DataTable();
-        public static String sessionRol_Nombre = "";
         public static int sessionRol_Id = 0;
 
         //El constructor del Singleton siempre debe ser privado para evitar ser instanciado
@@ -32,6 +31,11 @@ namespace FrbaCommerce
             {
                 return instance;
             }
+        }
+
+        public static string sessionRol_Nombre()
+        {
+            return InterfazBD.getRolNombre(sessionRol_Id);
         }
     }
 }

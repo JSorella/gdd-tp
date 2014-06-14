@@ -27,7 +27,7 @@ GO
 IF OBJECT_ID('J2LA.getFuncionalidadesPorRol') IS NOT NULL
 DROP FUNCTION J2LA.getFuncionalidadesPorRol
 GO
-CREATE FUNCTION J2LA.getFuncionalidadesPorRol( @nombreRol varchar(255) )
+CREATE FUNCTION J2LA.getFuncionalidadesPorRol( @nombreRol nvarchar(255) )
 RETURNS TABLE
 AS
 RETURN 
@@ -55,7 +55,7 @@ GO
 IF OBJECT_ID('J2LA.existeUsuario') IS NOT NULL
 DROP FUNCTION J2LA.existeUsuario
 GO
-CREATE FUNCTION J2LA.existeUsuario(@userName varchar(255))
+CREATE FUNCTION J2LA.existeUsuario(@userName nvarchar(255))
 RETURNS BIT
 AS
 BEGIN
@@ -69,13 +69,13 @@ GO
 IF OBJECT_ID('J2LA.setNuevoUsuario') IS NOT NULL
 DROP PROCEDURE J2LA.setNuevoUsuario
 GO
-CREATE PROCEDURE J2LA.setNuevoUsuario @userName varchar(255), @password varchar(255)
+CREATE PROCEDURE J2LA.setNuevoUsuario @usu_UserName nvarchar(255), @usu_Pass nvarchar(255), @usu_Primer_Ingreso bit
 AS
 BEGIN
 	INSERT INTO
 		J2LA.Usuarios (usu_UserName, usu_Pass, usu_Cant_Intentos, usu_Inhabilitado, usu_Eliminado, usu_Primer_Ingreso)
 	VALUES
-		(@userName, @password, 0, 0, 0, 0)
+		(@usu_UserName, @usu_Pass, 0, 0, 0, @usu_Primer_Ingreso)
 END
 GO
 
@@ -84,7 +84,7 @@ GO
 IF OBJECT_ID('J2LA.getUserId') IS NOT NULL
 DROP FUNCTION J2LA.getUserId
 GO
-CREATE FUNCTION J2LA.getUserId(@userName varchar(255))
+CREATE FUNCTION J2LA.getUserId(@userName nvarchar(255))
 RETURNS INT
 AS
 BEGIN
@@ -99,7 +99,7 @@ GO
 IF OBJECT_ID('J2LA.getRolId') IS NOT NULL
 DROP FUNCTION J2LA.getRolId
 GO
-CREATE FUNCTION J2LA.getRolId(@nombre varchar(255))
+CREATE FUNCTION J2LA.getRolId(@nombre nvarchar(255))
 RETURNS INT
 AS
 BEGIN
@@ -115,32 +115,44 @@ IF OBJECT_ID('J2LA.setNuevoCliente') IS NOT NULL
 DROP PROCEDURE J2LA.setNuevoCliente
 GO
 CREATE PROCEDURE J2LA.setNuevoCliente 
-	@userName varchar(255), 
-	@password varchar(255), 
-	@nombre varchar(255), 
-	@apellido varchar(255), 
-	@dni numeric(18,0), 
-	@tipoDoc int, 
-	@mail varchar(255), 
-	@telefono varchar(255), 
-	@nomCalle varchar(255), 
-	@nroCalle numeric(18,0), 
-	@piso numeric(28,0), 
-	@depto varchar(50), 
-	@localidad varchar(255), 
-	@cp varchar(50), 
-	@fecnac datetime, 
-	@cuil varchar(50)
+	@cli_Nombre nvarchar(255), 
+	@cli_Apellido nvarchar(255), 
+	@cli_Tipodoc_Id int, 
+	@cli_Nro_Doc numeric(18,0), 
+	@cli_Mail nvarchar(255), 
+	@cli_Tel nvarchar(255), 
+	@cli_Dom_Calle nvarchar(255), 
+	@cli_Nro_Calle numeric(18,0), 
+	@cli_Piso numeric(28,0), 
+	@cli_Dpto nvarchar(50), 
+	@cli_Localidad nvarchar(255), 
+	@cli_CP nvarchar(50), 
+	@cli_Fecha_Nac datetime, 
+	@cli_Cuil nvarchar(50),
+	@cli_usu_Id int,
+	
+	@usu_Id int,
+	@usu_UserName nvarchar(255), 
+	@usu_Pass nvarchar(255), 
+	@usu_Cant_Intentos int,
+	@usu_Inhabilitado bit,
+	@usu_Motivo nvarchar,
+	@usu_Eliminado bit,
+	@usu_Primer_Ingreso bit,
+	@Publ_Cli_Dni numeric (18,0),
+	@Publ_Empresa_Cuit nvarchar,
+	@usu_Inhabilitado_Comprar bit
+	
 AS
 BEGIN
-	EXECUTE J2LA.setNuevoUsuario @userName, @password
+	EXECUTE J2LA.setNuevoUsuario @usu_UserName, @usu_Pass, @usu_Primer_Ingreso
 	
 	INSERT INTO
 		J2LA.Clientes (
 			cli_Nombre, 
 			cli_Apellido, 
-			cli_Nro_Doc, 
 			cli_Tipodoc_Id, 
+			cli_Nro_Doc, 
 			cli_Mail, 
 			cli_Tel, 
 			cli_Dom_Calle, 
@@ -152,27 +164,27 @@ BEGIN
 			cli_Fecha_Nac, 
 			cli_Cuil, 
 			cli_usu_Id)
-	VALUES
-		(@nombre, 
-		@apellido, 
-		@dni, 
-		@tipoDoc, 
-		@mail, 
-		@telefono, 
-		@nomCalle, 
-		@nroCalle, 
-		@piso, 
-		@depto, 
-		@localidad, 
-		@cp, 
-		@fecnac, 
-		@cuil, 
-		J2LA.getUserId(@userName))
+	VALUES(
+		@cli_Nombre, 
+		@cli_Apellido, 
+		@cli_Tipodoc_Id , 
+		@cli_Nro_Doc, 
+		@cli_Mail , 
+		@cli_Tel , 
+		@cli_Dom_Calle , 
+		@cli_Nro_Calle , 
+		@cli_Piso , 
+		@cli_Dpto, 
+		@cli_Localidad, 
+		@cli_CP , 
+		@cli_Fecha_Nac , 
+		@cli_Cuil ,
+		J2LA.getUserId(@usu_UserName))
 
 	INSERT INTO
 		J2LA.Usuarios_Roles (usurol_usu_Id, usurol_rol_Id)
 	VALUES
-		(J2LA.getUserId(@userName), J2LA.getRolId('Cliente'))
+		(J2LA.getUserId(@usu_UserName), 2) /*Donde 2 es Cliente*/
 	
 END
 GO
@@ -185,7 +197,7 @@ CREATE PROCEDURE J2LA.setPreguntaRespuesta
 	@preg_pub_codigo numeric(18,0), 
 	@preg_Id int, 
 	@preg_Tipo char(1), 
-	@preg_Comentario varchar(255), 
+	@preg_Comentario nvarchar(255), 
 	@preg_usu_Id int,
 	@preg_Fecha datetime
 AS

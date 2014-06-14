@@ -73,19 +73,13 @@ namespace FrbaCommerce
                 }
 
                 //Validamos que el nombre de usuario no existe actualmente...
-                bool existe = InterfazBD.existeUsuario(this.txtUserName.Text);
-
-                if (existe)
-                {
-                    Funciones.mostrarAlert("Ya existe un usuario con este nombre. Por Favor, ingrese uno distinto.", this.Text);
-                    return false;
-                }
+                InterfazBD.existeUsuario(this.txtUserName.Text);
 
                 return true;
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error del Sistema - Informe al Administrador", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Funciones.mostrarAlert(ex.Message, this.Text);
                 return false;
             }
         }

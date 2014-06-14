@@ -219,7 +219,6 @@
     <Compile Include="Vistas\Abm_Cliente\Abm_Cliente_Alta.Designer.cs">
       <DependentUpon>Abm_Cliente_Alta.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vistas\Abm_Cliente\Cliente.cs" />
     <Compile Include="Vistas\Abm_Rol\Abm_Rol_Baja.cs">
       <SubType>Form</SubType>
     </Compile>

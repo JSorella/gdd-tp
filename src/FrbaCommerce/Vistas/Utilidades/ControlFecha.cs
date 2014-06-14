@@ -15,6 +15,7 @@ namespace FrbaCommerce
         Boolean isLoad = false;
         Boolean booCancelado = false;
         DateTime dteFecha;
+        private bool fechaMin;
 
         public DateTime FechaSeleccionada
         {
@@ -27,11 +28,20 @@ namespace FrbaCommerce
             get { return booCancelado; }
         }
 
-        public ControlFecha(int eX, int eY)
+        public ControlFecha(int eX, int eY) //con fecha min Actual
         {
             InitializeComponent();
             //Posicionamiento del Form
             this.Location = new System.Drawing.Point(eX, eY);
+            this.fechaMin = true; // por defecto
+        }
+
+        public ControlFecha(int eX, int eY, bool _fechaMin) //Puedo elegir restricción fecha mínima
+        {
+            InitializeComponent();
+            //Posicionamiento del Form
+            this.Location = new System.Drawing.Point(eX, eY);
+            this.fechaMin = _fechaMin;
         }
 
         private void ControlFecha_Load(object sender, EventArgs e)
@@ -39,7 +49,10 @@ namespace FrbaCommerce
             isLoad = true;
 
             // Asignamos la menor fecha posible
-            this.mcSelFecha.MinDate = Singleton.FechaDelSistema;
+            if (this.fechaMin)
+            {
+                this.mcSelFecha.MinDate = Singleton.FechaDelSistema;
+            }
 
             // Seleccionamos una fecha.
             if (dteFecha < Singleton.FechaDelSistema)

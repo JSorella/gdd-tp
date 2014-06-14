@@ -130,9 +130,30 @@ namespace FrbaCommerce
         }
 
         /// <summary>
+        /// Trae el nombre de un rol
+        /// </summary>
+        public static string getRolNombre(int rol_Id)
+        {
+            try
+            {
+                String query = "Select rol_Nombre From J2LA.Roles " +
+                                "Where rol_Id = " + rol_Id;
+
+                Console.Write(Singleton.conexion.executeQueryTable(query, null, null).Rows[0].ToString());
+
+                return Singleton.conexion.executeQueryTable(query, null, null).Rows[0]["rol_Nombre"].ToString();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+        }
+
+        /// <summary>
         /// Pregunto si existe un username en la tabla Usuario
         /// </summary>
-        public static bool existeUsuario(string userName)
+        public static string existeUsuario(string userName)
         {
             //SqlCommand comando = new SqlCommand("SELECT J2LA.existeUsuario(@userName)", Singleton.conexion.connector());
             //comando.Parameters.AddWithValue("@userName", userName);
@@ -140,8 +161,12 @@ namespace FrbaCommerce
 
             try
             {
-                return (bool)Singleton.conexion.executeQueryFuncEscalar("J2LA.existeUsuario(@userName)", null,
-                                        new String[1, 2] { { "userName", userName } });
+                if ((bool)Singleton.conexion.executeQueryFuncEscalar("J2LA.existeUsuario(@userName)", null,
+                                        new String[1, 2] { { "userName", userName } }))
+                {
+                    throw new Exception("Ya existe un usuario con este nombre. Por Favor, ingrese uno distinto.");
+                }
+                return "";
             }
             catch (Exception ex)
             {
@@ -174,56 +199,17 @@ namespace FrbaCommerce
         /// <summary>
         /// Crea un nuevo Cliente
         /// </summary>
-        public static void setNuevoCliente(Cliente cliente)
+        public static void setNuevoCliente(DataTable clienteUsuario)
         {
-            //SI ESTA FUNCION RECIBIERA UN DATATABLE DE CLIENTE CON LOS CAMPOS DEL SP SE PODRIA USAR LA FUNCION Singleton.conexion.executeQuerySP("J2LA.setNuevoCliente", oDataTableCli);
-            //SI ESTA FUNCION RECIBIERA UN DATATABLE DE CLIENTE CON LOS CAMPOS DEL SP SE PODRIA USAR LA FUNCION Singleton.conexion.executeQuerySP("J2LA.setNuevoCliente", oDataTableCli);
-            //SI ESTA FUNCION RECIBIERA UN DATATABLE DE CLIENTE CON LOS CAMPOS DEL SP SE PODRIA USAR LA FUNCION Singleton.conexion.executeQuerySP("J2LA.setNuevoCliente", oDataTableCli);
-
-            string query = @"J2LA.setNuevoCliente";
-            // @userName,
-            // @password,
-            // @nombre,
-            // @apellido,
-            // @dni,
-            // @tipoDoc,
-            // @mail,
-            // @telefono,
-            // @nomCalle,
-            // @nroCalle,
-            // @piso,
-            // @depto,
-            // @localidad,
-            // @cp,
-            // @fecnac,
-            // @cuil";
-
-            //SqlCommand comando = new SqlCommand(query, Singleton.conexion.connector());
-
-            SqlCommand comando = new SqlCommand(query);
-            comando.CommandType = CommandType.StoredProcedure;
-
-            //Console.WriteLine(cliente.userName);
-            comando.Parameters.AddWithValue("@userName", cliente.userName);
-            comando.Parameters.AddWithValue("@password", cliente.pass);
-            comando.Parameters.AddWithValue("@nombre", cliente.nombre);
-            comando.Parameters.AddWithValue("@apellido", cliente.apellido);
-            comando.Parameters.AddWithValue("@dni", cliente.dni);
-            comando.Parameters.AddWithValue("@tipoDoc", cliente.idTipoDoc);
-            comando.Parameters.AddWithValue("@mail", cliente.mail);
-            comando.Parameters.AddWithValue("@telefono", cliente.telefono);
-            comando.Parameters.AddWithValue("@nomCalle", cliente.nomCalle);
-            comando.Parameters.AddWithValue("@nroCalle", cliente.nroCalle);
-            comando.Parameters.AddWithValue("@piso", cliente.piso);
-            comando.Parameters.AddWithValue("@depto", cliente.depto);
-            comando.Parameters.AddWithValue("@localidad", cliente.localidad);
-            comando.Parameters.AddWithValue("@cp", cliente.cp);
-            comando.Parameters.AddWithValue("@fecnac", cliente.fechaNacimiento);
-            comando.Parameters.AddWithValue("@cuil", cliente.cuil);
-
             try
             {
-                Singleton.conexion.executeCommandConn(comando);
+                //if()
+                //{
+                //    throw new Exception("");
+                //}
+
+
+                Singleton.conexion.executeQuerySP("J2LA.setNuevoCliente", clienteUsuario, null);
             }
             catch (Exception ex)
             {
@@ -235,7 +221,7 @@ namespace FrbaCommerce
         {
             try
             {
-                return Singleton.conexion.executeQueryTable("Select * From J2LA.Clientes Where 1 = 0", null, null);
+                return Singleton.conexion.executeQueryTable("Select * From J2LA.Clientes, J2LA.Usuarios Where 1 = 0", null, null);
             }
             catch (Exception ex)
             {
