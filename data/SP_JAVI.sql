@@ -390,7 +390,6 @@ AS
 		 SELECT
 			 [Nombre] = cli_Nombre,
 			 [Apellido] = cli_Apellido,
-			 [Documento] =  (cli_Tipodoc_Id +' '+cli_Nro_Doc),
 			 [Mail] = cli_Mail, 
 			 [Teléfono] = cli_Tel , 
 			 [Calle] = cli_Dom_Calle, 

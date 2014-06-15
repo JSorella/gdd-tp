@@ -71,6 +71,7 @@
             this.Name = "DatosVendedor";
             this.Text = "Datos del Vendedor";
             this.Load += new System.EventHandler(this.DatosVendedor_Load);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.DatosVendedor_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.dgVendedor)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

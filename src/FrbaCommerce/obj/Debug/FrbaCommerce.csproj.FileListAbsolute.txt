@@ -274,3 +274,4 @@ C:\Users\Lucas\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.
 C:\Users\Lucas\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.Ver_Respuestas.resources
 C:\Users\Lucas\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.HistorialCalificaciones.resources
 C:\Users\Lucas\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.HistorialOfertas.resources
+C:\Users\jsorella\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.HistorialBinificacion.resources

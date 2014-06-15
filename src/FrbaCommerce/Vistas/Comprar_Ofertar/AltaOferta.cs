@@ -26,12 +26,7 @@ namespace FrbaCommerce
         {
             try
             {
-
-                //oDTPubli = InterfazBD.getPublicacion(Convert.ToInt32(this.codigoPublicacion));
-                //this.CargarDatosPubli();
                 nudCantidad.Value = InterfazBD.getPrecioMax(codigoPublicacion) + 1;
-                nudCantidad.Minimum = nudCantidad.Value;
-
             }
             catch (Exception ex)
             {
@@ -65,6 +60,7 @@ namespace FrbaCommerce
 
                 InterfazBD.setOferta(DToferta);
                 Funciones.mostrarInformacion("Su Oferta se ha efectuado satisfactoriamente!", "Oferta Efectuada");
+           
             }
             catch (Exception ex)
             {
@@ -81,9 +77,11 @@ namespace FrbaCommerce
             {
                 Funciones.mostrarAlert("Falta ingresar Cantidad a comprar", this.Text); return false;
             }
-            if (this.nudCantidad.Value < nudCantidad.Minimum)
+            if (this.nudCantidad.Value < InterfazBD.getPrecioMax(codigoPublicacion) + 1)
             {
-                Funciones.mostrarAlert("Debe ofertar por encima del mínimo", this.Text); return false;
+                Funciones.mostrarAlert("Debe ofertar por encima del mínimo", this.Text);
+                AltaOferta_Load(null,null);
+                return false;
             }
 
             if (this.nudCantidad.Value - (int)this.nudCantidad.Value != 0 )
@@ -93,5 +91,6 @@ namespace FrbaCommerce
 
             return true;
         }
+
     }
 }

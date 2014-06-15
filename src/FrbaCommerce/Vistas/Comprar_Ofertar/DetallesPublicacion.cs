@@ -13,6 +13,7 @@ namespace FrbaCommerce
     {
         DataTable oDTPubli = new DataTable();
         private Int32 codigoPublicacion;
+        DataTable preguntas = new DataTable();
 
         DateTime dteFecVto;
 
@@ -48,16 +49,12 @@ namespace FrbaCommerce
             txtPrecio.Text = oDr["Precio"].ToString();
             txtEstado.Text = oDr["pubest_Descripcion"].ToString();
             btnPregunta.Visible = Convert.ToBoolean(oDr["pub_Permite_Preg"]);
+            groupPreguntas.Visible = Convert.ToBoolean(oDr["pub_Permite_Preg"]);
 
             txtFechaVto.Text = dteFecVto.ToShortDateString();
             txtVendedor.Text = oDr["usu_UserName"].ToString();
 
-            //Cargar preguntas
-            DataTable preguntas = new DataTable();
-            preguntas = InterfazBD.getPreguntas_Publicacion(Convert.ToInt32(this.codigoPublicacion));
-            
-            dgPreguntas.Visible = true;
-            dgPreguntas.DataSource = preguntas;
+            this.cargarPreguntas();
 
         }
 
@@ -97,26 +94,32 @@ namespace FrbaCommerce
         private void btnPregunta_Click(object sender, EventArgs e)
         {
             AltaPregunta oFrm = new AltaPregunta(this.codigoPublicacion);
-            oFrm.ShowDialog();
+            if (oFrm.ShowDialog() == DialogResult.OK)
+            {
+                this.cargarPreguntas();
+            }
         }
 
         private void btnComprar_Click(object sender, EventArgs e)
         {
             AltaCompra oFrm = new AltaCompra(this.codigoPublicacion);
             oFrm.ShowDialog();
+            this.Close();
         }
 
         private void btnOfertar_Click(object sender, EventArgs e)
         {
             AltaOferta oFrm = new AltaOferta(this.codigoPublicacion);
             oFrm.ShowDialog();
+            this.Close();
         }
-        
 
-
- 
-
-
-
+        private void cargarPreguntas()
+        {
+            //Cargar preguntas
+            preguntas = InterfazBD.getPreguntas_Publicacion(Convert.ToInt32(this.codigoPublicacion));
+            dgPreguntas.Visible = true;
+            dgPreguntas.DataSource = preguntas;
+        }
     }
 }

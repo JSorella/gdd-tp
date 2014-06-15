@@ -64,9 +64,7 @@ namespace FrbaCommerce
         {
             try
             {
-                dgvPubli.DataSource = null;
-                dgvPubli.DataSource = InterfazBD.BuscarPublicacionesOrdenadasPorPeso(ArmarFiltros());
-                dgvPubli.Columns["Publicación Precio"].Visible = false;
+                this.mostrarPublicaciones();
             }
             catch (Exception ex)
             {
@@ -115,15 +113,22 @@ namespace FrbaCommerce
                 mobjDrResultado = ((DataRowView)dgvPubli.SelectedRows[0].DataBoundItem).Row;
                 DetallesPublicacion oFrm = new DetallesPublicacion(Convert.ToInt32(mobjDrResultado["Codigo"]));
                 oFrm.ShowDialog();
-                
+                this.mostrarPublicaciones();
             }
             else
                 MessageBox.Show("Seleccione una Publicación.", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
+        private void btnSalir_Click_1(object sender, EventArgs e)
+        {
+            this.Close();
+        }
 
-
-
-
+        private void mostrarPublicaciones()
+        {
+            dgvPubli.DataSource = null;
+            dgvPubli.DataSource = InterfazBD.BuscarPublicacionesOrdenadasPorPeso(ArmarFiltros());
+            dgvPubli.Columns["Publicación Precio"].Visible = false;
+        }
     }
 }

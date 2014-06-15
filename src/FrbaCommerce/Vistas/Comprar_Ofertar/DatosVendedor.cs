@@ -25,15 +25,18 @@ namespace FrbaCommerce
             try
             {
                 oDTVendedor = InterfazBD.getVendedor(this.codigoVendedor);
-                dgVendedor.Visible = true;
                 dgVendedor.DataSource = oDTVendedor;
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error en Datos Vendedor: " + System.Environment.NewLine + ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.Close();
             }
+        }
+
+        private void DatosVendedor_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Close();
         }
 
 

@@ -103,6 +103,7 @@
             // 
             // btnPregunta
             // 
+            this.btnPregunta.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnPregunta.Location = new System.Drawing.Point(390, 197);
             this.btnPregunta.Name = "btnPregunta";
             this.btnPregunta.Size = new System.Drawing.Size(137, 23);

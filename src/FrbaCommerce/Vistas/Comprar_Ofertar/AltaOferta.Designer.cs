@@ -48,8 +48,8 @@
             // 
             this.nudCantidad.Location = new System.Drawing.Point(103, 21);
             this.nudCantidad.Maximum = new decimal(new int[] {
-            1874919423,
-            2328306,
+            1410065407,
+            2,
             0,
             0});
             this.nudCantidad.Name = "nudCantidad";
