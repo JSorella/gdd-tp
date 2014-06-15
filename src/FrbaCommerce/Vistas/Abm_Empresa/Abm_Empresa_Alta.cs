@@ -178,7 +178,11 @@ namespace FrbaCommerce
                 return;
             }
 
-            Funciones.mostrarInformacion("La Empresa ha sido dado de alta con exito.\nUsuario: "+usuario+"\nPassword: "+pass, this.Text);
+            if (Singleton.sessionRol_Id == 1)
+                Funciones.mostrarInformacion("La Empresa ha sido dado de alta con exito.\nUsuario: "+usuario+"\nPassword: "+pass, this.Text);
+            else
+                Funciones.mostrarInformacion("La Empresa ha sido dado de alta con exito.", this.Text);
+
             this.Close();
         }
 
