@@ -210,8 +210,6 @@ CREATE PROCEDURE J2LA.setNuevoCliente
 	@usu_Motivo nvarchar,
 	@usu_Eliminado bit,
 	@usu_Primer_Ingreso bit,
-	@Publ_Cli_Dni numeric (18,0),
-	@Publ_Empresa_Cuit nvarchar,
 	@usu_Inhabilitado_Comprar bit
 	
 AS
@@ -259,6 +257,79 @@ BEGIN
 	
 END
 GO
+
+
+/*-------------------------STORED PROCEDURE (JAVI)--------------------------*/
+IF OBJECT_ID('J2LA.actualizarCliente') IS NOT NULL
+DROP PROCEDURE J2LA.actualizarCliente
+GO
+CREATE PROCEDURE J2LA.actualizarCliente(
+	@emp_Razon_Social nvarchar(255),
+	@emp_CUIT nvarchar(50),
+	@emp_Mail nvarchar(50),
+	@emp_Tel nvarchar(50),
+	@emp_Dom_Calle nvarchar(255),
+	@emp_Nro_Calle numeric(18,0),
+	@emp_Piso numeric(18,0),
+	@emp_Dpto nvarchar(255),
+	@emp_Localidad nvarchar(255),
+	@emp_CP nvarchar(50),
+	@emp_Ciudad nvarchar(255),
+	@emp_Contacto nvarchar(255),
+	@emp_Fecha_Creacion datetime,
+	@emp_usu_Id int,
+	
+	@usu_Id int,
+	@usu_UserName nvarchar(255), 
+	@usu_Pass nvarchar(255), 
+	@usu_Cant_Intentos int,
+	@usu_Inhabilitado bit,
+	@usu_Inhabilitado_Comprar bit,
+	@usu_Motivo nvarchar,
+	@usu_Eliminado bit,
+	@usu_Primer_Ingreso bit)
+AS
+	BEGIN
+		UPDATE J2LA.Empresas
+		SET
+			emp_Razon_Social = @emp_Razon_Social,
+			emp_CUIT = @emp_CUIT,
+			emp_Mail = @emp_Mail,
+			emp_Tel = @emp_Tel,
+			emp_Dom_Calle = @emp_Dom_Calle,
+			emp_Nro_Calle = @emp_Nro_Calle,
+			emp_Piso = @emp_Piso,
+			emp_Dpto = @emp_Dpto,
+			emp_Localidad = @emp_Localidad,
+			emp_CP = @emp_CP,
+			emp_Ciudad = @emp_Ciudad,
+			emp_Contacto = @emp_Contacto,
+			emp_Fecha_Creacion = @emp_Fecha_Creacion
+		WHERE emp_usu_Id = @emp_usu_Id
+		
+		UPDATE J2LA.Usuarios
+		SET usu_Eliminado = @usu_Eliminado
+		WHERE usu_Id = @usu_Id
+	END
+GO
+
+/*-------------------------STORED PROCEDURE (JAVI)--------------------------*/
+IF OBJECT_ID('J2LA.bajaCliente') IS NOT NULL
+DROP PROCEDURE J2LA.bajaCliente
+GO
+CREATE PROCEDURE J2LA.bajaCliente(@emp_CUIT nvarchar(50))
+AS
+	BEGIN
+		DECLARE @emp_usu_Id int
+		SET @emp_usu_Id = (SELECT emp_usu_Id FROM J2LA.Empresas WHERE emp_Cuit = @emp_CUIT)
+		
+		UPDATE J2LA.Usuarios
+		SET usu_Eliminado = 1
+		WHERE usu_Id = @emp_usu_Id
+	END
+GO
+
+
 
 /*-------------------------STORED PROCEDURE (JAVI)--------------------------*/
 IF OBJECT_ID('J2LA.setPreguntaRespuesta') IS NOT NULL
@@ -347,15 +418,26 @@ ON J2LA.Compras
 AFTER INSERT
 AS
 BEGIN
-	DECLARE @comp_usu_Id int
+	DECLARE @pub_usu_Id int
 	DECLARE @cantComprasSinRendir int
-	SET @comp_usu_Id = (SELECT comp_usu_Id FROM inserted)
+	DECLARE @comp_pub_Codigo int
+	SET @comp_pub_Codigo = (SELECT comp_pub_Codigo FROM inserted)
+	SET @pub_usu_Id = (
+		SELECT pub_usu_Id 
+		FROM J2LA.Publicaciones 
+		WHERE pub_Codigo = @comp_pub_Codigo)
 	
 	SET @cantComprasSinRendir = (
-		SELECT COUNT(*) 
-		FROM J2LA.Compras 
-		WHERE comp_Facturada = 0
-		AND comp_usu_Id = @comp_usu_Id
+		SELECT COUNT(*)	
+		FROM 
+			J2LA.Compras C
+			, J2LA.Publicaciones P
+		WHERE
+			C.comp_pub_Codigo = P.pub_Codigo
+		AND
+			P.pub_usu_Id = @pub_usu_Id
+		AND 
+			C.comp_Facturada = 0
 		)
 	
 	
@@ -363,13 +445,14 @@ BEGIN
 	BEGIN
 		UPDATE J2LA.Publicaciones
 		SET	pub_estado_Id = 3 /* Pausada */
-		WHERE pub_usu_Id = @comp_usu_Id
+		WHERE pub_usu_Id = @pub_usu_Id
 		
 		UPDATE J2LA.Usuarios
 		SET	
-			usu_Inhabilitado_Comprar = 1
-			/*, usu_Motivo = 'Debe rendir 10 o más Compras pendientes'*/
-		WHERE usu_Id = @comp_usu_Id
+			usu_Inhabilitado = 1
+			, usu_Motivo = 'Debe rendir 10 o más Compras pendientes'
+		WHERE 
+			usu_Id = @pub_usu_Id
 	END
 END
 GO

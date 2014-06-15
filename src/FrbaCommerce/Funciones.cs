@@ -68,5 +68,9 @@ namespace FrbaCommerce
             MessageBox.Show(mensaje, caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
             return true;
         }
+        public static void alertInhabilitadoComprar()
+        {
+            Funciones.mostrarAlert("Su usuario esta inhabilitado para esta operación, ya que posee más de 5 compras sin calificar. Por favor, realice todas las calificaciones pendientes.", "Aviso");
+        }
     }
 }
