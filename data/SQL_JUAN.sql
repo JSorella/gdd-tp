@@ -501,7 +501,8 @@ Select	P.pub_Codigo, comp_Id = 0, [Facturar] = CONVERT(Bit, 0),
 				' - Visib.: ' + PV.pubvis_Descripcion,
 		[Cantidad] = 1,
 		[Importe] = P.pub_vis_Precio,
-		P.pub_visibilidad_Id
+		P.pub_visibilidad_Id,
+		[FechaDte] = P.pub_Fecha_Ini
 From J2LA.Publicaciones P
 Inner Join J2LA.Publicaciones_Visibilidades PV On PV.pubvis_id = P.pub_visibilidad_Id
 Where P.pub_usu_Id = @usu_id
@@ -517,7 +518,8 @@ Select	P.pub_Codigo, C.comp_Id, [Facturar] = CONVERT(Bit, 0),
 				' - Usuario: ' + U.usu_UserName,
 		[Cantidad] = 1,
 		[Importe] = P.pub_vis_Precio,
-		P.pub_visibilidad_Id
+		P.pub_visibilidad_Id,
+		[FechaDte] = C.comp_Fecha
 From J2LA.Compras C
 Inner Join J2LA.Publicaciones P On P.pub_Codigo = C.comp_pub_Codigo
 Inner Join J2LA.Usuarios U On U.usu_Id = C.comp_usu_Id
