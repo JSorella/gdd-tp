@@ -47,7 +47,7 @@ namespace FrbaCommerce
 
             if ((oFrm.Resultado != null)) //Resultado es el DataRow.-
             {
-                oDtEmpresa = InterfazBD.getEmpresa(oFrm.Resultado["emp_CUIT"].ToString());
+                oDtEmpresa = InterfazBD.getEmpresaUsuario(oFrm.Resultado["emp_CUIT"].ToString());
 
                 tboxEmpresaSeleccionada.Text = oFrm.Resultado["emp_CUIT"].ToString();
             }
@@ -63,7 +63,7 @@ namespace FrbaCommerce
 
             try
             {
-                DataTable oDtEmpresa = InterfazBD.getEmpresa(tboxEmpresaSeleccionada.Text);
+                DataTable oDtEmpresa = InterfazBD.getEmpresaUsuario(tboxEmpresaSeleccionada.Text);
 
                 if (oDtEmpresa != null)
                 {

@@ -11,7 +11,7 @@ namespace FrbaCommerce
 {
     public partial class Abm_Empresa_Modif : Form
     {
-        DataTable oDtEmpresa;
+        DataTable oDtEmpresaUsuario;
         DateTime dteFecCreac;
 
         bool cerrarForm = false;
@@ -48,7 +48,7 @@ namespace FrbaCommerce
 
             if ((oFrm.Resultado != null)) //Resultado es el DataRow.-
             {
-                oDtEmpresa = InterfazBD.getEmpresa(oFrm.Resultado["emp_CUIT"].ToString());
+                oDtEmpresaUsuario = InterfazBD.getEmpresaUsuario(oFrm.Resultado["emp_CUIT"].ToString());
 
                 tboxEmpresaSeleccionada.Text = oFrm.Resultado["emp_CUIT"].ToString();
             }
@@ -56,7 +56,7 @@ namespace FrbaCommerce
 
         private void CargarDatosEmpresa()
         {
-            DataRow oDr = oDtEmpresa.Rows[0];
+            DataRow oDr = oDtEmpresaUsuario.Rows[0];
 
             tboxRazonSocial.Text = oDr["emp_Razon_Social"].ToString();
             tboxMail.Text = oDr["emp_Mail"].ToString();
@@ -74,10 +74,9 @@ namespace FrbaCommerce
 
             tboxFechaCreacion.Text = dteFecCreac.ToShortDateString();
 
-            if (Convert.ToInt32(oDr["usu_Inhabilitado"]) == 1)
-            {
-                chkboxInhabilitada.Checked = true;
-            }
+            if (Convert.ToInt32(oDr["usu_Eliminado"]) == 1)
+                chkboxEliminada.Checked = true;
+
         }
 
         private void HabilitarMod(bool habilitado)
@@ -108,11 +107,11 @@ namespace FrbaCommerce
 
             try
             {
-                oDtEmpresa = InterfazBD.getEmpresa(tboxEmpresaSeleccionada.Text);
+                oDtEmpresaUsuario = InterfazBD.getEmpresaUsuario(tboxEmpresaSeleccionada.Text);
 
-                if (oDtEmpresa != null)
+                if (oDtEmpresaUsuario != null)
                 {
-                    if (oDtEmpresa.Rows.Count <= 0)
+                    if (oDtEmpresaUsuario.Rows.Count <= 0)
                     {
                         MessageBox.Show("Empresa Inexistente.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return false;
@@ -143,7 +142,105 @@ namespace FrbaCommerce
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
+            if (!ValidarCampos())
+                return;
 
+            try
+            {
+                DataTable oDtEmpresaUsuario = new DataTable();
+                oDtEmpresaUsuario = InterfazBD.getEmpresaUsuario(tboxEmpresaSeleccionada.Text);
+
+                DataRow oDr = oDtEmpresaUsuario.Rows[0];
+
+                oDr.BeginEdit();
+
+                //Cliente
+                oDr["emp_Razon_Social"] = tboxRazonSocial.Text;
+                oDr["emp_Cuit"] = tboxCUIT.Text;
+                oDr["emp_Mail"] = tboxMail.Text;
+                oDr["emp_Tel"] = tboxTelefono.Text;
+                oDr["emp_Contacto"] = tboxNombreContacto.Text;
+                oDr["emp_Fecha_Creacion"] = tboxFechaCreacion.Text;
+                oDr["emp_Dom_Calle"] = tboxCalle.Text;
+                oDr["emp_Nro_Calle"] = tboxAltura.Text;
+                oDr["emp_Piso"] = tboxPiso.Text;
+                oDr["emp_Dpto"] = tboxDpto.Text;
+                oDr["emp_Localidad"] = tboxLocalidad.Text;
+                oDr["emp_CP"] = tboxCodPostal.Text;
+                oDr["emp_Ciudad"] = tboxCiudad.Text;
+                //Usuario
+                oDr["usu_Eliminado"] = chkboxEliminada.Checked ? 1 : 0;
+
+                oDr.EndEdit();
+
+                InterfazBD.ActualizarEmpresa(oDtEmpresaUsuario);
+            }
+            catch (Exception error)
+            {
+                Funciones.mostrarAlert(error.Message, this.Text);
+                return;
+            }
+
+            Funciones.mostrarInformacion("La Empresa ha sido modificada con exito.", this.Text);
+            this.Close();
+        }
+
+        private Boolean ValidarCampos()
+        {
+            try
+            {
+                if (this.tboxRazonSocial.Text == "")
+                {
+                    Funciones.mostrarAlert("Ingrese Razon Social", this.Text); return false;
+                }
+                if (this.tboxCUIT.Text == "")
+                {
+                    Funciones.mostrarAlert("Ingrese CUIT", this.Text); return false;
+                }
+                if (this.tboxMail.Text == "")
+                {
+                    Funciones.mostrarAlert("Ingrese Mail", this.Text); return false;
+                }
+                if (this.tboxTelefono.Text == "")
+                {
+                    Funciones.mostrarAlert("Ingrese Telefono", this.Text); return false;
+                }
+                if (this.tboxNombreContacto.Text == "")
+                {
+                    Funciones.mostrarAlert("Ingrese Nombre de Contacto", this.Text); return false;
+                }
+                if (this.tboxFechaCreacion.Text == "")
+                {
+                    Funciones.mostrarAlert("Ingrese Fecha de Creacion", this.Text); return false;
+                }
+                if (this.tboxCalle.Text == "")
+                {
+                    Funciones.mostrarAlert("Ingrese Calle", this.Text); return false;
+                }
+                if (this.tboxAltura.Text == "")
+                {
+                    Funciones.mostrarAlert("Ingrese Altura", this.Text); return false;
+                }
+                if (this.tboxLocalidad.Text == "")
+                {
+                    Funciones.mostrarAlert("Ingrese Localidad", this.Text); return false;
+                }
+                if (this.tboxCodPostal.Text == "")
+                {
+                    Funciones.mostrarAlert("Ingrese Codigo POstal", this.Text); return false;
+                }
+                if (this.tboxCiudad.Text == "")
+                {
+                    Funciones.mostrarAlert("Ingrese Ciudad", this.Text); return false;
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Funciones.mostrarAlert(ex.Message, this.Text);
+                return false;
+            }
         }
 
     }

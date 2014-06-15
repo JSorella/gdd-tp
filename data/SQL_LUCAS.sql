@@ -263,7 +263,6 @@ IF OBJECT_ID('J2LA.ActualizarEmpresa') IS NOT NULL
 DROP PROCEDURE J2LA.ActualizarEmpresa
 GO
 CREATE PROCEDURE J2LA.ActualizarEmpresa(
-	@emp_usu_id int,
 	@emp_Razon_Social nvarchar(255),
 	@emp_CUIT nvarchar(50),
 	@emp_Mail nvarchar(50),
@@ -277,16 +276,17 @@ CREATE PROCEDURE J2LA.ActualizarEmpresa(
 	@emp_Ciudad nvarchar(255),
 	@emp_Contacto nvarchar(255),
 	@emp_Fecha_Creacion datetime,
+	@emp_usu_Id int,
 	
 	@usu_Id int,
 	@usu_UserName nvarchar(255), 
 	@usu_Pass nvarchar(255), 
 	@usu_Cant_Intentos int,
 	@usu_Inhabilitado bit,
+	@usu_Inhabilitado_Comprar bit,
 	@usu_Motivo nvarchar,
 	@usu_Eliminado bit,
-	@usu_Primer_Ingreso bit,
-	@usu_Inhabilitado_Comprar bit)
+	@usu_Primer_Ingreso bit)
 AS
 	BEGIN
 		UPDATE J2LA.Empresas
@@ -308,7 +308,7 @@ AS
 		
 		UPDATE J2LA.Usuarios
 		SET usu_Eliminado = @usu_Eliminado
-		WHERE usu_Id = @emp_usu_id
+		WHERE usu_Id = @usu_Id
 	END
 GO
 

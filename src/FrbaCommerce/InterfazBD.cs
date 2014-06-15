@@ -1020,7 +1020,7 @@ namespace FrbaCommerce
             }
         }
 
-        public static DataTable getEmpresa(string emp_CUIT)
+        public static DataTable getEmpresaUsuario(string emp_CUIT)
         {
             try
             {

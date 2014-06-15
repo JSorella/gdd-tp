@@ -54,7 +54,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.chkboxInhabilitada = new System.Windows.Forms.CheckBox();
+            this.chkboxEliminada = new System.Windows.Forms.CheckBox();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.pnlParam = new System.Windows.Forms.Panel();
             this.btnAceptar = new System.Windows.Forms.Button();
@@ -278,15 +278,15 @@
             this.label1.TabIndex = 29;
             this.label1.Text = "Razón Social";
             // 
-            // chkboxInhabilitada
+            // chkboxEliminada
             // 
-            this.chkboxInhabilitada.AutoSize = true;
-            this.chkboxInhabilitada.Location = new System.Drawing.Point(10, 212);
-            this.chkboxInhabilitada.Name = "chkboxInhabilitada";
-            this.chkboxInhabilitada.Size = new System.Drawing.Size(124, 17);
-            this.chkboxInhabilitada.TabIndex = 57;
-            this.chkboxInhabilitada.Text = "Empresa Inhabilitada";
-            this.chkboxInhabilitada.UseVisualStyleBackColor = true;
+            this.chkboxEliminada.AutoSize = true;
+            this.chkboxEliminada.Location = new System.Drawing.Point(10, 212);
+            this.chkboxEliminada.Name = "chkboxEliminada";
+            this.chkboxEliminada.Size = new System.Drawing.Size(115, 17);
+            this.chkboxEliminada.TabIndex = 57;
+            this.chkboxEliminada.Text = "Empresa Eliminada";
+            this.chkboxEliminada.UseVisualStyleBackColor = true;
             // 
             // btnGuardar
             // 
@@ -351,7 +351,7 @@
             this.pnlDatos.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlDatos.Controls.Add(this.btnSelFec);
             this.pnlDatos.Controls.Add(this.tboxFechaCreacion);
-            this.pnlDatos.Controls.Add(this.chkboxInhabilitada);
+            this.pnlDatos.Controls.Add(this.chkboxEliminada);
             this.pnlDatos.Controls.Add(this.tboxCodPostal);
             this.pnlDatos.Controls.Add(this.tboxCiudad);
             this.pnlDatos.Controls.Add(this.tboxLocalidad);
@@ -450,7 +450,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.CheckBox chkboxInhabilitada;
+        private System.Windows.Forms.CheckBox chkboxEliminada;
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.Panel pnlParam;
         private System.Windows.Forms.Button btnAceptar;
