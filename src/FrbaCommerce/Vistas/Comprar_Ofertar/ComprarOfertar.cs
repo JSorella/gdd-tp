@@ -11,7 +11,7 @@ namespace FrbaCommerce
 {
     public partial class ComprarOfertar : Form
     {
-
+        private PaginarGrilla oPag;
         private DataRow mobjDrResultado;
 
         public ComprarOfertar()
@@ -34,6 +34,7 @@ namespace FrbaCommerce
         {
             CargarCombos();
             Limpiar();
+            Actualizar();
         }
 
         private void CargarCombos()
@@ -65,6 +66,7 @@ namespace FrbaCommerce
             try
             {
                 this.mostrarPublicaciones();
+                Actualizar();
             }
             catch (Exception ex)
             {
@@ -132,9 +134,46 @@ namespace FrbaCommerce
 
         private void mostrarPublicaciones()
         {
-            dgvPubli.DataSource = null;
-            dgvPubli.DataSource = InterfazBD.BuscarPublicacionesOrdenadasPorPeso(ArmarFiltros());
+            oPag = InterfazBD.BuscarPublicacionesOrdenadas(ArmarFiltros());
+            dgvPubli.DataSource = oPag.cargar();
+            dgvPubli.DataMember = "Publicaciones";
             dgvPubli.Columns["Publicación Precio"].Visible = false;
+            oPag.primeraPagina();
         }
+
+
+        private void Actualizar()
+        {
+            lblInfo.Text = "Página " + oPag.numPag().ToString() +
+                            " de " + oPag.countPag().ToString() +
+                            " ( " + oPag.countRow().ToString() +
+                            " Publicaciones )";
+        }
+
+        private void btnPrimera_Click(object sender, EventArgs e)
+        {
+            oPag.primeraPagina();
+            Actualizar();
+        }
+
+        private void btnAnterior_Click(object sender, EventArgs e)
+        {
+            oPag.atras();
+            Actualizar();
+        }
+
+        private void btnSiguiente_Click(object sender, EventArgs e)
+        {
+            oPag.adelante();
+            Actualizar();
+        }
+
+        private void btnUltima_Click(object sender, EventArgs e)
+        {
+            oPag.ultimaPagina();
+            Actualizar();
+        }
+
+
     }
 }

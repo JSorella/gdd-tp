@@ -38,6 +38,11 @@
             this.label7 = new System.Windows.Forms.Label();
             this.grpFiltros = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblInfo = new System.Windows.Forms.Label();
+            this.btnUltima = new System.Windows.Forms.Button();
+            this.btnSiguiente = new System.Windows.Forms.Button();
+            this.btnPrimera = new System.Windows.Forms.Button();
+            this.btnAnterior = new System.Windows.Forms.Button();
             this.cmbRubros = new FrbaCommerce.ComboCheck();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPubli)).BeginInit();
             this.grpFiltros.SuspendLayout();
@@ -74,7 +79,7 @@
             // btnSalir
             // 
             this.btnSalir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSalir.Location = new System.Drawing.Point(659, 460);
+            this.btnSalir.Location = new System.Drawing.Point(772, 484);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(104, 23);
             this.btnSalir.TabIndex = 19;
@@ -94,7 +99,7 @@
             // btnSeleccionar
             // 
             this.btnSeleccionar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSeleccionar.Location = new System.Drawing.Point(469, 460);
+            this.btnSeleccionar.Location = new System.Drawing.Point(582, 484);
             this.btnSeleccionar.Name = "btnSeleccionar";
             this.btnSeleccionar.Size = new System.Drawing.Size(184, 23);
             this.btnSeleccionar.TabIndex = 18;
@@ -118,7 +123,7 @@
             this.dgvPubli.Name = "dgvPubli";
             this.dgvPubli.ReadOnly = true;
             this.dgvPubli.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPubli.Size = new System.Drawing.Size(701, 298);
+            this.dgvPubli.Size = new System.Drawing.Size(793, 279);
             this.dgvPubli.TabIndex = 17;
             this.dgvPubli.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPubli_CellDoubleClick);
             // 
@@ -141,20 +146,79 @@
             this.grpFiltros.Controls.Add(this.label1);
             this.grpFiltros.Location = new System.Drawing.Point(45, 13);
             this.grpFiltros.Name = "grpFiltros";
-            this.grpFiltros.Size = new System.Drawing.Size(718, 99);
+            this.grpFiltros.Size = new System.Drawing.Size(831, 99);
             this.grpFiltros.TabIndex = 11;
             this.grpFiltros.TabStop = false;
             this.grpFiltros.Text = "Buscar Publicación";
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.lblInfo);
+            this.groupBox1.Controls.Add(this.btnUltima);
             this.groupBox1.Controls.Add(this.dgvPubli);
+            this.groupBox1.Controls.Add(this.btnSiguiente);
+            this.groupBox1.Controls.Add(this.btnPrimera);
+            this.groupBox1.Controls.Add(this.btnAnterior);
             this.groupBox1.Location = new System.Drawing.Point(45, 127);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(718, 323);
+            this.groupBox1.Size = new System.Drawing.Size(818, 333);
             this.groupBox1.TabIndex = 20;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Publicaciones Activas";
+            // 
+            // lblInfo
+            // 
+            this.lblInfo.AutoSize = true;
+            this.lblInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInfo.Location = new System.Drawing.Point(284, 307);
+            this.lblInfo.Name = "lblInfo";
+            this.lblInfo.Size = new System.Drawing.Size(259, 15);
+            this.lblInfo.TabIndex = 21;
+            this.lblInfo.Text = "Página X de XX ( XXXX Publicaciones )";
+            // 
+            // btnUltima
+            // 
+            this.btnUltima.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnUltima.Location = new System.Drawing.Point(712, 304);
+            this.btnUltima.Name = "btnUltima";
+            this.btnUltima.Size = new System.Drawing.Size(92, 23);
+            this.btnUltima.TabIndex = 25;
+            this.btnUltima.Text = "Ultima Página";
+            this.btnUltima.UseVisualStyleBackColor = true;
+            this.btnUltima.Click += new System.EventHandler(this.btnUltima_Click);
+            // 
+            // btnSiguiente
+            // 
+            this.btnSiguiente.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnSiguiente.Location = new System.Drawing.Point(614, 304);
+            this.btnSiguiente.Name = "btnSiguiente";
+            this.btnSiguiente.Size = new System.Drawing.Size(92, 23);
+            this.btnSiguiente.TabIndex = 24;
+            this.btnSiguiente.Text = "Siguiente >>";
+            this.btnSiguiente.UseVisualStyleBackColor = true;
+            this.btnSiguiente.Click += new System.EventHandler(this.btnSiguiente_Click);
+            // 
+            // btnPrimera
+            // 
+            this.btnPrimera.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnPrimera.Location = new System.Drawing.Point(11, 304);
+            this.btnPrimera.Name = "btnPrimera";
+            this.btnPrimera.Size = new System.Drawing.Size(92, 23);
+            this.btnPrimera.TabIndex = 22;
+            this.btnPrimera.Text = "Primer Página";
+            this.btnPrimera.UseVisualStyleBackColor = true;
+            this.btnPrimera.Click += new System.EventHandler(this.btnPrimera_Click);
+            // 
+            // btnAnterior
+            // 
+            this.btnAnterior.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnAnterior.Location = new System.Drawing.Point(109, 304);
+            this.btnAnterior.Name = "btnAnterior";
+            this.btnAnterior.Size = new System.Drawing.Size(92, 23);
+            this.btnAnterior.TabIndex = 23;
+            this.btnAnterior.Text = "<< Anterior";
+            this.btnAnterior.UseVisualStyleBackColor = true;
+            this.btnAnterior.Click += new System.EventHandler(this.btnAnterior_Click);
             // 
             // cmbRubros
             // 
@@ -168,7 +232,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(808, 495);
+            this.ClientSize = new System.Drawing.Size(921, 519);
             this.Controls.Add(this.cmbRubros);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.txtDescripcion);
@@ -183,6 +247,7 @@
             this.grpFiltros.ResumeLayout(false);
             this.grpFiltros.PerformLayout();
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -201,6 +266,11 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.GroupBox grpFiltros;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button btnUltima;
+        private System.Windows.Forms.Label lblInfo;
+        private System.Windows.Forms.Button btnSiguiente;
+        private System.Windows.Forms.Button btnAnterior;
+        private System.Windows.Forms.Button btnPrimera;
 
     }
 }

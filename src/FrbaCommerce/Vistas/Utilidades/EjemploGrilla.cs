@@ -64,12 +64,10 @@ namespace FrbaCommerce
             Actualizar();
         }
 
-        private void groupBox1_Enter(object sender, EventArgs e)
+        private void EjemploGrilla_Load(object sender, EventArgs e)
         {
 
         }
-
-
 
 
     }

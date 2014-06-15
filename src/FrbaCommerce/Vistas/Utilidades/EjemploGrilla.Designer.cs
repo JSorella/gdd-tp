@@ -56,7 +56,6 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros de Busqueda";
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // button1
             // 
@@ -182,6 +181,7 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "EjemploGrilla";
             this.Text = "EjemploGrilla";
+            this.Load += new System.EventHandler(this.EjemploGrilla_Load);
             this.groupBox1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dvgPublis)).EndInit();
