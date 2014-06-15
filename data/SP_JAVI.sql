@@ -314,18 +314,23 @@ AS
 GO
 
 /*-------------------------STORED PROCEDURE (JAVI)--------------------------*/
-IF OBJECT_ID('J2LA.bajaCliente') IS NOT NULL
-DROP PROCEDURE J2LA.bajaCliente
+IF OBJECT_ID('J2LA.setBajaCliente') IS NOT NULL
+DROP PROCEDURE J2LA.setBajaCliente
 GO
-CREATE PROCEDURE J2LA.bajaCliente(@emp_CUIT nvarchar(50))
+CREATE PROCEDURE J2LA.setBajaCliente(@cli_Tipodoc_Id int, @cli_Nro_Doc numeric(18,0))
 AS
 	BEGIN
-		DECLARE @emp_usu_Id int
-		SET @emp_usu_Id = (SELECT emp_usu_Id FROM J2LA.Empresas WHERE emp_Cuit = @emp_CUIT)
+		DECLARE @usu_Id int
+		SET @usu_Id = (
+			SELECT cli_usu_Id 
+			FROM J2LA.Clientes 
+			WHERE cli_Tipodoc_Id = @cli_Tipodoc_Id
+			AND cli_Nro_Doc = @cli_Nro_Doc
+			)
 		
 		UPDATE J2LA.Usuarios
 		SET usu_Eliminado = 1
-		WHERE usu_Id = @emp_usu_Id
+		WHERE usu_Id = @usu_Id
 	END
 GO
 

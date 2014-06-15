@@ -51,6 +51,7 @@
             this.label1.Size = new System.Drawing.Size(70, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Razón Social";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -60,6 +61,7 @@
             this.label2.Size = new System.Drawing.Size(32, 13);
             this.label2.TabIndex = 1;
             this.label2.Text = "CUIT";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label3
             // 
@@ -69,6 +71,7 @@
             this.label3.Size = new System.Drawing.Size(26, 13);
             this.label3.TabIndex = 2;
             this.label3.Text = "Mail";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // tboxRazonSocial
             // 
@@ -76,6 +79,7 @@
             this.tboxRazonSocial.Name = "tboxRazonSocial";
             this.tboxRazonSocial.Size = new System.Drawing.Size(283, 20);
             this.tboxRazonSocial.TabIndex = 3;
+            this.tboxRazonSocial.TextChanged += new System.EventHandler(this.tboxRazonSocial_TextChanged);
             // 
             // tboxMail
             // 
@@ -83,6 +87,7 @@
             this.tboxMail.Name = "tboxMail";
             this.tboxMail.Size = new System.Drawing.Size(283, 20);
             this.tboxMail.TabIndex = 4;
+            this.tboxMail.TextChanged += new System.EventHandler(this.tboxMail_TextChanged);
             // 
             // tboxCUIT
             // 
@@ -90,6 +95,7 @@
             this.tboxCUIT.Name = "tboxCUIT";
             this.tboxCUIT.Size = new System.Drawing.Size(283, 20);
             this.tboxCUIT.TabIndex = 5;
+            this.tboxCUIT.TextChanged += new System.EventHandler(this.tboxCUIT_TextChanged);
             // 
             // groupBox1
             // 
@@ -107,6 +113,7 @@
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros de búsqueda";
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // btnLimpiar
             // 
@@ -141,6 +148,7 @@
             this.gridEmpresas.Size = new System.Drawing.Size(387, 215);
             this.gridEmpresas.TabIndex = 7;
             this.gridEmpresas.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridEmpresas_CellDoubleClick);
+            this.gridEmpresas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridEmpresas_CellContentClick);
             // 
             // btnSeleccionar
             // 

@@ -51,6 +51,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Vistas\Abm_Cliente\Abm_Clientes_Busqueda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Abm_Cliente\Abm_Clientes_Busqueda.Designer.cs">
+      <DependentUpon>Abm_Clientes_Busqueda.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\Abm_Empresa\Abm_Empresas_Busqueda.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -343,6 +349,9 @@
     <EmbeddedResource Include="Vistas\Abm_Cliente\Abm_Cliente_Baja.resx">
       <DependentUpon>Abm_Cliente_Baja.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Abm_Cliente\Abm_Clientes_Busqueda.resx">
+      <DependentUpon>Abm_Clientes_Busqueda.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Abm_Cliente\Abm_Cliente_Modif.resx">
       <DependentUpon>Abm_Cliente_Modif.cs</DependentUpon>
     </EmbeddedResource>
@@ -438,6 +447,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Seguridad\CambiarPass.resx">
       <DependentUpon>CambiarPass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Seguridad\Usuarios_Baja.resx">
+      <DependentUpon>Usuarios_Baja.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Utilidades\ComboCheck.resx">
       <DependentUpon>ComboCheck.cs</DependentUpon>

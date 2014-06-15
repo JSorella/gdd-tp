@@ -73,7 +73,8 @@ namespace FrbaCommerce
                     AND u.usu_Id = ur.usurol_usu_id
                     AND ur.usurol_rol_id = r.rol_Id
                     AND r.rol_eliminado = 0
-                    AND r.rol_Inhabilitado = 0";
+                    AND r.rol_Inhabilitado = 0
+                    AND u.usu_Eliminado = 0";
 
                 DataTable usuarioResult = Singleton.conexion.executeQueryTable(query, null, null);
 
@@ -275,12 +276,6 @@ namespace FrbaCommerce
         {
             try
             {
-                //if()
-                //{
-                //    throw new Exception("");
-                //}
-
-
                 Singleton.conexion.executeQuerySP("J2LA.setNuevoCliente", clienteUsuario, null);
             }
             catch (Exception ex)
@@ -289,11 +284,58 @@ namespace FrbaCommerce
             }
         }
 
+        /// <summary>
+        /// Trae estructura Cliente-Usuario
+        /// </summary>
         public static DataTable getDTCliente()
         {
             try
             {
                 return Singleton.conexion.executeQueryTable("Select * From J2LA.Clientes, J2LA.Usuarios Where 1 = 0", null, null);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Trae un Cliente-Usuario
+        /// </summary>
+        public static DataTable getClienteUsuario(int cli_Tipodoc_Id, int cli_Nro_Doc)
+        {
+            try
+            {
+                String query = @"SELECT * 
+                                FROM 
+                                    J2LA.Clientes C
+                                    , J2LA.Usuarios U 
+                                WHERE C.cli_usu_Id = U.usu_Id 
+                                AND C.cli_Tipodoc_Id = " + cli_Tipodoc_Id + @"
+                                AND C.cli_Nro_Doc = " + cli_Nro_Doc + @"
+                                AND U.usu_Eliminado = 0";
+
+                return Singleton.conexion.executeQueryTable(query, null, null);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+        }
+
+        /// <summary>
+        /// Da de baja un Cliente-Usuario
+        /// </summary>
+        public static bool setBajaCliente(int cli_Tipodoc_Id, int cli_Nro_Doc)
+        {
+            try
+            {
+                Singleton.conexion.executeQuerySP("J2LA.setBajaCliente", null, new String[2, 2] { 
+                                                    { "cli_Tipodoc_Id", cli_Tipodoc_Id.ToString() }
+                                                    ,{ "cli_Nro_Doc", cli_Nro_Doc.ToString() }
+                                                    });
+                return true;
             }
             catch (Exception ex)
             {
@@ -1011,6 +1053,45 @@ namespace FrbaCommerce
                 String query = "Select emp_CUIT,emp_Razon_Social,emp_Mail from J2LA.Empresas" +
                                 filtros +
                                 " Order By emp_CUIT ASC";
+
+                return Singleton.conexion.executeQueryTable(query, null, null);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Trae todos los Clientes que coincidan con ciertos Filtros
+        /// </summary>
+        public static DataTable BuscarClientes(String filtros)
+        {
+            try
+            {
+                String query = @"
+                    SELECT 
+                        C.cli_Nombre
+                        , C.cli_Apellido 
+                        , T.tipodoc_Descripcion
+                        , C.cli_Tipodoc_Id
+                        , C.cli_Nro_Doc
+                        , C.cli_Mail 
+                    FROM 
+                        J2LA.Clientes C
+                        , J2LA.TiposDoc T
+                        , J2LA.Usuarios U" +
+                    filtros + @" 
+                    AND
+                        C.cli_Tipodoc_Id = T.tipodoc_Id
+                    AND
+                        C.cli_usu_id = U.usu_Id
+                    AND
+                        U.usu_Eliminado = 0
+                    ORDER BY 
+                        C.cli_Tipodoc_Id 
+                        , C.cli_Nro_Doc 
+                        ASC";
 
                 return Singleton.conexion.executeQueryTable(query, null, null);
             }
