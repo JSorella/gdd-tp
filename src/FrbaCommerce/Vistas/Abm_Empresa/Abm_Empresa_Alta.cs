@@ -55,7 +55,7 @@ namespace FrbaCommerce
             if (Singleton.sessionRol_Id == 1) //Soy el Admin
             {
                 usuario = tboxCUIT.Text;
-                pass = "5678";
+                pass = "p455w0rd";
             }
         }
 
