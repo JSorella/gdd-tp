@@ -283,7 +283,7 @@ namespace FrbaCommerce
             }
             else
             {
-                Funciones.mostrarAlert("Inhabilitado para comprar - Regularice su sitación con la administración", "Usuario en Mora");
+                Funciones.alertInhabilitadoComprar();
             }  
         }
 

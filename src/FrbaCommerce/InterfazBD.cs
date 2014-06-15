@@ -1501,7 +1501,7 @@ namespace FrbaCommerce
         {
             try
             {
-                String query = "Select * From J2LA.getPendientesFact(@usu_id) ORDER BY Fecha DESC";
+                String query = "Select * From J2LA.getPendientesFact(@usu_id) ORDER BY FechaDte DESC";
 
                 return Singleton.conexion.executeQueryTable(query, null,
                             new String[1, 2] { { "usu_Id", usu_Id.ToString() } });
