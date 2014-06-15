@@ -1035,12 +1035,82 @@ namespace FrbaCommerce
             }
         }
 
+        public static DataTable getDTEmpresaUsuario()
+        {
+            try
+            {
+                return Singleton.conexion.executeQueryTable("Select * From J2LA.Empresas, J2LA.Usuarios Where 1 = 0", null, null);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public static void CargarEmpresa(DataTable oDtEmpresaUsuario)
+        {
+            try
+            {
+                Singleton.conexion.executeQuerySP("J2LA.CargarEmpresa", oDtEmpresaUsuario, null);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public static void ActualizarEmpresa(DataTable oDtEmpresaUsuario)
+        {
+            try
+            {
+                Singleton.conexion.executeQuerySP("J2LA.ActualizarEmpresa", oDtEmpresaUsuario, null);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public static bool RealizarBajaEmpresa(string emp_CUIT)
         {
             try
             {
                 Singleton.conexion.executeQuerySP("J2LA.BajaEmpresa", null, new String[1, 2] { { "emp_CUIT", emp_CUIT } });
                 return true;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public static string existeCUIT(string emp_CUIT)
+        {
+            try
+            {
+                if ((bool)Singleton.conexion.executeQueryFuncEscalar("J2LA.existeCUIT(@emp_Cuit)", null,
+                                        new String[1, 2] { { "emp_CUIT", emp_CUIT.ToString() } }))
+                {
+                    throw new Exception("Ya existe una Empresa con este CUIT.");
+                }
+                return "";
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public static string existeRazonSocial(string emp_Razon_Social)
+        {
+            try
+            {
+                if ((bool)Singleton.conexion.executeQueryFuncEscalar("J2LA.existeCUIT(@emp_Razon_Social)", null,
+                                        new String[1, 2] { { "emp_Razon_Social", emp_Razon_Social.ToString() } }))
+                {
+                    throw new Exception("Ya existe una Empresa con esta Razon Social.");
+                }
+                return "";
             }
             catch (Exception ex)
             {

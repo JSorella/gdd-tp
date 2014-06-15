@@ -194,8 +194,6 @@ IF OBJECT_ID('J2LA.CargarEmpresa') IS NOT NULL
 DROP PROCEDURE J2LA.CargarEmpresa
 GO
 CREATE PROCEDURE J2LA.CargarEmpresa(
-	@userName nvarchar(255),
-	@pass nvarchar(255),
 	@emp_Razon_Social nvarchar(255),
 	@emp_CUIT nvarchar(50),
 	@emp_Mail nvarchar(50),
@@ -208,14 +206,21 @@ CREATE PROCEDURE J2LA.CargarEmpresa(
 	@emp_CP nvarchar(50),
 	@emp_Ciudad nvarchar(255),
 	@emp_Contacto nvarchar(255),
-	@emp_Fecha_Creacion datetime)
+	@emp_Fecha_Creacion datetime,
+	@emp_usu_Id int,
+	
+	@usu_Id int,
+	@usu_UserName nvarchar(255), 
+	@usu_Pass nvarchar(255), 
+	@usu_Cant_Intentos int,
+	@usu_Inhabilitado bit,
+	@usu_Inhabilitado_Comprar bit,
+	@usu_Motivo nvarchar,
+	@usu_Eliminado bit,
+	@usu_Primer_Ingreso bit)
 AS
 	BEGIN
-		DECLARE @usu_Id int
-		
-		EXEC J2LA.setNuevoUsuario @userName,@pass
-		
-		SET @usu_Id = J2LA.getUserId(@userName)
+		EXECUTE J2LA.setNuevoUsuario @usu_UserName, @usu_Pass, @usu_Primer_Ingreso
 	
 		INSERT INTO J2LA.Empresas(
 			emp_Razon_Social,
@@ -232,6 +237,7 @@ AS
 			emp_Contacto,
 			emp_Fecha_Creacion,
 			emp_usu_Id)
+			
 		VALUES (
 			@emp_Razon_Social,
 			@emp_CUIT,
@@ -246,10 +252,10 @@ AS
 			@emp_Ciudad,
 			@emp_Contacto,
 			@emp_Fecha_Creacion,
-			@usu_Id)
+			J2LA.getUserId(@usu_UserName))
 		
 		INSERT INTO J2LA.Usuarios_Roles (usurol_usu_Id, usurol_rol_Id)
-		VALUES (@usu_Id, J2LA.getRolId('Empresa'))
+		VALUES (J2LA.getUserId(@usu_UserName), J2LA.getRolId('Empresa'))
 	END
 GO
 
@@ -270,7 +276,17 @@ CREATE PROCEDURE J2LA.ActualizarEmpresa(
 	@emp_CP nvarchar(50),
 	@emp_Ciudad nvarchar(255),
 	@emp_Contacto nvarchar(255),
-	@emp_Fecha_Creacion datetime)
+	@emp_Fecha_Creacion datetime,
+	
+	@usu_Id int,
+	@usu_UserName nvarchar(255), 
+	@usu_Pass nvarchar(255), 
+	@usu_Cant_Intentos int,
+	@usu_Inhabilitado bit,
+	@usu_Motivo nvarchar,
+	@usu_Eliminado bit,
+	@usu_Primer_Ingreso bit,
+	@usu_Inhabilitado_Comprar bit)
 AS
 	BEGIN
 		UPDATE J2LA.Empresas
@@ -289,6 +305,10 @@ AS
 			emp_Contacto = @emp_Contacto,
 			emp_Fecha_Creacion = @emp_Fecha_Creacion
 		WHERE emp_usu_Id = @emp_usu_Id
+		
+		UPDATE J2LA.Usuarios
+		SET usu_Eliminado = @usu_Eliminado
+		WHERE usu_Id = @emp_usu_id
 	END
 GO
 
@@ -302,7 +322,33 @@ AS
 		SET @emp_usu_Id = (SELECT emp_usu_Id FROM J2LA.Empresas WHERE emp_Cuit = @emp_CUIT)
 		
 		UPDATE J2LA.Usuarios
-		SET usu_Inhabilitado = 1
+		SET usu_Eliminado = 1
 		WHERE usu_Id = @emp_usu_Id
 	END
-GO	
+GO
+
+IF OBJECT_ID('J2LA.existeCUIT') IS NOT NULL
+DROP FUNCTION J2LA.existeCUIT
+GO
+CREATE FUNCTION J2LA.existeCUIT(@emp_CUIT nvarchar(50))
+RETURNS BIT
+AS
+BEGIN
+	IF( (SELECT COUNT(emp_Cuit) FROM J2LA.Empresas where emp_Cuit = @emp_CUIT) > 0)
+		RETURN 1
+	RETURN 0
+END
+GO
+
+IF OBJECT_ID('J2LA.existeRazonSocial') IS NOT NULL
+DROP FUNCTION J2LA.existeRazonSocial
+GO
+CREATE FUNCTION J2LA.existeRazonSocial(@emp_Razon_Social nvarchar(50))
+RETURNS BIT
+AS
+BEGIN
+	IF( (SELECT COUNT(emp_Razon_Social) FROM J2LA.Empresas where emp_Razon_Social = @emp_Razon_Social) > 0)
+		RETURN 1
+	RETURN 0
+END
+GO

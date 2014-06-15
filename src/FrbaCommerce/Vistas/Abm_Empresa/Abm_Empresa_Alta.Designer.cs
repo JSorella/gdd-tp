@@ -69,6 +69,7 @@
             this.btnDarDeAlta.TabIndex = 14;
             this.btnDarDeAlta.Text = "Dar de Alta";
             this.btnDarDeAlta.UseVisualStyleBackColor = true;
+            this.btnDarDeAlta.Click += new System.EventHandler(this.btnDarDeAlta_Click);
             // 
             // label1
             // 
