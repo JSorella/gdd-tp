@@ -143,8 +143,7 @@ namespace FrbaCommerce
                 dgvPubli.EndEdit();  //Cancelo la Edicion para Confirmar el cambio.-
 
                 //Validar Compras - Debe Cancelar en orden de Fecha Desc.
-                if ((Convert.ToBoolean(dgvPubli.Rows[e.RowIndex].Cells["Facturar"].Value))
-                    && (dgvPubli.Rows[e.RowIndex].Cells["Tipo"].Value.ToString() == "C"))
+                if (dgvPubli.Rows[e.RowIndex].Cells["Tipo"].Value.ToString() == "C")
                 {
                     if (!ValidarComprasAnteriores(e.ColumnIndex, e.RowIndex))
                     {
@@ -227,11 +226,12 @@ namespace FrbaCommerce
                             oDr["Facturar"] = true;
                             oDr["Codigo Publi"] = row.Cells["pub_Codigo"].Value;
                             oDr["Tipo"] = "B";
-                            oDr["Fecha"] = Singleton.FechaDelSistema;
+                            oDr["Fecha"] = Singleton.FechaDelSistema.ToShortDateString();
                             oDr["Concepto"] = "Bonificacion 10 Publicaciones (Nro.Pub: " + row.Cells["pub_Codigo"].Value.ToString() + ")";
                             oDr["Cantidad"] = 1;
                             oDr["Importe"] = (Convert.ToDecimal(row.Cells["Importe"].Value) * -1);
                             oDr["pub_visibilidad_Id"] = row.Cells["pub_visibilidad_Id"].Value;
+                            oDr["FechaDte"] = Singleton.FechaDelSistema;
 
                             oDtCobAux.Rows.Add(oDr);
                         }
@@ -297,19 +297,48 @@ namespace FrbaCommerce
         private bool ValidarComprasAnteriores(int colIndex, int rowIndex)
         {
             bool valida = true;
+            DateTime fechaComp = Convert.ToDateTime(dgvPubli.Rows[rowIndex].Cells["Fecha"].Value);
 
-            for (int i = rowIndex - 1; i >= 0; i--)
+            if (Convert.ToBoolean(dgvPubli.Rows[rowIndex].Cells["Facturar"].Value))
             {
-                //Obtener la fecha y buscar las anteriores Todo DataSet
-                if ((!Convert.ToBoolean(dgvPubli.Rows[i].Cells["Facturar"].Value))
-                    && ((dgvPubli.Rows[i].Cells["Tipo"].Value.ToString() == "C")))
+                foreach (DataGridViewRow row in dgvPubli.Rows)
                 {
-                    MessageBox.Show("No puede pagar la Compra de la Fila " + rowIndex.ToString() +
-                        " sin antes haber pagado las compras de Fechas anteriores.",
-                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    valida = false;
-                    break;
+                    //Obtener la fecha y buscar las anteriores Todo DataSet
+                    if ((!Convert.ToBoolean(row.Cells["Facturar"].Value)) //Si no esta marcada
+                        && ((row.Cells["Tipo"].Value.ToString() == "C"))) //Y es compra.-
+                    {
+                        //Si tiene menor fecha informo.
+                        if (Convert.ToDateTime(row.Cells["Fecha"].Value) < fechaComp)
+                        {
+                            MessageBox.Show("No puede pagar la Compra de la Fila " + (rowIndex + 1).ToString() +
+                                " sin antes haber pagado las compras de Fechas anteriores.",
+                                "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                            valida = false;
+
+                            break;
+                        }
+                    }
                 }
+            }
+            else
+            {
+                foreach (DataGridViewRow row in dgvPubli.Rows)
+                {
+                    if ((Convert.ToBoolean(row.Cells["Facturar"].Value)) //Si esta marcada
+                        && ((row.Cells["Tipo"].Value.ToString() == "C"))) //Y es compra.-
+                    {
+                        //Si tiene fecha mayor, la destildo.
+                        if (Convert.ToDateTime(row.Cells["Fecha"].Value) > fechaComp)
+                        {
+                            row.Cells["Facturar"].Value = false;
+                            valida = false;
+                        }
+                    }
+                }
+
+                MessageBox.Show("No puede pagar las Compra con una Fecha mayor a la de la Fila " + (rowIndex + 1).ToString(),
+                            "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             return valida;
@@ -486,6 +515,7 @@ namespace FrbaCommerce
             dgvPubli.Columns["pub_Codigo"].Visible = false;
             dgvPubli.Columns["comp_Id"].Visible = false;
             dgvPubli.Columns["pub_visibilidad_id"].Visible = false;
+            dgvPubli.Columns["FechaDte"].Visible = false;
 
             dgvPubli.Columns["Codigo Publi"].ReadOnly = true;
             dgvPubli.Columns["Tipo"].ReadOnly = true;
