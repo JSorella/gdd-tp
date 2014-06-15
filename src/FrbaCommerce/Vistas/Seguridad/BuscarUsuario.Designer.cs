@@ -148,7 +148,7 @@
             this.MaximizeBox = false;
             this.Name = "BuscarUsuario";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "BuscarUsuario";
+            this.Text = "Buscar Usuario";
             this.Load += new System.EventHandler(this.BuscarUsuario_Load);
             this.grpParam.ResumeLayout(false);
             this.grpParam.PerformLayout();

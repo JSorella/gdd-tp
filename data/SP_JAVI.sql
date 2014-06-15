@@ -16,7 +16,7 @@ BEGIN
     SET
 		usu_Cant_Intentos = @cantIntentos,
 		usu_Inhabilitado = CASE WHEN @cantIntentos >= 3 THEN 1 ELSE 0 END,
-		usu_Motivo = CASE WHEN @cantIntentos >= 3 THEN 'Intentos' ELSE '' END
+		usu_Motivo = CASE WHEN @cantIntentos >= 3 THEN 'Tres Intentos Fallidos en Login' ELSE '' END
 	WHERE
 		usu_Id = @idUsuario
 END

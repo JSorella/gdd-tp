@@ -13,7 +13,7 @@ namespace FrbaCommerce
     {
         private string usuario;
         private string pass;
-        DateTime dteFecCreac;
+        DateTime dteFecNac;
         private bool usu_Primer_Ingreso;  
 
 
@@ -69,7 +69,7 @@ namespace FrbaCommerce
                 clienteUsuario["cli_Dpto"] = this.depto_textbox.Text;
                 clienteUsuario["cli_Localidad"] = this.localidad_textbox.Text; 
                 clienteUsuario["cli_CP"] = this.cp_textbox.Text;
-                clienteUsuario["cli_Fecha_Nac"] = (DateTime)this.dteFecCreac;
+                clienteUsuario["cli_Fecha_Nac"] = (DateTime)this.dteFecNac;
                 clienteUsuario["cli_Cuil"] = Convert.ToInt64(this.cuil_textbox.Text);
                 clienteUsuario["cli_usu_Id"] = 0;
                 //Usuario
@@ -202,7 +202,7 @@ namespace FrbaCommerce
             oFrm.ShowDialog();
 
             if (!oFrm.Cancelado)
-                dteFecCreac = oFrm.FechaSeleccionada;
+                dteFecNac = oFrm.FechaSeleccionada;
                 fechaNacimiento.Text = oFrm.FechaSeleccionada.ToShortDateString();
         }
 
