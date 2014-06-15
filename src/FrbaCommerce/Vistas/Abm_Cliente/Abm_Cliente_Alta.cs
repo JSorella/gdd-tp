@@ -81,8 +81,6 @@ namespace FrbaCommerce
                 clienteUsuario["usu_Motivo"] = "";
                 clienteUsuario["usu_Eliminado"] = 0;
                 clienteUsuario["usu_Primer_Ingreso"] = this.usu_Primer_Ingreso ? 1 : 0;
-                clienteUsuario["Publ_Cli_Dni"] = 0;
-                clienteUsuario["Publ_Empresa_Cuit"] = 0;
                 clienteUsuario["usu_Inhabilitado_Comprar"] = 0;
 
                 DTCliente.Rows.Add(clienteUsuario);

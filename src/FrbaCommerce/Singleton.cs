@@ -21,6 +21,7 @@ namespace FrbaCommerce
 
         public static DataRow usuario; //= new DataTable();
         public static int sessionRol_Id = 0;
+        public static string sessionRol_Nombre = "";
         public static bool debeCambiarPass = false;
 
         //El constructor del Singleton siempre debe ser privado para evitar ser instanciado
@@ -34,16 +35,12 @@ namespace FrbaCommerce
             }
         }
 
-        public static string sessionRol_Nombre()
-        {
-            return InterfazBD.getRolNombre(sessionRol_Id);
-        }
-
         public static void cargarUsuario(string nombre)
         {
             DataTable oDTRolesxUsuario = InterfazBD.getUsuarioConRoles(nombre);
             Singleton.usuario = oDTRolesxUsuario.NewRow();
             Singleton.usuario.ItemArray = oDTRolesxUsuario.Rows[0].ItemArray;
+            Singleton.sessionRol_Id = Convert.ToInt32(Singleton.usuario["usurol_rol_id"]);
         }
     }
 }

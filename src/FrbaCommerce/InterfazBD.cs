@@ -1057,7 +1057,7 @@ namespace FrbaCommerce
             {
                 throw new Exception(ex.Message);
             }
-        }
+        } 
 
         public static void ActualizarEmpresa(DataTable oDtEmpresaUsuario)
         {

@@ -137,7 +137,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(359, 175);
+            this.label8.Location = new System.Drawing.Point(359, 139);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(40, 13);
             this.label8.TabIndex = 7;
@@ -182,7 +182,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(359, 144);
+            this.label13.Location = new System.Drawing.Point(359, 166);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(71, 13);
             this.label13.TabIndex = 12;
@@ -269,14 +269,14 @@
             // 
             // tboxCiudad
             // 
-            this.tboxCiudad.Location = new System.Drawing.Point(449, 168);
+            this.tboxCiudad.Location = new System.Drawing.Point(449, 136);
             this.tboxCiudad.Name = "tboxCiudad";
             this.tboxCiudad.Size = new System.Drawing.Size(187, 20);
             this.tboxCiudad.TabIndex = 26;
             // 
             // tboxCodPostal
             // 
-            this.tboxCodPostal.Location = new System.Drawing.Point(449, 136);
+            this.tboxCodPostal.Location = new System.Drawing.Point(449, 163);
             this.tboxCodPostal.Name = "tboxCodPostal";
             this.tboxCodPostal.Size = new System.Drawing.Size(70, 20);
             this.tboxCodPostal.TabIndex = 27;
@@ -286,8 +286,9 @@
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.btnSelFec);
             this.panel1.Controls.Add(this.tboxCodPostal);
-            this.panel1.Controls.Add(this.tboxFechaCreacion);
             this.panel1.Controls.Add(this.tboxCiudad);
+            this.panel1.Controls.Add(this.tboxFechaCreacion);
+            this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.tboxLocalidad);
             this.panel1.Controls.Add(this.tboxDpto);
             this.panel1.Controls.Add(this.tboxPiso);
@@ -304,7 +305,6 @@
             this.panel1.Controls.Add(this.label11);
             this.panel1.Controls.Add(this.label10);
             this.panel1.Controls.Add(this.label9);
-            this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.label7);
             this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.label5);

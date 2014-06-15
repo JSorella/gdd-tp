@@ -70,6 +70,7 @@ namespace FrbaCommerce
                     limpiarCantidadIntentos();
                     oDTRolesxUsuario = InterfazBD.getUsuarioConRoles(usuario.nombre); //uso local
                     Singleton.cargarUsuario(usuario.nombre);
+                    Singleton.sessionRol_Nombre = InterfazBD.getRolNombre(Singleton.sessionRol_Id);
                     validarPrimerIngreso();
 
                     //Abro forms de acuerdo a la cantidad de Roles asignados

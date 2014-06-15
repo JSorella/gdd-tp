@@ -83,7 +83,7 @@ namespace FrbaCommerce
                     {
                         Limpiar(true);
                         HabilitarMod(false);
-                        if (!admin)
+                        if (!admin && Convert.ToBoolean(Singleton.usuario["usu_Primer_Ingreso"]))
                         {
                             InterfazBD.setPrimerIngresoValido(Convert.ToInt32(Singleton.usuario["usu_Id"]));
                             Singleton.debeCambiarPass = false;
