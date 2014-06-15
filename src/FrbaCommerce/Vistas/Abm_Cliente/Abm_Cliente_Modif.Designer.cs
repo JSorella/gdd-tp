@@ -31,8 +31,6 @@
             this.pnlParam = new System.Windows.Forms.Panel();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.btnSeleccionar = new System.Windows.Forms.Button();
-            this.tboxEmpresaSeleccionada = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
             this.tboxFechaCreacion = new System.Windows.Forms.TextBox();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.chkboxEliminada = new System.Windows.Forms.CheckBox();
@@ -64,6 +62,10 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.comboDoc = new System.Windows.Forms.ComboBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.txtNroDoc = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
             this.pnlParam.SuspendLayout();
             this.pnlDatos.SuspendLayout();
             this.SuspendLayout();
@@ -71,13 +73,15 @@
             // pnlParam
             // 
             this.pnlParam.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlParam.Controls.Add(this.comboDoc);
+            this.pnlParam.Controls.Add(this.label15);
+            this.pnlParam.Controls.Add(this.txtNroDoc);
+            this.pnlParam.Controls.Add(this.label16);
             this.pnlParam.Controls.Add(this.btnAceptar);
             this.pnlParam.Controls.Add(this.btnSeleccionar);
-            this.pnlParam.Controls.Add(this.tboxEmpresaSeleccionada);
-            this.pnlParam.Controls.Add(this.label15);
-            this.pnlParam.Location = new System.Drawing.Point(22, 19);
+            this.pnlParam.Location = new System.Drawing.Point(22, 12);
             this.pnlParam.Name = "pnlParam";
-            this.pnlParam.Size = new System.Drawing.Size(643, 46);
+            this.pnlParam.Size = new System.Drawing.Size(643, 62);
             this.pnlParam.TabIndex = 62;
             // 
             // btnAceptar
@@ -88,6 +92,7 @@
             this.btnAceptar.TabIndex = 3;
             this.btnAceptar.Text = "Aceptar";
             this.btnAceptar.UseVisualStyleBackColor = true;
+            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
             // 
             // btnSeleccionar
             // 
@@ -97,22 +102,7 @@
             this.btnSeleccionar.TabIndex = 2;
             this.btnSeleccionar.Text = "Seleccionar";
             this.btnSeleccionar.UseVisualStyleBackColor = true;
-            // 
-            // tboxEmpresaSeleccionada
-            // 
-            this.tboxEmpresaSeleccionada.Location = new System.Drawing.Point(210, 13);
-            this.tboxEmpresaSeleccionada.Name = "tboxEmpresaSeleccionada";
-            this.tboxEmpresaSeleccionada.Size = new System.Drawing.Size(219, 20);
-            this.tboxEmpresaSeleccionada.TabIndex = 1;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(24, 16);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(160, 13);
-            this.label15.TabIndex = 0;
-            this.label15.Text = "Indique el CUIT de una empresa";
+            this.btnSeleccionar.Click += new System.EventHandler(this.btnSeleccionar_Click);
             // 
             // tboxFechaCreacion
             // 
@@ -130,6 +120,7 @@
             this.btnGuardar.TabIndex = 61;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // chkboxEliminada
             // 
@@ -149,6 +140,7 @@
             this.btnSelFec.TabIndex = 59;
             this.btnSelFec.Text = "Seleccionar";
             this.btnSelFec.UseVisualStyleBackColor = true;
+            this.btnSelFec.Click += new System.EventHandler(this.btnSeleccionar_Click);
             // 
             // pnlDatos
             // 
@@ -397,6 +389,42 @@
             this.label1.TabIndex = 29;
             this.label1.Text = "Razón Social";
             // 
+            // comboDoc
+            // 
+            this.comboDoc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboDoc.FormattingEnabled = true;
+            this.comboDoc.Location = new System.Drawing.Point(175, 6);
+            this.comboDoc.Name = "comboDoc";
+            this.comboDoc.Size = new System.Drawing.Size(190, 21);
+            this.comboDoc.Sorted = true;
+            this.comboDoc.TabIndex = 33;
+            this.comboDoc.TabStop = false;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(37, 9);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(101, 13);
+            this.label15.TabIndex = 34;
+            this.label15.Text = "Tipo de Documento";
+            // 
+            // txtNroDoc
+            // 
+            this.txtNroDoc.Location = new System.Drawing.Point(175, 33);
+            this.txtNroDoc.Name = "txtNroDoc";
+            this.txtNroDoc.Size = new System.Drawing.Size(190, 20);
+            this.txtNroDoc.TabIndex = 32;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(37, 36);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(117, 13);
+            this.label16.TabIndex = 31;
+            this.label16.Text = "Número de Documento";
+            // 
             // Abm_Cliente_Modif
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -422,8 +450,6 @@
         private System.Windows.Forms.Panel pnlParam;
         private System.Windows.Forms.Button btnAceptar;
         private System.Windows.Forms.Button btnSeleccionar;
-        private System.Windows.Forms.TextBox tboxEmpresaSeleccionada;
-        private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox tboxFechaCreacion;
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.CheckBox chkboxEliminada;
@@ -455,5 +481,9 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox comboDoc;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox txtNroDoc;
+        private System.Windows.Forms.Label label16;
     }
 }
