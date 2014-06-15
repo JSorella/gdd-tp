@@ -68,8 +68,8 @@ namespace FrbaCommerce
                 {
                     
                     limpiarCantidadIntentos();
-                    oDTRolesxUsuario = InterfazBD.getUsuarioConRoles(usuario.nombre);
-                    cargarUsuarioEnSingleton();
+                    oDTRolesxUsuario = InterfazBD.getUsuarioConRoles(usuario.nombre); //uso local
+                    Singleton.cargarUsuario(usuario.nombre);
                     validarPrimerIngreso();
 
                     //Abro forms de acuerdo a la cantidad de Roles asignados
@@ -144,12 +144,6 @@ namespace FrbaCommerce
         {
             this.usuario.cantidadIntentos = 0;
             InterfazBD.setCantidadIntentos(this.usuario);
-        }
-
-        private void cargarUsuarioEnSingleton()
-        {
-            Singleton.usuario = oDTRolesxUsuario.NewRow();
-            Singleton.usuario.ItemArray = oDTRolesxUsuario.Rows[0].ItemArray;
         }
 
         private void validarPrimerIngreso()

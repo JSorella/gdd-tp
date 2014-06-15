@@ -45,6 +45,9 @@ GO
 IF OBJECT_ID('J2LA.updateStockPublicacion') IS NOT NULL
 DROP PROCEDURE J2LA.updateStockPublicacion
 GO
+IF OBJECT_ID('J2LA.validarComprasSinRendir') IS NOT NULL
+DROP TRIGGER J2LA.validarComprasSinRendir
+GO
 IF OBJECT_ID('J2LA.getPrecioMax') IS NOT NULL
 DROP FUNCTION J2LA.getPrecioMax
 GO

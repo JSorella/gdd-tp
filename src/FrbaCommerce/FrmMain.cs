@@ -277,7 +277,14 @@ namespace FrbaCommerce
 
         private void tsmiPublicacionComp_Click(object sender, EventArgs e)
         {
-            ejecutarForm(new ComprarOfertar(), sender);
+            if (!Convert.ToBoolean(Singleton.usuario["usu_Inhabilitado_Comprar"]))
+            {
+                ejecutarForm(new ComprarOfertar(), sender);
+            }
+            else
+            {
+                Funciones.mostrarAlert("Inhabilitado para comprar - Regularice su sitación con la administración", "Usuario en Mora");
+            }  
         }
 
         private void tsmiPublicacionCalif_Click(object sender, EventArgs e)

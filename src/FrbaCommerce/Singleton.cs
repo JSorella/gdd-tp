@@ -38,5 +38,12 @@ namespace FrbaCommerce
         {
             return InterfazBD.getRolNombre(sessionRol_Id);
         }
+
+        public static void cargarUsuario(string nombre)
+        {
+            DataTable oDTRolesxUsuario = InterfazBD.getUsuarioConRoles(nombre);
+            Singleton.usuario = oDTRolesxUsuario.NewRow();
+            Singleton.usuario.ItemArray = oDTRolesxUsuario.Rows[0].ItemArray;
+        }
     }
 }

@@ -338,6 +338,42 @@ BEGIN
 END
 GO
 
+/*-------------------------TRIGGER (JAVI)--------------------------*/
+IF OBJECT_ID('J2LA.validarComprasSinRendir') IS NOT NULL
+DROP TRIGGER J2LA.validarComprasSinRendir
+GO
+CREATE TRIGGER J2LA.validarComprasSinRendir 
+ON J2LA.Compras
+AFTER INSERT
+AS
+BEGIN
+	DECLARE @comp_usu_Id int
+	DECLARE @cantComprasSinRendir int
+	SET @comp_usu_Id = (SELECT comp_usu_Id FROM inserted)
+	
+	SET @cantComprasSinRendir = (
+		SELECT COUNT(*) 
+		FROM J2LA.Compras 
+		WHERE comp_Facturada = 0
+		AND comp_usu_Id = @comp_usu_Id
+		)
+	
+	
+	IF (@cantComprasSinRendir >= 10)
+	BEGIN
+		UPDATE J2LA.Publicaciones
+		SET	pub_estado_Id = 3 /* Pausada */
+		WHERE pub_usu_Id = @comp_usu_Id
+		
+		UPDATE J2LA.Usuarios
+		SET	
+			usu_Inhabilitado_Comprar = 1
+			/*, usu_Motivo = 'Debe rendir 10 o más Compras pendientes'*/
+		WHERE usu_Id = @comp_usu_Id
+	END
+END
+GO
+
 /*-------------------------FUNCTION (JAVI)--------------------------*/
 IF OBJECT_ID('J2LA.getPrecioMax') IS NOT NULL
 DROP FUNCTION J2LA.getPrecioMax

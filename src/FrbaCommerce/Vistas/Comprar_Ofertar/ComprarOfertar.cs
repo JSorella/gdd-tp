@@ -106,6 +106,12 @@ namespace FrbaCommerce
 
         private void Seleccionar()
         {
+            if (Convert.ToBoolean(Singleton.usuario["usu_Inhabilitado_Comprar"]))
+            {
+                Funciones.mostrarAlert("Inhabilitado para comprar - Regularice su sitación con la administración", "Usuario en Mora");
+                this.Close();
+            }
+
             DataGridViewSelectedRowCollection list = this.dgvPubli.SelectedRows;
 
             if (list.Count > 0)

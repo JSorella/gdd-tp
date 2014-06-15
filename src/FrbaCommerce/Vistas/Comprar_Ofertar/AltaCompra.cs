@@ -74,6 +74,7 @@ namespace FrbaCommerce
 
                 InterfazBD.setCompra(DTcompra);
                 Funciones.mostrarInformacion("Su Compra se ha efectuado Satisfactoriamente!", "Compra Efectuada");
+                Singleton.cargarUsuario(Singleton.usuario["usu_UserName"].ToString());
 
                 DatosVendedor oFrm = new DatosVendedor(Convert.ToInt32(oDTPubli.Rows[0]["pub_usu_Id"]));
                 oFrm.ShowDialog();
