@@ -74,8 +74,8 @@ namespace FrbaCommerce
 
             tboxFechaCreacion.Text = dteFecCreac.ToShortDateString();
 
-            if (Convert.ToInt32(oDr["usu_Eliminado"]) == 1)
-                chkboxEliminada.Checked = true;
+            if (Convert.ToInt32(oDr["usu_Inhabilitado"]) == 1)
+                chkboxInhabilitada.Checked = true;
 
         }
 
@@ -169,7 +169,7 @@ namespace FrbaCommerce
                 oDr["emp_CP"] = tboxCodPostal.Text;
                 oDr["emp_Ciudad"] = tboxCiudad.Text;
                 //Usuario
-                oDr["usu_Eliminado"] = chkboxEliminada.Checked ? 1 : 0;
+                oDr["usu_Inhabilitado"] = chkboxInhabilitada.Checked ? 1 : 0;
 
                 oDr.EndEdit();
 

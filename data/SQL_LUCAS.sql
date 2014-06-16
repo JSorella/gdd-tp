@@ -307,7 +307,7 @@ AS
 		WHERE emp_usu_Id = @emp_usu_Id
 		
 		UPDATE J2LA.Usuarios
-		SET usu_Eliminado = @usu_Eliminado
+		SET usu_Inhabilitado = @usu_Inhabilitado
 		WHERE usu_Id = @usu_Id
 	END
 GO
