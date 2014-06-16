@@ -86,15 +86,19 @@ namespace FrbaCommerce
                 DTCliente.Rows.Add(clienteUsuario);
 
                 InterfazBD.setNuevoCliente(DTCliente);
+
+                if (Singleton.sessionRol_Id == 1)
+                    Funciones.mostrarInformacion("El Cliente ha sido dado de alta con exito.\nUsuario: " + usuario + "\nPassword: " + pass, this.Text);
+                else
+                    Funciones.mostrarInformacion("El Cliente ha sido dado de alta con exito.", this.Text);
+
+                this.Close();
             }
             catch (Exception error)
             {
                 Funciones.mostrarAlert(error.Message, this.Text);
                 return;
             }
-
-            Funciones.mostrarInformacion("El Cliente ha sido dado de alta exitosamente!!", this.Text);
-            this.Close();
         }
 
         private Boolean validarCampos()
@@ -140,14 +144,6 @@ namespace FrbaCommerce
                 if (this.altura_textbox.Text == "")
                 {
                     Funciones.mostrarAlert("Ingrese Altura Calle", this.Text); return false;
-                }
-                if (this.piso_textbox.Text == "")
-                {
-                    Funciones.mostrarAlert("Ingrese Piso", this.Text); return false;
-                }
-                if (this.depto_textbox.Text == "")
-                {
-                    Funciones.mostrarAlert("Ingrese Departamento", this.Text); return false;
                 }
                 if (this.localidad_textbox.Text == "")
                 {

@@ -264,20 +264,21 @@ IF OBJECT_ID('J2LA.actualizarCliente') IS NOT NULL
 DROP PROCEDURE J2LA.actualizarCliente
 GO
 CREATE PROCEDURE J2LA.actualizarCliente(
-	@emp_Razon_Social nvarchar(255),
-	@emp_CUIT nvarchar(50),
-	@emp_Mail nvarchar(50),
-	@emp_Tel nvarchar(50),
-	@emp_Dom_Calle nvarchar(255),
-	@emp_Nro_Calle numeric(18,0),
-	@emp_Piso numeric(18,0),
-	@emp_Dpto nvarchar(255),
-	@emp_Localidad nvarchar(255),
-	@emp_CP nvarchar(50),
-	@emp_Ciudad nvarchar(255),
-	@emp_Contacto nvarchar(255),
-	@emp_Fecha_Creacion datetime,
-	@emp_usu_Id int,
+	@cli_Nombre nvarchar(255), 
+	@cli_Apellido nvarchar(255), 
+	@cli_Tipodoc_Id int, 
+	@cli_Nro_Doc numeric(18,0), 
+	@cli_Mail nvarchar(255), 
+	@cli_Tel nvarchar(255), 
+	@cli_Dom_Calle nvarchar(255), 
+	@cli_Nro_Calle numeric(18,0), 
+	@cli_Piso numeric(28,0), 
+	@cli_Dpto nvarchar(50), 
+	@cli_Localidad nvarchar(255), 
+	@cli_CP nvarchar(50), 
+	@cli_Fecha_Nac datetime, 
+	@cli_Cuil nvarchar(50),
+	@cli_usu_Id int,
 	
 	@usu_Id int,
 	@usu_UserName nvarchar(255), 
@@ -290,25 +291,27 @@ CREATE PROCEDURE J2LA.actualizarCliente(
 	@usu_Primer_Ingreso bit)
 AS
 	BEGIN
-		UPDATE J2LA.Empresas
+		UPDATE J2LA.Clientes
 		SET
-			emp_Razon_Social = @emp_Razon_Social,
-			emp_CUIT = @emp_CUIT,
-			emp_Mail = @emp_Mail,
-			emp_Tel = @emp_Tel,
-			emp_Dom_Calle = @emp_Dom_Calle,
-			emp_Nro_Calle = @emp_Nro_Calle,
-			emp_Piso = @emp_Piso,
-			emp_Dpto = @emp_Dpto,
-			emp_Localidad = @emp_Localidad,
-			emp_CP = @emp_CP,
-			emp_Ciudad = @emp_Ciudad,
-			emp_Contacto = @emp_Contacto,
-			emp_Fecha_Creacion = @emp_Fecha_Creacion
-		WHERE emp_usu_Id = @emp_usu_Id
-		
+			cli_Nombre = @cli_Nombre, 
+			cli_Apellido = @cli_Apellido,  
+			cli_Tipodoc_Id = @cli_Tipodoc_Id,  
+			cli_Nro_Doc = @cli_Nro_Doc,  
+			cli_Mail = @cli_Mail, 
+			cli_Tel = @cli_Tel,
+			cli_Dom_Calle = @cli_Dom_Calle,  
+			cli_Nro_Calle = @cli_Nro_Calle, 
+			cli_Piso = @cli_Piso, 
+			cli_Dpto = @cli_Dpto, 
+			cli_Localidad = @cli_Localidad,
+			cli_CP = @cli_CP, 
+			cli_Fecha_Nac = @cli_Fecha_Nac, 
+			cli_Cuil = @cli_Cuil
+		WHERE 
+			cli_usu_Id = @cli_usu_Id
+			
 		UPDATE J2LA.Usuarios
-		SET usu_Eliminado = @usu_Eliminado
+		SET usu_Inhabilitado = @usu_Inhabilitado
 		WHERE usu_Id = @usu_Id
 	END
 GO

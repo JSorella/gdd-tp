@@ -22,7 +22,6 @@ namespace FrbaCommerce
             String query = "SELECT * FROM J2LA.Usuarios " +
                             "WHERE usu_username = " + "'" + nombre + "' " +
                             "AND usu_eliminado = 0";
-
             try
             {
 
@@ -1145,6 +1144,21 @@ namespace FrbaCommerce
             try
             {
                 Singleton.conexion.executeQuerySP("J2LA.ActualizarEmpresa", oDtEmpresaUsuario, null);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Actualiza los campos de un Cliente
+        /// </summary>
+        public static void actualizarCliente(DataTable oDtClienteUsuario)
+        {
+            try
+            {
+                Singleton.conexion.executeQuerySP("J2LA.actualizarCliente", oDtClienteUsuario, null);
             }
             catch (Exception ex)
             {

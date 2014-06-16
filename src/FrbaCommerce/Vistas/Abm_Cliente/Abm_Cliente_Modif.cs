@@ -11,8 +11,8 @@ namespace FrbaCommerce
 {
     public partial class Abm_Cliente_Modif : Form
     {
-        DataTable oDtEmpresaUsuario;
-        DateTime dteFecCreac;
+        DataTable oDtClienteUsuario;
+        DateTime dteFecNac;
 
         bool cerrarForm = false;
 
@@ -29,6 +29,10 @@ namespace FrbaCommerce
         {
             //Limpiar(true);
             HabilitarMod(false);
+            this.comboDocEleccion.DataSource = InterfazBD.getTiposDoc();
+            this.comboDocEleccion.DisplayMember = "tipodoc_Descripcion";
+            this.comboDocEleccion.ValueMember = "tipodoc_Id";
+            this.comboDocEleccion.SelectedIndex = -1;
             this.comboDoc.DataSource = InterfazBD.getTiposDoc();
             this.comboDoc.DisplayMember = "tipodoc_Descripcion";
             this.comboDoc.ValueMember = "tipodoc_Id";
@@ -37,20 +41,12 @@ namespace FrbaCommerce
 
         private void btnSelFec_Click(object sender, EventArgs e)
         {
-            Point ppos = this.btnSelFec.PointToScreen(new Point());
-            ppos.X = ppos.X + this.btnSelFec.Width;
 
-            FrbaCommerce.ControlFecha oFrm = new FrbaCommerce.ControlFecha(ppos.X, ppos.Y);
-            oFrm.ShowDialog();
-
-            if (!oFrm.Cancelado)
-                dteFecCreac = oFrm.FechaSeleccionada;
-            tboxFechaCreacion.Text = oFrm.FechaSeleccionada.ToShortDateString();
         }
 
         private void btnSeleccionar_Click(object sender, EventArgs e)
         {
-            Abm_Empresas_Busqueda oFrm = new Abm_Empresas_Busqueda();
+            Abm_Clientes_Busqueda oFrm = new Abm_Clientes_Busqueda();
             oFrm.ShowDialog();
 
             if ((oFrm.Resultado != null)) //Resultado es el DataRow.-
@@ -59,34 +55,35 @@ namespace FrbaCommerce
                 this.cli_Tipodoc_Id = Convert.ToInt32(oDtCliente.Rows[0]["cli_Tipodoc_Id"]);
                 this.cli_Nro_Doc = Convert.ToInt32(oDtCliente.Rows[0]["cli_Nro_Doc"]);
 
-                this.comboDoc.SelectedIndex = this.cli_Tipodoc_Id;
+                this.comboDocEleccion.SelectedIndex = this.cli_Tipodoc_Id;
                 this.txtNroDoc.Text = this.cli_Nro_Doc.ToString();
             }
         }
 
         private void CargarDatosEmpresa()
         {
-            DataRow oDr = oDtEmpresaUsuario.Rows[0];
+            DataRow clienteUsuario = oDtClienteUsuario.Rows[0];
 
-            tboxRazonSocial.Text = oDr["emp_Razon_Social"].ToString();
-            tboxMail.Text = oDr["emp_Mail"].ToString();
-            tboxTelefono.Text = oDr["emp_Tel"].ToString();
-            tboxCUIT.Text = oDr["emp_CUIT"].ToString();
-            tboxNombreContacto.Text = oDr["emp_Contacto"].ToString();
-            dteFecCreac = Convert.ToDateTime(oDr["emp_Fecha_Creacion"]);
-            tboxCalle.Text = oDr["emp_Dom_Calle"].ToString();
-            tboxAltura.Text = oDr["emp_Nro_Calle"].ToString();
-            tboxPiso.Text = oDr["emp_Piso"].ToString();
-            tboxDpto.Text = oDr["emp_Dpto"].ToString();
-            tboxLocalidad.Text = oDr["emp_Localidad"].ToString();
-            tboxCiudad.Text = oDr["emp_Ciudad"].ToString();
-            tboxCodPostal.Text = oDr["emp_CP"].ToString();
+            this.nombre_textbox.Text = clienteUsuario["cli_Nombre"].ToString();
+            this.apellido_textbox.Text = clienteUsuario["cli_Apellido"].ToString();
+            this.comboDoc.SelectedIndex = Convert.ToInt32(clienteUsuario["cli_Tipodoc_Id"]);
+            this.dni_textbox.Text = clienteUsuario["cli_Nro_Doc"].ToString();
+            this.mail_textbox.Text = clienteUsuario["cli_Mail"].ToString();
+            this.telefono_textbox.Text = clienteUsuario["cli_Tel"].ToString();
+            this.calle_textbox.Text = clienteUsuario["cli_Dom_Calle"].ToString();
+            this.altura_textbox.Text = clienteUsuario["cli_Nro_Calle"].ToString();
+            this.piso_textbox.Text = clienteUsuario["cli_Piso"].ToString();
+            this.depto_textbox.Text = clienteUsuario["cli_Dpto"].ToString();
+            this.localidad_textbox.Text = clienteUsuario["cli_Localidad"].ToString();
+            this.cp_textbox.Text = clienteUsuario["cli_CP"].ToString();
+            this.cuil_textbox.Text = clienteUsuario["cli_Cuil"].ToString();
+            dteFecNac = Convert.ToDateTime(clienteUsuario["cli_Fecha_Nac"]);
+            this.fechaNacimiento.Text = dteFecNac.ToShortDateString();
 
-            tboxFechaCreacion.Text = dteFecCreac.ToShortDateString();
-
-            if (Convert.ToInt32(oDr["usu_Eliminado"]) == 1)
-                chkboxEliminada.Checked = true;
-
+            if (Convert.ToInt32(clienteUsuario["usu_Inhabilitado"]) == 1)
+                chkboxHabilitada.Checked = true;
+            else
+                chkboxHabilitada.Checked = false;
         }
 
         private void HabilitarMod(bool habilitado)
@@ -109,27 +106,33 @@ namespace FrbaCommerce
 
         private bool ValidaAceptar()
         {
-            //if (tboxEmpresaSeleccionada.Text == "")
-            //{
-            //    MessageBox.Show("Debe indicar el CUIT de una empresa.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //    return false;
-            //}
+            if (this.txtNroDoc.Text == "")
+            {
+                MessageBox.Show("Debe indicar el Nro de Documento.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            if (this.comboDocEleccion.Text == "")
+            {
+                MessageBox.Show("Debe indicar el Tipo de Documento.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
 
             try
             {
-                //oDtEmpresaUsuario = InterfazBD.getEmpresaUsuario(tboxEmpresaSeleccionada.Text);
+                oDtClienteUsuario = InterfazBD.getClienteUsuario(this.comboDocEleccion.SelectedIndex, Convert.ToInt32(this.txtNroDoc.Text));
 
-                if (oDtEmpresaUsuario != null)
+                if (oDtClienteUsuario != null)
                 {
-                    if (oDtEmpresaUsuario.Rows.Count <= 0)
+                    if (oDtClienteUsuario.Rows.Count <= 0)
                     {
-                        MessageBox.Show("Empresa Inexistente.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Cliente Inexistente.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return false;
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Empresa Inexistente.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Cliente Inexistente.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
             }
@@ -157,34 +160,34 @@ namespace FrbaCommerce
 
             try
             {
-                DataTable oDtEmpresaUsuario = new DataTable();
-                //oDtEmpresaUsuario = InterfazBD.getEmpresaUsuario(tboxEmpresaSeleccionada.Text);
+                oDtCliente = InterfazBD.getClienteUsuario(Convert.ToInt32(Convert.ToInt32(((DataRowView)this.comboDocEleccion.SelectedItem).Row["tipodoc_Id"])), Convert.ToInt32(this.dni_textbox.Text));
 
-                DataRow oDr = oDtEmpresaUsuario.Rows[0];
+                DataRow clienteUsuario = oDtCliente.Rows[0];
 
-                oDr.BeginEdit();
+                clienteUsuario.BeginEdit();
 
                 //Cliente
-                oDr["emp_Razon_Social"] = tboxRazonSocial.Text;
-                oDr["emp_Cuit"] = tboxCUIT.Text;
-                oDr["emp_Mail"] = tboxMail.Text;
-                oDr["emp_Tel"] = tboxTelefono.Text;
-                oDr["emp_Contacto"] = tboxNombreContacto.Text;
-                oDr["emp_Fecha_Creacion"] = tboxFechaCreacion.Text;
-                oDr["emp_Dom_Calle"] = tboxCalle.Text;
-                oDr["emp_Nro_Calle"] = tboxAltura.Text;
-                oDr["emp_Piso"] = tboxPiso.Text;
-                oDr["emp_Dpto"] = tboxDpto.Text;
-                oDr["emp_Localidad"] = tboxLocalidad.Text;
-                oDr["emp_CP"] = tboxCodPostal.Text;
-                oDr["emp_Ciudad"] = tboxCiudad.Text;
+                clienteUsuario["cli_Nombre"] = this.nombre_textbox.Text;
+                clienteUsuario["cli_Apellido"] = this.apellido_textbox.Text;
+                clienteUsuario["cli_Tipodoc_Id"] = Convert.ToInt32(((DataRowView)this.comboDocEleccion.SelectedItem).Row["tipodoc_Id"]);
+                clienteUsuario["cli_Nro_Doc"] = Convert.ToInt64(this.dni_textbox.Text);
+                clienteUsuario["cli_Mail"] = this.mail_textbox.Text;
+                clienteUsuario["cli_Tel"] = Convert.ToInt64(this.telefono_textbox.Text);
+                clienteUsuario["cli_Dom_Calle"] = this.calle_textbox.Text;
+                clienteUsuario["cli_Nro_Calle"] = Convert.ToInt32(this.altura_textbox.Text);
+                clienteUsuario["cli_Piso"] = Convert.ToInt32(this.piso_textbox.Text);
+                clienteUsuario["cli_Dpto"] = this.depto_textbox.Text;
+                clienteUsuario["cli_Localidad"] = this.localidad_textbox.Text;
+                clienteUsuario["cli_CP"] = this.cp_textbox.Text;
+                clienteUsuario["cli_Fecha_Nac"] = this.fechaNacimiento.Text;
+                clienteUsuario["cli_Cuil"] = Convert.ToInt64(this.cuil_textbox.Text);
 
                 //Usuario
-                oDr["usu_Eliminado"] = chkboxEliminada.Checked ? 1 : 0;
+                clienteUsuario["usu_Inhabilitado"] = chkboxHabilitada.Checked ? 1 : 0;
 
-                oDr.EndEdit();
+                clienteUsuario.EndEdit();
 
-                InterfazBD.ActualizarEmpresa(oDtEmpresaUsuario);
+                InterfazBD.actualizarCliente(oDtCliente);
             }
             catch (Exception error)
             {
@@ -200,49 +203,57 @@ namespace FrbaCommerce
         {
             try
             {
-                if (this.tboxRazonSocial.Text == "")
+                if (this.nombre_textbox.Text == "")
                 {
-                    Funciones.mostrarAlert("Ingrese Razon Social", this.Text); return false;
+                    Funciones.mostrarAlert("Ingrese Nombre", this.Text); return false;
                 }
-                if (this.tboxCUIT.Text == "")
+                if (this.apellido_textbox.Text == "")
                 {
-                    Funciones.mostrarAlert("Ingrese CUIT", this.Text); return false;
+                    Funciones.mostrarAlert("Ingrese Apellido", this.Text); return false;
                 }
-                if (this.tboxMail.Text == "")
+                if (this.dni_textbox.Text == "")
                 {
-                    Funciones.mostrarAlert("Ingrese Mail", this.Text); return false;
+                    Funciones.mostrarAlert("Ingrese DNI", this.Text); return false;
                 }
-                if (this.tboxTelefono.Text == "")
+                if (this.comboDocEleccion.Text == "")
                 {
-                    Funciones.mostrarAlert("Ingrese Telefono", this.Text); return false;
+                    Funciones.mostrarAlert("Ingrese Tipo Documento", this.Text); return false;
                 }
-                if (this.tboxNombreContacto.Text == "")
+                if (this.cuil_textbox.Text == "")
                 {
-                    Funciones.mostrarAlert("Ingrese Nombre de Contacto", this.Text); return false;
+                    Funciones.mostrarAlert("Ingrese Cuil", this.Text); return false;
                 }
-                if (this.tboxFechaCreacion.Text == "")
+                if (this.mail_textbox.Text == "")
                 {
-                    Funciones.mostrarAlert("Ingrese Fecha de Creacion", this.Text); return false;
+                    Funciones.mostrarAlert("Ingrese Email", this.Text); return false;
                 }
-                if (this.tboxCalle.Text == "")
+                if (this.apellido_textbox.Text == "")
+                {
+                    Funciones.mostrarAlert("Ingrese Apellido", this.Text); return false;
+                }
+                if (this.telefono_textbox.Text == "")
+                {
+                    Funciones.mostrarAlert("Ingrese Teléfono", this.Text); return false;
+                }
+                if (this.calle_textbox.Text == "")
                 {
                     Funciones.mostrarAlert("Ingrese Calle", this.Text); return false;
                 }
-                if (this.tboxAltura.Text == "")
+                if (this.altura_textbox.Text == "")
                 {
-                    Funciones.mostrarAlert("Ingrese Altura", this.Text); return false;
+                    Funciones.mostrarAlert("Ingrese Altura Calle", this.Text); return false;
                 }
-                if (this.tboxLocalidad.Text == "")
+                if (this.localidad_textbox.Text == "")
                 {
                     Funciones.mostrarAlert("Ingrese Localidad", this.Text); return false;
                 }
-                if (this.tboxCodPostal.Text == "")
+                if (this.cp_textbox.Text == "")
                 {
-                    Funciones.mostrarAlert("Ingrese Codigo POstal", this.Text); return false;
+                    Funciones.mostrarAlert("Ingrese Código Postal", this.Text); return false;
                 }
-                if (this.tboxCiudad.Text == "")
+                if (this.fechaNacimiento.Text == "")
                 {
-                    Funciones.mostrarAlert("Ingrese Ciudad", this.Text); return false;
+                    Funciones.mostrarAlert("Ingrese Fecha Nacimiento", this.Text); return false;
                 }
 
                 return true;
@@ -252,6 +263,11 @@ namespace FrbaCommerce
                 Funciones.mostrarAlert(ex.Message, this.Text);
                 return false;
             }
+        }
+
+        private void textbox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = Funciones.SoloNumeros(e.KeyChar);
         }
     }
 }
