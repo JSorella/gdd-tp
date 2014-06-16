@@ -328,12 +328,22 @@ AS
 			AND cli_Nro_Doc = @cli_Nro_Doc
 			)
 		
+		EXEC J2LA.setBajaUsuario @usu_Id
+	END
+GO
+
+/*-------------------------STORED PROCEDURE (JAVI)--------------------------*/
+IF OBJECT_ID('J2LA.setBajaUsuario') IS NOT NULL
+DROP PROCEDURE J2LA.setBajaUsuario
+GO
+CREATE PROCEDURE J2LA.setBajaUsuario @usu_Id int
+AS
+	BEGIN
 		UPDATE J2LA.Usuarios
 		SET usu_Eliminado = 1
 		WHERE usu_Id = @usu_Id
 	END
 GO
-
 
 
 /*-------------------------STORED PROCEDURE (JAVI)--------------------------*/

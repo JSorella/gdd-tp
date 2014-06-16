@@ -321,9 +321,7 @@ AS
 		DECLARE @emp_usu_Id int
 		SET @emp_usu_Id = (SELECT emp_usu_Id FROM J2LA.Empresas WHERE emp_Cuit = @emp_CUIT)
 		
-		UPDATE J2LA.Usuarios
-		SET usu_Eliminado = 1
-		WHERE usu_Id = @emp_usu_Id
+		EXEC J2LA.setBajaUsuario @usu_Id
 	END
 GO
 

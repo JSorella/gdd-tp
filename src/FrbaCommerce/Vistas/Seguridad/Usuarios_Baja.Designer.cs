@@ -31,7 +31,7 @@
             this.btnDarDeBaja = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnSeleccionar = new System.Windows.Forms.Button();
-            this.tboxEmpresaSeleccionada = new System.Windows.Forms.TextBox();
+            this.txtUserName = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -44,12 +44,13 @@
             this.btnDarDeBaja.TabIndex = 61;
             this.btnDarDeBaja.Text = "Dar de Baja";
             this.btnDarDeBaja.UseVisualStyleBackColor = true;
+            this.btnDarDeBaja.Click += new System.EventHandler(this.btnDarDeBaja_Click);
             // 
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.btnSeleccionar);
-            this.panel1.Controls.Add(this.tboxEmpresaSeleccionada);
+            this.panel1.Controls.Add(this.txtUserName);
             this.panel1.Controls.Add(this.label15);
             this.panel1.Location = new System.Drawing.Point(5, 5);
             this.panel1.Name = "panel1";
@@ -64,22 +65,23 @@
             this.btnSeleccionar.TabIndex = 2;
             this.btnSeleccionar.Text = "Seleccionar";
             this.btnSeleccionar.UseVisualStyleBackColor = true;
+            this.btnSeleccionar.Click += new System.EventHandler(this.btnSeleccionar_Click);
             // 
-            // tboxEmpresaSeleccionada
+            // txtUserName
             // 
-            this.tboxEmpresaSeleccionada.Location = new System.Drawing.Point(161, 12);
-            this.tboxEmpresaSeleccionada.Name = "tboxEmpresaSeleccionada";
-            this.tboxEmpresaSeleccionada.Size = new System.Drawing.Size(219, 20);
-            this.tboxEmpresaSeleccionada.TabIndex = 1;
+            this.txtUserName.Location = new System.Drawing.Point(161, 12);
+            this.txtUserName.Name = "txtUserName";
+            this.txtUserName.Size = new System.Drawing.Size(219, 20);
+            this.txtUserName.TabIndex = 1;
             // 
             // label15
             // 
             this.label15.AutoSize = true;
             this.label15.Location = new System.Drawing.Point(4, 15);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(153, 13);
+            this.label15.Size = new System.Drawing.Size(136, 13);
             this.label15.TabIndex = 0;
-            this.label15.Text = "Indique el CUIT de la empresa:";
+            this.label15.Text = "Indique Nombre de Usuario";
             // 
             // Usuarios_Baja
             // 
@@ -101,7 +103,7 @@
         private System.Windows.Forms.Button btnDarDeBaja;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnSeleccionar;
-        private System.Windows.Forms.TextBox tboxEmpresaSeleccionada;
+        private System.Windows.Forms.TextBox txtUserName;
         private System.Windows.Forms.Label label15;
     }
 }

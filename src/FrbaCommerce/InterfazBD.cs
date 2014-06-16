@@ -80,7 +80,7 @@ namespace FrbaCommerce
 
                 if (usuarioResult.Rows.Count == 0)
                 {
-                    throw new Exception("Usuario sin Roles asociados!!!");
+                    throw new Exception("Usuario Inexistente / Sin Roles!");
                 }
 
                 return usuarioResult;
@@ -1744,6 +1744,22 @@ namespace FrbaCommerce
                                 "Order By PU.pub_Codigo, P.preg_Fecha ";
 
                 return Singleton.conexion.executeQueryTable(query, null, null);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Da de baja un Usuario
+        /// </summary>
+        public static bool setBajaUsuario(int usu_Id)
+        {
+            try
+            {
+                Singleton.conexion.executeQuerySP("J2LA.setBajaUsuario", null, new String[1, 2] { { "usu_Id", usu_Id.ToString() } });
+                return true;
             }
             catch (Exception ex)
             {

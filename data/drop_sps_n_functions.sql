@@ -42,6 +42,9 @@ GO
 IF OBJECT_ID('J2LA.setBajaCliente') IS NOT NULL
 DROP PROCEDURE J2LA.setBajaCliente
 GO
+IF OBJECT_ID('J2LA.setBajaUsuario') IS NOT NULL
+DROP PROCEDURE J2LA.setBajaUsuario
+GO
 IF OBJECT_ID('J2LA.setPreguntaRespuesta') IS NOT NULL
 DROP PROCEDURE J2LA.setPreguntaRespuesta
 GO
