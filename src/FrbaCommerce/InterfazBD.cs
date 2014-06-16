@@ -1199,6 +1199,40 @@ namespace FrbaCommerce
             }
         }
 
+        public static string existeOtroCUIT(string emp_CUIT, int emp_usu_Id)
+        {
+            try
+            {
+                if ((bool)Singleton.conexion.executeQueryFuncEscalar("J2LA.existeOtroCUIT(@emp_Cuit,@emp_usu_Id)", null,
+                                        new String[2, 2] { { "emp_CUIT", emp_CUIT.ToString() }, { "emp_usu_Id", emp_usu_Id.ToString() } }))
+                {
+                    throw new Exception("Ya existe una Empresa con este CUIT.");
+                }
+                return "";
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public static string existeOtraRazonSocial(string emp_Razon_Social, int emp_usu_Id)
+        {
+            try
+            {
+                if ((bool)Singleton.conexion.executeQueryFuncEscalar("J2LA.existeOtraRazonSocial(@emp_Razon_Social,@emp_usu_Id)", null,
+                                        new String[2, 2] { { "emp_Razon_Social", emp_Razon_Social.ToString() }, { "emp_usu_Id", emp_usu_Id.ToString() } }))
+                {
+                    throw new Exception("Ya existe una Empresa con esta Razon Social.");
+                }
+                return "";
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public static int getCantPubliGratis(int pub_codigo)
         {
             try

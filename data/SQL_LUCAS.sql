@@ -321,7 +321,7 @@ AS
 		DECLARE @emp_usu_Id int
 		SET @emp_usu_Id = (SELECT emp_usu_Id FROM J2LA.Empresas WHERE emp_Cuit = @emp_CUIT)
 		
-		EXEC J2LA.setBajaUsuario @usu_Id
+		EXEC J2LA.setBajaUsuario @emp_usu_Id
 	END
 GO
 
@@ -348,5 +348,43 @@ BEGIN
 	IF( (SELECT COUNT(emp_Razon_Social) FROM J2LA.Empresas where emp_Razon_Social = @emp_Razon_Social) > 0)
 		RETURN 1
 	RETURN 0
+END
+GO
+
+IF OBJECT_ID('J2LA.existeOtroCUIT') IS NOT NULL
+DROP FUNCTION J2LA.existeOtroCUIT
+GO
+CREATE FUNCTION J2LA.existeOtroCUIT(@emp_CUIT nvarchar(50), @emp_usu_Id int)
+RETURNS BIT
+AS
+BEGIN
+	IF ((SELECT COUNT(emp_Cuit) FROM J2LA.Empresas WHERE emp_Cuit = @emp_CUIT) > 0)
+		BEGIN
+			IF ((SELECT emp_usu_Id FROM J2LA.Empresas WHERE emp_Cuit = @emp_CUIT) = @emp_usu_Id)
+				RETURN 0
+			ELSE
+				RETURN 1
+		END
+
+		RETURN 0
+END
+GO
+
+IF OBJECT_ID('J2LA.existeOtraRazonSocial') IS NOT NULL
+DROP FUNCTION J2LA.existeOtraRazonSocial
+GO
+CREATE FUNCTION J2LA.existeOtraRazonSocial(@emp_Razon_Social nvarchar(255), @emp_usu_Id int)
+RETURNS BIT
+AS
+BEGIN
+	IF ((SELECT COUNT(emp_Razon_Social) FROM J2LA.Empresas WHERE emp_Razon_Social = @emp_Razon_Social) > 0)
+		BEGIN
+			IF ((SELECT emp_usu_Id FROM J2LA.Empresas WHERE emp_Razon_Social = @emp_Razon_Social) = @emp_usu_Id)
+				RETURN 0
+			ELSE
+				RETURN 1
+		END
+
+		RETURN 0
 END
 GO
