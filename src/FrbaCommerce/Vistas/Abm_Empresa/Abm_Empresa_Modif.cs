@@ -234,6 +234,11 @@ namespace FrbaCommerce
                     Funciones.mostrarAlert("Ingrese Ciudad", this.Text); return false;
                 }
 
+                DataRow oDr = oDtEmpresaUsuario.Rows[0];
+
+                InterfazBD.existeOtroCUIT(tboxCUIT.Text, Convert.ToInt32(oDr["emp_usu_Id"]));
+                InterfazBD.existeOtraRazonSocial(tboxRazonSocial.Text, Convert.ToInt32(oDr["emp_usu_Id"]));
+
                 return true;
             }
             catch (Exception ex)

@@ -278,3 +278,5 @@ C:\Users\jsorella\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommer
 C:\Users\Lucas\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.HistorialBinificacion.resources
 C:\Users\jsorella\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.Usuarios_Baja.resources
 C:\Users\jsorella\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.Abm_Clientes_Busqueda.resources
+C:\Users\Lucas\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.Abm_Clientes_Busqueda.resources
+C:\Users\Lucas\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.Usuarios_Baja.resources
