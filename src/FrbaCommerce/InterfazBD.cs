@@ -1213,6 +1213,55 @@ namespace FrbaCommerce
             }
         }
 
+        /// <summary>
+        /// Valida si existe otro Dni al del cliente
+        /// </summary>
+        public static string existeOtroDni(int cli_Tipodoc_Id, int cli_Nro_Doc, Int64 cli_usu_Id)
+        {
+            try
+            {
+                if ((bool)Singleton.conexion.executeQueryFuncEscalar("J2LA.existeOtroDni(@cli_Tipodoc_Id,@cli_Nro_Doc,@cli_usu_Id)", null,
+                                        new String[3, 2] { 
+                                            { "cli_Tipodoc_Id", cli_Tipodoc_Id.ToString() }
+                                            , { "cli_Nro_Doc", cli_Nro_Doc.ToString() }
+                                            , { "cli_usu_Id", cli_usu_Id.ToString() }
+                                            }))
+                {
+                    throw new Exception("Ya existe un Cliente con este DNI.");
+                }
+                return "";
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Valida si existe otro Teléfono al del cliente
+        /// </summary>
+        public static string existeOtroTelefono(string cli_Tel, Int64 cli_usu_Id)
+        {
+            try
+            {
+                if ((bool)Singleton.conexion.executeQueryFuncEscalar("J2LA.existeOtroTelefono(@cli_Tel, @cli_usu_Id)", null,
+                                        new String[2, 2] { 
+                                            { "cli_Tel", cli_Tel.ToString() }
+                                            , { "cli_usu_Id", cli_usu_Id.ToString() }
+                                            }))
+                {
+                    throw new Exception("Ya existe un Cliente con este Teléfono.");
+                }
+                return "";
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+
+
         public static string existeOtroCUIT(string emp_CUIT, int emp_usu_Id)
         {
             try

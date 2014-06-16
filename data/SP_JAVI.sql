@@ -100,6 +100,46 @@ END
 GO
 
 /*-------------------------FUNCTION (JAVI)--------------------------*/
+IF OBJECT_ID('J2LA.existeOtroDni') IS NOT NULL
+DROP FUNCTION J2LA.existeOtroDni
+GO
+CREATE FUNCTION J2LA.existeOtroDni(@cli_Tipodoc_Id int , @cli_Nro_Doc numeric(18,0), @cli_usu_Id int)
+RETURNS BIT
+AS
+BEGIN
+	IF ((SELECT COUNT(cli_Nro_Doc) FROM J2LA.Clientes WHERE cli_Nro_Doc = @cli_Nro_Doc AND cli_Tipodoc_Id = @cli_Tipodoc_Id) > 0)
+		BEGIN
+			IF ((SELECT cli_Nro_Doc FROM J2LA.Clientes WHERE cli_Nro_Doc = @cli_Nro_Doc AND cli_Tipodoc_Id = @cli_Tipodoc_Id) = @cli_usu_Id)
+				RETURN 0
+			ELSE
+				RETURN 1
+		END
+
+		RETURN 0
+END
+GO
+
+/*-------------------------FUNCTION (JAVI)--------------------------*/
+IF OBJECT_ID('J2LA.existeOtroTelefono') IS NOT NULL
+DROP FUNCTION J2LA.existeOtroTelefono
+GO
+CREATE FUNCTION J2LA.existeOtroTelefono(@cli_Tel nvarchar(50) , @cli_usu_Id int)
+RETURNS BIT
+AS
+BEGIN
+	IF ((SELECT COUNT(cli_Tel) FROM J2LA.Clientes WHERE cli_Tel = @cli_Tel) > 0)
+		BEGIN
+			IF ((SELECT cli_usu_Id FROM J2LA.Clientes WHERE cli_Tel = @cli_Tel) = @cli_usu_Id)
+				RETURN 0
+			ELSE
+				RETURN 1
+		END
+
+		RETURN 0
+END
+GO
+
+/*-------------------------FUNCTION (JAVI)--------------------------*/
 IF OBJECT_ID('J2LA.validarPrimerIngreso') IS NOT NULL
 DROP FUNCTION J2LA.validarPrimerIngreso
 GO

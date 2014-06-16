@@ -55,7 +55,7 @@ namespace FrbaCommerce
                 this.cli_Tipodoc_Id = Convert.ToInt32(oDtCliente.Rows[0]["cli_Tipodoc_Id"]);
                 this.cli_Nro_Doc = Convert.ToInt32(oDtCliente.Rows[0]["cli_Nro_Doc"]);
 
-                this.comboDoc.SelectedValue = this.cli_Tipodoc_Id;
+                this.comboDocEleccion.SelectedIndex = this.cli_Tipodoc_Id;
                 this.txtNroDoc.Text = this.cli_Nro_Doc.ToString();
             }
         }
@@ -66,7 +66,7 @@ namespace FrbaCommerce
 
             this.nombre_textbox.Text = clienteUsuario["cli_Nombre"].ToString();
             this.apellido_textbox.Text = clienteUsuario["cli_Apellido"].ToString();
-            this.comboDoc.SelectedValue = Convert.ToInt32(clienteUsuario["cli_Tipodoc_Id"]);
+            this.comboDoc.SelectedIndex = Convert.ToInt32(clienteUsuario["cli_Tipodoc_Id"]);
             this.dni_textbox.Text = clienteUsuario["cli_Nro_Doc"].ToString();
             this.mail_textbox.Text = clienteUsuario["cli_Mail"].ToString();
             this.telefono_textbox.Text = clienteUsuario["cli_Tel"].ToString();
@@ -155,12 +155,14 @@ namespace FrbaCommerce
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (!ValidarCampos())
-                return;
-
             try
             {
-                oDtCliente = InterfazBD.getClienteUsuario(Convert.ToInt32(Convert.ToInt32(((DataRowView)this.comboDocEleccion.SelectedItem).Row["tipodoc_Id"])), Convert.ToInt32(this.dni_textbox.Text));
+                if (!ValidarCampos())
+                    return;
+
+                DataRow oDr = oDtClienteUsuario.Rows[0];
+
+                oDtCliente = InterfazBD.getClienteUsuario(Convert.ToInt32(oDr["cli_Tipodoc_Id"]), Convert.ToInt32(oDr["cli_Nro_Doc"]));
 
                 DataRow clienteUsuario = oDtCliente.Rows[0];
 
@@ -255,6 +257,18 @@ namespace FrbaCommerce
                 {
                     Funciones.mostrarAlert("Ingrese Fecha Nacimiento", this.Text); return false;
                 }
+
+                DataRow oDr = oDtClienteUsuario.Rows[0];
+
+
+                //Validamos que el teléfono no lo tenga otro usuario
+                InterfazBD.existeOtroTelefono(this.telefono_textbox.Text, Convert.ToInt64(oDr["cli_usu_Id"]));
+
+                //Validamos que el DNI no lo tenga otro usuario
+                InterfazBD.existeOtroDni(
+                    Convert.ToInt32(((DataRowView)this.comboDoc.SelectedItem).Row["tipodoc_Id"])
+                    , Convert.ToInt32(this.dni_textbox.Text)
+                    , Convert.ToInt64(oDr["cli_usu_Id"]));
 
                 return true;
             }

@@ -40,16 +40,15 @@ namespace FrbaCommerce
             this.comboDoc.ValueMember = "tipodoc_Id";
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void darDeAlta_Click(object sender, EventArgs e)
         {
+            altaAdminDatosUsuario();
+
             if (!validarCampos())
                 return;
 
             try
-            {
-                altaAdminDatosUsuario();
-
-
+            {   
                 DataTable DTCliente = new DataTable();
                 DTCliente = InterfazBD.getDTCliente();
 
