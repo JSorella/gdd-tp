@@ -217,6 +217,7 @@
             this.tboxTelefono.Name = "tboxTelefono";
             this.tboxTelefono.Size = new System.Drawing.Size(199, 20);
             this.tboxTelefono.TabIndex = 17;
+            this.tboxTelefono.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tboxTelefono_KeyPress);
             // 
             // tboxCUIT
             // 

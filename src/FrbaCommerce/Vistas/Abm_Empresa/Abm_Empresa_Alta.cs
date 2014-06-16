@@ -196,5 +196,9 @@ namespace FrbaCommerce
             e.Handled = Funciones.SoloNumeros(e.KeyChar);
         }
 
+        private void tboxTelefono_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = Funciones.SoloNumeros(e.KeyChar);
+        }
     }
 }
