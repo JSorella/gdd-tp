@@ -245,6 +245,7 @@
             this.tboxAltura.Name = "tboxAltura";
             this.tboxAltura.Size = new System.Drawing.Size(84, 20);
             this.tboxAltura.TabIndex = 22;
+            this.tboxAltura.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tboxAltura_KeyPress);
             // 
             // tboxPiso
             // 
@@ -252,6 +253,7 @@
             this.tboxPiso.Name = "tboxPiso";
             this.tboxPiso.Size = new System.Drawing.Size(37, 20);
             this.tboxPiso.TabIndex = 23;
+            this.tboxPiso.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tboxPiso_KeyPress);
             // 
             // tboxDpto
             // 

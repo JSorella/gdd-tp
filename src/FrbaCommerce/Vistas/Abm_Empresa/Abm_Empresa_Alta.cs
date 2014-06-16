@@ -186,5 +186,15 @@ namespace FrbaCommerce
             this.Close();
         }
 
+        private void tboxAltura_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = Funciones.SoloNumeros(e.KeyChar);
+        }
+
+        private void tboxPiso_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = Funciones.SoloNumeros(e.KeyChar);
+        }
+
     }
 }
