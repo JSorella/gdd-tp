@@ -114,9 +114,6 @@ namespace FrbaCommerce
                 //Validamos que la Razon Social no esté repetida
                 InterfazBD.existeRazonSocial(tboxRazonSocial.Text);
 
-                //Validamos que el teléfono no esté repetido
-                InterfazBD.existeTelefono(Convert.ToInt64(this.tboxTelefono.Text));
-
                 return true;
             }
             catch (Exception ex)
