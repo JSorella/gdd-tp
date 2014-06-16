@@ -55,7 +55,7 @@ namespace FrbaCommerce
                 this.cli_Tipodoc_Id = Convert.ToInt32(oDtCliente.Rows[0]["cli_Tipodoc_Id"]);
                 this.cli_Nro_Doc = Convert.ToInt32(oDtCliente.Rows[0]["cli_Nro_Doc"]);
 
-                this.comboDocEleccion.SelectedIndex = this.cli_Tipodoc_Id;
+                this.comboDoc.SelectedValue = this.cli_Tipodoc_Id;
                 this.txtNroDoc.Text = this.cli_Nro_Doc.ToString();
             }
         }
@@ -66,7 +66,7 @@ namespace FrbaCommerce
 
             this.nombre_textbox.Text = clienteUsuario["cli_Nombre"].ToString();
             this.apellido_textbox.Text = clienteUsuario["cli_Apellido"].ToString();
-            this.comboDoc.SelectedIndex = Convert.ToInt32(clienteUsuario["cli_Tipodoc_Id"]);
+            this.comboDoc.SelectedValue = Convert.ToInt32(clienteUsuario["cli_Tipodoc_Id"]);
             this.dni_textbox.Text = clienteUsuario["cli_Nro_Doc"].ToString();
             this.mail_textbox.Text = clienteUsuario["cli_Mail"].ToString();
             this.telefono_textbox.Text = clienteUsuario["cli_Tel"].ToString();
@@ -169,7 +169,7 @@ namespace FrbaCommerce
                 //Cliente
                 clienteUsuario["cli_Nombre"] = this.nombre_textbox.Text;
                 clienteUsuario["cli_Apellido"] = this.apellido_textbox.Text;
-                clienteUsuario["cli_Tipodoc_Id"] = Convert.ToInt32(((DataRowView)this.comboDocEleccion.SelectedItem).Row["tipodoc_Id"]);
+                clienteUsuario["cli_Tipodoc_Id"] = Convert.ToInt32(((DataRowView)this.comboDoc.SelectedItem).Row["tipodoc_Id"]);
                 clienteUsuario["cli_Nro_Doc"] = Convert.ToInt64(this.dni_textbox.Text);
                 clienteUsuario["cli_Mail"] = this.mail_textbox.Text;
                 clienteUsuario["cli_Tel"] = Convert.ToInt64(this.telefono_textbox.Text);
