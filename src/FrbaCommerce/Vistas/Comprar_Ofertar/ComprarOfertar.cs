@@ -81,7 +81,14 @@ namespace FrbaCommerce
         {
             String rubros = cmbRubros.ObtenerstrChequeados("rub_id");
 
-            String filtros = "Where E.pubest_Descripcion = 'Activa' OR E.pubest_Descripcion = 'Pausada'  ";
+            //Filtro solo por las Activas o Pausadas
+            String filtros = "Where (E.pubest_Descripcion = 'Activa' OR E.pubest_Descripcion = 'Pausada') ";
+
+            //Filtro Fecha de Inicio de Publicacion menor igual a la Fecha Actual (Fecha del Sistema)
+            filtros = filtros + "And P.pub_Fecha_Ini <= Convert(Datetime, '" + Singleton.FechaDelSistema.ToShortDateString() + "') ";
+
+            //Filtro Fecha de Vencimiento de Publicacion mayor igual a la Fecha Actual (Fecha del Sistema)
+            filtros = filtros + "And P.pub_Fecha_Vto >= Convert(Datetime, '" + Singleton.FechaDelSistema.ToShortDateString() + "') ";
 
             if (txtDescripcion.Text != "")
                 filtros = filtros + " And P.pub_Descripcion like '%" + txtDescripcion.Text + "%' ";
