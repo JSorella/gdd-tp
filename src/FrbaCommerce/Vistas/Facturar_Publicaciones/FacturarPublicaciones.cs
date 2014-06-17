@@ -114,7 +114,7 @@ namespace FrbaCommerce
 
         private void btnHistBonif_Click(object sender, EventArgs e)
         {
-            HistorialBinificacion oFrm = new HistorialBinificacion();
+            HistorialBonificacion oFrm = new HistorialBonificacion();
             oFrm.Icon = this.Icon;
             oFrm._Datos = oDtBonif;
             oFrm.ShowDialog();
@@ -122,6 +122,7 @@ namespace FrbaCommerce
 
         private void dgvPubli_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
+            //Agregamos el Row Id en HeaderRow
             string RowsNumber = (e.RowIndex + 1).ToString();
 
             SizeF size = e.Graphics.MeasureString(RowsNumber, this.Font);
@@ -625,6 +626,8 @@ namespace FrbaCommerce
             oDr["fac_Fecha"] = Singleton.FechaDelSistema;
             oDr["fac_usu_id_gen"] = Singleton.usuario["usu_Id"];
             oDr["fac_Total"] = decTotal;
+
+            oDr["fac_fdp_Id"] = cmbFormaPago.SelectedValue;
 
             if(txtTarjeta.Text != "")
                 oDr["fac_Forma_Pago_Desc"] = cmbFormaPago.Text + " - " + txtTarjeta.Text;

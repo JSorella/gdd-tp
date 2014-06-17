@@ -842,7 +842,7 @@ namespace FrbaCommerce
                                         new String[2, 2] { { "cli_cuil", cli_cuil.ToString() },
                                                             {"cli_usu_id", cli_usu_id.ToString()} }))
                 {
-                    throw new Exception("Ya existe un cliente con este Teléfono.");
+                    throw new Exception("Ya existe un cliente con este CUIL.");
                 }
 
                 return;
@@ -876,13 +876,13 @@ namespace FrbaCommerce
         /// <summary>
         /// Valido si existe un Tipo + Numero de Documento en la tabla Clientes
         /// </summary>
-        public static string existeDni(int cli_Tipodoc_id, int cli_Nro_doc)
+        public static string existeDni(int cli_Tipodoc_id, string cli_Nro_doc)
         {
             try
             {
                 if ((bool)Singleton.conexion.executeQueryFuncEscalar("J2LA.existeDni(@cli_Tipodoc_id, @cli_Nro_doc)", null,
                                         new String[2, 2] { { "cli_Tipodoc_id", cli_Tipodoc_id.ToString() }, 
-                                                           { "cli_Nro_doc", cli_Nro_doc.ToString() } }))
+                                                           { "cli_Nro_doc", cli_Nro_doc } }))
                 {
                     throw new Exception("Ya existe un cliente con este Dni.");
                 }
@@ -897,14 +897,14 @@ namespace FrbaCommerce
         /// <summary>
         /// Valida la existencia de un Cliente con un Tipo + Numero de Documento diferente al de un Cliente especifico.
         /// </summary>
-        public static string existeOtroDni(int cli_Tipodoc_Id, int cli_Nro_Doc, int cli_usu_Id)
+        public static string existeOtroDni(int cli_Tipodoc_Id, string cli_Nro_Doc, int cli_usu_Id)
         {
             try
             {
                 if ((bool)Singleton.conexion.executeQueryFuncEscalar("J2LA.existeOtroDni(@cli_Tipodoc_Id,@cli_Nro_Doc,@cli_usu_Id)", null,
                                         new String[3, 2] { 
                                             { "cli_Tipodoc_Id", cli_Tipodoc_Id.ToString() }
-                                            , { "cli_Nro_Doc", cli_Nro_Doc.ToString() }
+                                            , { "cli_Nro_Doc", cli_Nro_Doc }
                                             , { "cli_usu_Id", cli_usu_Id.ToString() }
                                             }))
                 {
@@ -960,7 +960,7 @@ namespace FrbaCommerce
         /// Trae todos los datos de un Cliente, incluyendo los datos de Usuario
         /// Siempre y cuando el usuario no haya sido Eliminado.
         /// </summary>
-        public static DataTable getClienteUsuario(int cli_Tipodoc_Id, int cli_Nro_Doc)
+        public static DataTable getClienteUsuario(int cli_Tipodoc_Id, string cli_Nro_Doc)
         {
             try
             {
@@ -985,13 +985,13 @@ namespace FrbaCommerce
         /// <summary>
         /// Realiza la Baja Logica de un Cliente-Usuario desde Baja de Clientes
         /// </summary>
-        public static bool setBajaCliente(int cli_Tipodoc_Id, int cli_Nro_Doc)
+        public static bool setBajaCliente(int cli_Tipodoc_Id, string cli_Nro_Doc)
         {
             try
             {
                 Singleton.conexion.executeQuerySP("J2LA.setBajaCliente", null, new String[2, 2] { 
                                                     { "cli_Tipodoc_Id", cli_Tipodoc_Id.ToString() }
-                                                    ,{ "cli_Nro_Doc", cli_Nro_Doc.ToString() }
+                                                    ,{ "cli_Nro_Doc", cli_Nro_Doc }
                                                     });
                 return true;
             }

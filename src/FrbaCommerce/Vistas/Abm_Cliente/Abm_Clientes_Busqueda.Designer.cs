@@ -117,9 +117,12 @@
             // txtNroDoc
             // 
             this.txtNroDoc.Location = new System.Drawing.Point(112, 121);
+            this.txtNroDoc.MaxLength = 18;
             this.txtNroDoc.Name = "txtNroDoc";
             this.txtNroDoc.Size = new System.Drawing.Size(262, 20);
             this.txtNroDoc.TabIndex = 4;
+            this.txtNroDoc.TextChanged += new System.EventHandler(this.txtNroDoc_TextChanged);
+            this.txtNroDoc.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNroDoc_KeyPress);
             // 
             // txtMail
             // 

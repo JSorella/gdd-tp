@@ -262,16 +262,25 @@ CONSTRAINT PK_comp_Id PRIMARY KEY (comp_Id))
 
 GO
 
+-- Creamos la Tabla con las Formas de Pago disponibles para la Facturacion 
+CREATE TABLE J2LA.FormasDePago (
+	fdp_Id	Int	Identity(1,1),
+	fdp_Descripcion Nvarchar(100)
+CONSTRAINT PK_fdp_Id PRIMARY KEY (fdp_Id))
+GO
+
 -- Creamos la Tabla con la Cabecera de Facturas emitidas.-
 CREATE TABLE J2LA.Facturas (
 	fac_Numero numeric(18,0) NOT NULL,
 	fac_usu_Id int NOT NULL,
 	fac_Fecha datetime NOT NULL,
 	fac_Total numeric(18,2) NOT NULL,
+	fac_fdp_Id int NOT NULL,
 	fac_Forma_Pago_Desc nvarchar(255) NOT NULL,
 	fac_usu_id_gen INT NOT NULL,
 CONSTRAINT FK_fac_usu_Id FOREIGN KEY(fac_usu_Id) REFERENCES J2LA.Usuarios (usu_Id),
 CONSTRAINT FK_fac_usu_id_gen FOREIGN KEY(fac_usu_id_gen) REFERENCES J2LA.Usuarios (usu_Id),
+CONSTRAINT FK_fac_fdp_Id FOREIGN KEY(fac_fdp_Id) REFERENCES J2LA.FormasDePago (fdp_Id),
 CONSTRAINT PK_fac_numero PRIMARY KEY (fac_numero))
 
 GO
@@ -288,13 +297,6 @@ CONSTRAINT FK_facdet_pub_Codigo FOREIGN KEY(facdet_pub_Codigo) REFERENCES J2LA.P
 CONSTRAINT FK_facdet_fac_Numero FOREIGN KEY(facdet_fac_Numero) REFERENCES J2LA.Facturas (fac_numero))
 
 GO
-
--- Creamos la Tabla con las Formas de Pago disponibles para la Facturacion 
-CREATE TABLE J2LA.FormasDePago (
-	fdp_Id	Int	Identity(1,1),
-	fdp_Descripcion Nvarchar(100)
-)
-Go
 
 CREATE TABLE J2LA.Usuarios_CantFactxTipoVis (
 	ucftv_usu_Id Int,
@@ -568,11 +570,11 @@ GROUP BY P.pub_usu_Id, YEAR(Co.comp_Fecha)
 GO
 
 -- Migramos el Encabezado de las Facuras de la Tabla Maestra.-
-Insert Into J2LA.Facturas(fac_Numero, fac_usu_Id,
-	fac_Fecha, fac_Total, fac_Forma_Pago_Desc, fac_usu_id_gen)
+Insert Into J2LA.Facturas(fac_Numero, fac_usu_Id, fac_Fecha, 
+	fac_Total, fac_fdp_Id, fac_Forma_Pago_Desc, fac_usu_id_gen)
 Select Distinct M.Factura_Nro, P.pub_usu_id,
-	M.Factura_Fecha, M.Factura_Total, M.Forma_Pago_Desc,
-	fac_usu_id_gen = 1 -- Usuario admin (datos migrados)
+	M.Factura_Fecha, M.Factura_Total, fac_fdp_Id = 1, --Efectivo
+	M.Forma_Pago_Desc, fac_usu_id_gen = 1 -- Usuario admin (datos migrados)
 From gd_esquema.Maestra M
 Inner Join J2LA.Publicaciones P On P.pub_codigo = M.Publicacion_Cod
 Where M.Factura_Nro is not null
@@ -653,7 +655,12 @@ CREATE FUNCTION J2LA.existeTelefono(@cli_tel nvarchar(50))
 RETURNS BIT
 AS
 BEGIN
-	IF( (SELECT COUNT(cli_tel) FROM J2LA.Clientes where cli_tel = @cli_tel) > 0)
+	IF( (SELECT COUNT(C.cli_tel) 
+			FROM J2LA.Clientes C
+			Inner Join J2LA.Usuarios U On
+				U.usu_Id = C.cli_usu_Id
+				And U.usu_Eliminado = 0
+			WHERE cli_tel = @cli_tel) > 0)
 		RETURN 1
 	RETURN 0
 END
@@ -666,12 +673,13 @@ CREATE FUNCTION J2LA.existeDni(@cli_Tipodoc_Id int, @cli_Nro_Doc numeric(18,0))
 RETURNS BIT
 AS
 BEGIN
-	IF( (	SELECT COUNT(cli_Nro_Doc) 
-			FROM J2LA.Clientes 
-			WHERE 
-				cli_Nro_Doc = @cli_Nro_Doc
-			AND	
-				cli_Tipodoc_Id = @cli_Tipodoc_Id
+	IF( (	SELECT COUNT(C.cli_Nro_Doc) 
+			FROM J2LA.Clientes C
+			Inner Join J2LA.Usuarios U On
+				U.usu_Id = C.cli_usu_Id
+				And U.usu_Eliminado = 0
+			WHERE C.cli_Nro_Doc = @cli_Nro_Doc
+			AND	C.cli_Tipodoc_Id = @cli_Tipodoc_Id
 		) > 0 )
 		RETURN 1
 	RETURN 0
@@ -685,7 +693,13 @@ CREATE FUNCTION J2LA.existeOtroDni(@cli_Tipodoc_Id int , @cli_Nro_Doc numeric(18
 RETURNS BIT
 AS
 BEGIN
-	IF ((SELECT COUNT(cli_Nro_Doc) FROM J2LA.Clientes WHERE cli_Nro_Doc = @cli_Nro_Doc AND cli_Tipodoc_Id = @cli_Tipodoc_Id) > 0)
+	IF ((SELECT COUNT(C.cli_Nro_Doc) 
+		FROM J2LA.Clientes C
+		Inner Join J2LA.Usuarios U On
+			U.usu_Id = C.cli_usu_Id
+			And U.usu_Eliminado = 0
+		WHERE C.cli_Nro_Doc = @cli_Nro_Doc 
+			AND C.cli_Tipodoc_Id = @cli_Tipodoc_Id) > 0)
 		BEGIN
 			IF ((SELECT cli_usu_Id FROM J2LA.Clientes WHERE cli_Nro_Doc = @cli_Nro_Doc AND cli_Tipodoc_Id = @cli_Tipodoc_Id) = @cli_usu_Id)
 				RETURN 0
@@ -703,7 +717,12 @@ CREATE FUNCTION J2LA.existeCuil(@cli_cuil nvarchar(50), @cli_usu_Id int)
 RETURNS BIT
 AS
 BEGIN
-	IF ((SELECT COUNT(cli_Nro_Doc) FROM J2LA.Clientes WHERE cli_cuil = @cli_cuil) > 0)
+	IF ((SELECT COUNT(C.cli_Nro_Doc) 
+		FROM J2LA.Clientes C
+		Inner Join J2LA.Usuarios U On
+			U.usu_Id = C.cli_usu_Id
+			And U.usu_Eliminado = 0
+		WHERE C.cli_cuil = @cli_cuil) > 0)
 		BEGIN
 			IF ((SELECT cli_usu_Id FROM J2LA.Clientes WHERE cli_cuil = @cli_cuil) = @cli_usu_Id)
 				RETURN 0
@@ -721,7 +740,12 @@ CREATE FUNCTION J2LA.existeOtroTelefono(@cli_Tel nvarchar(50) , @cli_usu_Id int)
 RETURNS BIT
 AS
 BEGIN
-	IF ((SELECT COUNT(cli_Tel) FROM J2LA.Clientes WHERE cli_Tel = @cli_Tel) > 0)
+	IF ((SELECT COUNT(C.cli_Tel) 
+		FROM J2LA.Clientes C
+		Inner Join J2LA.Usuarios U On
+			U.usu_Id = C.cli_usu_Id
+			And U.usu_Eliminado = 0
+		WHERE C.cli_Tel = @cli_Tel) > 0)
 		BEGIN
 			IF ((SELECT cli_usu_Id FROM J2LA.Clientes WHERE cli_Tel = @cli_Tel) = @cli_usu_Id)
 				RETURN 0
@@ -1512,7 +1536,12 @@ CREATE FUNCTION J2LA.existeCUIT(@emp_CUIT nvarchar(50))
 RETURNS BIT
 AS
 BEGIN
-	IF( (SELECT COUNT(emp_Cuit) FROM J2LA.Empresas where emp_Cuit = @emp_CUIT) > 0)
+	IF( (SELECT COUNT(E.emp_Cuit) 
+		FROM J2LA.Empresas E
+		Inner Join J2LA.Usuarios U On
+			U.usu_Id = E.emp_usu_Id
+			And U.usu_Eliminado = 0
+		WHERE E.emp_Cuit = @emp_CUIT) > 0)
 		RETURN 1
 	RETURN 0
 END
@@ -1525,7 +1554,12 @@ CREATE FUNCTION J2LA.existeRazonSocial(@emp_Razon_Social nvarchar(50))
 RETURNS BIT
 AS
 BEGIN
-	IF( (SELECT COUNT(emp_Razon_Social) FROM J2LA.Empresas where emp_Razon_Social = @emp_Razon_Social) > 0)
+	IF( (SELECT COUNT(E.emp_Razon_Social) 
+		FROM J2LA.Empresas E
+		Inner Join J2LA.Usuarios U On
+			U.usu_Id = E.emp_usu_Id
+			And U.usu_Eliminado = 0
+		WHERE E.emp_Razon_Social = @emp_Razon_Social) > 0)
 		RETURN 1
 	RETURN 0
 END
@@ -1538,7 +1572,12 @@ CREATE FUNCTION J2LA.existeOtroCUIT(@emp_CUIT nvarchar(50), @emp_usu_Id int)
 RETURNS BIT
 AS
 BEGIN
-	IF ((SELECT COUNT(emp_Cuit) FROM J2LA.Empresas WHERE emp_Cuit = @emp_CUIT) > 0)
+	IF ((SELECT COUNT(E.emp_Cuit) 
+		FROM J2LA.Empresas E
+		Inner Join J2LA.Usuarios U On
+			U.usu_Id = E.emp_usu_Id
+			And U.usu_Eliminado = 0
+		WHERE E.emp_Cuit = @emp_CUIT) > 0)
 		BEGIN
 			IF ((SELECT emp_usu_Id FROM J2LA.Empresas WHERE emp_Cuit = @emp_CUIT) = @emp_usu_Id)
 				RETURN 0
@@ -1558,7 +1597,12 @@ CREATE FUNCTION J2LA.existeOtraRazonSocial(@emp_Razon_Social nvarchar(255), @emp
 RETURNS BIT
 AS
 BEGIN
-	IF ((SELECT COUNT(emp_Razon_Social) FROM J2LA.Empresas WHERE emp_Razon_Social = @emp_Razon_Social) > 0)
+	IF ((SELECT COUNT(E.emp_Razon_Social) 
+		FROM J2LA.Empresas E
+		Inner Join J2LA.Usuarios U On
+			U.usu_Id = E.emp_usu_Id
+			And U.usu_Eliminado = 0
+		WHERE E.emp_Razon_Social = @emp_Razon_Social) > 0)
 		BEGIN
 			IF ((SELECT emp_usu_Id FROM J2LA.Empresas WHERE emp_Razon_Social = @emp_Razon_Social) = @emp_usu_Id)
 				RETURN 0
@@ -1955,6 +1999,7 @@ CREATE PROCEDURE J2LA.Facturas_Insert
 	@fac_usu_Id int,
 	@fac_Fecha datetime,
 	@fac_Total numeric(18,2),
+	@fac_fdp_Id int,
 	@fac_Forma_Pago_Desc nvarchar(255),
 	@fac_usu_Id_gen int
 AS
@@ -1963,8 +2008,10 @@ BEGIN
 	SELECT @fac_Numero = MAX(fac_Numero) + 1 FROM J2LA.Facturas
 
 	INSERT INTO J2LA.Facturas
-		([fac_Numero],[fac_usu_Id],[fac_Fecha],[fac_Total],[fac_Forma_Pago_Desc],[fac_usu_Id_gen])
-	VALUES(@fac_Numero, @fac_usu_Id, @fac_Fecha, @fac_Total, @fac_Forma_Pago_Desc, @fac_usu_Id_gen)
+		([fac_Numero],[fac_usu_Id],[fac_Fecha],[fac_Total], [fac_fdp_Id], 
+			[fac_Forma_Pago_Desc],[fac_usu_Id_gen])
+	VALUES(@fac_Numero, @fac_usu_Id, @fac_Fecha, @fac_Total, @fac_fdp_Id,
+		@fac_Forma_Pago_Desc, @fac_usu_Id_gen)
 		
 END
 GO

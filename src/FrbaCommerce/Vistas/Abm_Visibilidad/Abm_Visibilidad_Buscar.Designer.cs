@@ -170,7 +170,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Abm_Visibilidad_Buscar";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Abm_Visibilidad_Buscar";
+            this.Text = "Buscar Visibilidad";
             this.Load += new System.EventHandler(this.Abm_Visibilidad_Buscar_Load);
             this.grpParam.ResumeLayout(false);
             this.grpParam.PerformLayout();

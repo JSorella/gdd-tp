@@ -1,6 +1,6 @@
 ﻿namespace FrbaCommerce
 {
-    partial class HistorialBinificacion
+    partial class HistorialBonificacion
     {
         /// <summary>
         /// Required designer variable.
@@ -73,7 +73,7 @@
             this.MinimizeBox = false;
             this.Name = "HistorialBinificacion";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Historial para Binificaciones";
+            this.Text = "Historial para Bonificaciones";
             this.Load += new System.EventHandler(this.HistorialBinificacion_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalle)).EndInit();
             this.ResumeLayout(false);

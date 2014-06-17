@@ -203,11 +203,11 @@ Drop Table J2LA.Empresas
 GO
 Drop Table J2LA.TiposDoc
 GO
-Drop Table J2LA.FormasDePago
-GO
 Drop Table J2LA.Facturas_Det
 GO
 Drop Table J2LA.Facturas
+GO
+Drop Table J2LA.FormasDePago
 GO
 Drop Table J2LA.Preguntas
 GO

@@ -58,12 +58,17 @@ namespace FrbaCommerce
                 clienteUsuario["cli_Nombre"] = this.nombre_textbox.Text;
                 clienteUsuario["cli_Apellido"] = this.apellido_textbox.Text;
                 clienteUsuario["cli_Tipodoc_Id"] = Convert.ToInt32(this.comboDoc.SelectedValue);
-                clienteUsuario["cli_Nro_Doc"] = Convert.ToInt32(this.dni_textbox.Text);
+                clienteUsuario["cli_Nro_Doc"] = this.dni_textbox.Text.Trim(); //Solo Numeros
                 clienteUsuario["cli_Mail"] = this.mail_textbox.Text;
                 clienteUsuario["cli_Tel"] = this.telefono_textbox.Text;
                 clienteUsuario["cli_Dom_Calle"] = this.calle_textbox.Text;
                 clienteUsuario["cli_Nro_Calle"] = Convert.ToInt32(this.altura_textbox.Text);
-                clienteUsuario["cli_Piso"] = Convert.ToInt32(this.piso_textbox.Text);
+                
+                if(piso_textbox.Text == "")
+                    clienteUsuario["cli_Piso"] = Convert.ToInt32(0);
+                else
+                    clienteUsuario["cli_Piso"] = Convert.ToInt32(this.piso_textbox.Text);
+
                 clienteUsuario["cli_Dpto"] = this.depto_textbox.Text;
                 clienteUsuario["cli_Localidad"] = this.localidad_textbox.Text; 
                 clienteUsuario["cli_CP"] = this.cp_textbox.Text;
@@ -168,7 +173,7 @@ namespace FrbaCommerce
                 //Validamos que el DNI no esté repetido
                 InterfazBD.existeDni(
                     Convert.ToInt32(comboDoc.SelectedValue),
-                    Convert.ToInt32(this.dni_textbox.Text));
+                    this.dni_textbox.Text);
 
                 return true;
             }

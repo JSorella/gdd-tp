@@ -96,7 +96,7 @@ namespace FrbaCommerce
                 }
                 if (this.tboxCodPostal.Text == "")
                 {
-                    Funciones.mostrarAlert("Ingrese Codigo POstal", this.Text); return false;
+                    Funciones.mostrarAlert("Ingrese Codigo Postal", this.Text); return false;
                 }
                 if (this.tboxCiudad.Text == "")
                 {
@@ -134,7 +134,7 @@ namespace FrbaCommerce
                 oDtEmpresaUsuario.Rows.Clear();
 
                 DataRow oDrEmpresaUsuario = oDtEmpresaUsuario.NewRow();
-                //Cliente
+                //Empresa
                 oDrEmpresaUsuario["emp_Razon_Social"] = tboxRazonSocial.Text;
                 oDrEmpresaUsuario["emp_Cuit"] = txtCuit.Text;
                 oDrEmpresaUsuario["emp_Mail"] = tboxMail.Text;
@@ -143,7 +143,12 @@ namespace FrbaCommerce
                 oDrEmpresaUsuario["emp_Fecha_Creacion"] = dteFecCreac;
                 oDrEmpresaUsuario["emp_Dom_Calle"] = tboxCalle.Text;
                 oDrEmpresaUsuario["emp_Nro_Calle"] = Convert.ToInt32(tboxAltura.Text);
-                oDrEmpresaUsuario["emp_Piso"] = Convert.ToInt32(tboxPiso.Text);
+
+                if(tboxPiso.Text == "")
+                    oDrEmpresaUsuario["emp_Piso"] = Convert.ToInt32(0);
+                else
+                    oDrEmpresaUsuario["emp_Piso"] = Convert.ToInt32(tboxPiso.Text);
+
                 oDrEmpresaUsuario["emp_Dpto"] = tboxDpto.Text;
                 oDrEmpresaUsuario["emp_Localidad"] = tboxLocalidad.Text;
                 oDrEmpresaUsuario["emp_CP"] = tboxCodPostal.Text;

@@ -12,7 +12,7 @@ namespace FrbaCommerce
     public partial class Abm_Cliente_Baja : Form
     {
         private int cli_Tipodoc_Id;
-        private int cli_Nro_Doc;
+        private string cli_Nro_Doc;
         
         DataTable oDtCliente;
 
@@ -39,7 +39,7 @@ namespace FrbaCommerce
                     {
                         if (RealizarBaja())
                         {
-                            this.cli_Nro_Doc = 0;
+                            this.cli_Nro_Doc = "";
                             this.txtNroDoc.Text = "";
                             this.cli_Tipodoc_Id = 0;
                             this.comboDoc.SelectedIndex = -1;
@@ -60,9 +60,11 @@ namespace FrbaCommerce
 
             if ((oFrm.Resultado != null)) //Resultado es el DataRow.-
             {
-                oDtCliente = InterfazBD.getClienteUsuario(Convert.ToInt32(oFrm.Resultado["cli_Tipodoc_Id"]), Convert.ToInt32(oFrm.Resultado["cli_Nro_Doc"]));
+                oDtCliente = InterfazBD.getClienteUsuario(Convert.ToInt32(oFrm.Resultado["cli_Tipodoc_Id"]), 
+                                                            oFrm.Resultado["cli_Nro_Doc"].ToString());
+
                 this.cli_Tipodoc_Id = Convert.ToInt32(oDtCliente.Rows[0]["cli_Tipodoc_Id"]);
-                this.cli_Nro_Doc = Convert.ToInt32(oDtCliente.Rows[0]["cli_Nro_Doc"]);
+                this.cli_Nro_Doc = oDtCliente.Rows[0]["cli_Nro_Doc"].ToString();
 
                 this.comboDoc.SelectedValue = this.cli_Tipodoc_Id;
                 this.txtNroDoc.Text = this.cli_Nro_Doc.ToString();
@@ -83,7 +85,8 @@ namespace FrbaCommerce
                 return false;
             }
 
-            DataTable oDtCliente = InterfazBD.getClienteUsuario(Convert.ToInt32(comboDoc.SelectedValue), Convert.ToInt32(txtNroDoc.Text));
+            DataTable oDtCliente = InterfazBD.getClienteUsuario(Convert.ToInt32(comboDoc.SelectedValue), 
+                                                                txtNroDoc.Text);
 
             if (oDtCliente != null)
             {
@@ -100,7 +103,7 @@ namespace FrbaCommerce
             }
 
             cli_Tipodoc_Id = Convert.ToInt32(oDtCliente.Rows[0]["cli_Tipodoc_Id"]);
-            cli_Nro_Doc = Convert.ToInt32(oDtCliente.Rows[0]["cli_Nro_Doc"]);
+            cli_Nro_Doc = oDtCliente.Rows[0]["cli_Nro_Doc"].ToString();
 
             return true;
         }
@@ -121,6 +124,16 @@ namespace FrbaCommerce
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }  
+        }
+
+        private void txtNroDoc_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = Funciones.SoloNumeros(e.KeyChar);
+        }
+
+        private void txtNroDoc_TextChanged(object sender, EventArgs e)
+        {
+            txtNroDoc.Text = Funciones.ValidaTextoSoloNumerosConFiltro(txtNroDoc.Text, "");
         }
 
     }

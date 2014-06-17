@@ -94,9 +94,12 @@
             // txtNroDoc
             // 
             this.txtNroDoc.Location = new System.Drawing.Point(144, 50);
+            this.txtNroDoc.MaxLength = 18;
             this.txtNroDoc.Name = "txtNroDoc";
             this.txtNroDoc.Size = new System.Drawing.Size(190, 20);
             this.txtNroDoc.TabIndex = 1;
+            this.txtNroDoc.TextChanged += new System.EventHandler(this.txtNroDoc_TextChanged);
+            this.txtNroDoc.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNroDoc_KeyPress);
             // 
             // label15
             // 

@@ -98,7 +98,8 @@
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.btnResponder);
             this.Name = "Responder_preguntas";
-            this.Text = "Responder preguntas";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "Preguntas Pendientes de Respuesta";
             this.Load += new System.EventHandler(this.Responder_preguntas_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPreguntas)).EndInit();
             this.ResumeLayout(false);

@@ -17,7 +17,7 @@ namespace FrbaCommerce
         bool cerrarForm = false;
 
         private int cli_Tipodoc_Id;
-        private int cli_Nro_Doc;
+        private string cli_Nro_Doc;
 
         DataTable oDtCliente;
 
@@ -48,9 +48,11 @@ namespace FrbaCommerce
 
             if ((oFrm.Resultado != null)) //Resultado es el DataRow.-
             {
-                oDtCliente = InterfazBD.getClienteUsuario(Convert.ToInt32(oFrm.Resultado["cli_Tipodoc_Id"]), Convert.ToInt32(oFrm.Resultado["cli_Nro_Doc"]));
+                oDtCliente = InterfazBD.getClienteUsuario(Convert.ToInt32(oFrm.Resultado["cli_Tipodoc_Id"]), 
+                                                        oFrm.Resultado["cli_Nro_Doc"].ToString());
+
                 this.cli_Tipodoc_Id = Convert.ToInt32(oDtCliente.Rows[0]["cli_Tipodoc_Id"]);
-                this.cli_Nro_Doc = Convert.ToInt32(oDtCliente.Rows[0]["cli_Nro_Doc"]);
+                this.cli_Nro_Doc = oDtCliente.Rows[0]["cli_Nro_Doc"].ToString();
 
                 this.comboDocEleccion.SelectedValue = this.cli_Tipodoc_Id;
                 this.txtNroDoc.Text = this.cli_Nro_Doc.ToString();
@@ -111,7 +113,8 @@ namespace FrbaCommerce
 
             try
             {
-                oDtClienteUsuario = InterfazBD.getClienteUsuario(Convert.ToInt32(comboDocEleccion.SelectedValue), Convert.ToInt32(this.txtNroDoc.Text));
+                oDtClienteUsuario = InterfazBD.getClienteUsuario(Convert.ToInt32(comboDocEleccion.SelectedValue), 
+                                                                this.txtNroDoc.Text);
 
                 if (oDtClienteUsuario != null)
                 {
@@ -153,7 +156,8 @@ namespace FrbaCommerce
 
                 DataRow oDr = oDtClienteUsuario.Rows[0];
 
-                oDtCliente = InterfazBD.getClienteUsuario(Convert.ToInt32(oDr["cli_Tipodoc_Id"]), Convert.ToInt32(oDr["cli_Nro_Doc"]));
+                oDtCliente = InterfazBD.getClienteUsuario(Convert.ToInt32(oDr["cli_Tipodoc_Id"]), 
+                                                        oDr["cli_Nro_Doc"].ToString());
 
                 DataRow clienteUsuario = oDtCliente.Rows[0];
 
@@ -163,12 +167,17 @@ namespace FrbaCommerce
                 clienteUsuario["cli_Nombre"] = this.nombre_textbox.Text;
                 clienteUsuario["cli_Apellido"] = this.apellido_textbox.Text;
                 clienteUsuario["cli_Tipodoc_Id"] = Convert.ToInt32(this.comboDoc.SelectedValue);
-                clienteUsuario["cli_Nro_Doc"] = Convert.ToInt32(this.dni_textbox.Text);
+                clienteUsuario["cli_Nro_Doc"] = this.dni_textbox.Text;
                 clienteUsuario["cli_Mail"] = this.mail_textbox.Text;
                 clienteUsuario["cli_Tel"] = this.telefono_textbox.Text;
                 clienteUsuario["cli_Dom_Calle"] = this.calle_textbox.Text;
                 clienteUsuario["cli_Nro_Calle"] = Convert.ToInt32(this.altura_textbox.Text);
-                clienteUsuario["cli_Piso"] = Convert.ToInt32(this.piso_textbox.Text);
+                
+                if(piso_textbox.Text == "")
+                    clienteUsuario["cli_Piso"] = Convert.ToInt32(0);
+                else
+                    clienteUsuario["cli_Piso"] = Convert.ToInt32(this.piso_textbox.Text);
+
                 clienteUsuario["cli_Dpto"] = this.depto_textbox.Text;
                 clienteUsuario["cli_Localidad"] = this.localidad_textbox.Text;
                 clienteUsuario["cli_CP"] = this.cp_textbox.Text;
@@ -260,7 +269,7 @@ namespace FrbaCommerce
                 //Validamos que el DNI no lo tenga otro usuario
                 InterfazBD.existeOtroDni(
                     Convert.ToInt32(this.comboDoc.SelectedValue)
-                    , Convert.ToInt32(this.dni_textbox.Text)
+                    , this.dni_textbox.Text
                     , Convert.ToInt32(oDr["cli_usu_Id"]));
 
                 return true;
@@ -299,6 +308,5 @@ namespace FrbaCommerce
 
             fechaNacimiento.Text = dteFecNac.ToShortDateString();
         }
-
     }
 }

@@ -147,7 +147,7 @@ namespace FrbaCommerce
 
                 oDr.BeginEdit();
 
-                //Cliente
+                //Empresa
                 oDr["emp_Razon_Social"] = tboxRazonSocial.Text;
                 oDr["emp_Cuit"] = txtCuit.Text;
                 oDr["emp_Mail"] = tboxMail.Text;
@@ -155,12 +155,18 @@ namespace FrbaCommerce
                 oDr["emp_Contacto"] = tboxNombreContacto.Text;
                 oDr["emp_Fecha_Creacion"] = tboxFechaCreacion.Text;
                 oDr["emp_Dom_Calle"] = tboxCalle.Text;
-                oDr["emp_Nro_Calle"] = tboxAltura.Text;
-                oDr["emp_Piso"] = tboxPiso.Text;
+                oDr["emp_Nro_Calle"] = Convert.ToInt32(tboxAltura.Text);
+                
+                if (tboxPiso.Text == "")
+                    oDr["emp_Piso"] = Convert.ToInt32(0);
+                else
+                    oDr["emp_Piso"] = Convert.ToInt32(tboxPiso.Text);
+
                 oDr["emp_Dpto"] = tboxDpto.Text;
                 oDr["emp_Localidad"] = tboxLocalidad.Text;
                 oDr["emp_CP"] = tboxCodPostal.Text;
                 oDr["emp_Ciudad"] = tboxCiudad.Text;
+
                 //Usuario
                 oDr["usu_Inhabilitado"] = chkboxInhabilitada.Checked;
 
@@ -220,7 +226,7 @@ namespace FrbaCommerce
                 }
                 if (this.tboxCodPostal.Text == "")
                 {
-                    Funciones.mostrarAlert("Ingrese Codigo POstal", this.Text); return false;
+                    Funciones.mostrarAlert("Ingrese Codigo Postal", this.Text); return false;
                 }
                 if (this.tboxCiudad.Text == "")
                 {

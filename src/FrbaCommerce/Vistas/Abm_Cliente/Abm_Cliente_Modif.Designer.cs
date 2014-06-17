@@ -38,6 +38,7 @@
             this.btnGuardar = new System.Windows.Forms.Button();
             this.chkboxHabilitada = new System.Windows.Forms.CheckBox();
             this.pnlDatos = new System.Windows.Forms.Panel();
+            this.txtCuil = new System.Windows.Forms.MaskedTextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.depto_textbox = new System.Windows.Forms.TextBox();
             this.calle_textbox = new System.Windows.Forms.TextBox();
@@ -67,7 +68,6 @@
             this.nombre_textbox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
-            this.txtCuil = new System.Windows.Forms.MaskedTextBox();
             this.pnlParam.SuspendLayout();
             this.pnlDatos.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -110,9 +110,12 @@
             // txtNroDoc
             // 
             this.txtNroDoc.Location = new System.Drawing.Point(175, 33);
+            this.txtNroDoc.MaxLength = 18;
             this.txtNroDoc.Name = "txtNroDoc";
             this.txtNroDoc.Size = new System.Drawing.Size(190, 20);
             this.txtNroDoc.TabIndex = 32;
+            this.txtNroDoc.TextChanged += new System.EventHandler(this.textbox_TextChanged);
+            this.txtNroDoc.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textbox_KeyPress);
             // 
             // label16
             // 
@@ -189,6 +192,14 @@
             this.pnlDatos.Name = "pnlDatos";
             this.pnlDatos.Size = new System.Drawing.Size(643, 230);
             this.pnlDatos.TabIndex = 63;
+            // 
+            // txtCuil
+            // 
+            this.txtCuil.Location = new System.Drawing.Point(110, 113);
+            this.txtCuil.Mask = "##-########-#";
+            this.txtCuil.Name = "txtCuil";
+            this.txtCuil.Size = new System.Drawing.Size(100, 20);
+            this.txtCuil.TabIndex = 90;
             // 
             // groupBox1
             // 
@@ -462,14 +473,6 @@
             this.label17.TabIndex = 72;
             this.label17.Text = "Nombre";
             // 
-            // txtCuil
-            // 
-            this.txtCuil.Location = new System.Drawing.Point(110, 113);
-            this.txtCuil.Mask = "##-########-#";
-            this.txtCuil.Name = "txtCuil";
-            this.txtCuil.Size = new System.Drawing.Size(100, 20);
-            this.txtCuil.TabIndex = 90;
-            // 
             // Abm_Cliente_Modif
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -481,7 +484,7 @@
             this.MaximizeBox = false;
             this.Name = "Abm_Cliente_Modif";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Editar Datos Cliente";
+            this.Text = "Editar Datos del Cliente";
             this.Load += new System.EventHandler(this.Abm_Cliente_Modif_Load);
             this.pnlParam.ResumeLayout(false);
             this.pnlParam.PerformLayout();

@@ -32,6 +32,8 @@ namespace FrbaCommerce
 
         private void ComprarOfertar_Load(object sender, EventArgs e)
         {
+            //Actualizamos el usuario por si cambio su estado de Inhabilitacion para Comprar
+            Singleton.cargarUsuario(Singleton.usuario["usu_UserName"].ToString());
             CargarCombos();
             Limpiar();
             lblInfo.Text = "";
@@ -113,19 +115,21 @@ namespace FrbaCommerce
                 Funciones.alertInhabilitadoComprar();
                 this.Close();
             }
-
-            DataGridViewSelectedRowCollection list = this.dgvPubli.SelectedRows;
-
-            if (list.Count > 0)
-            {
-                mobjDrResultado = ((DataRowView)dgvPubli.SelectedRows[0].DataBoundItem).Row;
-                DetallesPublicacion oFrm = new DetallesPublicacion(Convert.ToInt32(mobjDrResultado["Codigo"]));
-                oFrm.Icon = this.Icon;
-                oFrm.ShowDialog();
-                this.mostrarPublicaciones();
-            }
             else
-                MessageBox.Show("Seleccione una Publicación.", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            {
+                DataGridViewSelectedRowCollection list = this.dgvPubli.SelectedRows;
+
+                if (list.Count > 0)
+                {
+                    mobjDrResultado = ((DataRowView)dgvPubli.SelectedRows[0].DataBoundItem).Row;
+                    DetallesPublicacion oFrm = new DetallesPublicacion(Convert.ToInt32(mobjDrResultado["Codigo"]));
+                    oFrm.Icon = this.Icon;
+                    oFrm.ShowDialog();
+                    this.mostrarPublicaciones();
+                }
+                else
+                    MessageBox.Show("Seleccione una Publicación.", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void mostrarPublicaciones()

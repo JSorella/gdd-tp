@@ -9,11 +9,11 @@ using System.Windows.Forms;
 
 namespace FrbaCommerce
 {
-    public partial class HistorialBinificacion : Form
+    public partial class HistorialBonificacion : Form
     {
         DataTable oDatos;
 
-        public HistorialBinificacion()
+        public HistorialBonificacion()
         {
             InitializeComponent();
         }

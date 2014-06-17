@@ -116,5 +116,15 @@ namespace FrbaCommerce
         {
             Limpiar();
         }
+
+        private void txtNroDoc_TextChanged(object sender, EventArgs e)
+        {
+            txtNroDoc.Text = Funciones.ValidaTextoSoloNumerosConFiltro(txtNroDoc.Text, "");
+        }
+
+        private void txtNroDoc_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = Funciones.SoloNumeros(e.KeyChar);
+        }
     }
 }

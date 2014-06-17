@@ -287,16 +287,7 @@ namespace FrbaCommerce
 
         private void tsmiPublicacionComp_Click(object sender, EventArgs e)
         {
-            //Controlamos si el usuario fue inhabilitado para realizar Compras/Ofertas
-            if (!Convert.ToBoolean(Singleton.usuario["usu_Inhabilitado_Comprar"]))
-            {
-                ejecutarForm(new ComprarOfertar(), sender);
-            }
-            else
-            {
-                //Esta Inhabilitado entonces informamos por Pantalla.
-                Funciones.alertInhabilitadoComprar();
-            }  
+            ejecutarForm(new ComprarOfertar(), sender);
         }
 
         private void tsmiPublicacionCalif_Click(object sender, EventArgs e)

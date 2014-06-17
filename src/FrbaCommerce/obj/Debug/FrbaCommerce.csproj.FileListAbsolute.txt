@@ -65,7 +65,6 @@ C:\Users\jtonelli.NACION\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\Frb
 C:\Users\jtonelli.NACION\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.FacturarPublicaciones.resources
 C:\Users\jtonelli.NACION\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.ControlFecha.resources
 C:\Users\jtonelli.NACION\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.GenerarPublicacion.resources
-C:\Users\jtonelli.NACION\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.GestionPreguntas.resources
 C:\Users\jtonelli.NACION\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.HistorialCliente.resources
 C:\Users\jtonelli.NACION\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.ListadoEstadistico.resources
 C:\Users\jtonelli.NACION\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.EleccionRol.resources
@@ -188,7 +187,6 @@ C:\Users\jtonelli.NACION\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\Frb
 C:\Users\jtonelli.NACION\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.DetallesPublicacion.resources
 C:\Users\jtonelli.NACION\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.BuscarUsuario.resources
 C:\Users\jtonelli.NACION\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.CambiarPass.resources
-C:\Users\jtonelli.NACION\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.EjemploGrilla.resources
 C:\Users\jtonelli.NACION\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.Responder_preguntas.resources
 C:\Users\jtonelli.NACION\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.Respuesta.resources
 C:\Users\jtonelli.NACION\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.Ver_Respuestas.resources
@@ -290,3 +288,9 @@ C:\Users\Juan\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.U
 C:\Users\Juan\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.Abm_Rubro_Alta.resources
 C:\Users\Juan\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.Abm_Rubro_Baja.resources
 C:\Users\Juan\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.Abm_Rubro_Modif.resources
+C:\Users\jtonelli.NACION\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.Abm_Clientes_Busqueda.resources
+C:\Users\jtonelli.NACION\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.Abm_Rubro_Alta.resources
+C:\Users\jtonelli.NACION\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.Abm_Rubro_Baja.resources
+C:\Users\jtonelli.NACION\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.Abm_Rubro_Modif.resources
+C:\Users\jtonelli.NACION\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.Usuarios_Baja.resources
+C:\Users\jtonelli.NACION\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.HistorialBonificacion.resources
