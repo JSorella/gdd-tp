@@ -90,7 +90,10 @@
             this.ClientSize = new System.Drawing.Size(478, 101);
             this.Controls.Add(this.btnDarDeBaja);
             this.Controls.Add(this.panel1);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Usuarios_Baja";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Dar de Baja Usuario";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

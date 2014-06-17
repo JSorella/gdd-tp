@@ -16,7 +16,6 @@ namespace FrbaCommerce
         DateTime dteFecNac;
         private bool usu_Primer_Ingreso;  
 
-
         public Abm_Cliente_Alta()    //Alta desde Admin
         {
             this.usuario = "";
@@ -50,7 +49,7 @@ namespace FrbaCommerce
             try
             {   
                 DataTable DTCliente = new DataTable();
-                DTCliente = InterfazBD.getDTCliente();
+                DTCliente = InterfazBD.getDTClienteUsuario();
 
                 DTCliente.Rows.Clear();
 
@@ -58,18 +57,18 @@ namespace FrbaCommerce
                 //Cliente
                 clienteUsuario["cli_Nombre"] = this.nombre_textbox.Text;
                 clienteUsuario["cli_Apellido"] = this.apellido_textbox.Text;
-                clienteUsuario["cli_Tipodoc_Id"] = Convert.ToInt32(((DataRowView)this.comboDoc.SelectedItem).Row["tipodoc_Id"]);
-                clienteUsuario["cli_Nro_Doc"] = Convert.ToInt64(this.dni_textbox.Text);
+                clienteUsuario["cli_Tipodoc_Id"] = Convert.ToInt32(this.comboDoc.SelectedValue);
+                clienteUsuario["cli_Nro_Doc"] = Convert.ToInt32(this.dni_textbox.Text);
                 clienteUsuario["cli_Mail"] = this.mail_textbox.Text;
-                clienteUsuario["cli_Tel"] = Convert.ToInt64(this.telefono_textbox.Text);
+                clienteUsuario["cli_Tel"] = this.telefono_textbox.Text;
                 clienteUsuario["cli_Dom_Calle"] = this.calle_textbox.Text;
                 clienteUsuario["cli_Nro_Calle"] = Convert.ToInt32(this.altura_textbox.Text);
                 clienteUsuario["cli_Piso"] = Convert.ToInt32(this.piso_textbox.Text);
                 clienteUsuario["cli_Dpto"] = this.depto_textbox.Text;
                 clienteUsuario["cli_Localidad"] = this.localidad_textbox.Text; 
                 clienteUsuario["cli_CP"] = this.cp_textbox.Text;
-                clienteUsuario["cli_Fecha_Nac"] = (DateTime)this.dteFecNac;
-                clienteUsuario["cli_Cuil"] = Convert.ToInt64(this.cuil_textbox.Text);
+                clienteUsuario["cli_Fecha_Nac"] = this.dteFecNac;
+                clienteUsuario["cli_Cuil"] = this.txtCuil.Text;
                 clienteUsuario["cli_usu_Id"] = 0;
                 //Usuario
                 clienteUsuario["usu_Id"] = 0;
@@ -79,7 +78,7 @@ namespace FrbaCommerce
                 clienteUsuario["usu_Inhabilitado"] = 0;
                 clienteUsuario["usu_Motivo"] = "";
                 clienteUsuario["usu_Eliminado"] = 0;
-                clienteUsuario["usu_Primer_Ingreso"] = this.usu_Primer_Ingreso ? 1 : 0;
+                clienteUsuario["usu_Primer_Ingreso"] = this.usu_Primer_Ingreso;
                 clienteUsuario["usu_Inhabilitado_Comprar"] = 0;
 
                 DTCliente.Rows.Add(clienteUsuario);
@@ -87,7 +86,7 @@ namespace FrbaCommerce
                 InterfazBD.setNuevoCliente(DTCliente);
 
                 if (Singleton.sessionRol_Id == 1)
-                    Funciones.mostrarInformacion("El Cliente ha sido dado de alta con exito.\nUsuario: " + usuario + "\nPassword: " + pass, this.Text);
+                    Funciones.mostrarInformacion("El Cliente ha sido dado de alta con exito.\n Usuario: " + usuario + "\n Password: " + pass, this.Text);
                 else
                     Funciones.mostrarInformacion("El Cliente ha sido dado de alta con exito.", this.Text);
 
@@ -114,13 +113,13 @@ namespace FrbaCommerce
                 }
                 if (this.dni_textbox.Text == "")
                 {
-                    Funciones.mostrarAlert("Ingrese DNI", this.Text); return false;
+                    Funciones.mostrarAlert("Ingrese Nro. Doc", this.Text); return false;
                 }
                 if (this.comboDoc.Text == "")
                 {
                     Funciones.mostrarAlert("Ingrese Tipo Documento", this.Text); return false;
                 }
-                if (this.cuil_textbox.Text == "")
+                if (this.txtCuil.Text.Replace(" ", "").Length != 13)
                 {
                     Funciones.mostrarAlert("Ingrese Cuil", this.Text); return false;
                 }
@@ -161,12 +160,15 @@ namespace FrbaCommerce
                 InterfazBD.existeUsuario(this.usuario);
 
                 //Validamos que el teléfono no esté repetido
-                InterfazBD.existeTelefono(Convert.ToInt64(this.telefono_textbox.Text));
+                InterfazBD.existeTelefono(this.telefono_textbox.Text);
+
+                //Validamos que el Cuil no esté repetido
+                InterfazBD.existeCuil(this.txtCuil.Text, 0);
 
                 //Validamos que el DNI no esté repetido
                 InterfazBD.existeDni(
-                    Convert.ToInt32(((DataRowView)this.comboDoc.SelectedItem).Row["tipodoc_Id"]),
-                    Convert.ToInt64(this.dni_textbox.Text));
+                    Convert.ToInt32(comboDoc.SelectedValue),
+                    Convert.ToInt32(this.dni_textbox.Text));
 
                 return true;
             }
@@ -179,9 +181,9 @@ namespace FrbaCommerce
 
         private void altaAdminDatosUsuario()
         {
-            if (Singleton.sessionRol_Id == 1) //Soy el Admin
+            if (Singleton.sessionRol_Id == 1) //Rol Admin
             {
-                this.usuario = this.dni_textbox.Text + ((DataRowView)this.comboDoc.SelectedItem).Row["tipodoc_Id"];
+                this.usuario = this.dni_textbox.Text + (comboDoc.SelectedValue).ToString();
                 // Estaría bueno que el password sea el Teléfono, pero dificulta el testing
                 //this.pass = this.telefono_textbox.Text;
                 this.pass = "p455w0rd";
@@ -198,12 +200,22 @@ namespace FrbaCommerce
 
             if (!oFrm.Cancelado)
                 dteFecNac = oFrm.FechaSeleccionada;
-                fechaNacimiento.Text = oFrm.FechaSeleccionada.ToShortDateString();
+
+            fechaNacimiento.Text = dteFecNac.ToShortDateString();
         }
 
         private void textbox_KeyPress(object sender, KeyPressEventArgs e)
         {
+            //Solo numero por ingreso de teclas
             e.Handled = Funciones.SoloNumeros(e.KeyChar);
+        }
+
+        private void textbox_TextChanged(object sender, EventArgs e)
+        {
+            //Solo numero por Copiar/Pegar
+            TextBox oTxt = (TextBox)sender;
+
+            oTxt.Text = Funciones.ValidaTextoSoloNumerosConFiltro(oTxt.Text, "");
         }
     }
 }

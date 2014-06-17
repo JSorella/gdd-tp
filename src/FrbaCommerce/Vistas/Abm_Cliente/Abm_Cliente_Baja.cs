@@ -53,8 +53,6 @@ namespace FrbaCommerce
             }
         }
 
-        
-
         private void btnSeleccionar_Click(object sender, EventArgs e)
         {
             Abm_Clientes_Busqueda oFrm = new Abm_Clientes_Busqueda();
@@ -66,7 +64,7 @@ namespace FrbaCommerce
                 this.cli_Tipodoc_Id = Convert.ToInt32(oDtCliente.Rows[0]["cli_Tipodoc_Id"]);
                 this.cli_Nro_Doc = Convert.ToInt32(oDtCliente.Rows[0]["cli_Nro_Doc"]);
 
-                this.comboDoc.SelectedIndex = this.cli_Tipodoc_Id;
+                this.comboDoc.SelectedValue = this.cli_Tipodoc_Id;
                 this.txtNroDoc.Text = this.cli_Nro_Doc.ToString();
             }
         }
@@ -78,13 +76,14 @@ namespace FrbaCommerce
                 Funciones.mostrarAlert("Debe indicar el Número de Documento del Cliente.", "Atención");
                 return false;
             }
+
             if (comboDoc.Text == "")
             {
                 Funciones.mostrarAlert("Debe indicar el Tipo de Documento del Cliente.", "Atención");
                 return false;
             }
 
-            DataTable oDtCliente = InterfazBD.getClienteUsuario(comboDoc.SelectedIndex, Convert.ToInt32(txtNroDoc.Text));
+            DataTable oDtCliente = InterfazBD.getClienteUsuario(Convert.ToInt32(comboDoc.SelectedValue), Convert.ToInt32(txtNroDoc.Text));
 
             if (oDtCliente != null)
             {
@@ -98,7 +97,10 @@ namespace FrbaCommerce
             {
                 Funciones.mostrarAlert("Cliente Inexistente", "Aviso");
                 return false;
-            }      
+            }
+
+            cli_Tipodoc_Id = Convert.ToInt32(oDtCliente.Rows[0]["cli_Tipodoc_Id"]);
+            cli_Nro_Doc = Convert.ToInt32(oDtCliente.Rows[0]["cli_Nro_Doc"]);
 
             return true;
         }
@@ -107,11 +109,18 @@ namespace FrbaCommerce
         {
             bool result;
 
+            try
+            {
+                result = InterfazBD.setBajaCliente(this.cli_Tipodoc_Id, this.cli_Nro_Doc);
 
-            result = InterfazBD.setBajaCliente(this.cli_Tipodoc_Id, this.cli_Nro_Doc);
-
-            Funciones.mostrarInformacion("El cliente fue dado de baja con exito","Operacion Exitosa");
-            return result;   
+                Funciones.mostrarInformacion("El cliente fue dado de baja con exito", "Operacion Exitosa");
+                return result; 
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }  
         }
 
     }

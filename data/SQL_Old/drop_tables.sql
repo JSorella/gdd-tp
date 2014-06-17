@@ -8,6 +8,8 @@ Drop Table J2LA.Empresas
 GO
 Drop Table J2LA.TiposDoc
 GO
+Drop Table J2LA.FormasDePago
+GO
 Drop Table J2LA.Facturas_Det
 GO
 Drop Table J2LA.Facturas
@@ -26,6 +28,8 @@ Drop Table J2LA.Rubros
 GO
 Drop Table J2LA.Publicaciones
 GO
+Drop Table J2LA.Usuarios_CantFactxTipoVis
+GO
 Drop Table J2LA.Publicaciones_Visibilidades
 GO
 Drop Table J2LA.Publicaciones_Tipos
@@ -34,6 +38,8 @@ Drop Table J2LA.Publicaciones_Estados
 GO
 Drop Table J2LA.Usuarios_Roles
 GO
+Drop Table J2LA.Usuarios_Calificaciones
+GO
 Drop Table J2LA.Usuarios
 GO
 Drop Table J2LA.Roles_Funcionalidades
@@ -41,8 +47,6 @@ GO
 Drop Table J2LA.Funcionalidades
 GO
 Drop Table J2LA.Roles
-GO
-Drop Table J2LA.Usuarios_Calificaciones
 GO
 Drop Schema J2LA
 GO

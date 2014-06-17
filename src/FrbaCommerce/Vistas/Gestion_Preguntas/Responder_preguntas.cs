@@ -53,6 +53,7 @@ namespace FrbaCommerce
                 oDrSeleccion = ((DataRowView)dgvPreguntas.SelectedRows[0].DataBoundItem).Row;
                 Respuesta oFrm = new Respuesta();
                 oFrm.PreguntaDr = oDrSeleccion; //Le paso los datos de la Pregunta.
+                oFrm.Icon = this.Icon;
                 oFrm.ShowDialog();
 
                 cargarPreguntas(); //Refresco la grilla

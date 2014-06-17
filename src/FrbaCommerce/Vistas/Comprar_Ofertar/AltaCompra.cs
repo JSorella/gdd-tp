@@ -15,7 +15,6 @@ namespace FrbaCommerce
         DataTable oDTPubli = new DataTable();
         private int nudMaximum;
         
-
         public AltaCompra(int _codigoPublicacion)
         {
             this.codigoPublicacion = _codigoPublicacion;
@@ -26,11 +25,9 @@ namespace FrbaCommerce
         {
             try
             {
-
-                this.oDTPubli = InterfazBD.getPublicacion(Convert.ToInt32(this.codigoPublicacion));
+                this.oDTPubli = InterfazBD.getPublicacion(Convert.ToInt32(this.codigoPublicacion), false);
                 this.CargarDatosPubli();
                 this.nudMaximum = Convert.ToInt32(oDTPubli.Rows[0]["pub_Stock"]);
-
             }
             catch (Exception ex)
             {
@@ -77,10 +74,9 @@ namespace FrbaCommerce
                 Singleton.cargarUsuario(Singleton.usuario["usu_UserName"].ToString());
 
                 DatosVendedor oFrm = new DatosVendedor(Convert.ToInt32(oDTPubli.Rows[0]["pub_usu_Id"]));
+                oFrm.Icon = this.Icon;
                 oFrm.ShowDialog();
                 this.Close();
-                
-
             }
             catch (Exception ex)
             {
@@ -103,7 +99,6 @@ namespace FrbaCommerce
                 nudCantidad.Value = this.nudMaximum;
                 return false;
             }
-
 
             return true;
         }

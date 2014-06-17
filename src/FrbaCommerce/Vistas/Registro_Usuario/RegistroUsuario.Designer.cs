@@ -40,6 +40,7 @@
             // txtPass
             // 
             this.txtPass.Location = new System.Drawing.Point(88, 60);
+            this.txtPass.MaxLength = 255;
             this.txtPass.Name = "txtPass";
             this.txtPass.Size = new System.Drawing.Size(191, 20);
             this.txtPass.TabIndex = 2;
@@ -48,6 +49,7 @@
             // txtUserName
             // 
             this.txtUserName.Location = new System.Drawing.Point(88, 12);
+            this.txtUserName.MaxLength = 255;
             this.txtUserName.Name = "txtUserName";
             this.txtUserName.Size = new System.Drawing.Size(191, 20);
             this.txtUserName.TabIndex = 1;

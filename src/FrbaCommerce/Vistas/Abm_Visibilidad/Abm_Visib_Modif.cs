@@ -42,6 +42,14 @@ namespace FrbaCommerce
             e.Handled = Funciones.SoloNumeros(e.KeyChar);
         }
 
+        private void textbox_TextChanged(object sender, EventArgs e)
+        {
+            //Solo numero por Copiar/Pegar
+            TextBox oTxt = (TextBox)sender;
+
+            oTxt.Text = Funciones.ValidaTextoSoloNumerosConFiltro(oTxt.Text, "");
+        }
+
         private void btnSelPubli_Click(object sender, EventArgs e)
         {
             Abm_Visibilidad_Buscar oFrm = new Abm_Visibilidad_Buscar();

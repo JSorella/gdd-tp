@@ -78,7 +78,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(463, 109);
+            this.label1.Location = new System.Drawing.Point(469, 112);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(52, 13);
             this.label1.TabIndex = 45;
@@ -86,7 +86,7 @@
             // 
             // nudCantidad
             // 
-            this.nudCantidad.Location = new System.Drawing.Point(521, 107);
+            this.nudCantidad.Location = new System.Drawing.Point(527, 110);
             this.nudCantidad.Maximum = new decimal(new int[] {
             1874919423,
             2328306,
@@ -119,7 +119,10 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.txtDesc);
             this.Controls.Add(this.label2);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "AltaCompra";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Confirmar Compra";
             this.Load += new System.EventHandler(this.AltaCompra_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nudCantidad)).EndInit();

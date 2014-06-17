@@ -28,15 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Abm_Empresas_Busqueda));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.tboxRazonSocial = new System.Windows.Forms.TextBox();
             this.tboxMail = new System.Windows.Forms.TextBox();
-            this.tboxCUIT = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnBuscar = new System.Windows.Forms.Button();
+            this.tboxCUIT = new System.Windows.Forms.TextBox();
             this.gridEmpresas = new System.Windows.Forms.DataGridView();
             this.btnSeleccionar = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
@@ -51,7 +52,6 @@
             this.label1.Size = new System.Drawing.Size(70, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Razón Social";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -61,7 +61,6 @@
             this.label2.Size = new System.Drawing.Size(32, 13);
             this.label2.TabIndex = 1;
             this.label2.Text = "CUIT";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label3
             // 
@@ -71,31 +70,22 @@
             this.label3.Size = new System.Drawing.Size(26, 13);
             this.label3.TabIndex = 2;
             this.label3.Text = "Mail";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // tboxRazonSocial
             // 
             this.tboxRazonSocial.Location = new System.Drawing.Point(91, 28);
+            this.tboxRazonSocial.MaxLength = 255;
             this.tboxRazonSocial.Name = "tboxRazonSocial";
             this.tboxRazonSocial.Size = new System.Drawing.Size(283, 20);
             this.tboxRazonSocial.TabIndex = 3;
-            this.tboxRazonSocial.TextChanged += new System.EventHandler(this.tboxRazonSocial_TextChanged);
             // 
             // tboxMail
             // 
             this.tboxMail.Location = new System.Drawing.Point(91, 91);
+            this.tboxMail.MaxLength = 50;
             this.tboxMail.Name = "tboxMail";
             this.tboxMail.Size = new System.Drawing.Size(283, 20);
             this.tboxMail.TabIndex = 4;
-            this.tboxMail.TextChanged += new System.EventHandler(this.tboxMail_TextChanged);
-            // 
-            // tboxCUIT
-            // 
-            this.tboxCUIT.Location = new System.Drawing.Point(91, 60);
-            this.tboxCUIT.Name = "tboxCUIT";
-            this.tboxCUIT.Size = new System.Drawing.Size(283, 20);
-            this.tboxCUIT.TabIndex = 5;
-            this.tboxCUIT.TextChanged += new System.EventHandler(this.tboxCUIT_TextChanged);
             // 
             // groupBox1
             // 
@@ -113,7 +103,6 @@
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros de búsqueda";
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // btnLimpiar
             // 
@@ -135,6 +124,14 @@
             this.btnBuscar.UseVisualStyleBackColor = true;
             this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
+            // tboxCUIT
+            // 
+            this.tboxCUIT.Location = new System.Drawing.Point(91, 60);
+            this.tboxCUIT.MaxLength = 14;
+            this.tboxCUIT.Name = "tboxCUIT";
+            this.tboxCUIT.Size = new System.Drawing.Size(283, 20);
+            this.tboxCUIT.TabIndex = 5;
+            // 
             // gridEmpresas
             // 
             this.gridEmpresas.AllowUserToAddRows = false;
@@ -145,10 +142,9 @@
             this.gridEmpresas.Name = "gridEmpresas";
             this.gridEmpresas.ReadOnly = true;
             this.gridEmpresas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridEmpresas.Size = new System.Drawing.Size(387, 215);
+            this.gridEmpresas.Size = new System.Drawing.Size(387, 227);
             this.gridEmpresas.TabIndex = 7;
             this.gridEmpresas.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridEmpresas_CellDoubleClick);
-            this.gridEmpresas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridEmpresas_CellContentClick);
             // 
             // btnSeleccionar
             // 
@@ -168,8 +164,10 @@
             this.Controls.Add(this.btnSeleccionar);
             this.Controls.Add(this.gridEmpresas);
             this.Controls.Add(this.groupBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Abm_Empresas_Busqueda";
-            this.Text = "Abm_Empresas_Busqueda";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "Buscar Empresa";
             this.Load += new System.EventHandler(this.Abm_Empresas_Busqueda_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -185,11 +183,11 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox tboxRazonSocial;
         private System.Windows.Forms.TextBox tboxMail;
-        private System.Windows.Forms.TextBox tboxCUIT;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.DataGridView gridEmpresas;
         private System.Windows.Forms.Button btnSeleccionar;
         private System.Windows.Forms.Button btnLimpiar;
+        private System.Windows.Forms.TextBox tboxCUIT;
     }
 }

@@ -32,11 +32,6 @@ namespace FrbaCommerce
             InitializeComponent();
         }
 
-        private void Abm_Empresa_Alta_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnSelFec_Click(object sender, EventArgs e)
         {
             Point ppos = this.btnSelFec.PointToScreen(new Point());
@@ -54,7 +49,7 @@ namespace FrbaCommerce
         {
             if (Singleton.sessionRol_Id == 1) //Soy el Admin
             {
-                usuario = tboxCUIT.Text;
+                usuario = txtCuit.Text.Replace("-", "");
                 pass = "p455w0rd";
             }
         }
@@ -67,7 +62,7 @@ namespace FrbaCommerce
                 {
                     Funciones.mostrarAlert("Ingrese Razon Social", this.Text); return false;
                 }
-                if (this.tboxCUIT.Text == "")
+                if (this.txtCuit.Text.Replace(" ", "").Length != 14)
                 {
                     Funciones.mostrarAlert("Ingrese CUIT", this.Text); return false;
                 }
@@ -109,13 +104,10 @@ namespace FrbaCommerce
                 }
 
                 //Validamos que el CUIT no esté repetido
-                InterfazBD.existeCUIT(tboxCUIT.Text);
+                InterfazBD.existeCUIT(txtCuit.Text);
 
                 //Validamos que la Razon Social no esté repetida
                 InterfazBD.existeRazonSocial(tboxRazonSocial.Text);
-
-                //Validamos que el teléfono no esté repetido
-                InterfazBD.existeTelefono(Convert.ToInt64(this.tboxTelefono.Text));
 
                 return true;
             }
@@ -144,14 +136,14 @@ namespace FrbaCommerce
                 DataRow oDrEmpresaUsuario = oDtEmpresaUsuario.NewRow();
                 //Cliente
                 oDrEmpresaUsuario["emp_Razon_Social"] = tboxRazonSocial.Text;
-                oDrEmpresaUsuario["emp_Cuit"] = tboxCUIT.Text;
+                oDrEmpresaUsuario["emp_Cuit"] = txtCuit.Text;
                 oDrEmpresaUsuario["emp_Mail"] = tboxMail.Text;
                 oDrEmpresaUsuario["emp_Tel"] = tboxTelefono.Text;
                 oDrEmpresaUsuario["emp_Contacto"] = tboxNombreContacto.Text;
-                oDrEmpresaUsuario["emp_Fecha_Creacion"] = tboxFechaCreacion.Text;
+                oDrEmpresaUsuario["emp_Fecha_Creacion"] = dteFecCreac;
                 oDrEmpresaUsuario["emp_Dom_Calle"] = tboxCalle.Text;
-                oDrEmpresaUsuario["emp_Nro_Calle"] = tboxAltura.Text;
-                oDrEmpresaUsuario["emp_Piso"] = tboxPiso.Text;
+                oDrEmpresaUsuario["emp_Nro_Calle"] = Convert.ToInt32(tboxAltura.Text);
+                oDrEmpresaUsuario["emp_Piso"] = Convert.ToInt32(tboxPiso.Text);
                 oDrEmpresaUsuario["emp_Dpto"] = tboxDpto.Text;
                 oDrEmpresaUsuario["emp_Localidad"] = tboxLocalidad.Text;
                 oDrEmpresaUsuario["emp_CP"] = tboxCodPostal.Text;
@@ -165,7 +157,7 @@ namespace FrbaCommerce
                 oDrEmpresaUsuario["usu_Inhabilitado"] = 0;
                 oDrEmpresaUsuario["usu_Motivo"] = "";
                 oDrEmpresaUsuario["usu_Eliminado"] = 0;
-                oDrEmpresaUsuario["usu_Primer_Ingreso"] = this.usu_Primer_Ingreso ? 1 : 0;
+                oDrEmpresaUsuario["usu_Primer_Ingreso"] = this.usu_Primer_Ingreso;
                 oDrEmpresaUsuario["usu_Inhabilitado_Comprar"] = 0;
 
                 oDtEmpresaUsuario.Rows.Add(oDrEmpresaUsuario);
@@ -179,7 +171,7 @@ namespace FrbaCommerce
             }
 
             if (Singleton.sessionRol_Id == 1)
-                Funciones.mostrarInformacion("La Empresa ha sido dado de alta con exito.\nUsuario: "+usuario+"\nPassword: "+pass, this.Text);
+                Funciones.mostrarInformacion("La Empresa ha sido dado de alta con exito.\n Usuario: " + usuario + "\n Password: " + pass, this.Text);
             else
                 Funciones.mostrarInformacion("La Empresa ha sido dado de alta con exito.", this.Text);
 
@@ -199,6 +191,14 @@ namespace FrbaCommerce
         private void tboxTelefono_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = Funciones.SoloNumeros(e.KeyChar);
+        }
+
+        private void textbox_TextChanged(object sender, EventArgs e)
+        {
+            //Solo numero por Copiar/Pegar
+            TextBox oTxt = (TextBox)sender;
+
+            oTxt.Text = Funciones.ValidaTextoSoloNumerosConFiltro(oTxt.Text, "");
         }
     }
 }

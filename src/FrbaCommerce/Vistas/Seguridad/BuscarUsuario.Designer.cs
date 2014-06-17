@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BuscarUsuario));
             this.btnSalir = new System.Windows.Forms.Button();
             this.grpParam = new System.Windows.Forms.GroupBox();
             this.txtNombre = new System.Windows.Forms.TextBox();
@@ -71,6 +72,7 @@
             this.txtNombre.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.txtNombre.Location = new System.Drawing.Point(116, 29);
+            this.txtNombre.MaxLength = 255;
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(231, 20);
             this.txtNombre.TabIndex = 1;
@@ -145,6 +147,7 @@
             this.Controls.Add(this.grpParam);
             this.Controls.Add(this.btnSeleccionar);
             this.Controls.Add(this.dgvUsu);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "BuscarUsuario";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

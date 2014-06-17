@@ -21,11 +21,6 @@ namespace FrbaCommerce
             InitializeComponent();
         }
 
-        private void Login_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void login_button_Click(object sender, EventArgs e)
         {
             ConfirmarLogIn();
@@ -34,6 +29,7 @@ namespace FrbaCommerce
         private void registrar_usuario_button_Click(object sender, EventArgs e)
         {
             RegistroUsuario registroUsuarioWindow = new RegistroUsuario();
+            registroUsuarioWindow.Icon = this.Icon;
             registroUsuarioWindow.ShowDialog();
 
             if (Singleton.sessionRol_Id != 0)
@@ -90,6 +86,7 @@ namespace FrbaCommerce
                     else
                     {
                         EleccionRol rolWindow = new EleccionRol();
+                        rolWindow.Icon = this.Icon;
                         rolWindow.RolesTable = oDTRolesxUsuario;
                         rolWindow.ShowDialog();
 
@@ -152,7 +149,11 @@ namespace FrbaCommerce
             if (InterfazBD.validarPrimerIngreso(Convert.ToInt32(Singleton.usuario["usu_Id"])))
             {
                 Singleton.debeCambiarPass = true;
+
+                MessageBox.Show("Por ser la primera vez que ingresa, deberá modificar su contraseña. Gracias.", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                 CambiarPass oForm = new CambiarPass();
+                oForm.Icon = this.Icon;
                 oForm.ShowDialog();
             }
         }

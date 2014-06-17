@@ -15,5 +15,15 @@ namespace FrbaCommerce
         {
             InitializeComponent();
         }
+
+        private void Abm_Rubro_Alta_Load(object sender, EventArgs e)
+        {
+            MessageBox.Show("Esta funcionalidad no esta Disponible en esta Version. Gracias.", "Informacón", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void Abm_Rubro_Alta_VisibleChanged(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

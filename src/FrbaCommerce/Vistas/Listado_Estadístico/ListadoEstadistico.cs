@@ -145,7 +145,7 @@ namespace FrbaCommerce
             gridListado.DataSource = dt;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnConsultar_Click(object sender, EventArgs e)
         {
             int anio = this.getAnio();
             int trimestre = this.getTrimestre();
@@ -192,11 +192,5 @@ namespace FrbaCommerce
         {
             cargarComboBoxMeses();
         }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
     }
 }

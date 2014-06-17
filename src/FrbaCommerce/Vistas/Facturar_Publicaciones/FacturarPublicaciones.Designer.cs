@@ -35,6 +35,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnSeleccionar = new System.Windows.Forms.Button();
             this.pnlDatos = new System.Windows.Forms.Panel();
+            this.btnHistBonif = new System.Windows.Forms.Button();
             this.txtBonif = new System.Windows.Forms.TextBox();
             this.txtCantBonif = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -56,7 +57,6 @@
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnGenerar = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.btnHistBonif = new System.Windows.Forms.Button();
             this.pnlParam.SuspendLayout();
             this.pnlDatos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPubli)).BeginInit();
@@ -90,6 +90,7 @@
             // txtUsuName
             // 
             this.txtUsuName.Location = new System.Drawing.Point(118, 13);
+            this.txtUsuName.MaxLength = 255;
             this.txtUsuName.Name = "txtUsuName";
             this.txtUsuName.Size = new System.Drawing.Size(169, 20);
             this.txtUsuName.TabIndex = 1;
@@ -142,6 +143,17 @@
             this.pnlDatos.Size = new System.Drawing.Size(707, 486);
             this.pnlDatos.TabIndex = 20;
             // 
+            // btnHistBonif
+            // 
+            this.btnHistBonif.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnHistBonif.Location = new System.Drawing.Point(560, 3);
+            this.btnHistBonif.Name = "btnHistBonif";
+            this.btnHistBonif.Size = new System.Drawing.Size(142, 23);
+            this.btnHistBonif.TabIndex = 4;
+            this.btnHistBonif.Text = "Historial para Bonifcación";
+            this.btnHistBonif.UseVisualStyleBackColor = true;
+            this.btnHistBonif.Click += new System.EventHandler(this.btnHistBonif_Click);
+            // 
             // txtBonif
             // 
             this.txtBonif.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -151,7 +163,7 @@
             this.txtBonif.Name = "txtBonif";
             this.txtBonif.ReadOnly = true;
             this.txtBonif.Size = new System.Drawing.Size(80, 20);
-            this.txtBonif.TabIndex = 23;
+            this.txtBonif.TabIndex = 11;
             this.txtBonif.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // txtCantBonif
@@ -163,7 +175,7 @@
             this.txtCantBonif.Name = "txtCantBonif";
             this.txtCantBonif.ReadOnly = true;
             this.txtCantBonif.Size = new System.Drawing.Size(29, 20);
-            this.txtCantBonif.TabIndex = 21;
+            this.txtCantBonif.TabIndex = 10;
             this.txtCantBonif.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label7
@@ -185,7 +197,7 @@
             this.txtSaldo.Name = "txtSaldo";
             this.txtSaldo.ReadOnly = true;
             this.txtSaldo.Size = new System.Drawing.Size(115, 20);
-            this.txtSaldo.TabIndex = 6;
+            this.txtSaldo.TabIndex = 7;
             this.txtSaldo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label8
@@ -217,7 +229,7 @@
             this.txtAcum.Name = "txtAcum";
             this.txtAcum.ReadOnly = true;
             this.txtAcum.Size = new System.Drawing.Size(115, 20);
-            this.txtAcum.TabIndex = 5;
+            this.txtAcum.TabIndex = 6;
             this.txtAcum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label6
@@ -239,7 +251,7 @@
             this.txtTotal.Name = "txtTotal";
             this.txtTotal.ReadOnly = true;
             this.txtTotal.Size = new System.Drawing.Size(98, 20);
-            this.txtTotal.TabIndex = 8;
+            this.txtTotal.TabIndex = 12;
             this.txtTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label5
@@ -261,7 +273,7 @@
             this.txtCantItems.Name = "txtCantItems";
             this.txtCantItems.ReadOnly = true;
             this.txtCantItems.Size = new System.Drawing.Size(98, 20);
-            this.txtCantItems.TabIndex = 7;
+            this.txtCantItems.TabIndex = 8;
             this.txtCantItems.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label4
@@ -291,9 +303,10 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.txtTarjeta.BackColor = System.Drawing.Color.White;
             this.txtTarjeta.Location = new System.Drawing.Point(125, 452);
+            this.txtTarjeta.MaxLength = 255;
             this.txtTarjeta.Name = "txtTarjeta";
             this.txtTarjeta.Size = new System.Drawing.Size(577, 20);
-            this.txtTarjeta.TabIndex = 10;
+            this.txtTarjeta.TabIndex = 13;
             // 
             // label3
             // 
@@ -319,7 +332,7 @@
             this.dgvPubli.Name = "dgvPubli";
             this.dgvPubli.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPubli.Size = new System.Drawing.Size(689, 363);
-            this.dgvPubli.TabIndex = 4;
+            this.dgvPubli.TabIndex = 5;
             this.dgvPubli.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPubli_CellDoubleClick);
             this.dgvPubli.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvPubli_RowPostPaint);
             this.dgvPubli.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPubli_CellContentClick);
@@ -339,7 +352,7 @@
             this.btnCancelar.Location = new System.Drawing.Point(644, 558);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
-            this.btnCancelar.TabIndex = 13;
+            this.btnCancelar.TabIndex = 16;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
@@ -350,7 +363,7 @@
             this.btnLimpiar.Location = new System.Drawing.Point(563, 558);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(75, 23);
-            this.btnLimpiar.TabIndex = 12;
+            this.btnLimpiar.TabIndex = 15;
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.UseVisualStyleBackColor = true;
             this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
@@ -361,20 +374,10 @@
             this.btnGenerar.Location = new System.Drawing.Point(482, 558);
             this.btnGenerar.Name = "btnGenerar";
             this.btnGenerar.Size = new System.Drawing.Size(75, 23);
-            this.btnGenerar.TabIndex = 11;
+            this.btnGenerar.TabIndex = 14;
             this.btnGenerar.Text = "Generar";
             this.btnGenerar.UseVisualStyleBackColor = true;
             this.btnGenerar.Click += new System.EventHandler(this.btnGenerar_Click);
-            // 
-            // btnHistBonif
-            // 
-            this.btnHistBonif.Location = new System.Drawing.Point(560, 3);
-            this.btnHistBonif.Name = "btnHistBonif";
-            this.btnHistBonif.Size = new System.Drawing.Size(142, 23);
-            this.btnHistBonif.TabIndex = 24;
-            this.btnHistBonif.Text = "Historial para Bonifcación";
-            this.btnHistBonif.UseVisualStyleBackColor = true;
-            this.btnHistBonif.Click += new System.EventHandler(this.btnHistBonif_Click);
             // 
             // FacturarPublicaciones
             // 

@@ -169,7 +169,10 @@ namespace FrbaCommerce
 
             if ((oFrm.Resultado != null)) //Resultado es el DataRow.-
             {
-                oDTPubli = InterfazBD.getPublicacion(Convert.ToInt32(oFrm.Resultado["Codigo"]));
+                if(Singleton.sessionRol_Id == 1)
+                    oDTPubli = InterfazBD.getPublicacion(Convert.ToInt32(oFrm.Resultado["Codigo"]), false);
+                else
+                    oDTPubli = InterfazBD.getPublicacion(Convert.ToInt32(oFrm.Resultado["Codigo"]), true);
 
                 txtCodPubli.Text = oFrm.Resultado["Codigo"].ToString();
 
@@ -234,9 +237,19 @@ namespace FrbaCommerce
             if ((Convert.ToInt32(cmbEstado.SelectedValue) != 4) //Si no esta Finalizada 
                     && (dteFecVto < Singleton.FechaDelSistema)) //Y esta vencida.
             {
-                MessageBox.Show("Esta Publicacion venció el dia: " + dteFecVto.ToShortDateString() + " - No podrá realizar cambios en ella.-",
+                MessageBox.Show("Esta Publicacion venció el dia: " + dteFecVto.ToShortDateString() + " - Debe pasarla al Estado Finalizada. Gracias.",
                     this.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                
                 ActivarVistaFinalizada(); //Sin Modificaciones en la Publicacion
+
+                //Activo modificacion al Estado Finalizada.-
+                cmbEstado.DataSource = oDTEstados.Select("pubest_id in (4)").CopyToDataTable();
+                cmbEstado.SelectedIndex = 0;
+                cmbEstado.Enabled = true;
+
+                //Puede Grabar
+                btnGenerar.Enabled = true;
+
                 return;
             }
 
@@ -363,7 +376,10 @@ namespace FrbaCommerce
 
             try
             {
-                oDTPubli = InterfazBD.getPublicacion(Convert.ToInt32(txtCodPubli.Text));
+                if (Singleton.sessionRol_Id == 1)
+                    oDTPubli = InterfazBD.getPublicacion(Convert.ToInt32(txtCodPubli.Text), false);
+                else
+                    oDTPubli = InterfazBD.getPublicacion(Convert.ToInt32(txtCodPubli.Text), true);
 
                 if (oDTPubli != null)
                 {
@@ -599,6 +615,14 @@ namespace FrbaCommerce
         private void EditarPublicacion_VisibleChanged(object sender, EventArgs e)
         {
             if (cerrarForm) this.Close();
+        }
+
+        private void txtCodPubli_TextChanged(object sender, EventArgs e)
+        {
+            //Solo numero por Copiar/Pegar
+            TextBox oTxt = (TextBox)sender;
+
+            oTxt.Text = Funciones.ValidaTextoSoloNumerosConFiltro(oTxt.Text, "");
         }
     }
 }

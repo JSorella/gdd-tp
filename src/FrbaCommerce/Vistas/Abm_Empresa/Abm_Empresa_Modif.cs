@@ -13,8 +13,7 @@ namespace FrbaCommerce
     {
         DataTable oDtEmpresaUsuario;
         DateTime dteFecCreac;
-
-        bool cerrarForm = false;
+        string emp_CUIT;
 
         public Abm_Empresa_Modif()
         {
@@ -36,9 +35,8 @@ namespace FrbaCommerce
 
         private void Abm_Empresa_Modif_Load(object sender, EventArgs e)
         {
-            //Limpiar(true);
             HabilitarMod(false);
-            tboxEmpresaSeleccionada.Focus();
+            txtCuitSelect.Focus();
         }
 
         private void btnSeleccionar_Click(object sender, EventArgs e)
@@ -50,7 +48,7 @@ namespace FrbaCommerce
             {
                 oDtEmpresaUsuario = InterfazBD.getEmpresaUsuario(oFrm.Resultado["emp_CUIT"].ToString());
 
-                tboxEmpresaSeleccionada.Text = oFrm.Resultado["emp_CUIT"].ToString();
+                txtCuitSelect.Text = oFrm.Resultado["emp_CUIT"].ToString();
             }
         }
 
@@ -61,7 +59,7 @@ namespace FrbaCommerce
             tboxRazonSocial.Text = oDr["emp_Razon_Social"].ToString();
             tboxMail.Text = oDr["emp_Mail"].ToString();
             tboxTelefono.Text = oDr["emp_Tel"].ToString();
-            tboxCUIT.Text = oDr["emp_CUIT"].ToString();
+            txtCuit.Text = oDr["emp_CUIT"].ToString();
             tboxNombreContacto.Text = oDr["emp_Contacto"].ToString();
             dteFecCreac = Convert.ToDateTime(oDr["emp_Fecha_Creacion"]);
             tboxCalle.Text = oDr["emp_Dom_Calle"].ToString();
@@ -71,35 +69,28 @@ namespace FrbaCommerce
             tboxLocalidad.Text = oDr["emp_Localidad"].ToString();
             tboxCiudad.Text = oDr["emp_Ciudad"].ToString();
             tboxCodPostal.Text = oDr["emp_CP"].ToString();
-
             tboxFechaCreacion.Text = dteFecCreac.ToShortDateString();
 
-            if (Convert.ToInt32(oDr["usu_Inhabilitado"]) == 1)
-                chkboxInhabilitada.Checked = true;
-
+            chkboxInhabilitada.Checked = Convert.ToBoolean(oDr["usu_Inhabilitado"]);
         }
 
         private void HabilitarMod(bool habilitado)
         {
-            if (cerrarForm) return;
-
             pnlDatos.Enabled = !habilitado;
             pnlDatos.Enabled = habilitado;
             btnGuardar.Enabled = habilitado;
-            //btnLimpiar.Enabled = habilitado;
-            //btnCancelar.Enabled = habilitado;
         }
 
         private void Aplicar()
         {
             CargarDatosEmpresa();
             HabilitarMod(true);
-            tboxEmpresaSeleccionada.Focus();
+            txtCuit.Focus();
         }
 
         private bool ValidaAceptar()
         {
-            if (tboxEmpresaSeleccionada.Text == "")
+            if (this.txtCuitSelect.Text.Replace(" ", "").Length != 14)
             {
                 MessageBox.Show("Debe indicar el CUIT de una empresa.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
@@ -107,7 +98,7 @@ namespace FrbaCommerce
 
             try
             {
-                oDtEmpresaUsuario = InterfazBD.getEmpresaUsuario(tboxEmpresaSeleccionada.Text);
+                oDtEmpresaUsuario = InterfazBD.getEmpresaUsuario(txtCuitSelect.Text);
 
                 if (oDtEmpresaUsuario != null)
                 {
@@ -122,6 +113,8 @@ namespace FrbaCommerce
                     MessageBox.Show("Empresa Inexistente.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
+
+                emp_CUIT = oDtEmpresaUsuario.Rows[0]["emp_CUIT"].ToString();
             }
             catch (Exception ex)
             {
@@ -148,7 +141,7 @@ namespace FrbaCommerce
             try
             {
                 DataTable oDtEmpresaUsuario = new DataTable();
-                oDtEmpresaUsuario = InterfazBD.getEmpresaUsuario(tboxEmpresaSeleccionada.Text);
+                oDtEmpresaUsuario = InterfazBD.getEmpresaUsuario(txtCuitSelect.Text);
 
                 DataRow oDr = oDtEmpresaUsuario.Rows[0];
 
@@ -156,7 +149,7 @@ namespace FrbaCommerce
 
                 //Cliente
                 oDr["emp_Razon_Social"] = tboxRazonSocial.Text;
-                oDr["emp_Cuit"] = tboxCUIT.Text;
+                oDr["emp_Cuit"] = txtCuit.Text;
                 oDr["emp_Mail"] = tboxMail.Text;
                 oDr["emp_Tel"] = tboxTelefono.Text;
                 oDr["emp_Contacto"] = tboxNombreContacto.Text;
@@ -169,7 +162,7 @@ namespace FrbaCommerce
                 oDr["emp_CP"] = tboxCodPostal.Text;
                 oDr["emp_Ciudad"] = tboxCiudad.Text;
                 //Usuario
-                oDr["usu_Inhabilitado"] = chkboxInhabilitada.Checked ? 1 : 0;
+                oDr["usu_Inhabilitado"] = chkboxInhabilitada.Checked;
 
                 oDr.EndEdit();
 
@@ -193,9 +186,9 @@ namespace FrbaCommerce
                 {
                     Funciones.mostrarAlert("Ingrese Razon Social", this.Text); return false;
                 }
-                if (this.tboxCUIT.Text == "")
+                if (this.txtCuit.Text.Replace(" ", "").Length != 14)
                 {
-                    Funciones.mostrarAlert("Ingrese CUIT", this.Text); return false;
+                    Funciones.mostrarAlert("Ingrese un CUIT Valido", this.Text); return false;
                 }
                 if (this.tboxMail.Text == "")
                 {
@@ -236,7 +229,7 @@ namespace FrbaCommerce
 
                 DataRow oDr = oDtEmpresaUsuario.Rows[0];
 
-                InterfazBD.existeOtroCUIT(tboxCUIT.Text, Convert.ToInt32(oDr["emp_usu_Id"]));
+                InterfazBD.existeOtroCUIT(txtCuit.Text, Convert.ToInt32(oDr["emp_usu_Id"]));
                 InterfazBD.existeOtraRazonSocial(tboxRazonSocial.Text, Convert.ToInt32(oDr["emp_usu_Id"]));
 
                 return true;
@@ -263,5 +256,12 @@ namespace FrbaCommerce
             e.Handled = Funciones.SoloNumeros(e.KeyChar);
         }
 
+        private void textbox_TextChanged(object sender, EventArgs e)
+        {
+            //Solo numero por Copiar/Pegar
+            TextBox oTxt = (TextBox)sender;
+
+            oTxt.Text = Funciones.ValidaTextoSoloNumerosConFiltro(oTxt.Text, "");
+        }
     }
 }

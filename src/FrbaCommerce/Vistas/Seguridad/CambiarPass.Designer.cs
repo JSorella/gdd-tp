@@ -188,6 +188,8 @@
             this.Controls.Add(this.btnGenerar);
             this.Controls.Add(this.pnlDatos);
             this.Controls.Add(this.pnlParam);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "CambiarPass";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Cambiar Contraseña";

@@ -85,7 +85,6 @@ C:\Users\Juan\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.C
 C:\Users\Juan\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.BuscarPublicaciones.resources
 C:\Users\Juan\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.EditarPublicacion.resources
 C:\Users\Juan\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.FacturarPublicaciones.resources
-C:\Users\Juan\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.GestionPreguntas.resources
 C:\Users\Juan\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.HistorialCliente.resources
 C:\Users\Juan\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.ListadoEstadistico.resources
 C:\Users\Juan\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.EleccionRol.resources
@@ -168,7 +167,6 @@ C:\Users\jsorella\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommer
 C:\Users\Juan\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.CalificarBusqueda.resources
 C:\Users\Juan\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.AltaPregunta.resources
 C:\Users\Juan\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.DetallesPublicacion.resources
-C:\Users\Juan\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.EjemploGrilla.resources
 C:\Users\Juan\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.Abm_Visibilidad_Buscar.resources
 C:\Users\Juan\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.Abm_Visib_Alta.resources
 C:\Users\Juan\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.Abm_Visib_Baja.resources
@@ -280,3 +278,15 @@ C:\Users\jsorella\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommer
 C:\Users\jsorella\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.Abm_Clientes_Busqueda.resources
 C:\Users\Lucas\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.Abm_Clientes_Busqueda.resources
 C:\Users\Lucas\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.Usuarios_Baja.resources
+C:\Users\Juan\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.Abm_Clientes_Busqueda.resources
+C:\Users\Juan\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.Abm_Empresas_Busqueda.resources
+C:\Users\Juan\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.AltaCompra.resources
+C:\Users\Juan\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.AltaOferta.resources
+C:\Users\Juan\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.DatosVendedor.resources
+C:\Users\Juan\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.HistorialBinificacion.resources
+C:\Users\Juan\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.HistorialCalificaciones.resources
+C:\Users\Juan\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.HistorialOfertas.resources
+C:\Users\Juan\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.Usuarios_Baja.resources
+C:\Users\Juan\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.Abm_Rubro_Alta.resources
+C:\Users\Juan\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.Abm_Rubro_Baja.resources
+C:\Users\Juan\Documents\GitHub\j2la-tp\src\FrbaCommerce\obj\Debug\FrbaCommerce.Abm_Rubro_Modif.resources

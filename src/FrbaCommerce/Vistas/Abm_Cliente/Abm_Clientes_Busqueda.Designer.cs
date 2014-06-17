@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Abm_Clientes_Busqueda));
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.gridClientes = new System.Windows.Forms.DataGridView();
@@ -52,16 +53,17 @@
             this.btnLimpiar.Location = new System.Drawing.Point(12, 191);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(70, 30);
-            this.btnLimpiar.TabIndex = 7;
+            this.btnLimpiar.TabIndex = 6;
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
             // btnBuscar
             // 
             this.btnBuscar.Location = new System.Drawing.Point(302, 191);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(72, 30);
-            this.btnBuscar.TabIndex = 6;
+            this.btnBuscar.TabIndex = 7;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = true;
             this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
@@ -76,8 +78,8 @@
             this.gridClientes.Name = "gridClientes";
             this.gridClientes.ReadOnly = true;
             this.gridClientes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridClientes.Size = new System.Drawing.Size(387, 215);
-            this.gridClientes.TabIndex = 10;
+            this.gridClientes.Size = new System.Drawing.Size(387, 227);
+            this.gridClientes.TabIndex = 8;
             this.gridClientes.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridClientes_CellDoubleClick);
             // 
             // groupBox1
@@ -105,11 +107,11 @@
             // 
             this.comboDoc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboDoc.FormattingEnabled = true;
-            this.comboDoc.Location = new System.Drawing.Point(112, 86);
+            this.comboDoc.Location = new System.Drawing.Point(112, 91);
             this.comboDoc.Name = "comboDoc";
             this.comboDoc.Size = new System.Drawing.Size(262, 21);
             this.comboDoc.Sorted = true;
-            this.comboDoc.TabIndex = 30;
+            this.comboDoc.TabIndex = 3;
             this.comboDoc.TabStop = false;
             // 
             // txtNroDoc
@@ -117,14 +119,14 @@
             this.txtNroDoc.Location = new System.Drawing.Point(112, 121);
             this.txtNroDoc.Name = "txtNroDoc";
             this.txtNroDoc.Size = new System.Drawing.Size(262, 20);
-            this.txtNroDoc.TabIndex = 11;
+            this.txtNroDoc.TabIndex = 4;
             // 
             // txtMail
             // 
             this.txtMail.Location = new System.Drawing.Point(112, 152);
             this.txtMail.Name = "txtMail";
             this.txtMail.Size = new System.Drawing.Size(262, 20);
-            this.txtMail.TabIndex = 10;
+            this.txtMail.TabIndex = 5;
             // 
             // label4
             // 
@@ -149,14 +151,14 @@
             this.txtApellido.Location = new System.Drawing.Point(112, 60);
             this.txtApellido.Name = "txtApellido";
             this.txtApellido.Size = new System.Drawing.Size(262, 20);
-            this.txtApellido.TabIndex = 5;
+            this.txtApellido.TabIndex = 2;
             // 
             // txtNombre
             // 
             this.txtNombre.Location = new System.Drawing.Point(112, 28);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(262, 20);
-            this.txtNombre.TabIndex = 3;
+            this.txtNombre.TabIndex = 1;
             // 
             // label3
             // 
@@ -190,7 +192,7 @@
             this.btnSeleccionar.Location = new System.Drawing.Point(314, 470);
             this.btnSeleccionar.Name = "btnSeleccionar";
             this.btnSeleccionar.Size = new System.Drawing.Size(84, 28);
-            this.btnSeleccionar.TabIndex = 11;
+            this.btnSeleccionar.TabIndex = 9;
             this.btnSeleccionar.Text = "Seleccionar";
             this.btnSeleccionar.UseVisualStyleBackColor = true;
             this.btnSeleccionar.Click += new System.EventHandler(this.btnSeleccionar_Click);
@@ -203,7 +205,9 @@
             this.Controls.Add(this.gridClientes);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnSeleccionar);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Abm_Clientes_Busqueda";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Buscar Cliente";
             this.Load += new System.EventHandler(this.Abm_Clientes_Busqueda_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gridClientes)).EndInit();

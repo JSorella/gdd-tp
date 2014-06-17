@@ -14,6 +14,22 @@
     <FileAlignment>512</FileAlignment>
     <StartupObject>
     </StartupObject>
+    <ApplicationIcon>cart.ico</ApplicationIcon>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -320,12 +336,6 @@
     <Compile Include="Vistas\Generar_Publicacion\GenerarPublicacion.Designer.cs">
       <DependentUpon>GenerarPublicacion.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vistas\Gestion_Preguntas\GestionPreguntas.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Vistas\Gestion_Preguntas\GestionPreguntas.Designer.cs">
-      <DependentUpon>GestionPreguntas.cs</DependentUpon>
-    </Compile>
     <Compile Include="Vistas\Historial_Cliente\HistorialCliente.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -378,6 +388,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Abm_Rol\Abm_Rol_Modif.resx">
       <DependentUpon>Abm_Rol_Modif.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Abm_Rubro\Abm_Rubro_Alta.resx">
+      <DependentUpon>Abm_Rubro_Alta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Abm_Rubro\Abm_Rubro_Baja.resx">
+      <DependentUpon>Abm_Rubro_Baja.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Abm_Rubro\Abm_Rubro_Modif.resx">
+      <DependentUpon>Abm_Rubro_Modif.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Abm_Visibilidad\Abm_Visibilidad_Buscar.resx">
       <DependentUpon>Abm_Visibilidad_Buscar.cs</DependentUpon>
@@ -460,9 +479,6 @@
     <EmbeddedResource Include="Vistas\Generar_Publicacion\GenerarPublicacion.resx">
       <DependentUpon>GenerarPublicacion.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Vistas\Gestion_Preguntas\GestionPreguntas.resx">
-      <DependentUpon>GestionPreguntas.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Historial_Cliente\HistorialCliente.resx">
       <DependentUpon>HistorialCliente.cs</DependentUpon>
     </EmbeddedResource>
@@ -482,9 +498,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Registro_Usuario\RegistroUsuario.resx">
       <DependentUpon>RegistroUsuario.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Vistas\Utilidades\EjemploGrilla.resx">
-      <DependentUpon>EjemploGrilla.cs</DependentUpon>
     </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -512,12 +525,6 @@
     <Compile Include="Vistas\Seguridad\Usuarios_Baja.Designer.cs">
       <DependentUpon>Usuarios_Baja.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vistas\Utilidades\EjemploGrilla.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Vistas\Utilidades\EjemploGrilla.Designer.cs">
-      <DependentUpon>EjemploGrilla.cs</DependentUpon>
-    </Compile>
     <Compile Include="Vistas\Utilidades\PaginarGrilla.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -534,6 +541,76 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\FecSist.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FrbaComm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="cart.ico" />
+    <None Include="Resources\zoom.png" />
+    <None Include="Resources\application.png" />
+    <None Include="Resources\vcard_add.png" />
+    <None Include="Resources\user_.png" />
+    <None Include="Resources\lock.png" />
+    <None Include="Resources\vcard_edit.png" />
+    <None Include="Resources\vcard.png" />
+    <None Include="Resources\user_edit.png" />
+    <None Include="Resources\user_delete.png" />
+    <None Include="Resources\user_delete %282%29.png" />
+    <None Include="Resources\user_add.png" />
+    <None Include="Resources\tag_blue_edit.png" />
+    <None Include="Resources\tag_blue_delete.png" />
+    <None Include="Resources\tag_blue_add.png" />
+    <None Include="Resources\tag_blue.png" />
+    <None Include="Resources\star.png" />
+    <None Include="Resources\report_user.png" />
+    <None Include="Resources\report.png" />
+    <None Include="Resources\pencil.png" />
+    <None Include="Resources\money.png" />
+    <None Include="Resources\medal_gold_1.png" />
+    <None Include="Resources\information.png" />
+    <None Include="Resources\house_go.png" />
+    <None Include="Resources\help.png" />
+    <None Include="Resources\group_edit.png" />
+    <None Include="Resources\group_delete.png" />
+    <None Include="Resources\group_add.png" />
+    <None Include="Resources\delete.png" />
+    <None Include="Resources\cross %282%29.png" />
+    <None Include="Resources\change_password %282%29.png" />
+    <None Include="Resources\building_edit.png" />
+    <None Include="Resources\building_delete.png" />
+    <None Include="Resources\building_add.png" />
+    <None Include="Resources\building.png" />
+    <None Include="Resources\book.png" />
+    <None Include="Resources\application_tile_vertical %282%29.png" />
+    <None Include="Resources\application_tile_horizontal %282%29.png" />
+    <None Include="Resources\application_double %282%29.png" />
+    <None Include="Resources\application_delete %282%29.png" />
+    <None Include="Resources\application_cascade %282%29.png" />
+    <None Include="Resources\add.png" />
+    <None Include="Resources\accept.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

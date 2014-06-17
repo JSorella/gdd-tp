@@ -30,7 +30,7 @@ namespace FrbaCommerce
             lblLenght.Text = (txtDesc.MaxLength - txtDesc.TextLength).ToString();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnConfirmar_Click(object sender, EventArgs e)
         {
             if (!validarCampos())
                 return;
@@ -68,11 +68,10 @@ namespace FrbaCommerce
         {
             if (this.txtDesc.Text == "")
             {
-                Funciones.mostrarAlert("Falta ingresar una pregunta", this.Text); return false;
+                Funciones.mostrarAlert("Debe ingresar una pregunta", this.Text); return false;
             }
 
             return true;
         }
-
     }
 }

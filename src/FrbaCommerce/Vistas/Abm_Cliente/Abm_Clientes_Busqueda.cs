@@ -26,6 +26,7 @@ namespace FrbaCommerce
         private void Abm_Clientes_Busqueda_Load(object sender, EventArgs e)
         {
             mobjDrResultado = null;
+
             this.comboDoc.DataSource = InterfazBD.getTiposDoc();
             this.comboDoc.DisplayMember = "tipodoc_Descripcion";
             this.comboDoc.ValueMember = "tipodoc_Id";
@@ -39,7 +40,7 @@ namespace FrbaCommerce
             String cli_Nro_Doc = this.txtNroDoc.Text;
             String cli_Mail = this.txtMail.Text;
 
-            String filtros = " Where 1=1";
+            String filtros = " Where C.cli_usu_id = U.usu_Id AND U.usu_Eliminado = 0";
 
             if (cli_Nombre != "")
                 filtros = filtros + " AND cli_Nombre LIKE '%" + cli_Nombre + "%' ";
@@ -115,9 +116,5 @@ namespace FrbaCommerce
         {
             Limpiar();
         }
-
-
-
-
     }
 }

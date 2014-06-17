@@ -90,10 +90,10 @@ namespace FrbaCommerce
             }
         }
 
-
         private void btnPregunta_Click(object sender, EventArgs e)
         {
             AltaPregunta oFrm = new AltaPregunta(this.codigoPublicacion);
+            oFrm.Icon = this.Icon;
             if (oFrm.ShowDialog() == DialogResult.OK)
             {
                 this.cargarPreguntas();
@@ -103,6 +103,7 @@ namespace FrbaCommerce
         private void btnComprar_Click(object sender, EventArgs e)
         {
             AltaCompra oFrm = new AltaCompra(this.codigoPublicacion);
+            oFrm.Icon = this.Icon;
             oFrm.ShowDialog();
             this.Close();
         }
@@ -110,6 +111,7 @@ namespace FrbaCommerce
         private void btnOfertar_Click(object sender, EventArgs e)
         {
             AltaOferta oFrm = new AltaOferta(this.codigoPublicacion);
+            oFrm.Icon = this.Icon;
             oFrm.ShowDialog();
             this.Close();
         }

@@ -83,12 +83,18 @@ namespace FrbaCommerce
                     {
                         Limpiar(true);
                         HabilitarMod(false);
-                        if (!admin && Convert.ToBoolean(Singleton.usuario["usu_Primer_Ingreso"]))
+
+                        //Si era su primer ingreso actualizamos el valor en la BD.
+                        if (Convert.ToBoolean(Singleton.usuario["usu_Primer_Ingreso"]))
                         {
                             InterfazBD.setPrimerIngresoValido(Convert.ToInt32(Singleton.usuario["usu_Id"]));
                             Singleton.debeCambiarPass = false;
                             this.Close();
-                        } 
+                        }
+
+                        //Si no es admin, salimos del Form.
+                        if (!admin)
+                            this.Close();
                     }
                 }
             }

@@ -4,3 +4,4 @@ Go
 Insert Into J2LA.Roles_Funcionalidades 
 	Values (1,13), (1,14), (1,15), (2, 13), (2, 15), (3, 13), (3, 15)
 Go
+--Sacar Registro de Usuario

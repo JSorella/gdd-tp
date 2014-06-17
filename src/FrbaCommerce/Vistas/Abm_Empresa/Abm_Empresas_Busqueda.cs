@@ -11,7 +11,6 @@ namespace FrbaCommerce
 {
     public partial class Abm_Empresas_Busqueda : Form
     {
-
         private DataRow mobjDrResultado;
 
         public System.Data.DataRow Resultado
@@ -35,16 +34,16 @@ namespace FrbaCommerce
             String emp_CUIT = tboxCUIT.Text;
             String emp_Mail = tboxMail.Text;
 
-            String filtros = " Where 1=1";
+            String filtros = " WHERE E.emp_usu_id = U.usu_Id AND U.usu_Eliminado = 0 ";
 
             if (emp_Razon_Social != "")
-                filtros = filtros + " and emp_Razon_Social like '%" + emp_Razon_Social + "%' ";
+                filtros = filtros + " and E.emp_Razon_Social like '%" + emp_Razon_Social + "%' ";
 
             if (emp_CUIT != "")
-                filtros = filtros + " and emp_CUIT like '%" + emp_CUIT + "%' ";
+                filtros = filtros + " and E.emp_CUIT like '%" + emp_CUIT + "%' ";
 
             if (emp_Mail != "")
-                filtros = filtros + " and emp_Mail like '%" + emp_Mail + "%' ";
+                filtros = filtros + " and E.emp_Mail like '%" + emp_Mail + "%' ";
 
             return filtros;
         }
@@ -99,46 +98,6 @@ namespace FrbaCommerce
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             Limpiar();
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tboxRazonSocial_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tboxMail_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tboxCUIT_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void gridEmpresas_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
     }
 }

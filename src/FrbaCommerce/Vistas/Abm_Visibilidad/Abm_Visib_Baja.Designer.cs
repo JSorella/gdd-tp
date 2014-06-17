@@ -39,7 +39,7 @@
             this.btnBaja.Location = new System.Drawing.Point(242, 60);
             this.btnBaja.Name = "btnBaja";
             this.btnBaja.Size = new System.Drawing.Size(101, 27);
-            this.btnBaja.TabIndex = 7;
+            this.btnBaja.TabIndex = 3;
             this.btnBaja.Text = "Dar de Baja";
             this.btnBaja.UseVisualStyleBackColor = true;
             this.btnBaja.Click += new System.EventHandler(this.btnBaja_Click);
@@ -49,7 +49,7 @@
             this.btnSeleccionar.Location = new System.Drawing.Point(242, 8);
             this.btnSeleccionar.Name = "btnSeleccionar";
             this.btnSeleccionar.Size = new System.Drawing.Size(101, 27);
-            this.btnSeleccionar.TabIndex = 6;
+            this.btnSeleccionar.TabIndex = 2;
             this.btnSeleccionar.Text = "Seleccionar";
             this.btnSeleccionar.UseVisualStyleBackColor = true;
             this.btnSeleccionar.Click += new System.EventHandler(this.btnSeleccionar_Click);
@@ -59,7 +59,8 @@
             this.txtCodVisib.Location = new System.Drawing.Point(127, 12);
             this.txtCodVisib.Name = "txtCodVisib";
             this.txtCodVisib.Size = new System.Drawing.Size(109, 20);
-            this.txtCodVisib.TabIndex = 4;
+            this.txtCodVisib.TabIndex = 1;
+            this.txtCodVisib.TextChanged += new System.EventHandler(this.textbox_TextChanged);
             this.txtCodVisib.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCodVisib_KeyPress);
             // 
             // label1
@@ -81,6 +82,7 @@
             this.Controls.Add(this.txtCodVisib);
             this.Controls.Add(this.label1);
             this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Abm_Visib_Baja";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Baja de Visibilidades";

@@ -29,9 +29,14 @@ namespace FrbaCommerce
             }
         }
 
-        private void HistorialCalificaciones_Load_1(object sender, EventArgs e)
+        private void HistorialCalificaciones_Load(object sender, EventArgs e)
         {
             cargarHistorialCalificaciones();
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

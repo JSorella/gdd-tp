@@ -1,7 +1,7 @@
 --Creamos una Tabla Auxiliar de Calificaciones para ir actualizando la reputacion de los vendedores
 
 CREATE TABLE J2LA.Usuarios_Calificaciones(
-	usucal_usu_Id nvarchar(255),
+	usucal_usu_Id int,
 	usucal_Anio int,
 	usucal_Puntos_Primero int,
 	usucal_Cant_Ventas_Primero int,

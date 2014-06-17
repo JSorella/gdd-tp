@@ -21,23 +21,27 @@ namespace FrbaCommerce
         {
             this.Visible = false;
 
-            //fecha del sistema
+            //Almacenamos el App.Config
             Singleton.FechaDelSistema = Convert.ToDateTime(ConfigurationSettings.AppSettings["FechaDelSistema"]);
             Singleton.ConnectionString = ConfigurationManager.ConnectionStrings["FrbaCommerceConnectionString"].ToString();
 
+            //Llamamos al Login
             Login oFrmLogin = new Login();
             oFrmLogin.ShowDialog();
 
+            //Si no se logueo - Salimos del Sistema
             if (Singleton.sessionRol_Id == 0)
             {
                 Application.Exit();
                 return;
             }
 
+            //Informacion visual de los datos principales
             this.tsslRol.Text = "Rol : " + Singleton.sessionRol_Nombre + " ";
             this.tsslUsuario.Text = "Usuario : " + Singleton.usuario["usu_UserName"].ToString() + " ";
             this.tssiFecSystem.Text = "Fecha del Sistema: " + Singleton.FechaDelSistema.ToShortDateString() + " ";
 
+            //HabilitamosFuncionalidadesPorRol
             HabilitarOpciones();
 
             this.Visible = true;
@@ -48,8 +52,9 @@ namespace FrbaCommerce
             this.TopMost = false;
         }
 
-        private void CambiarOpcionesMenu(ToolStripItemCollection oItemOpcion)
+        private void HabilitarOpcionesMenu(ToolStripItemCollection oItemOpcion)
         {
+            //Recorre los SubItems de un Menu para Ocultarlos
             foreach (ToolStripItem oItem in oItemOpcion)
             {
                 oItem.Visible = false;
@@ -58,14 +63,16 @@ namespace FrbaCommerce
 
         private void HabilitarOpciones()
         {
+            //Ocultamos todas las opciones del Menu
             foreach (ToolStripMenuItem oItem in this.menuStrip1.Items)
             {
                 oItem.Visible = false;
 
                 if (oItem.DropDownItems.Count > 0)
-                    CambiarOpcionesMenu(oItem.DropDownItems);
+                    HabilitarOpcionesMenu(oItem.DropDownItems);
             }
 
+            //Habilitamos las Opciones de Sistema - Para todos los usuarios
             ventanasToolStripMenuItem.Visible = true;
             cascadaToolStripMenuItem.Visible = true;
             mosaicoHorizontalToolStripMenuItem.Visible = true;
@@ -73,15 +80,15 @@ namespace FrbaCommerce
             cerrarTodoToolStripMenuItem.Visible = true;
             toolStripSeparator1.Visible = true;
 
-            ejemploToolStripMenuItem.Visible = true;
-
+            //Obtenemos las Funcionalidades x Rol
             DataTable oDt = InterfazBD.getRoles_Funcionalidades(Singleton.sessionRol_Id);
 
+            //Recorremos la Tabla y por Cada Funcionalidad hacemos visible su opcion de menu
             foreach (DataRow oDr in oDt.Rows)
             {
                 switch (oDr["fun_nombre"].ToString())
                 {
-                    case "Cambiar Contraseña":
+                    case ("Cambiar Contraseña"):
                         tsmiSeguridad.Visible = true;
                         tsmiCambiarPass.Visible = true;
                         break;
@@ -112,7 +119,7 @@ namespace FrbaCommerce
                         tsmiEmpresaMod.Visible = true;
                         break;
 
-                    case "ABM de visibilidad de publicacion":
+                    case "ABM de Visibilidad de Publicacion":
                         tsmiVisibilidades.Visible = true;
                         tsmiVisibilidadAlta.Visible = true;
                         tsmiVisibilidadBaja.Visible = true;
@@ -164,16 +171,24 @@ namespace FrbaCommerce
 
         private void ejecutarForm(Form oFrm, object sender)
         {
+            //Nos permite invocar a todos los Form de la misma forma
             System.Drawing.Bitmap oBitmap = (System.Drawing.Bitmap)((ToolStripMenuItem)sender).Image;
 
+            //Si la opcion de Menu tiene icono se la pasamos al Form
             if(oBitmap != null) 
                 oFrm.Icon = System.Drawing.Icon.FromHandle(oBitmap.GetHicon());
 
+            //Asignamos el MDI para que el FrmMain sea contenedor de los Formularios de las Opciones de Menu.
             oFrm.MdiParent = this;
+
+            //Lo centramos para mejorar la visualizacion del usuario.
             oFrm.StartPosition = FormStartPosition.CenterScreen;
 
+            //Mostramos el Formulario.
             oFrm.Show();
         }
+
+        #region Menu_Items_Click
 
         private void tsmiCambiarPass_Click(object sender, EventArgs e)
         {
@@ -270,19 +285,16 @@ namespace FrbaCommerce
             ejecutarForm(new EditarPublicacion(), sender);
         }
 
-        private void tsmiPublicacionPreg_Click(object sender, EventArgs e)
-        {
-            //ejecutarForm(new GestionPreguntas());
-        }
-
         private void tsmiPublicacionComp_Click(object sender, EventArgs e)
         {
+            //Controlamos si el usuario fue inhabilitado para realizar Compras/Ofertas
             if (!Convert.ToBoolean(Singleton.usuario["usu_Inhabilitado_Comprar"]))
             {
                 ejecutarForm(new ComprarOfertar(), sender);
             }
             else
             {
+                //Esta Inhabilitado entonces informamos por Pantalla.
                 Funciones.alertInhabilitadoComprar();
             }  
         }
@@ -330,11 +342,6 @@ namespace FrbaCommerce
             Application.Exit();
         }
 
-        private void ejemploToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ejecutarForm(new EjemploGrilla(), sender);
-        }
-
         private void responderPreguntasToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ejecutarForm(new Responder_preguntas(), sender);
@@ -359,5 +366,7 @@ namespace FrbaCommerce
         {
             ejecutarForm(new HistorialCalificaciones(), sender);
         }
+
+        #endregion
     }
 }

@@ -29,7 +29,7 @@ namespace FrbaCommerce
                     if (RealizarBaja())
                     {
                         emp_CUIT = "";
-                        tboxEmpresaSeleccionada.Text = "";
+                        txtCuit.Text = "";
                     }
                 }
             }
@@ -37,7 +37,8 @@ namespace FrbaCommerce
 
         private void Abm_Empresa_Baja_Load(object sender, EventArgs e)
         {
-
+            emp_CUIT = "";
+            txtCuit.Text = "";
         }
 
         private void btnSeleccionar_Click(object sender, EventArgs e)
@@ -48,14 +49,13 @@ namespace FrbaCommerce
             if ((oFrm.Resultado != null)) //Resultado es el DataRow.-
             {
                 oDtEmpresa = InterfazBD.getEmpresaUsuario(oFrm.Resultado["emp_CUIT"].ToString());
-
-                tboxEmpresaSeleccionada.Text = oFrm.Resultado["emp_CUIT"].ToString();
+                txtCuit.Text = oFrm.Resultado["emp_CUIT"].ToString();
             }
         }
 
         private bool ValidarBaja()
         {
-            if (tboxEmpresaSeleccionada.Text == "")
+            if (this.txtCuit.Text.Replace(" ", "").Length != 14)
             {
                 MessageBox.Show("Debe indicar el CUIT de la empresa.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
@@ -63,7 +63,7 @@ namespace FrbaCommerce
 
             try
             {
-                DataTable oDtEmpresa = InterfazBD.getEmpresaUsuario(tboxEmpresaSeleccionada.Text);
+                DataTable oDtEmpresa = InterfazBD.getEmpresaUsuario(txtCuit.Text);
 
                 if (oDtEmpresa != null)
                 {

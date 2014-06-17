@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Abm_Rol_Busqueda));
             this.label1 = new System.Windows.Forms.Label();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.btnBuscar = new System.Windows.Forms.Button();
@@ -52,6 +53,7 @@
             // txtNombre
             // 
             this.txtNombre.Location = new System.Drawing.Point(98, 29);
+            this.txtNombre.MaxLength = 255;
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(263, 20);
             this.txtNombre.TabIndex = 1;
@@ -128,7 +130,7 @@
             this.btnSalir.Location = new System.Drawing.Point(304, 335);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(75, 23);
-            this.btnSalir.TabIndex = 9;
+            this.btnSalir.TabIndex = 6;
             this.btnSalir.Text = "Salir";
             this.btnSalir.UseVisualStyleBackColor = true;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
@@ -142,6 +144,7 @@
             this.Controls.Add(this.grpParam);
             this.Controls.Add(this.btnSeleccionar);
             this.Controls.Add(this.dgvRoles);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Abm_Rol_Busqueda";

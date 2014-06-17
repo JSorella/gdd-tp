@@ -48,6 +48,7 @@
             // txtRolName
             // 
             this.txtRolName.Location = new System.Drawing.Point(106, 12);
+            this.txtRolName.MaxLength = 255;
             this.txtRolName.Name = "txtRolName";
             this.txtRolName.Size = new System.Drawing.Size(146, 20);
             this.txtRolName.TabIndex = 1;
@@ -102,6 +103,7 @@
             this.Controls.Add(this.txtRolName);
             this.Controls.Add(this.label1);
             this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Abm_Rol_Alta";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Alta de Roles";

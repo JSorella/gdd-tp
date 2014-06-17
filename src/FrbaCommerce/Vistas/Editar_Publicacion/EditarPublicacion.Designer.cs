@@ -30,6 +30,7 @@
         {
             this.btnGenerar = new System.Windows.Forms.Button();
             this.pnlDatos = new System.Windows.Forms.Panel();
+            this.chkFacturada = new System.Windows.Forms.CheckBox();
             this.cmbTipoPubli = new System.Windows.Forms.ComboBox();
             this.nudStock = new System.Windows.Forms.NumericUpDown();
             this.nudPrecio = new System.Windows.Forms.NumericUpDown();
@@ -57,7 +58,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnLimpiar = new System.Windows.Forms.Button();
-            this.chkFacturada = new System.Windows.Forms.CheckBox();
             this.pnlDatos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudStock)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPrecio)).BeginInit();
@@ -106,6 +106,18 @@
             this.pnlDatos.Name = "pnlDatos";
             this.pnlDatos.Size = new System.Drawing.Size(596, 375);
             this.pnlDatos.TabIndex = 6;
+            // 
+            // chkFacturada
+            // 
+            this.chkFacturada.AutoSize = true;
+            this.chkFacturada.Enabled = false;
+            this.chkFacturada.Location = new System.Drawing.Point(164, 334);
+            this.chkFacturada.Name = "chkFacturada";
+            this.chkFacturada.Size = new System.Drawing.Size(74, 17);
+            this.chkFacturada.TabIndex = 14;
+            this.chkFacturada.Text = "Facturada";
+            this.chkFacturada.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chkFacturada.UseVisualStyleBackColor = true;
             // 
             // cmbTipoPubli
             // 
@@ -340,6 +352,7 @@
             this.txtCodPubli.Name = "txtCodPubli";
             this.txtCodPubli.Size = new System.Drawing.Size(148, 20);
             this.txtCodPubli.TabIndex = 1;
+            this.txtCodPubli.TextChanged += new System.EventHandler(this.txtCodPubli_TextChanged);
             this.txtCodPubli.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCodPubli_KeyPress);
             // 
             // btnAceptar
@@ -383,18 +396,6 @@
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.UseVisualStyleBackColor = true;
             this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
-            // 
-            // chkFacturada
-            // 
-            this.chkFacturada.AutoSize = true;
-            this.chkFacturada.Enabled = false;
-            this.chkFacturada.Location = new System.Drawing.Point(164, 334);
-            this.chkFacturada.Name = "chkFacturada";
-            this.chkFacturada.Size = new System.Drawing.Size(74, 17);
-            this.chkFacturada.TabIndex = 14;
-            this.chkFacturada.Text = "Facturada";
-            this.chkFacturada.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.chkFacturada.UseVisualStyleBackColor = true;
             // 
             // EditarPublicacion
             // 

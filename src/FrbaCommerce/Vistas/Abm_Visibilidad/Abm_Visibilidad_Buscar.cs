@@ -53,6 +53,14 @@ namespace FrbaCommerce
             e.Handled = Funciones.SoloNumeros(e.KeyChar);
         }
 
+        private void textbox_TextChanged(object sender, EventArgs e)
+        {
+            //Solo numero por Copiar/Pegar
+            TextBox oTxt = (TextBox)sender;
+
+            oTxt.Text = Funciones.ValidaTextoSoloNumerosConFiltro(oTxt.Text, "");
+        }
+
         private void dgvVisib_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             Seleccionar();
@@ -60,8 +68,8 @@ namespace FrbaCommerce
 
         private void Limpiar()
         {
-            txtNombre.Text = string.Empty;
-            textBox1.Text = string.Empty;
+            txtCodigo.Text = string.Empty;
+            txtDescripcion.Text = string.Empty;
             dgvVisib.DataSource = null;
         }
 
@@ -70,7 +78,7 @@ namespace FrbaCommerce
             try
             {
                 //Cargamos el data_grid con el resultado de la busqueda
-                dgvVisib.DataSource = InterfazBD.BuscarVisibilidades(txtNombre.Text, textBox1.Text);
+                dgvVisib.DataSource = InterfazBD.BuscarVisibilidades(txtCodigo.Text, txtDescripcion.Text);
             }
             catch (Exception ex)
             {

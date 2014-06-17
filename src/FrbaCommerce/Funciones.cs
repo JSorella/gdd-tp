@@ -57,6 +57,24 @@ namespace FrbaCommerce
                 }
         }
 
+        static public String ValidaTextoSoloNumerosConFiltro(String texto, String filtro)
+        {
+            string Nums = "0123456789" + filtro;
+            object c;
+
+            foreach (object c_loopVariable in texto.ToCharArray())
+            {
+                c = c_loopVariable;
+
+                if (!Nums.Contains(c.ToString()))
+                {
+                    texto = texto.Replace(c.ToString(), "");
+                }
+            }
+
+            return texto;
+        }
+
         public static bool mostrarAlert(string mensaje, string caption)
         {
             MessageBox.Show(mensaje, caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -68,6 +86,7 @@ namespace FrbaCommerce
             MessageBox.Show(mensaje, caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
             return true;
         }
+
         public static void alertInhabilitadoComprar()
         {
             Funciones.mostrarAlert("Su usuario esta inhabilitado para esta operación, ya que posee más de 5 compras sin calificar. Por favor, realice todas las calificaciones pendientes.", "Aviso");

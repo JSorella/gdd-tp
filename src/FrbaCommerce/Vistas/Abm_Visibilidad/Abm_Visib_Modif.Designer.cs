@@ -85,6 +85,7 @@
             this.txtCodVisib.Name = "txtCodVisib";
             this.txtCodVisib.Size = new System.Drawing.Size(148, 20);
             this.txtCodVisib.TabIndex = 1;
+            this.txtCodVisib.TextChanged += new System.EventHandler(this.textbox_TextChanged);
             this.txtCodVisib.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCodVisib_KeyPress);
             // 
             // btnAceptar
@@ -171,9 +172,11 @@
             // txtCodigo
             // 
             this.txtCodigo.Location = new System.Drawing.Point(78, 8);
+            this.txtCodigo.MaxLength = 18;
             this.txtCodigo.Name = "txtCodigo";
             this.txtCodigo.Size = new System.Drawing.Size(148, 20);
             this.txtCodigo.TabIndex = 4;
+            this.txtCodigo.TextChanged += new System.EventHandler(this.textbox_TextChanged);
             this.txtCodigo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCodigo_KeyPress);
             // 
             // nudPorcentaje
@@ -188,6 +191,7 @@
             // txtDesc
             // 
             this.txtDesc.Location = new System.Drawing.Point(78, 34);
+            this.txtDesc.MaxLength = 255;
             this.txtDesc.Name = "txtDesc";
             this.txtDesc.Size = new System.Drawing.Size(148, 20);
             this.txtDesc.TabIndex = 5;
@@ -274,6 +278,7 @@
             this.Controls.Add(this.pnlDatos);
             this.Controls.Add(this.pnlParam);
             this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Abm_Visib_Modif";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Modificar Visibilidades";

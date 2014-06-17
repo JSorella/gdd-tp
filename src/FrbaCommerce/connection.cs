@@ -13,11 +13,16 @@ namespace FrbaCommerce
     public class Connection
     {
         /// <summary>
-        /// Funciones Genericas
+        /// Clase unica de Funciones Genericas para preparar y ejecutar Comandos con la Base de Datos.
         /// </summary>
 
-        /*====================================================================================================*/
-        /*====================================================================================================*/
+        #region Preparacion de Comandos
+
+        /// <summary>
+        /// Dado un DataTable donde las Columnas son los Parametros del Comando recibido, 
+        /// y una Fila con los valores de los Prametros se carga el Comando de forma generica.
+        /// En caso de hay parametros OUTPUT en un SP, exite la posibilidad de configurarlo asi.
+        /// </summary>
 
         private SqlCommand cargarParametrosCommand(SqlCommand cmd, DataTable oTable, DataRow oRow, String sListOutParam)
         {
@@ -37,6 +42,10 @@ namespace FrbaCommerce
             return cmd;
         }
 
+        /// <summary>
+        /// Esta Funcion es igual a la anterior, solo que utiliza una Matriz {NombreCampo, Valor} para cargar los Parametros.
+        /// </summary>
+
         private SqlCommand cargarParametrosCommand(SqlCommand cmd, String[,] aParam, String sListOutParam)
         {
             cmd.Parameters.Clear();
@@ -55,10 +64,13 @@ namespace FrbaCommerce
             return cmd;
         }
 
-        /*====================================================================================================*/
-        /*====================================================================================================*/
+        #endregion
 
-        //Genera un DataAdapter segun un query dado - Para grilla paginada.
+        #region Ejecucion de Comandos
+
+        /// <summary>
+        /// Genera un DataAdapter segun un query dado - Solo para grilla paginada.
+        /// </summary>
         public SqlDataAdapter executeQueryAdapter(String query, ref DataSet oDs, ref DataTable oDt, 
                                 String dataMember, int inicio, int tope)
         {
@@ -87,32 +99,11 @@ namespace FrbaCommerce
             }
         }
 
-        //Ejecutar un Comando armado - Es algo temporal, deberiamos no utilizarlo.
-        public void executeCommandConn(SqlCommand cmd)
-        {
-            SqlConnection conn = new SqlConnection(Singleton.ConnectionString);
-            cmd.Connection = conn;
-
-            try
-            {
-                conn.Open();
-
-                try
-                {
-                    cmd.ExecuteNonQuery();
-                }
-                finally
-                {
-                    conn.Close();
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Se detecto un error en executeCommand con el Texto: " + cmd.CommandText + System.Environment.NewLine + "Mensaje de Error: " + ex.Message);
-            }
-        }
-
-        //Query Obtener DataTable BD      
+        /// <summary>
+        /// Ejecuta un Query que devuelve un DataTable.
+        /// Puede ser un Query completo (Ej. un Select From Tabla) o puede tener parametros, los cuales pueden venir en un 
+        /// DataTable o en una Matriz (Ej. un Select From Funciion(@Parametros)).
+        /// </summary>  
         public DataTable executeQueryTable(String query, DataTable oDtParam, String[,] aParam)
         {
             DataTable dt = new DataTable();
@@ -144,7 +135,11 @@ namespace FrbaCommerce
             return dt;
         }
 
-        //Query Funciones Escalares - Parametros Tabla (Estructura) / Parametros Matriz (Pocos)
+        /// <summary>
+        /// Ejecuta un Query para Funciones Escalares. Devuelve un Object que debe ser transformado por quien lo llamo.
+        /// Puede ser un Query completo (Ej. un Funcion(1)) o puede tener parametros, los cuales pueden venir en un 
+        /// DataTable o en una Matriz (Ej. un Funciion(@Parametros)).
+        /// </summary>  
         public object executeQueryFuncEscalar(String funNameParam, DataTable oDtParam, String[,] aParam)
         {
             String query = "Select " + funNameParam;;
@@ -182,7 +177,12 @@ namespace FrbaCommerce
             return result;
         }
 
-        //Query SP Con Parametros Out
+        /// <summary>
+        /// Ejecuta un Stored Procedure que realiza Modificaciones en la Base (Inserts - Updates - Deletes)
+        /// Puede o no tener parametros. En caso de que lo tenga, pueden venir en un DataTable o en una Matriz.
+        /// Solo debe ser llamado si el SP cuenta con parametros OutPut, ya que retorna un String con los valores
+        /// de las variables OutPut separadas por el caracter "|" para ser tratato por que hizo la llamda.
+        /// </summary>  
         public String executeQuerySPOutPut(String spName, DataTable oDtParam, String[,] aParam, String sListOutParam)
         {
             String result = "";
@@ -214,7 +214,10 @@ namespace FrbaCommerce
             return result;
         }
 
-        //Query Stored Procedure con Parametros Tabla (Estructura) / Parametros Matriz (Poco)
+        /// <summary>
+        /// Ejecuta un Stored Procedure que realiza Modificaciones en la Base (Inserts - Updates - Deletes)
+        /// Puede o no tener parametros. En caso de que lo tenga, pueden venir en un DataTable o en una Matriz.
+        /// </summary>  
         public void executeQuerySP(String spName, DataTable oDtParam, String[,] aParam)
         {
             SqlConnection conn = new SqlConnection(Singleton.ConnectionString);
@@ -238,7 +241,12 @@ namespace FrbaCommerce
             }
         }
 
-        //Ejecuta un SqlCommand que ya posee una SqlConnection (Y posible SqlTransaction)
+        /// <summary>
+        /// Ejecuta un SqlCommand enviado por parametros, el cual es modificado dentro de la funcion.
+        /// El SqlCommand recibio ya contiene dentro una Conexion Abierta a la Base, y tambien puede ser
+        /// que tenga una Transaccion Activa (SqlTransaction generado por codigo), especial para
+        /// Ejecutar de forma Masiva (Ej.: Encabezado + Detalle) en una misma Tr.
+        /// </summary> 
         public void executeCommandMasivo(ref SqlCommand cmd, String cmdTxt, DataTable oDatos, String[,] aParam, String sListOutParam)
         {
             cmd.CommandText = cmdTxt;
@@ -276,7 +284,6 @@ namespace FrbaCommerce
             }
         }
 
-        /*====================================================================================================*/
-        /*====================================================================================================*/
+        #endregion
     }
 }

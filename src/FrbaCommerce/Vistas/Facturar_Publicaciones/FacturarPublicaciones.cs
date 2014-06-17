@@ -115,6 +115,7 @@ namespace FrbaCommerce
         private void btnHistBonif_Click(object sender, EventArgs e)
         {
             HistorialBinificacion oFrm = new HistorialBinificacion();
+            oFrm.Icon = this.Icon;
             oFrm._Datos = oDtBonif;
             oFrm.ShowDialog();
         }

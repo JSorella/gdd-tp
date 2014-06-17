@@ -37,11 +37,11 @@
             this.pnlParam = new System.Windows.Forms.Panel();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.pnlDatos = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtNombre = new System.Windows.Forms.TextBox();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnGenerar = new System.Windows.Forms.Button();
-            this.txtNombre = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.pnlParam.SuspendLayout();
             this.pnlDatos.SuspendLayout();
             this.SuspendLayout();
@@ -58,6 +58,7 @@
             // txtRolName
             // 
             this.txtRolName.Location = new System.Drawing.Point(154, 13);
+            this.txtRolName.MaxLength = 255;
             this.txtRolName.Name = "txtRolName";
             this.txtRolName.Size = new System.Drawing.Size(133, 20);
             this.txtRolName.TabIndex = 1;
@@ -86,6 +87,7 @@
             this.listfunc.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.listfunc.CheckOnClick = true;
             this.listfunc.FormattingEnabled = true;
             this.listfunc.Location = new System.Drawing.Point(13, 62);
             this.listfunc.Name = "listfunc";
@@ -142,6 +144,23 @@
             this.pnlDatos.Size = new System.Drawing.Size(459, 277);
             this.pnlDatos.TabIndex = 18;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(10, 11);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(86, 13);
+            this.label3.TabIndex = 12;
+            this.label3.Text = "Nombre del Rol :";
+            // 
+            // txtNombre
+            // 
+            this.txtNombre.Location = new System.Drawing.Point(102, 8);
+            this.txtNombre.MaxLength = 255;
+            this.txtNombre.Name = "txtNombre";
+            this.txtNombre.Size = new System.Drawing.Size(133, 20);
+            this.txtNombre.TabIndex = 4;
+            // 
             // btnCancelar
             // 
             this.btnCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -175,22 +194,6 @@
             this.btnGenerar.UseVisualStyleBackColor = true;
             this.btnGenerar.Click += new System.EventHandler(this.btnGenerar_Click);
             // 
-            // txtNombre
-            // 
-            this.txtNombre.Location = new System.Drawing.Point(102, 8);
-            this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(133, 20);
-            this.txtNombre.TabIndex = 4;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(10, 11);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(86, 13);
-            this.label3.TabIndex = 12;
-            this.label3.Text = "Nombre del Rol :";
-            // 
             // Abm_Rol_Modif
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -202,6 +205,7 @@
             this.Controls.Add(this.pnlDatos);
             this.Controls.Add(this.pnlParam);
             this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Abm_Rol_Modif";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Modificación de Roles";

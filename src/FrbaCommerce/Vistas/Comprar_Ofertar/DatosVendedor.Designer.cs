@@ -49,7 +49,7 @@
             this.dgVendedor.Name = "dgVendedor";
             this.dgVendedor.ReadOnly = true;
             this.dgVendedor.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgVendedor.Size = new System.Drawing.Size(866, 108);
+            this.dgVendedor.Size = new System.Drawing.Size(727, 108);
             this.dgVendedor.TabIndex = 19;
             // 
             // label7
@@ -65,10 +65,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(890, 168);
+            this.ClientSize = new System.Drawing.Size(751, 168);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.dgVendedor);
             this.Name = "DatosVendedor";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Datos del Vendedor";
             this.Load += new System.EventHandler(this.DatosVendedor_Load);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.DatosVendedor_FormClosed);

@@ -28,10 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Abm_Visibilidad_Buscar));
             this.grpParam = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtDescripcion = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.txtNombre = new System.Windows.Forms.TextBox();
+            this.txtCodigo = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.btnLimpiar = new System.Windows.Forms.Button();
@@ -46,9 +47,9 @@
             // 
             this.grpParam.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.grpParam.Controls.Add(this.textBox1);
+            this.grpParam.Controls.Add(this.txtDescripcion);
             this.grpParam.Controls.Add(this.label2);
-            this.grpParam.Controls.Add(this.txtNombre);
+            this.grpParam.Controls.Add(this.txtCodigo);
             this.grpParam.Controls.Add(this.label1);
             this.grpParam.Controls.Add(this.btnBuscar);
             this.grpParam.Controls.Add(this.btnLimpiar);
@@ -59,12 +60,13 @@
             this.grpParam.TabStop = false;
             this.grpParam.Text = "Filtros de Busqueda";
             // 
-            // textBox1
+            // txtDescripcion
             // 
-            this.textBox1.Location = new System.Drawing.Point(81, 52);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(374, 20);
-            this.textBox1.TabIndex = 5;
+            this.txtDescripcion.Location = new System.Drawing.Point(81, 52);
+            this.txtDescripcion.MaxLength = 255;
+            this.txtDescripcion.Name = "txtDescripcion";
+            this.txtDescripcion.Size = new System.Drawing.Size(374, 20);
+            this.txtDescripcion.TabIndex = 5;
             // 
             // label2
             // 
@@ -75,13 +77,15 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "Descripción :";
             // 
-            // txtNombre
+            // txtCodigo
             // 
-            this.txtNombre.Location = new System.Drawing.Point(81, 26);
-            this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(106, 20);
-            this.txtNombre.TabIndex = 1;
-            this.txtNombre.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNombre_KeyPress);
+            this.txtCodigo.Location = new System.Drawing.Point(81, 26);
+            this.txtCodigo.MaxLength = 18;
+            this.txtCodigo.Name = "txtCodigo";
+            this.txtCodigo.Size = new System.Drawing.Size(106, 20);
+            this.txtCodigo.TabIndex = 1;
+            this.txtCodigo.TextChanged += new System.EventHandler(this.textbox_TextChanged);
+            this.txtCodigo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNombre_KeyPress);
             // 
             // label1
             // 
@@ -163,6 +167,7 @@
             this.Controls.Add(this.btnSeleccionar);
             this.Controls.Add(this.dgvVisib);
             this.Controls.Add(this.grpParam);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Abm_Visibilidad_Buscar";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Abm_Visibilidad_Buscar";
@@ -177,9 +182,9 @@
         #endregion
 
         private System.Windows.Forms.GroupBox grpParam;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtDescripcion;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtNombre;
+        private System.Windows.Forms.TextBox txtCodigo;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.Button btnLimpiar;

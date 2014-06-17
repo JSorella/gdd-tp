@@ -75,6 +75,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnOfertar);
             this.Name = "AltaOferta";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Ofertar";
             this.Load += new System.EventHandler(this.AltaOferta_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nudCantidad)).EndInit();

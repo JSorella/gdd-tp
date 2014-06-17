@@ -51,7 +51,7 @@
             // 
             // btnLimpiar
             // 
-            this.btnLimpiar.Location = new System.Drawing.Point(2, 71);
+            this.btnLimpiar.Location = new System.Drawing.Point(116, 71);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(75, 23);
             this.btnLimpiar.TabIndex = 16;
@@ -61,7 +61,7 @@
             // 
             // btnBuscar
             // 
-            this.btnBuscar.Location = new System.Drawing.Point(459, 71);
+            this.btnBuscar.Location = new System.Drawing.Point(489, 71);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(75, 23);
             this.btnBuscar.TabIndex = 15;
@@ -79,13 +79,13 @@
             // btnSalir
             // 
             this.btnSalir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSalir.Location = new System.Drawing.Point(772, 484);
+            this.btnSalir.Location = new System.Drawing.Point(721, 496);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(104, 23);
             this.btnSalir.TabIndex = 19;
             this.btnSalir.Text = "Salir";
             this.btnSalir.UseVisualStyleBackColor = true;
-            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click_1);
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // label1
             // 
@@ -99,7 +99,7 @@
             // btnSeleccionar
             // 
             this.btnSeleccionar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSeleccionar.Location = new System.Drawing.Point(582, 484);
+            this.btnSeleccionar.Location = new System.Drawing.Point(531, 496);
             this.btnSeleccionar.Name = "btnSeleccionar";
             this.btnSeleccionar.Size = new System.Drawing.Size(184, 23);
             this.btnSeleccionar.TabIndex = 18;
@@ -123,7 +123,7 @@
             this.dgvPubli.Name = "dgvPubli";
             this.dgvPubli.ReadOnly = true;
             this.dgvPubli.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPubli.Size = new System.Drawing.Size(793, 279);
+            this.dgvPubli.Size = new System.Drawing.Size(786, 319);
             this.dgvPubli.TabIndex = 17;
             this.dgvPubli.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPubli_CellDoubleClick);
             // 
@@ -144,33 +144,37 @@
             this.grpFiltros.Controls.Add(this.btnBuscar);
             this.grpFiltros.Controls.Add(this.btnLimpiar);
             this.grpFiltros.Controls.Add(this.label1);
-            this.grpFiltros.Location = new System.Drawing.Point(45, 13);
+            this.grpFiltros.Location = new System.Drawing.Point(12, 12);
             this.grpFiltros.Name = "grpFiltros";
-            this.grpFiltros.Size = new System.Drawing.Size(831, 99);
+            this.grpFiltros.Size = new System.Drawing.Size(813, 99);
             this.grpFiltros.TabIndex = 11;
             this.grpFiltros.TabStop = false;
             this.grpFiltros.Text = "Buscar Publicación";
             // 
             // groupBox1
             // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.lblInfo);
             this.groupBox1.Controls.Add(this.btnUltima);
             this.groupBox1.Controls.Add(this.dgvPubli);
             this.groupBox1.Controls.Add(this.btnSiguiente);
             this.groupBox1.Controls.Add(this.btnPrimera);
             this.groupBox1.Controls.Add(this.btnAnterior);
-            this.groupBox1.Location = new System.Drawing.Point(45, 127);
+            this.groupBox1.Location = new System.Drawing.Point(14, 117);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(818, 333);
+            this.groupBox1.Size = new System.Drawing.Size(811, 373);
             this.groupBox1.TabIndex = 20;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Publicaciones Activas";
             // 
             // lblInfo
             // 
+            this.lblInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblInfo.AutoSize = true;
             this.lblInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblInfo.Location = new System.Drawing.Point(284, 307);
+            this.lblInfo.Location = new System.Drawing.Point(284, 347);
             this.lblInfo.Name = "lblInfo";
             this.lblInfo.Size = new System.Drawing.Size(259, 15);
             this.lblInfo.TabIndex = 21;
@@ -178,8 +182,8 @@
             // 
             // btnUltima
             // 
-            this.btnUltima.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnUltima.Location = new System.Drawing.Point(712, 304);
+            this.btnUltima.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnUltima.Location = new System.Drawing.Point(705, 344);
             this.btnUltima.Name = "btnUltima";
             this.btnUltima.Size = new System.Drawing.Size(92, 23);
             this.btnUltima.TabIndex = 25;
@@ -189,8 +193,8 @@
             // 
             // btnSiguiente
             // 
-            this.btnSiguiente.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnSiguiente.Location = new System.Drawing.Point(614, 304);
+            this.btnSiguiente.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSiguiente.Location = new System.Drawing.Point(607, 344);
             this.btnSiguiente.Name = "btnSiguiente";
             this.btnSiguiente.Size = new System.Drawing.Size(92, 23);
             this.btnSiguiente.TabIndex = 24;
@@ -201,7 +205,7 @@
             // btnPrimera
             // 
             this.btnPrimera.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnPrimera.Location = new System.Drawing.Point(11, 304);
+            this.btnPrimera.Location = new System.Drawing.Point(11, 344);
             this.btnPrimera.Name = "btnPrimera";
             this.btnPrimera.Size = new System.Drawing.Size(92, 23);
             this.btnPrimera.TabIndex = 22;
@@ -212,7 +216,7 @@
             // btnAnterior
             // 
             this.btnAnterior.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAnterior.Location = new System.Drawing.Point(109, 304);
+            this.btnAnterior.Location = new System.Drawing.Point(109, 344);
             this.btnAnterior.Name = "btnAnterior";
             this.btnAnterior.Size = new System.Drawing.Size(92, 23);
             this.btnAnterior.TabIndex = 23;
@@ -232,7 +236,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(921, 519);
+            this.ClientSize = new System.Drawing.Size(837, 531);
             this.Controls.Add(this.cmbRubros);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.txtDescripcion);
@@ -241,6 +245,7 @@
             this.Controls.Add(this.grpFiltros);
             this.Name = "ComprarOfertar";
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Comprar / Ofertar";
             this.Load += new System.EventHandler(this.ComprarOfertar_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPubli)).EndInit();

@@ -8,7 +8,7 @@ namespace FrbaCommerce
     static class Program
     {
         /// <summary>
-        /// The main entry point for the application.
+        /// Es el punto de Inicio de la Aplicacion - Llama al Formulario de Menu.
         /// </summary>
         [STAThread]
         static void Main()

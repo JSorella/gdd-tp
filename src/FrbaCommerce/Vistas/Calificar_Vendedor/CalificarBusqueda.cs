@@ -25,10 +25,18 @@ namespace FrbaCommerce
 
         public void cargarCalificacionesPendientes()
         {
-            gridCalificacionesPendientes.DataSource = InterfazBD.getCalificacionesPendientes();
-            if (this.gridCalificacionesPendientes.RowCount == 0)
+            try
             {
-                MessageBox.Show("¡Buen trabajo! Usted no posee calificaciones pendientes.", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                gridCalificacionesPendientes.DataSource = InterfazBD.getCalificacionesPendientes();
+
+                if (this.gridCalificacionesPendientes.RowCount == 0)
+                {
+                    MessageBox.Show("¡Buen trabajo! Usted no posee calificaciones pendientes.", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -41,6 +49,7 @@ namespace FrbaCommerce
                 drCompraSeleccionada = ((DataRowView)gridCalificacionesPendientes.SelectedRows[0].DataBoundItem).Row;
                 CalificarVendedor calificar = new CalificarVendedor();
                 calificar.Compra = drCompraSeleccionada;
+                calificar.Icon = this.Icon;
                 calificar.ShowDialog();
                 cargarCalificacionesPendientes();
             }

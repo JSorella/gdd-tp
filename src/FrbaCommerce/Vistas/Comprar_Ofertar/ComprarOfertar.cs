@@ -34,7 +34,7 @@ namespace FrbaCommerce
         {
             CargarCombos();
             Limpiar();
-            Actualizar();
+            lblInfo.Text = "";
         }
 
         private void CargarCombos()
@@ -120,16 +120,12 @@ namespace FrbaCommerce
             {
                 mobjDrResultado = ((DataRowView)dgvPubli.SelectedRows[0].DataBoundItem).Row;
                 DetallesPublicacion oFrm = new DetallesPublicacion(Convert.ToInt32(mobjDrResultado["Codigo"]));
+                oFrm.Icon = this.Icon;
                 oFrm.ShowDialog();
                 this.mostrarPublicaciones();
             }
             else
                 MessageBox.Show("Seleccione una Publicación.", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        }
-
-        private void btnSalir_Click_1(object sender, EventArgs e)
-        {
-            this.Close();
         }
 
         private void mostrarPublicaciones()
@@ -140,7 +136,6 @@ namespace FrbaCommerce
             dgvPubli.Columns["Publicación Precio"].Visible = false;
             oPag.primeraPagina();
         }
-
 
         private void Actualizar()
         {
@@ -173,7 +168,5 @@ namespace FrbaCommerce
             oPag.ultimaPagina();
             Actualizar();
         }
-
-
     }
 }

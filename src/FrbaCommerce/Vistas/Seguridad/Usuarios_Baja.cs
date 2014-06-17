@@ -12,18 +12,16 @@ namespace FrbaCommerce
     public partial class Usuarios_Baja : Form
     {
         private int usu_Id;
-        
-        DataTable oDtCliente;
+        DataTable oDtUsuario;
 
         public Usuarios_Baja()
         {
             InitializeComponent();
         }
 
-
         private void btnDarDeBaja_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Confirma que desea dar de Baja este cliente?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show("Confirma que desea dar de Baja este Usuario?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 try
                 {
@@ -43,8 +41,6 @@ namespace FrbaCommerce
             }
         }
 
-        
-
         private void btnSeleccionar_Click(object sender, EventArgs e)
         {
             BuscarUsuario oFrm = new BuscarUsuario();
@@ -52,8 +48,8 @@ namespace FrbaCommerce
 
             if ((oFrm.Resultado != null)) //Resultado es el DataRow.-
             {
-                oDtCliente = InterfazBD.getUsuarioConRoles(oFrm.Resultado["Usuario"].ToString());
-                this.usu_Id = Convert.ToInt32(oDtCliente.Rows[0]["usu_Id"]);
+                oDtUsuario = InterfazBD.getUsuarioConRoles(oFrm.Resultado["Usuario"].ToString());
+                this.usu_Id = Convert.ToInt32(oDtUsuario.Rows[0]["usu_Id"]);
                 this.txtUserName.Text = oFrm.Resultado["Usuario"].ToString();
             }
         }
@@ -66,8 +62,7 @@ namespace FrbaCommerce
                 return false;
             }
 
-
-            DataTable oDtUsuario = InterfazBD.getUsuarioConRoles(txtUserName.Text);
+            oDtUsuario = InterfazBD.getUsuarioConRoles(txtUserName.Text);
 
             if (oDtUsuario != null)
             {
@@ -81,7 +76,9 @@ namespace FrbaCommerce
             {
                 Funciones.mostrarAlert("Usuario Inexistente", "Aviso");
                 return false;
-            }      
+            }
+
+            usu_Id = Convert.ToInt32(oDtUsuario.Rows[0]["usu_Id"]);
 
             return true;
         }
@@ -90,12 +87,18 @@ namespace FrbaCommerce
         {
             bool result;
 
+            try
+            {
+                result = InterfazBD.setBajaUsuario(this.usu_Id);
 
-            result = InterfazBD.setBajaUsuario(this.usu_Id);
-
-            Funciones.mostrarInformacion("El usuario fue dado de baja con exito","Operacion Exitosa");
-            return result;   
+                Funciones.mostrarInformacion("El usuario fue dado de baja con exito", "Operacion Exitosa");
+                return result;  
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            } 
         }
-
     }
 }

@@ -40,7 +40,7 @@
             // 
             // btnDarDeBaja
             // 
-            this.btnDarDeBaja.Location = new System.Drawing.Point(193, 110);
+            this.btnDarDeBaja.Location = new System.Drawing.Point(180, 110);
             this.btnDarDeBaja.Name = "btnDarDeBaja";
             this.btnDarDeBaja.Size = new System.Drawing.Size(108, 30);
             this.btnDarDeBaja.TabIndex = 61;
@@ -58,7 +58,7 @@
             this.panel1.Controls.Add(this.label15);
             this.panel1.Location = new System.Drawing.Point(5, 7);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(443, 91);
+            this.panel1.Size = new System.Drawing.Size(437, 91);
             this.panel1.TabIndex = 62;
             // 
             // comboDoc
@@ -83,7 +83,7 @@
             // 
             // btnSeleccionar
             // 
-            this.btnSeleccionar.Location = new System.Drawing.Point(354, 23);
+            this.btnSeleccionar.Location = new System.Drawing.Point(349, 36);
             this.btnSeleccionar.Name = "btnSeleccionar";
             this.btnSeleccionar.Size = new System.Drawing.Size(73, 30);
             this.btnSeleccionar.TabIndex = 2;
@@ -111,13 +111,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(452, 152);
+            this.ClientSize = new System.Drawing.Size(454, 152);
             this.Controls.Add(this.btnDarDeBaja);
             this.Controls.Add(this.panel1);
             this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Abm_Cliente_Baja";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Eliminar Cliente";
+            this.Text = "Baja de Clientes";
             this.Load += new System.EventHandler(this.Abm_Empresa_Baja_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

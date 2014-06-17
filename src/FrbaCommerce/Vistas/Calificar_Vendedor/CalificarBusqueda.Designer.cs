@@ -37,7 +37,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(15, 22);
+            this.label1.Location = new System.Drawing.Point(9, 22);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(256, 13);
             this.label1.TabIndex = 0;
@@ -47,22 +47,27 @@
             // 
             this.gridCalificacionesPendientes.AllowUserToAddRows = false;
             this.gridCalificacionesPendientes.AllowUserToDeleteRows = false;
+            this.gridCalificacionesPendientes.AllowUserToResizeRows = false;
+            this.gridCalificacionesPendientes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.gridCalificacionesPendientes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.gridCalificacionesPendientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gridCalificacionesPendientes.Location = new System.Drawing.Point(18, 59);
+            this.gridCalificacionesPendientes.Location = new System.Drawing.Point(12, 38);
             this.gridCalificacionesPendientes.MultiSelect = false;
             this.gridCalificacionesPendientes.Name = "gridCalificacionesPendientes";
             this.gridCalificacionesPendientes.ReadOnly = true;
             this.gridCalificacionesPendientes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridCalificacionesPendientes.Size = new System.Drawing.Size(469, 145);
+            this.gridCalificacionesPendientes.Size = new System.Drawing.Size(449, 183);
             this.gridCalificacionesPendientes.TabIndex = 1;
             this.gridCalificacionesPendientes.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridCalificacionesPendientes_CellDoubleClick);
             // 
             // SeleccionarCompra
             // 
-            this.SeleccionarCompra.Location = new System.Drawing.Point(215, 223);
+            this.SeleccionarCompra.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.SeleccionarCompra.Location = new System.Drawing.Point(348, 230);
             this.SeleccionarCompra.Name = "SeleccionarCompra";
-            this.SeleccionarCompra.Size = new System.Drawing.Size(69, 33);
+            this.SeleccionarCompra.Size = new System.Drawing.Size(113, 33);
             this.SeleccionarCompra.TabIndex = 2;
             this.SeleccionarCompra.Text = "Calificar";
             this.SeleccionarCompra.UseVisualStyleBackColor = true;
@@ -72,12 +77,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(513, 271);
+            this.ClientSize = new System.Drawing.Size(473, 275);
             this.Controls.Add(this.SeleccionarCompra);
             this.Controls.Add(this.gridCalificacionesPendientes);
             this.Controls.Add(this.label1);
             this.Name = "CalificarBusqueda";
-            this.Text = "Calificar Vendedor";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "Calificar Vendedores";
             this.Load += new System.EventHandler(this.CalificarVendedor_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gridCalificacionesPendientes)).EndInit();
             this.ResumeLayout(false);

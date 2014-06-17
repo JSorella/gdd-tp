@@ -35,7 +35,7 @@
             this.cboxListado = new System.Windows.Forms.ComboBox();
             this.cboxAnio = new System.Windows.Forms.ComboBox();
             this.cboxTrimestre = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnConsultar = new System.Windows.Forms.Button();
             this.cboxVisibilidad = new System.Windows.Forms.ComboBox();
             this.cboxMes = new System.Windows.Forms.ComboBox();
             this.labelVisibilidad = new System.Windows.Forms.Label();
@@ -51,7 +51,6 @@
             this.label1.Size = new System.Drawing.Size(26, 13);
             this.label1.TabIndex = 3;
             this.label1.Text = "Año";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -75,12 +74,15 @@
             // 
             this.gridListado.AllowUserToAddRows = false;
             this.gridListado.AllowUserToDeleteRows = false;
+            this.gridListado.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.gridListado.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.gridListado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridListado.Location = new System.Drawing.Point(12, 219);
             this.gridListado.Name = "gridListado";
             this.gridListado.ReadOnly = true;
-            this.gridListado.Size = new System.Drawing.Size(560, 188);
+            this.gridListado.Size = new System.Drawing.Size(562, 214);
             this.gridListado.TabIndex = 6;
             // 
             // cboxListado
@@ -112,15 +114,15 @@
             this.cboxTrimestre.TabIndex = 10;
             this.cboxTrimestre.SelectedIndexChanged += new System.EventHandler(this.cboxTrimestre_SelectedIndexChanged);
             // 
-            // button1
+            // btnConsultar
             // 
-            this.button1.Location = new System.Drawing.Point(508, 92);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(64, 26);
-            this.button1.TabIndex = 11;
-            this.button1.Text = "Consultar!";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnConsultar.Location = new System.Drawing.Point(508, 92);
+            this.btnConsultar.Name = "btnConsultar";
+            this.btnConsultar.Size = new System.Drawing.Size(64, 26);
+            this.btnConsultar.TabIndex = 11;
+            this.btnConsultar.Text = "Consultar!";
+            this.btnConsultar.UseVisualStyleBackColor = true;
+            this.btnConsultar.Click += new System.EventHandler(this.btnConsultar_Click);
             // 
             // cboxVisibilidad
             // 
@@ -162,12 +164,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(584, 417);
+            this.ClientSize = new System.Drawing.Size(586, 443);
             this.Controls.Add(this.labelMes);
             this.Controls.Add(this.labelVisibilidad);
             this.Controls.Add(this.cboxMes);
             this.Controls.Add(this.cboxVisibilidad);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnConsultar);
             this.Controls.Add(this.cboxTrimestre);
             this.Controls.Add(this.cboxAnio);
             this.Controls.Add(this.cboxListado);
@@ -193,7 +195,7 @@
         private System.Windows.Forms.ComboBox cboxListado;
         private System.Windows.Forms.ComboBox cboxAnio;
         private System.Windows.Forms.ComboBox cboxTrimestre;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnConsultar;
         private System.Windows.Forms.ComboBox cboxVisibilidad;
         private System.Windows.Forms.ComboBox cboxMes;
         private System.Windows.Forms.Label labelVisibilidad;

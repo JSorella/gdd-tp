@@ -21,7 +21,6 @@ namespace FrbaCommerce
             InitializeComponent();
         }
 
-
         private void AltaOferta_Load(object sender, EventArgs e)
         {
             try
@@ -91,6 +90,5 @@ namespace FrbaCommerce
 
             return true;
         }
-
     }
 }

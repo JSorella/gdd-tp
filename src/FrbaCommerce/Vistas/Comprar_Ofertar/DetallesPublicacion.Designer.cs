@@ -55,8 +55,7 @@
             // 
             // pnlDatos
             // 
-            this.pnlDatos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
+            this.pnlDatos.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlDatos.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlDatos.Controls.Add(this.btnOfertar);
@@ -78,7 +77,7 @@
             this.pnlDatos.Controls.Add(this.label2);
             this.pnlDatos.Location = new System.Drawing.Point(12, 12);
             this.pnlDatos.Name = "pnlDatos";
-            this.pnlDatos.Size = new System.Drawing.Size(603, 304);
+            this.pnlDatos.Size = new System.Drawing.Size(592, 305);
             this.pnlDatos.TabIndex = 7;
             // 
             // btnOfertar
@@ -236,10 +235,13 @@
             // 
             // groupPreguntas
             // 
+            this.groupPreguntas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.groupPreguntas.Controls.Add(this.dgPreguntas);
             this.groupPreguntas.Location = new System.Drawing.Point(12, 322);
             this.groupPreguntas.Name = "groupPreguntas";
-            this.groupPreguntas.Size = new System.Drawing.Size(603, 174);
+            this.groupPreguntas.Size = new System.Drawing.Size(592, 191);
             this.groupPreguntas.TabIndex = 8;
             this.groupPreguntas.TabStop = false;
             this.groupPreguntas.Text = "Preguntas";
@@ -260,18 +262,19 @@
             this.dgPreguntas.Name = "dgPreguntas";
             this.dgPreguntas.ReadOnly = true;
             this.dgPreguntas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgPreguntas.Size = new System.Drawing.Size(591, 145);
+            this.dgPreguntas.Size = new System.Drawing.Size(580, 162);
             this.dgPreguntas.TabIndex = 18;
             // 
             // DetallesPublicacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(627, 508);
+            this.ClientSize = new System.Drawing.Size(616, 526);
             this.Controls.Add(this.groupPreguntas);
             this.Controls.Add(this.pnlDatos);
             this.Name = "DetallesPublicacion";
-            this.Text = "Detalles Publicacion";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "Detalles de la Publicación";
             this.Load += new System.EventHandler(this.DetallesPublicacion_Load);
             this.pnlDatos.ResumeLayout(false);
             this.pnlDatos.PerformLayout();

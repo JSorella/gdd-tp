@@ -46,6 +46,7 @@
             // txtRol
             // 
             this.txtRol.Location = new System.Drawing.Point(104, 12);
+            this.txtRol.MaxLength = 255;
             this.txtRol.Name = "txtRol";
             this.txtRol.Size = new System.Drawing.Size(133, 20);
             this.txtRol.TabIndex = 1;
@@ -81,6 +82,7 @@
             this.Controls.Add(this.label1);
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(369, 137);
+            this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(369, 137);
             this.Name = "Abm_Rol_Baja";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

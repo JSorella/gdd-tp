@@ -29,26 +29,50 @@
         private void InitializeComponent()
         {
             this.dgvHistorialCal = new System.Windows.Forms.DataGridView();
+            this.btnSalir = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHistorialCal)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvHistorialCal
             // 
+            this.dgvHistorialCal.AllowUserToAddRows = false;
+            this.dgvHistorialCal.AllowUserToDeleteRows = false;
+            this.dgvHistorialCal.AllowUserToOrderColumns = true;
+            this.dgvHistorialCal.AllowUserToResizeRows = false;
+            this.dgvHistorialCal.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvHistorialCal.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvHistorialCal.Location = new System.Drawing.Point(13, 13);
+            this.dgvHistorialCal.Location = new System.Drawing.Point(12, 12);
+            this.dgvHistorialCal.MultiSelect = false;
             this.dgvHistorialCal.Name = "dgvHistorialCal";
-            this.dgvHistorialCal.Size = new System.Drawing.Size(696, 356);
-            this.dgvHistorialCal.TabIndex = 0;
+            this.dgvHistorialCal.ReadOnly = true;
+            this.dgvHistorialCal.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvHistorialCal.Size = new System.Drawing.Size(697, 328);
+            this.dgvHistorialCal.TabIndex = 1;
+            // 
+            // btnSalir
+            // 
+            this.btnSalir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSalir.Location = new System.Drawing.Point(634, 346);
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(75, 23);
+            this.btnSalir.TabIndex = 2;
+            this.btnSalir.Text = "Salir";
+            this.btnSalir.UseVisualStyleBackColor = true;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // HistorialCalificaciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(721, 381);
+            this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.dgvHistorialCal);
             this.Name = "HistorialCalificaciones";
-            this.Text = "Historial Cliente - Calificaciones";
-            this.Load += new System.EventHandler(this.HistorialCalificaciones_Load_1);
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "Historial de Calificaciones";
+            this.Load += new System.EventHandler(this.HistorialCalificaciones_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvHistorialCal)).EndInit();
             this.ResumeLayout(false);
 
@@ -57,5 +81,7 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dgvHistorialCal;
+        private System.Windows.Forms.Button btnSalir;
+
     }
 }
