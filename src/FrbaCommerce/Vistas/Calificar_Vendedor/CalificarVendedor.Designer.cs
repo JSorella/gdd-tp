@@ -41,7 +41,7 @@
             this.cboxCalificaciones.FormattingEnabled = true;
             this.cboxCalificaciones.Location = new System.Drawing.Point(168, 12);
             this.cboxCalificaciones.Name = "cboxCalificaciones";
-            this.cboxCalificaciones.Size = new System.Drawing.Size(100, 21);
+            this.cboxCalificaciones.Size = new System.Drawing.Size(101, 21);
             this.cboxCalificaciones.TabIndex = 0;
             // 
             // label1

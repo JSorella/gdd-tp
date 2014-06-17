@@ -123,10 +123,8 @@
             this.Name = "RegistroUsuario";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Registrar Nuevo Usuario";
-            this.Load += new System.EventHandler(this.RegistroUsuario_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion

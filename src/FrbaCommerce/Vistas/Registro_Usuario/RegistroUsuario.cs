@@ -16,11 +16,6 @@ namespace FrbaCommerce
             this.InitializeComponent();
         }
 
-        private void RegistroUsuario_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             try
@@ -32,12 +27,14 @@ namespace FrbaCommerce
                 if (this.cmbRoles.Text == "Cliente")
                 {
                     Abm_Cliente_Alta newWindow = new Abm_Cliente_Alta(this.txtUserName.Text, this.txtPass.Text);
+                    newWindow.Icon = this.Icon;
                     newWindow.ShowDialog();
                 }
 
                 if (this.cmbRoles.Text == "Empresa")
                 {
                     Abm_Empresa_Alta newWindow = new Abm_Empresa_Alta(this.txtUserName.Text, this.txtPass.Text);
+                    newWindow.Icon = this.Icon;
                     newWindow.ShowDialog();
                 }
             }
