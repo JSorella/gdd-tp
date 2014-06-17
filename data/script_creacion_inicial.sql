@@ -2048,6 +2048,20 @@ BEGIN
 		UPDATE J2LA.Publicaciones 
 		SET pub_Facturada = 1
 		WHERE pub_Codigo = @facdet_pub_Codigo
+		
+		IF(@facdet_Importe > 0) --No es Bonificacion
+		BEGIN
+			SELECT @pub_visibilidad_Id = pub_visibilidad_Id,
+			@pub_usu_Id = pub_usu_Id
+			FROM J2LA.Publicaciones 
+			Where pub_Codigo = @facdet_pub_Codigo
+
+			--Actualizo Historico para Bonificacion en Facturacion
+			Update J2LA.Usuarios_CantFactxTipoVis
+			Set	ucftv_Cantidad = ucftv_Cantidad + 1
+			Where ucftv_usu_Id = @pub_usu_Id
+			And ucftv_vis_Id = @pub_visibilidad_Id
+		END
 	END
 	ELSE
 	BEGIN
@@ -2056,17 +2070,6 @@ BEGIN
 		SET comp_Facturada = 1
 		WHERE comp_Id = @facdet_comp_Id
 	END
-
-	SELECT @pub_visibilidad_Id = pub_visibilidad_Id,
-			@pub_usu_Id = pub_usu_Id
-	FROM J2LA.Publicaciones 
-	Where pub_Codigo = @facdet_pub_Codigo
-
-	--Actualizo Historico para Facturacion
-	Update J2LA.Usuarios_CantFactxTipoVis
-	Set	ucftv_Cantidad = ucftv_Cantidad + 1
-	Where ucftv_usu_Id = @pub_usu_Id
-	And ucftv_vis_Id = @pub_visibilidad_Id
 
 END
 GO
