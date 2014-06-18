@@ -160,6 +160,12 @@ namespace FrbaCommerce
                     CalcularBonificacion(e.ColumnIndex, e.RowIndex);
                 }
 
+                //Validar Bonificacion - No puede ser destildada
+                if (dgvPubli.Rows[e.RowIndex].Cells["Tipo"].Value.ToString() == "B")
+                {
+                    dgvPubli.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = true;
+                }
+
                 //Actualizamos los Totales
                 CalcularValores();
             }
@@ -174,8 +180,7 @@ namespace FrbaCommerce
                 dgvPubli.EndEdit();  //Cancelo la Edicion para Confirmar el cambio.-
 
                 //Validar Compras - Debe Cancelar en orden de Fecha Desc.
-                if ((Convert.ToBoolean(dgvPubli.Rows[e.RowIndex].Cells["Facturar"].Value))
-                    && (dgvPubli.Rows[e.RowIndex].Cells["Tipo"].Value.ToString() == "C"))
+                if (dgvPubli.Rows[e.RowIndex].Cells["Tipo"].Value.ToString() == "C")
                 {
                     if (!ValidarComprasAnteriores(e.ColumnIndex, e.RowIndex))
                     {
@@ -188,6 +193,12 @@ namespace FrbaCommerce
                 if (dgvPubli.Rows[e.RowIndex].Cells["Tipo"].Value.ToString() == "P")
                 {
                     CalcularBonificacion(e.ColumnIndex, e.RowIndex);
+                }
+
+                //Validar Bonificacion - No puede ser destildada
+                if (dgvPubli.Rows[e.RowIndex].Cells["Tipo"].Value.ToString() == "B")
+                {
+                    dgvPubli.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = true;
                 }
 
                 //Actualizamos los Totales
@@ -339,8 +350,11 @@ namespace FrbaCommerce
                     }
                 }
 
-                MessageBox.Show("No puede pagar las Compra con una Fecha mayor a la de la Fila " + (rowIndex + 1).ToString(),
+                if (!valida)
+                {
+                    MessageBox.Show("No puede pagar las Compra con una Fecha mayor a la de la Fila " + (rowIndex + 1).ToString(),
                             "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
 
             return valida;

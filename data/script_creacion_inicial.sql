@@ -1647,7 +1647,7 @@ BEGIN
 		@pub_usu_Id,@pub_vis_Precio,@pub_vis_Porcentaje,@pub_Facturada)
 		
 	--Si es una Publicacion No Gratuita
-	IF( @pub_Precio > 0)
+	IF( @pub_vis_Precio > 0)
 	BEGIN
 		-- Si ya No existe un regitros en la Tabla
 		IF NOT EXISTS ( SELECT * FROM J2LA.Usuarios_CantFactxTipoVis
